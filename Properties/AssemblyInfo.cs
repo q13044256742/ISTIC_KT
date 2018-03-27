@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("数据采集档案管理系统 - 加工版")]
+[assembly: AssemblyTitle("数据采集档案管理系统 - 课题版")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("数据采集档案管理系统 - 加工版")]
+[assembly: AssemblyProduct("数据采集档案管理系统 - 课题版")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 如果此项目向 COM 公开，则下列 GUID 用于类型库的 ID
-[assembly: Guid("835e7c75-f614-4d98-9b76-93f82b8d2bbf")]
+[assembly: Guid("135e7c75-f614-4d98-9b76-93f82b8d2bbf")]
 
 // 程序集的版本信息由下列四个值组成: 
 //

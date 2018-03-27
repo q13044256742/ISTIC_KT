@@ -1,4 +1,4 @@
-﻿namespace 数据采集档案管理系统___加工版
+﻿namespace 数据采集档案管理系统___课题版
 {
     partial class Frm_Login
     {
@@ -89,7 +89,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::数据采集档案管理系统___加工版.Properties.Resources.login_1;
+            this.pictureBox1.Image = global::数据采集档案管理系统___课题版.Properties.Resources.login_1;
             this.pictureBox1.Location = new System.Drawing.Point(20, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(475, 58);

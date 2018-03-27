@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using 数据采集档案管理系统___加工版.Properties;
+using 数据采集档案管理系统___课题版.Properties;
 
-namespace 数据采集档案管理系统___加工版
+namespace 数据采集档案管理系统___课题版
 {
     public partial class Frm_AddFile_FileSelect : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace 数据采集档案管理系统___加工版
+﻿namespace 数据采集档案管理系统___课题版
 {
     partial class Frm_MainFrame
     {
@@ -117,7 +117,7 @@
             // 
             this.pic_Add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pic_Add.Image = global::数据采集档案管理系统___加工版.Properties.Resources.png_0289;
+            this.pic_Add.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0289;
             this.pic_Add.Location = new System.Drawing.Point(18, 7);
             this.pic_Add.Name = "pic_Add";
             this.pic_Add.Size = new System.Drawing.Size(55, 48);
@@ -150,7 +150,7 @@
             // 
             this.pic_Import.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pic_Import.Image = global::数据采集档案管理系统___加工版.Properties.Resources.png_0222;
+            this.pic_Import.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0222;
             this.pic_Import.Location = new System.Drawing.Point(18, 7);
             this.pic_Import.Name = "pic_Import";
             this.pic_Import.Size = new System.Drawing.Size(55, 48);
@@ -183,7 +183,7 @@
             // 
             this.pic_Export.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pic_Export.Image = global::数据采集档案管理系统___加工版.Properties.Resources.png_0228;
+            this.pic_Export.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0228;
             this.pic_Export.Location = new System.Drawing.Point(18, 7);
             this.pic_Export.Name = "pic_Export";
             this.pic_Export.Size = new System.Drawing.Size(55, 48);
@@ -235,7 +235,7 @@
             // 
             this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.Image = global::数据采集档案管理系统___加工版.Properties.Resources.png_0289;
+            this.pictureBox3.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0289;
             this.pictureBox3.Location = new System.Drawing.Point(18, 7);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(55, 48);
@@ -268,7 +268,7 @@
             // 
             this.pic_BackUp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pic_BackUp.Image = global::数据采集档案管理系统___加工版.Properties.Resources.png_0281;
+            this.pic_BackUp.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0281;
             this.pic_BackUp.Location = new System.Drawing.Point(18, 7);
             this.pic_BackUp.Name = "pic_BackUp";
             this.pic_BackUp.Size = new System.Drawing.Size(55, 48);
@@ -301,7 +301,7 @@
             // 
             this.pic_Manager.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pic_Manager.Image = global::数据采集档案管理系统___加工版.Properties.Resources.png_0222;
+            this.pic_Manager.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0222;
             this.pic_Manager.Location = new System.Drawing.Point(18, 7);
             this.pic_Manager.Name = "pic_Manager";
             this.pic_Manager.Size = new System.Drawing.Size(55, 48);
@@ -314,7 +314,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::数据采集档案管理系统___加工版.Properties.Resources.login_1;
+            this.pictureBox1.Image = global::数据采集档案管理系统___课题版.Properties.Resources.login_1;
             this.pictureBox1.Location = new System.Drawing.Point(799, 19);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(484, 67);

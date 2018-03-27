@@ -1,4 +1,4 @@
-﻿namespace 数据采集档案管理系统___加工版
+﻿namespace 数据采集档案管理系统___课题版
 {
     partial class Frm_Manager
     {
@@ -72,7 +72,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::数据采集档案管理系统___加工版.Properties.Resources.Mbg;
+            this.BackgroundImage = global::数据采集档案管理系统___课题版.Properties.Resources.Mbg;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1184, 611);
             this.Controls.Add(this.pal_LeftMenu);

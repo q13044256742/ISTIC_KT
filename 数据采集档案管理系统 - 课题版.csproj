@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{835E7C75-F614-4D98-9B76-93F82B8D2BBF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>数据采集档案管理系统___加工版</RootNamespace>
-    <AssemblyName>数据采集档案管理系统 - 加工版</AssemblyName>
+    <RootNamespace>数据采集档案管理系统___课题版</RootNamespace>
+    <AssemblyName>数据采集档案管理系统 - 课题版</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -74,7 +74,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\System.Data.SQLite.dll</HintPath>
+      <HintPath>..\space_zx\bin\Debug\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -218,7 +218,6 @@
     <Compile Include="Tools\DataSourceHelper.cs" />
     <Compile Include="Tools\DictionaryHelper.cs" />
     <Compile Include="Tools\FileBoxHelper.cs" />
-    <Compile Include="Tools\FileListHelper.cs" />
     <Compile Include="Tools\MicrosoftWordHelper.cs" />
     <Compile Include="Tools\ServerHelper.cs" />
     <Compile Include="Tools\SQLiteHelper.cs" />

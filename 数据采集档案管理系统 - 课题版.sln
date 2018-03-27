@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数据采集档案管理系统 - 加工版", "数据采集档案管理系统 - 加工版.csproj", "{835E7C75-F614-4D98-9B76-93F82B8D2BBF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数据采集档案管理系统 - 课题版", "数据采集档案管理系统 - 课题版.csproj", "{835E7C75-F614-4D98-9B76-93F82B8D2BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

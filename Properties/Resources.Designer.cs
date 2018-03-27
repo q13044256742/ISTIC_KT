@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace 数据采集档案管理系统___加工版.Properties {
+namespace 数据采集档案管理系统___课题版.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace 数据采集档案管理系统___加工版.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("数据采集档案管理系统___加工版.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("数据采集档案管理系统___课题版.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace 数据采集档案管理系统___加工版
+namespace 数据采集档案管理系统___课题版
 {
     public class CreateKyoPanel
     {

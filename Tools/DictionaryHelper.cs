@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 
-namespace 数据采集档案管理系统___加工版
+namespace 数据采集档案管理系统___课题版
 {
     /// <summary>
     /// 当前操作对象类型
