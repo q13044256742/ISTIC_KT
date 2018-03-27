@@ -135,7 +135,7 @@ namespace 数据采集档案管理系统___课题版
                 
                 /* ----合成文件清单----*/
                 string filePath = value + "\\重大专项项目（课题）档案交接清单";
-                MicrosoftWordHelper.WriteDocument(filePath, list);
+                MicrosoftWordHelper.WriteDocument(ref filePath, list);
                 if(MessageBox.Show("文件清单合成完毕, 是否需要现在打开?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                     LoadDocumnet(filePath);
                 Close();

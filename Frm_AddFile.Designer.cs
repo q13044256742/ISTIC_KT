@@ -61,6 +61,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbo_stage = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pal_ShowData = new System.Windows.Forms.Panel();
             this.gro_BasicInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_amount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
@@ -68,6 +69,7 @@
             // 
             // gro_BasicInfo
             // 
+            this.gro_BasicInfo.Controls.Add(this.pal_ShowData);
             this.gro_BasicInfo.Controls.Add(this.btn_Reset);
             this.gro_BasicInfo.Controls.Add(this.lbl_OpenFile);
             this.gro_BasicInfo.Controls.Add(this.btn_Quit);
@@ -105,7 +107,7 @@
             this.gro_BasicInfo.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.gro_BasicInfo.Name = "gro_BasicInfo";
             this.gro_BasicInfo.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.gro_BasicInfo.Size = new System.Drawing.Size(640, 592);
+            this.gro_BasicInfo.Size = new System.Drawing.Size(634, 592);
             this.gro_BasicInfo.TabIndex = 1;
             this.gro_BasicInfo.TabStop = false;
             // 
@@ -424,16 +426,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "阶段";
             // 
+            // pal_ShowData
+            // 
+            this.pal_ShowData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pal_ShowData.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_ShowData.Location = new System.Drawing.Point(649, 14);
+            this.pal_ShowData.Name = "pal_ShowData";
+            this.pal_ShowData.Size = new System.Drawing.Size(0, 573);
+            this.pal_ShowData.TabIndex = 31;
+            this.pal_ShowData.Visible = false;
+            // 
             // Frm_AddFile
             // 
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(640, 592);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(634, 592);
             this.Controls.Add(this.gro_BasicInfo);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Frm_AddFile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "新增文件";
@@ -481,5 +494,6 @@
         private System.Windows.Forms.ComboBox cbo_stage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_Reset;
+        private System.Windows.Forms.Panel pal_ShowData;
     }
 }

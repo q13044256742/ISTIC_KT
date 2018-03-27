@@ -58,6 +58,7 @@ namespace 数据采集档案管理系统___课题版
                         $"DELETE FROM subject_info WHERE si_id IN({ids});");
 
                     MessageBox.Show("删除成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    btn_Refresh_Click(sender, e);
                 }
             }
         }
@@ -106,7 +107,7 @@ namespace 数据采集档案管理系统___课题版
             {
                 rootId = GetValue(obj[0]);
                 LoadTreeList(rootId);
-                Tv_DataTree_AfterSelect(sender, new TreeViewEventArgs(tv_DataTree.Nodes[0].Nodes[0]));
+                Tv_DataTree_AfterSelect(sender, new TreeViewEventArgs(tv_DataTree.Nodes[0]));
 
                 new Frm_Explain().ShowDialog();
             }
@@ -118,7 +119,7 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="specialId">专项ID</param>
         public void LoadTreeList(string specialId)
         {
-            tv_DataTree.Nodes[0].Nodes.Clear();
+            tv_DataTree.Nodes.Clear();
             TreeNode rootNode = null;
             //【计划】
             DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT spi_id, spi_code, spi_name FROM special_info WHERE spi_id='{specialId}'");
@@ -199,7 +200,7 @@ namespace 数据采集档案管理系统___课题版
                         });
                     }
                 }
-                tv_DataTree.Nodes[0].Nodes.Add(rootNode);
+                tv_DataTree.Nodes.Add(rootNode);
             }
             tv_DataTree.ExpandAll();
         }
@@ -263,10 +264,13 @@ namespace 数据采集档案管理系统___课题版
 
         private void Tv_DataTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if(e.Node.Tag != null)
+            if(!e.Node.Tag.Equals(ControlType.Plan))
             {
                 Frm_Wroking frm = new Frm_Wroking(e.Node);
-                frm.ShowDialog();
+                if(frm.ShowDialog() == DialogResult.OK)
+                {
+                    btn_Refresh_Click(sender, e);
+                }
             }
         }
 
@@ -401,7 +405,13 @@ namespace 数据采集档案管理系统___课题版
 
         private void btn_Refresh_Click(object sender, EventArgs e)
         {
-            LoadTreeList(tv_DataTree.Nodes[0].Nodes[0].Name);
+            LoadTreeList(tv_DataTree.Nodes[0].Name);
+            Tv_DataTree_AfterSelect(sender, new TreeViewEventArgs(tv_DataTree.Nodes[0]));
+        }
+
+        private void pic_Query_Click(object sender, EventArgs e)
+        {
+            new Frm_Query(rootId).ShowDialog();
         }
     }
 }

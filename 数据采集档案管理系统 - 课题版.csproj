@@ -175,17 +175,17 @@
     <Compile Include="Frm_Manager.Designer.cs">
       <DependentUpon>Frm_Manager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_OnWork.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Frm_OnWork.Designer.cs">
-      <DependentUpon>Frm_OnWork.cs</DependentUpon>
-    </Compile>
     <Compile Include="Frm_Print.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Frm_Print.Designer.cs">
       <DependentUpon>Frm_Print.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frm_Query.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_Query.Designer.cs">
+      <DependentUpon>Frm_Query.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm_SetContextPath.cs">
       <SubType>Form</SubType>
@@ -217,6 +217,7 @@
     <Compile Include="Tools\DataGridViewStyleHelper.cs" />
     <Compile Include="Tools\DataSourceHelper.cs" />
     <Compile Include="Tools\DictionaryHelper.cs" />
+    <Compile Include="Tools\ExeToWinForm.cs" />
     <Compile Include="Tools\FileBoxHelper.cs" />
     <Compile Include="Tools\MicrosoftWordHelper.cs" />
     <Compile Include="Tools\ServerHelper.cs" />
@@ -267,11 +268,11 @@
     <EmbeddedResource Include="Frm_Manager.resx">
       <DependentUpon>Frm_Manager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Frm_OnWork.resx">
-      <DependentUpon>Frm_OnWork.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Frm_Print.resx">
       <DependentUpon>Frm_Print.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frm_Query.resx">
+      <DependentUpon>Frm_Query.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_SetContextPath.resx">
       <DependentUpon>Frm_SetContextPath.cs</DependentUpon>
