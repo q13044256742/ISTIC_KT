@@ -157,7 +157,10 @@ namespace 数据采集档案管理系统___课题版
                 lbl_Template.Text = GetValue(row["cr_template"]);
             }
             else
+            {
                 lbl_Template.Text = string.Empty;
+                cbo_Type.Tag = null;
+            }
         }
 
         private string GetValue(object v) => v == null ? string.Empty : v.ToString();

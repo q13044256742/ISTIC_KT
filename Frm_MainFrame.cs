@@ -129,7 +129,8 @@ namespace 数据采集档案管理系统___课题版
                 {
                     Name = GetValue(row["spi_id"]),
                     Text = GetValue(row["spi_code"]),
-                    Tag = ControlType.Plan
+                    Tag = ControlType.Plan,
+                    NodeFont = new System.Drawing.Font("微软雅黑", 10f)
                 };
                 //【项目】
                 DataTable projectTable = SQLiteHelper.ExecuteQuery($"SELECT pi_id, pi_code, pi_name FROM project_info WHERE pi_obj_id='{rootNode.Name}'");

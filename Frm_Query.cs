@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Windows.Forms;
 
 namespace 数据采集档案管理系统___课题版
@@ -217,10 +216,10 @@ namespace 数据采集档案管理系统___课题版
                 new DataGridViewTextBoxColumn(){ Name = "id", HeaderText = "序号", FillWeight = 3 },
                 new DataGridViewTextBoxColumn(){ Name = "stage", HeaderText = "阶段", FillWeight = 5 },
                 new DataGridViewTextBoxColumn(){ Name = "categor", HeaderText = "类别", FillWeight = 5 },
-                new DataGridViewTextBoxColumn(){ Name = "name", HeaderText = "名称", FillWeight = 10 },
-                new DataGridViewTextBoxColumn(){ Name = "user", HeaderText = "责任者", FillWeight = 5 },
-                new DataGridViewTextBoxColumn(){ Name = "type", HeaderText = "类型", FillWeight = 5 },
-                new DataGridViewTextBoxColumn(){ Name = "secret", HeaderText = "密级", FillWeight = 5 },
+                new DataGridViewTextBoxColumn(){ Name = "name", HeaderText = "名称", FillWeight = 8 },
+                new DataGridViewTextBoxColumn(){ Name = "user", HeaderText = "责任者", FillWeight = 4 },
+                new DataGridViewTextBoxColumn(){ Name = "type", HeaderText = "类型", FillWeight = 3 },
+                new DataGridViewTextBoxColumn(){ Name = "secret", HeaderText = "密级", FillWeight = 3 },
                 new DataGridViewTextBoxColumn(){ Name = "pages", HeaderText = "页数", FillWeight = 3 },
                 new DataGridViewTextBoxColumn(){ Name = "number", HeaderText = "份数", FillWeight = 3 },
                 new DataGridViewTextBoxColumn(){ Name = "date", HeaderText = "形成日期", FillWeight = 5 },
@@ -232,12 +231,12 @@ namespace 数据采集档案管理系统___课题版
                 int index = dgv_ShowData.Rows.Add();
                 dgv_ShowData.Rows[index].Tag = table.Rows[i]["fi_id"];
                 dgv_ShowData.Rows[index].Cells["id"].Value = i + 1;
-                dgv_ShowData.Rows[index].Cells["stage"].Value = table.Rows[i]["fi_stage"];
-                dgv_ShowData.Rows[index].Cells["categor"].Value = table.Rows[i]["fi_categor"];
+                dgv_ShowData.Rows[index].Cells["stage"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_stage"]);
+                dgv_ShowData.Rows[index].Cells["categor"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_categor"]);
                 dgv_ShowData.Rows[index].Cells["name"].Value = table.Rows[i]["fi_name"];
                 dgv_ShowData.Rows[index].Cells["user"].Value = table.Rows[i]["fi_user"];
-                dgv_ShowData.Rows[index].Cells["type"].Value = table.Rows[i]["fi_type"];
-                dgv_ShowData.Rows[index].Cells["secret"].Value = table.Rows[i]["fi_secret"];
+                dgv_ShowData.Rows[index].Cells["type"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_type"]);
+                dgv_ShowData.Rows[index].Cells["secret"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_secret"]);
                 dgv_ShowData.Rows[index].Cells["pages"].Value = table.Rows[i]["fi_pages"];
                 dgv_ShowData.Rows[index].Cells["number"].Value = table.Rows[i]["fi_number"];
                 dgv_ShowData.Rows[index].Cells["date"].Value = table.Rows[i]["fi_create_date"];
@@ -249,6 +248,9 @@ namespace 数据采集档案管理系统___课题版
             DataGridViewStyleHelper.SetAlignWithCenter(dgv_ShowData, new string[] { "pages", "number" });
         }
 
+        /// <summary>
+        /// 返回 点击事件
+        /// </summary>
         private void lbl_Back_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             LinkLabel label = sender as LinkLabel;
