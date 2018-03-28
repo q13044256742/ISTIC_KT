@@ -47,7 +47,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["pro_id"].Value = i + 1;
                 dgv_ShowData.Rows[index].Cells["pro_code"].Value = projectTable.Rows[i]["pi_code"];
                 dgv_ShowData.Rows[index].Cells["pro_name"].Value = projectTable.Rows[i]["pi_name"];
-                dgv_ShowData.Rows[index].Cells["pro_unit"].Value = projectTable.Rows[i]["pi_unit"];
+                dgv_ShowData.Rows[index].Cells["pro_unit"].Value = SQLiteHelper.GetValueByKey(projectTable.Rows[i]["pi_unit"]);
                 dgv_ShowData.Rows[index].Cells["pro_user"].Value = projectTable.Rows[i]["pi_contacts"];
                 dgv_ShowData.Rows[index].Cells["pro_phone"].Value = projectTable.Rows[i]["pi_contacts_phone"];
                 dgv_ShowData.Rows[index].Cells["pro_totalFileAmount"].Value = GetFileAmount(projectTable.Rows[i]["pi_id"]);
@@ -146,7 +146,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["sub_id"].Value = i + 1;
                 dgv_ShowData.Rows[index].Cells["sub_code"].Value = topicTable.Rows[i]["si_code"];
                 dgv_ShowData.Rows[index].Cells["sub_name"].Value = topicTable.Rows[i]["si_name"];
-                dgv_ShowData.Rows[index].Cells["sub_unit"].Value = topicTable.Rows[i]["si_unit"];
+                dgv_ShowData.Rows[index].Cells["sub_unit"].Value = SQLiteHelper.GetValueByKey(topicTable.Rows[i]["si_unit"]);
                 dgv_ShowData.Rows[index].Cells["sub_user"].Value = topicTable.Rows[i]["si_contacts"];
                 dgv_ShowData.Rows[index].Cells["sub_phone"].Value = topicTable.Rows[i]["si_contacts_phone"];
                 dgv_ShowData.Rows[index].Cells["sub_totalFileAmount"].Value = GetFileAmount(topicTable.Rows[i]["si_id"]);
@@ -185,7 +185,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["top_id"].Value = i + 1;
                 dgv_ShowData.Rows[index].Cells["top_code"].Value = topicTable.Rows[i]["ti_code"];
                 dgv_ShowData.Rows[index].Cells["top_name"].Value = topicTable.Rows[i]["ti_name"];
-                dgv_ShowData.Rows[index].Cells["top_unit"].Value = topicTable.Rows[i]["ti_unit"];
+                dgv_ShowData.Rows[index].Cells["top_unit"].Value = SQLiteHelper.GetValueByKey(topicTable.Rows[i]["ti_unit"]);
                 dgv_ShowData.Rows[index].Cells["top_user"].Value = topicTable.Rows[i]["ti_contacts"];
                 dgv_ShowData.Rows[index].Cells["top_phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
                 dgv_ShowData.Rows[index].Cells["top_totalFileAmount"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"]);

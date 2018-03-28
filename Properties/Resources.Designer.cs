@@ -123,6 +123,26 @@ namespace 数据采集档案管理系统___课题版.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap png_0152 {
+            get {
+                object obj = ResourceManager.GetObject("png_0152", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap png_0217 {
+            get {
+                object obj = ResourceManager.GetObject("png_0217", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap png_0222 {
             get {
                 object obj = ResourceManager.GetObject("png_0222", resourceCulture);
@@ -146,6 +166,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap png_0281 {
             get {
                 object obj = ResourceManager.GetObject("png_0281", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap png_0285 {
+            get {
+                object obj = ResourceManager.GetObject("png_0285", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
