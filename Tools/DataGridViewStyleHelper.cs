@@ -65,5 +65,17 @@ namespace 数据采集档案管理系统___课题版
             for (int j = 0; j < indexs.Length; j++)
                 dataGridView.Columns[indexs[j]].DefaultCellStyle = style;
         }
+
+        /// <summary>
+        /// 设置单元格文本对齐方式为居中
+        /// </summary>
+        /// <param name="indexs">指定列的列数（从0开始）</param>
+        public static void SetAlignWithCenter(DataGridView dataGridView, string[] columnNames)
+        {
+            DataGridViewCellStyle style = new DataGridViewCellStyle();
+            style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            for(int j = 0; j < columnNames.Length; j++)
+                dataGridView.Columns[columnNames[j]].DefaultCellStyle = style;
+        }
     }
 }

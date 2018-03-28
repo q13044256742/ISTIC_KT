@@ -20,16 +20,14 @@ namespace 数据采集档案管理系统___课题版
             this.tabPages = new Dictionary<string, TabPage>();
             foreach(TabPage item in tab_Menu.TabPages)
                 tabPages.Add(item.Name, item);
-
+            tab_Menu.TabPages.Clear();
             if((ControlType)treeNode.Tag == ControlType.Plan)
             {
-                ShowTabPageByName("project", 1);
+                ShowTabPageByName("project", 0);
                 project.Tag = treeNode.Name;
             }
             else
-            {
                 LoadBasicInfo(treeNode);
-            }
         }
 
         private void LoadBasicInfo(TreeNode treeNode)
@@ -40,8 +38,8 @@ namespace 数据采集档案管理系统___课题版
                 DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM project_info WHERE pi_id='{treeNode.Name}'");
                 if(row != null)
                 {
-                    ShowTabPageByName("project", 1);
-                    gro_Project_Btns.Tag = 1;
+                    ShowTabPageByName("project", 0);
+                    gro_Project_Btns.Tag = 0;
                     project.Tag = row["pi_id"];
                     LoadBasicInfoInstince(ControlType.Plan_Project, row["pi_id"], row);
 
@@ -58,13 +56,13 @@ namespace 数据采集档案管理系统___课题版
                     DataRow projectRow = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM project_info WHERE pi_id='{row["ti_obj_id"]}'");
                     if(projectRow != null)// 项目 >> 课题
                     {
-                        ShowTabPageByName("project", 1);
-                        gro_Project_Btns.Tag = 1;
+                        ShowTabPageByName("project", 0);
+                        gro_Project_Btns.Tag = 0;
                         project.Tag = projectRow["pi_id"];
                         LoadBasicInfoInstince(ControlType.Plan_Project, projectRow["pi_id"], projectRow);
 
-                        ShowTabPageByName("topic", 2);
-                        gro_Topic_Btns.Tag = 2;
+                        ShowTabPageByName("topic", 1);
+                        gro_Topic_Btns.Tag = 1;
                         topic.Tag = row["ti_id"];
                         LoadBasicInfoInstince(ControlType.Plan_Topic, row["ti_id"], row);
                     }
@@ -83,17 +81,17 @@ namespace 数据采集档案管理系统___课题版
                         //计划 >> 项目 >> 课题 >> 子课题
                         if(projectRow != null)
                         {
-                            ShowTabPageByName("project", 1);
-                            gro_Project_Btns.Tag = 1;
+                            ShowTabPageByName("project", 0);
+                            gro_Project_Btns.Tag = 0;
                             project.Tag = projectRow["pi_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Project, projectRow["pi_id"], projectRow);
 
-                            ShowTabPageByName("topic", 2);
-                            gro_Topic_Btns.Tag = 2;
+                            ShowTabPageByName("topic", 1);
+                            gro_Topic_Btns.Tag = 1;
                             topic.Tag = topicRow["ti_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic, topicRow["ti_id"], topicRow);
 
-                            ShowTabPageByName("Subject", 3);
+                            ShowTabPageByName("Subject", 2);
                             LoadBasicInfoInstince(ControlType.Plan_Topic_Subject, subjectRow["si_id"], subjectRow);
                         }
                         else
