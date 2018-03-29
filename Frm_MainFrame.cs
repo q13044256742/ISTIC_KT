@@ -239,14 +239,19 @@ namespace 数据采集档案管理系统___课题版
         {
             if(MessageBox.Show("确定要备份当前系统数据吗？", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
             {
-                string destPath = Application.StartupPath + $"\\backupfile\\ISTIC{DateTime.Now.ToString(" yyyyMMdd-HHmm")}.db";
-                if(!Directory.Exists(Path.GetDirectoryName(destPath)))
-                    Directory.CreateDirectory(Path.GetDirectoryName(destPath));
-                if(!File.Exists(destPath))
-                    File.Create(destPath).Close();
-                string sourFile = Application.StartupPath + @"\ISTIC.db";
-                File.Copy(sourFile, destPath, true);
-                MessageBox.Show("备份完毕。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                object KEY = "SAVE_PATH";
+                object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_name FROM data_dictionary WHERE dd_code='{KEY}'");
+                if(value != null)
+                {
+                    string destPath = value + $"\\ISTIC_{DateTime.Now.ToString("yyyyMMddHHmm")}.db";
+                    if(!Directory.Exists(Path.GetDirectoryName(destPath)))
+                        Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+                    if(!File.Exists(destPath))
+                        File.Create(destPath).Close();
+                    string sourFile = Application.StartupPath + @"\ISTIC.db";
+                    File.Copy(sourFile, destPath, true);
+                    MessageBox.Show("备份完毕。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
             }
         }
 
@@ -256,10 +261,7 @@ namespace 数据采集档案管理系统___课题版
             frm_EditPassword.ShowDialog();
         }
 
-        string GetValue(object obj)
-        {
-            return obj == null ? string.Empty : obj.ToString();
-        }
+        private string GetValue(object obj) => obj == null ? string.Empty : obj.ToString();
 
         private void Tv_DataTree_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {

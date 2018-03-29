@@ -131,13 +131,11 @@ namespace 数据采集档案管理系统___课题版
                         CopyFile(ref okcount, ref nocount, _rootFolder3, GetFileLinkByObjId(list6[k][0]));
                     }
                 }
-                MessageBox.Show($"备份完成，共计{count}个文件，成功{okcount}个，失败{nocount}个。", "操作成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show($"数据已完成备份至指定路径，共计{count}个文件，成功{okcount}个，失败{nocount}个。", "操作成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 
                 /* ----合成文件清单----*/
                 string filePath = value + "\\重大专项项目（课题）档案交接清单";
                 MicrosoftWordHelper.WriteDocument(ref filePath, list);
-                if(MessageBox.Show("文件清单合成完毕, 是否需要现在打开?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
-                    LoadDocumnet(filePath);
                 Close();
             }
             else
