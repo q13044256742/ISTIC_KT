@@ -38,6 +38,9 @@
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("863计划");
             this.tab_Menu = new System.Windows.Forms.TabControl();
             this.project = new System.Windows.Forms.TabPage();
+            this.cbo_Project_Field = new System.Windows.Forms.ComboBox();
+            this.cbo_Project_Province = new System.Windows.Forms.ComboBox();
+            this.cbo_Project_Unit = new System.Windows.Forms.ComboBox();
             this.tab_Project_Info = new System.Windows.Forms.TabControl();
             this.tab_Project_File = new System.Windows.Forms.TabPage();
             this.dgv_Project_FileList = new System.Windows.Forms.DataGridView();
@@ -133,6 +136,9 @@
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.topic = new System.Windows.Forms.TabPage();
+            this.cbo_Topic_Province = new System.Windows.Forms.ComboBox();
+            this.cbo_Topic_Unit = new System.Windows.Forms.ComboBox();
+            this.cbo_Topic_Field = new System.Windows.Forms.ComboBox();
             this.txt_Topic_ConnertPhone = new System.Windows.Forms.TextBox();
             this.label36 = new System.Windows.Forms.Label();
             this.txt_Topic_Connecter = new System.Windows.Forms.TextBox();
@@ -228,6 +234,9 @@
             this.btn_KT_Submit = new System.Windows.Forms.Button();
             this.btn_Topic_Save = new System.Windows.Forms.Button();
             this.Subject = new System.Windows.Forms.TabPage();
+            this.cbo_Subject_Province = new System.Windows.Forms.ComboBox();
+            this.cbo_Subject_Unit = new System.Windows.Forms.ComboBox();
+            this.cbo_Subject_Field = new System.Windows.Forms.ComboBox();
             this.txt_Subject_ConnectPhone = new System.Windows.Forms.TextBox();
             this.label72 = new System.Windows.Forms.Label();
             this.txt_Subject_Connecter = new System.Windows.Forms.TextBox();
@@ -324,15 +333,6 @@
             this.添加文件AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除文件DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tv_Working = new System.Windows.Forms.TreeView();
-            this.cbo_Project_Unit = new System.Windows.Forms.ComboBox();
-            this.cbo_Project_Province = new System.Windows.Forms.ComboBox();
-            this.cbo_Project_Field = new System.Windows.Forms.ComboBox();
-            this.cbo_Topic_Field = new System.Windows.Forms.ComboBox();
-            this.cbo_Topic_Unit = new System.Windows.Forms.ComboBox();
-            this.cbo_Topic_Province = new System.Windows.Forms.ComboBox();
-            this.cbo_Subject_Field = new System.Windows.Forms.ComboBox();
-            this.cbo_Subject_Unit = new System.Windows.Forms.ComboBox();
-            this.cbo_Subject_Province = new System.Windows.Forms.ComboBox();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -419,6 +419,33 @@
             this.project.TabIndex = 4;
             this.project.Text = "项目";
             this.project.UseVisualStyleBackColor = true;
+            // 
+            // cbo_Project_Field
+            // 
+            this.cbo_Project_Field.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Project_Field.FormattingEnabled = true;
+            this.cbo_Project_Field.Location = new System.Drawing.Point(107, 42);
+            this.cbo_Project_Field.Name = "cbo_Project_Field";
+            this.cbo_Project_Field.Size = new System.Drawing.Size(210, 24);
+            this.cbo_Project_Field.TabIndex = 119;
+            // 
+            // cbo_Project_Province
+            // 
+            this.cbo_Project_Province.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Project_Province.FormattingEnabled = true;
+            this.cbo_Project_Province.Location = new System.Drawing.Point(457, 108);
+            this.cbo_Project_Province.Name = "cbo_Project_Province";
+            this.cbo_Project_Province.Size = new System.Drawing.Size(200, 24);
+            this.cbo_Project_Province.TabIndex = 118;
+            // 
+            // cbo_Project_Unit
+            // 
+            this.cbo_Project_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Project_Unit.FormattingEnabled = true;
+            this.cbo_Project_Unit.Location = new System.Drawing.Point(107, 108);
+            this.cbo_Project_Unit.Name = "cbo_Project_Unit";
+            this.cbo_Project_Unit.Size = new System.Drawing.Size(210, 24);
+            this.cbo_Project_Unit.TabIndex = 117;
             // 
             // tab_Project_Info
             // 
@@ -850,7 +877,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 227);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 229);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -862,7 +889,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 196);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 198);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -882,7 +909,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 165);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 167);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -894,7 +921,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 134);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 136);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -906,7 +933,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 103);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 105);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -918,7 +945,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 72);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 74);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -961,7 +988,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(668, 46);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 214);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 218);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -976,7 +1003,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 45);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 214);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 218);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1385,6 +1412,33 @@
             this.topic.TabIndex = 2;
             this.topic.Text = "课题";
             this.topic.UseVisualStyleBackColor = true;
+            // 
+            // cbo_Topic_Province
+            // 
+            this.cbo_Topic_Province.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Topic_Province.FormattingEnabled = true;
+            this.cbo_Topic_Province.Location = new System.Drawing.Point(457, 108);
+            this.cbo_Topic_Province.Name = "cbo_Topic_Province";
+            this.cbo_Topic_Province.Size = new System.Drawing.Size(200, 24);
+            this.cbo_Topic_Province.TabIndex = 83;
+            // 
+            // cbo_Topic_Unit
+            // 
+            this.cbo_Topic_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Topic_Unit.FormattingEnabled = true;
+            this.cbo_Topic_Unit.Location = new System.Drawing.Point(107, 108);
+            this.cbo_Topic_Unit.Name = "cbo_Topic_Unit";
+            this.cbo_Topic_Unit.Size = new System.Drawing.Size(210, 24);
+            this.cbo_Topic_Unit.TabIndex = 82;
+            // 
+            // cbo_Topic_Field
+            // 
+            this.cbo_Topic_Field.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Topic_Field.FormattingEnabled = true;
+            this.cbo_Topic_Field.Location = new System.Drawing.Point(107, 42);
+            this.cbo_Topic_Field.Name = "cbo_Topic_Field";
+            this.cbo_Topic_Field.Size = new System.Drawing.Size(210, 24);
+            this.cbo_Topic_Field.TabIndex = 81;
             // 
             // txt_Topic_ConnertPhone
             // 
@@ -1895,7 +1949,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 225);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 227);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1907,7 +1961,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 194);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 196);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -1927,7 +1981,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 163);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 165);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -1939,7 +1993,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 132);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 134);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -1951,7 +2005,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 101);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 103);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -1963,7 +2017,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 70);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 72);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -2006,7 +2060,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(668, 43);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 216);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 220);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -2021,7 +2075,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 43);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 216);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 220);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -2375,6 +2429,33 @@
             this.Subject.TabIndex = 3;
             this.Subject.Text = "子课题";
             this.Subject.UseVisualStyleBackColor = true;
+            // 
+            // cbo_Subject_Province
+            // 
+            this.cbo_Subject_Province.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Subject_Province.FormattingEnabled = true;
+            this.cbo_Subject_Province.Location = new System.Drawing.Point(460, 111);
+            this.cbo_Subject_Province.Name = "cbo_Subject_Province";
+            this.cbo_Subject_Province.Size = new System.Drawing.Size(200, 24);
+            this.cbo_Subject_Province.TabIndex = 85;
+            // 
+            // cbo_Subject_Unit
+            // 
+            this.cbo_Subject_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Subject_Unit.FormattingEnabled = true;
+            this.cbo_Subject_Unit.Location = new System.Drawing.Point(107, 111);
+            this.cbo_Subject_Unit.Name = "cbo_Subject_Unit";
+            this.cbo_Subject_Unit.Size = new System.Drawing.Size(210, 24);
+            this.cbo_Subject_Unit.TabIndex = 84;
+            // 
+            // cbo_Subject_Field
+            // 
+            this.cbo_Subject_Field.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Subject_Field.FormattingEnabled = true;
+            this.cbo_Subject_Field.Location = new System.Drawing.Point(107, 43);
+            this.cbo_Subject_Field.Name = "cbo_Subject_Field";
+            this.cbo_Subject_Field.Size = new System.Drawing.Size(210, 24);
+            this.cbo_Subject_Field.TabIndex = 83;
             // 
             // txt_Subject_ConnectPhone
             // 
@@ -2885,7 +2966,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 224);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 226);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -2897,7 +2978,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 193);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 195);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -2917,7 +2998,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 162);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 164);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -2929,7 +3010,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 131);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 133);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -2941,7 +3022,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 100);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 102);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -2953,7 +3034,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 69);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 71);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -2996,7 +3077,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(668, 42);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 215);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 219);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -3011,7 +3092,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 42);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 215);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 219);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -3337,87 +3418,6 @@
             this.tv_Working.Size = new System.Drawing.Size(240, 641);
             this.tv_Working.TabIndex = 0;
             this.tv_Working.Visible = false;
-            // 
-            // cbo_Project_Unit
-            // 
-            this.cbo_Project_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Project_Unit.FormattingEnabled = true;
-            this.cbo_Project_Unit.Location = new System.Drawing.Point(107, 108);
-            this.cbo_Project_Unit.Name = "cbo_Project_Unit";
-            this.cbo_Project_Unit.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Project_Unit.TabIndex = 117;
-            // 
-            // cbo_Project_Province
-            // 
-            this.cbo_Project_Province.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Project_Province.FormattingEnabled = true;
-            this.cbo_Project_Province.Location = new System.Drawing.Point(457, 108);
-            this.cbo_Project_Province.Name = "cbo_Project_Province";
-            this.cbo_Project_Province.Size = new System.Drawing.Size(200, 24);
-            this.cbo_Project_Province.TabIndex = 118;
-            // 
-            // cbo_Project_Field
-            // 
-            this.cbo_Project_Field.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Project_Field.FormattingEnabled = true;
-            this.cbo_Project_Field.Location = new System.Drawing.Point(107, 42);
-            this.cbo_Project_Field.Name = "cbo_Project_Field";
-            this.cbo_Project_Field.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Project_Field.TabIndex = 119;
-            // 
-            // cbo_Topic_Field
-            // 
-            this.cbo_Topic_Field.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Topic_Field.FormattingEnabled = true;
-            this.cbo_Topic_Field.Location = new System.Drawing.Point(107, 42);
-            this.cbo_Topic_Field.Name = "cbo_Topic_Field";
-            this.cbo_Topic_Field.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Topic_Field.TabIndex = 81;
-            // 
-            // cbo_Topic_Unit
-            // 
-            this.cbo_Topic_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Topic_Unit.FormattingEnabled = true;
-            this.cbo_Topic_Unit.Location = new System.Drawing.Point(107, 108);
-            this.cbo_Topic_Unit.Name = "cbo_Topic_Unit";
-            this.cbo_Topic_Unit.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Topic_Unit.TabIndex = 82;
-            // 
-            // cbo_Topic_Province
-            // 
-            this.cbo_Topic_Province.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Topic_Province.FormattingEnabled = true;
-            this.cbo_Topic_Province.Location = new System.Drawing.Point(457, 108);
-            this.cbo_Topic_Province.Name = "cbo_Topic_Province";
-            this.cbo_Topic_Province.Size = new System.Drawing.Size(200, 24);
-            this.cbo_Topic_Province.TabIndex = 83;
-            // 
-            // cbo_Subject_Field
-            // 
-            this.cbo_Subject_Field.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Subject_Field.FormattingEnabled = true;
-            this.cbo_Subject_Field.Location = new System.Drawing.Point(107, 43);
-            this.cbo_Subject_Field.Name = "cbo_Subject_Field";
-            this.cbo_Subject_Field.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Subject_Field.TabIndex = 83;
-            // 
-            // cbo_Subject_Unit
-            // 
-            this.cbo_Subject_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Subject_Unit.FormattingEnabled = true;
-            this.cbo_Subject_Unit.Location = new System.Drawing.Point(107, 111);
-            this.cbo_Subject_Unit.Name = "cbo_Subject_Unit";
-            this.cbo_Subject_Unit.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Subject_Unit.TabIndex = 84;
-            // 
-            // cbo_Subject_Province
-            // 
-            this.cbo_Subject_Province.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Subject_Province.FormattingEnabled = true;
-            this.cbo_Subject_Province.Location = new System.Drawing.Point(460, 111);
-            this.cbo_Subject_Province.Name = "cbo_Subject_Province";
-            this.cbo_Subject_Province.Size = new System.Drawing.Size(200, 24);
-            this.cbo_Subject_Province.TabIndex = 85;
             // 
             // Frm_Wroking
             // 
