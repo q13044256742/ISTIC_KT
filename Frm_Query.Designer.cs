@@ -28,16 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Query));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_Query = new System.Windows.Forms.Button();
+            this.txt_Key = new System.Windows.Forms.TextBox();
+            this.cbo_Type = new System.Windows.Forms.ComboBox();
             this.lbl_FirstPage = new System.Windows.Forms.LinkLabel();
             this.lbl_Back = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgv_ShowData = new System.Windows.Forms.DataGridView();
-            this.cbo_Type = new System.Windows.Forms.ComboBox();
-            this.txt_Key = new System.Windows.Forms.TextBox();
-            this.btn_Query = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ShowData)).BeginInit();
@@ -56,6 +57,33 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(991, 65);
             this.panel1.TabIndex = 0;
+            // 
+            // btn_Query
+            // 
+            this.btn_Query.Location = new System.Drawing.Point(367, 16);
+            this.btn_Query.Name = "btn_Query";
+            this.btn_Query.Size = new System.Drawing.Size(80, 31);
+            this.btn_Query.TabIndex = 4;
+            this.btn_Query.Text = "查询";
+            this.btn_Query.UseVisualStyleBackColor = true;
+            this.btn_Query.Click += new System.EventHandler(this.btn_Query_Click);
+            // 
+            // txt_Key
+            // 
+            this.txt_Key.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txt_Key.Location = new System.Drawing.Point(139, 17);
+            this.txt_Key.Name = "txt_Key";
+            this.txt_Key.Size = new System.Drawing.Size(222, 29);
+            this.txt_Key.TabIndex = 3;
+            // 
+            // cbo_Type
+            // 
+            this.cbo_Type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Type.FormattingEnabled = true;
+            this.cbo_Type.Location = new System.Drawing.Point(12, 17);
+            this.cbo_Type.Name = "cbo_Type";
+            this.cbo_Type.Size = new System.Drawing.Size(121, 28);
+            this.cbo_Type.TabIndex = 2;
             // 
             // lbl_FirstPage
             // 
@@ -99,23 +127,23 @@
             this.dgv_ShowData.AllowUserToDeleteRows = false;
             this.dgv_ShowData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgv_ShowData.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_ShowData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_ShowData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_ShowData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_ShowData.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_ShowData.DefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_ShowData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_ShowData.Location = new System.Drawing.Point(0, 0);
             this.dgv_ShowData.Name = "dgv_ShowData";
@@ -125,33 +153,6 @@
             this.dgv_ShowData.TabIndex = 0;
             this.dgv_ShowData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ShowData_CellContentClick);
             // 
-            // cbo_Type
-            // 
-            this.cbo_Type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Type.FormattingEnabled = true;
-            this.cbo_Type.Location = new System.Drawing.Point(12, 17);
-            this.cbo_Type.Name = "cbo_Type";
-            this.cbo_Type.Size = new System.Drawing.Size(121, 28);
-            this.cbo_Type.TabIndex = 2;
-            // 
-            // txt_Key
-            // 
-            this.txt_Key.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txt_Key.Location = new System.Drawing.Point(139, 17);
-            this.txt_Key.Name = "txt_Key";
-            this.txt_Key.Size = new System.Drawing.Size(222, 29);
-            this.txt_Key.TabIndex = 3;
-            // 
-            // btn_Query
-            // 
-            this.btn_Query.Location = new System.Drawing.Point(367, 16);
-            this.btn_Query.Name = "btn_Query";
-            this.btn_Query.Size = new System.Drawing.Size(80, 31);
-            this.btn_Query.TabIndex = 4;
-            this.btn_Query.Text = "查询";
-            this.btn_Query.UseVisualStyleBackColor = true;
-            this.btn_Query.Click += new System.EventHandler(this.btn_Query_Click);
-            // 
             // Frm_Query
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -159,6 +160,7 @@
             this.ClientSize = new System.Drawing.Size(991, 605);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Query";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "查询统计";
