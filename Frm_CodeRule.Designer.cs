@@ -54,10 +54,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(41, 29);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.Size = new System.Drawing.Size(79, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "所属对象：";
             // 
@@ -75,10 +76,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(41, 95);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 20);
+            this.label2.Size = new System.Drawing.Size(79, 19);
             this.label2.TabIndex = 2;
             this.label2.Text = "指定组合：";
             // 
@@ -151,10 +153,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.Location = new System.Drawing.Point(41, 279);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(79, 20);
+            this.label4.Size = new System.Drawing.Size(79, 19);
             this.label4.TabIndex = 8;
             this.label4.Text = "当前示例：";
             // 
@@ -191,9 +194,10 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label5.Location = new System.Drawing.Point(55, 216);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(65, 20);
+            this.label5.Size = new System.Drawing.Size(65, 19);
             this.label5.TabIndex = 12;
             this.label5.Text = "间隔符：";
             // 
@@ -201,6 +205,7 @@
             // 
             this.txt_Mdi.Location = new System.Drawing.Point(155, 213);
             this.txt_Mdi.Name = "txt_Mdi";
+            this.txt_Mdi.ReadOnly = true;
             this.txt_Mdi.Size = new System.Drawing.Size(37, 26);
             this.txt_Mdi.TabIndex = 13;
             this.txt_Mdi.Text = "-";

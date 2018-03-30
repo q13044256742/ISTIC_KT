@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 
 namespace 数据采集档案管理系统___课题版
@@ -47,7 +49,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["pro_id"].Value = i + 1;
                 dgv_ShowData.Rows[index].Cells["pro_code"].Value = projectTable.Rows[i]["pi_code"];
                 dgv_ShowData.Rows[index].Cells["pro_name"].Value = projectTable.Rows[i]["pi_name"];
-                dgv_ShowData.Rows[index].Cells["pro_unit"].Value = SQLiteHelper.GetValueByKey(projectTable.Rows[i]["pi_unit"]);
+                dgv_ShowData.Rows[index].Cells["pro_unit"].Value = projectTable.Rows[i]["pi_unit"];
                 dgv_ShowData.Rows[index].Cells["pro_user"].Value = projectTable.Rows[i]["pi_contacts"];
                 dgv_ShowData.Rows[index].Cells["pro_phone"].Value = projectTable.Rows[i]["pi_contacts_phone"];
                 dgv_ShowData.Rows[index].Cells["pro_totalFileAmount"].Value = GetFileAmount(projectTable.Rows[i]["pi_id"]);
@@ -57,6 +59,9 @@ namespace 数据采集档案管理系统___课题版
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewStyleHelper.SetAlignWithCenter(dgv_ShowData, new string[] { "pro_id", "pro_totalFileAmount", "pro_topicAmount" });
+
+            InitialType();
+            btn_Query.Tag = "PROJECT";
         }
 
         /// <summary>
@@ -76,7 +81,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void dgv_ShowData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex!=-1 && e.ColumnIndex != -1)
+            if(e.RowIndex != -1 && e.ColumnIndex != -1)
             {
                 object id = dgv_ShowData.Rows[e.RowIndex].Tag;
                 string columnName = dgv_ShowData.Columns[e.ColumnIndex].Name;
@@ -146,7 +151,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["sub_id"].Value = i + 1;
                 dgv_ShowData.Rows[index].Cells["sub_code"].Value = topicTable.Rows[i]["si_code"];
                 dgv_ShowData.Rows[index].Cells["sub_name"].Value = topicTable.Rows[i]["si_name"];
-                dgv_ShowData.Rows[index].Cells["sub_unit"].Value = SQLiteHelper.GetValueByKey(topicTable.Rows[i]["si_unit"]);
+                dgv_ShowData.Rows[index].Cells["sub_unit"].Value = topicTable.Rows[i]["si_unit"];
                 dgv_ShowData.Rows[index].Cells["sub_user"].Value = topicTable.Rows[i]["si_contacts"];
                 dgv_ShowData.Rows[index].Cells["sub_phone"].Value = topicTable.Rows[i]["si_contacts_phone"];
                 dgv_ShowData.Rows[index].Cells["sub_totalFileAmount"].Value = GetFileAmount(topicTable.Rows[i]["si_id"]);
@@ -154,6 +159,9 @@ namespace 数据采集档案管理系统___课题版
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewStyleHelper.SetAlignWithCenter(dgv_ShowData, new string[] { "sub_id", "sub_totalFileAmount" });
+
+            InitialType();
+            btn_Query.Tag = "SUBJECT";
         }
 
         /// <summary>
@@ -185,7 +193,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["top_id"].Value = i + 1;
                 dgv_ShowData.Rows[index].Cells["top_code"].Value = topicTable.Rows[i]["ti_code"];
                 dgv_ShowData.Rows[index].Cells["top_name"].Value = topicTable.Rows[i]["ti_name"];
-                dgv_ShowData.Rows[index].Cells["top_unit"].Value = SQLiteHelper.GetValueByKey(topicTable.Rows[i]["ti_unit"]);
+                dgv_ShowData.Rows[index].Cells["top_unit"].Value = topicTable.Rows[i]["ti_unit"];
                 dgv_ShowData.Rows[index].Cells["top_user"].Value = topicTable.Rows[i]["ti_contacts"];
                 dgv_ShowData.Rows[index].Cells["top_phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
                 dgv_ShowData.Rows[index].Cells["top_totalFileAmount"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"]);
@@ -194,6 +202,9 @@ namespace 数据采集档案管理系统___课题版
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewStyleHelper.SetAlignWithCenter(dgv_ShowData, new string[] { "top_id", "top_totalFileAmount", "top_subjectAmount" });
+
+            InitialType();
+            btn_Query.Tag = "TOPIC";
         }
 
         /// <summary>
@@ -231,12 +242,12 @@ namespace 数据采集档案管理系统___课题版
                 int index = dgv_ShowData.Rows.Add();
                 dgv_ShowData.Rows[index].Tag = table.Rows[i]["fi_id"];
                 dgv_ShowData.Rows[index].Cells["id"].Value = i + 1;
-                dgv_ShowData.Rows[index].Cells["stage"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_stage"]);
-                dgv_ShowData.Rows[index].Cells["categor"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_categor"]);
+                dgv_ShowData.Rows[index].Cells["stage"].Value = table.Rows[i]["fi_stage"];
+                dgv_ShowData.Rows[index].Cells["categor"].Value = table.Rows[i]["fi_categor"];
                 dgv_ShowData.Rows[index].Cells["name"].Value = table.Rows[i]["fi_name"];
                 dgv_ShowData.Rows[index].Cells["user"].Value = table.Rows[i]["fi_user"];
-                dgv_ShowData.Rows[index].Cells["type"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_type"]);
-                dgv_ShowData.Rows[index].Cells["secret"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_secret"]);
+                dgv_ShowData.Rows[index].Cells["type"].Value = table.Rows[i]["fi_type"];
+                dgv_ShowData.Rows[index].Cells["secret"].Value = table.Rows[i]["fi_secret"];
                 dgv_ShowData.Rows[index].Cells["pages"].Value = table.Rows[i]["fi_pages"];
                 dgv_ShowData.Rows[index].Cells["number"].Value = table.Rows[i]["fi_number"];
                 dgv_ShowData.Rows[index].Cells["date"].Value = table.Rows[i]["fi_create_date"];
@@ -246,6 +257,9 @@ namespace 数据采集档案管理系统___课题版
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             DataGridViewStyleHelper.SetAlignWithCenter(dgv_ShowData, new string[] { "pages", "number" });
+
+            InitialType();
+            btn_Query.Tag = "FILE";
         }
 
         /// <summary>
@@ -278,5 +292,85 @@ namespace 数据采集档案管理系统___课题版
         {
             LoadProjectList(rootId);
         }
+
+        private void btn_Query_Click(object sender, EventArgs e)
+        {
+            string key = txt_Key.Text;
+            if(!string.IsNullOrEmpty(key))
+            {
+                object type = cbo_Type.SelectedItem;
+                LoadAllList();
+
+                List<DataGridViewRow> rowList = new List<DataGridViewRow>();
+                foreach(DataGridViewRow row in dgv_ShowData.Rows)
+                {
+                    if("全部".Equals(type))
+                    {
+                        bool flag = false;
+                        foreach(DataGridViewCell cell in row.Cells)
+                        {
+                            if(GetValue(cell.Value).Contains(key))
+                            {
+                                flag = true;
+                                break;
+                            }
+                        }
+                        if(!flag)
+                            rowList.Add(row);
+                    }
+                    else
+                    {
+
+                        foreach(DataGridViewCell cell in row.Cells)
+                        {
+                            if(cell.OwningColumn.HeaderText.Equals(type))
+                            {
+                                if(!GetValue(cell.Value).Contains(key))
+                                {
+                                    rowList.Add(row);
+                                }
+                            }
+                        }
+                    }
+                }
+                for(int i = 0; i < rowList.Count; i++)
+                    dgv_ShowData.Rows.Remove(rowList[i]);
+            }
+            else
+            {
+                LoadAllList();
+            }
+        }
+
+        private void LoadAllList()
+        {
+            object tag = btn_Query.Tag;
+            object id = dgv_ShowData.Tag ?? rootId;
+            if("FILE".Equals(tag))
+                LoadFileList(tag);
+            else if("PROJECT".Equals(tag))
+                LoadProjectList(id);
+            else if("TOPIC".Equals(tag))
+                LoadTopicList(id);
+            else if("SUBJECT".Equals(tag))
+                LoadSubjectList(id);
+        }
+
+        private string GetValue(object value) => value == null ? string.Empty : value.ToString();
+
+        private void InitialType()
+        {
+            cbo_Type.Items.Clear();
+            cbo_Type.Items.Add("全部");
+            foreach(DataGridViewColumn column in dgv_ShowData.Columns)
+            {
+                cbo_Type.Items.Add(column.HeaderText);
+            }
+
+            if(cbo_Type.Items.Count > 0)
+                cbo_Type.SelectedIndex = 0;
+            txt_Key.ResetText();
+        }
+
     }
 }

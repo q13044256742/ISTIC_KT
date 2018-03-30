@@ -309,7 +309,7 @@ namespace 数据采集档案管理系统___课题版
                         dgv_DataList.Rows[rid].Cells["id"].Value = rowNumber++;
                         dgv_DataList.Rows[rid].Cells["code"].Value = projectTable.Rows[i]["pi_code"];
                         dgv_DataList.Rows[rid].Cells["name"].Value = projectTable.Rows[i]["pi_name"];
-                        dgv_DataList.Rows[rid].Cells["unit"].Value = SQLiteHelper.GetValueByKey(projectTable.Rows[i]["pi_unit"]);
+                        dgv_DataList.Rows[rid].Cells["unit"].Value = projectTable.Rows[i]["pi_unit"];
                         dgv_DataList.Rows[rid].Cells["user"].Value = projectTable.Rows[i]["pi_unit_user"];
                         dgv_DataList.Rows[rid].Cells["phone"].Value = projectTable.Rows[i]["pi_contacts_phone"];
                         dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(projectTable.Rows[i]["pi_id"], true);
@@ -324,7 +324,7 @@ namespace 数据采集档案管理系统___课题版
                         dgv_DataList.Rows[rid].Cells["id"].Value = rowNumber++;
                         dgv_DataList.Rows[rid].Cells["code"].Value = topicTable.Rows[i]["ti_code"];
                         dgv_DataList.Rows[rid].Cells["name"].Value = topicTable.Rows[i]["ti_name"];
-                        dgv_DataList.Rows[rid].Cells["unit"].Value = SQLiteHelper.GetValueByKey(topicTable.Rows[i]["ti_unit"]);
+                        dgv_DataList.Rows[rid].Cells["unit"].Value = topicTable.Rows[i]["ti_unit"];
                         dgv_DataList.Rows[rid].Cells["user"].Value = topicTable.Rows[i]["ti_unit_user"];
                         dgv_DataList.Rows[rid].Cells["phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
                         dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], true);
@@ -343,7 +343,7 @@ namespace 数据采集档案管理系统___课题版
                         dgv_DataList.Rows[rid].Cells["id"].Value = rowNumber++;
                         dgv_DataList.Rows[rid].Cells["code"].Value = subjectTable.Rows[i]["si_code"];
                         dgv_DataList.Rows[rid].Cells["name"].Value = subjectTable.Rows[i]["si_name"];
-                        dgv_DataList.Rows[rid].Cells["unit"].Value = SQLiteHelper.GetValueByKey(subjectTable.Rows[i]["si_unit"]);
+                        dgv_DataList.Rows[rid].Cells["unit"].Value = subjectTable.Rows[i]["si_unit"];
                         dgv_DataList.Rows[rid].Cells["user"].Value = subjectTable.Rows[i]["si_unit_user"];
                         dgv_DataList.Rows[rid].Cells["phone"].Value = subjectTable.Rows[i]["si_contacts_phone"];
                         dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(subjectTable.Rows[i]["si_id"], true);
@@ -358,7 +358,7 @@ namespace 数据采集档案管理系统___课题版
                         dgv_DataList.Rows[rid].Cells["id"].Value = rowNumber++;
                         dgv_DataList.Rows[rid].Cells["code"].Value = topicTable.Rows[i]["ti_code"];
                         dgv_DataList.Rows[rid].Cells["name"].Value = topicTable.Rows[i]["ti_name"];
-                        dgv_DataList.Rows[rid].Cells["unit"].Value = SQLiteHelper.GetValueByKey(topicTable.Rows[i]["ti_unit"]);
+                        dgv_DataList.Rows[rid].Cells["unit"].Value = topicTable.Rows[i]["ti_unit"];
                         dgv_DataList.Rows[rid].Cells["user"].Value = topicTable.Rows[i]["ti_unit_user"];
                         dgv_DataList.Rows[rid].Cells["phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
                         dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], true);
@@ -376,7 +376,7 @@ namespace 数据采集档案管理系统___课题版
                         dgv_DataList.Rows[rid].Cells["id"].Value = i + 1;
                         dgv_DataList.Rows[rid].Cells["code"].Value = subjectTable.Rows[i]["si_code"];
                         dgv_DataList.Rows[rid].Cells["name"].Value = subjectTable.Rows[i]["si_name"];
-                        dgv_DataList.Rows[rid].Cells["unit"].Value = SQLiteHelper.GetValueByKey(subjectTable.Rows[i]["si_unit"]);
+                        dgv_DataList.Rows[rid].Cells["unit"].Value = subjectTable.Rows[i]["si_unit"];
                         dgv_DataList.Rows[rid].Cells["user"].Value = subjectTable.Rows[i]["si_unit_user"];
                         dgv_DataList.Rows[rid].Cells["phone"].Value = subjectTable.Rows[i]["si_contacts_phone"];
                         dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(subjectTable.Rows[i]["si_id"], true);

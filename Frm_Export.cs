@@ -66,7 +66,7 @@ namespace 数据采集档案管理系统___课题版
                 /* ----复制文件----*/
                 pro_Show.Maximum = GetTotalFileAmountBySpiId(UserHelper.GetUser().UserSpecialId);
                 int count = pro_Show.Maximum, okcount = 0, nocount = 0;
-                string rootFolder = value + "\\" + SQLiteHelper.ExecuteOnlyOneQuery($"SELECT spi_name FROM special_info WHERE spi_id='{UserHelper.GetUser().UserSpecialId}'");
+                string rootFolder = value + "\\" + UserHelper.GetUser().SpecialName;
                 if(!Directory.Exists(rootFolder))
                     Directory.CreateDirectory(rootFolder);
                 //专项下的文件
@@ -131,11 +131,12 @@ namespace 数据采集档案管理系统___课题版
                         CopyFile(ref okcount, ref nocount, _rootFolder3, GetFileLinkByObjId(list6[k][0]));
                     }
                 }
-                MessageBox.Show($"数据已完成备份至指定路径，共计{count}个文件，成功{okcount}个，失败{nocount}个。", "操作成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 
                 /* ----合成文件清单----*/
                 string filePath = value + "\\重大专项项目（课题）档案交接清单";
                 MicrosoftWordHelper.WriteDocument(ref filePath, list);
+
+                MessageBox.Show($"数据已完成备份，成功{okcount}个，失败{nocount}个。", "操作成功", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Close();
             }
             else
