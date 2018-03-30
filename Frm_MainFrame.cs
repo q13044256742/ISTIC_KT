@@ -87,8 +87,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void Pic_Import_Click(object sender, EventArgs e)
         {
-            Frm_Import frm_Import = new Frm_Import();
-            frm_Import.ShowDialog();
+            new Frm_Import().ShowDialog();
         }
 
         private void Frm_MainFrame_Shown(object sender, EventArgs e)
@@ -126,7 +125,7 @@ namespace 数据采集档案管理系统___课题版
                 rootNode = new TreeNode()
                 {
                     Name = GetValue(row["spi_id"]),
-                    Text = GetValue(row["spi_code"]),
+                    Text = GetValue(row["spi_name"]) + "    ",
                     Tag = ControlType.Plan,
                     NodeFont = new System.Drawing.Font("微软雅黑", 10f)
                 };

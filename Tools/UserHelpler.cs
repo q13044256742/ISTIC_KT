@@ -20,6 +20,7 @@
         private string userUnitId;
         private string userUnitName;
         private string userSpecialId;
+        private string specialName;
         /// <summary>
         /// 用户ID
         /// </summary>
@@ -48,5 +49,9 @@
         /// 用户密码
         /// </summary>
         public string PassWord { get => passWord; set => passWord = value; }
+        /// <summary>
+        /// 专项名称
+        /// </summary>
+        public string SpecialName { get => specialName; set => specialName = value; }
     }
 }

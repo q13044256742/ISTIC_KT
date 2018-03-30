@@ -121,7 +121,9 @@ namespace 数据采集档案管理系统___课题版
             if(cbo_categor.SelectedIndex != -1)
                 LoadFileNameByCategor(cbo_categor.SelectedValue);
         }
-        
+
+        private ExeToWinForm form;
+
         /// <summary>
         /// 打开文件
         /// </summary>
@@ -148,7 +150,8 @@ namespace 数据采集档案管理系统___课题版
                             pal_ShowData.Visible = true;
                             pal_ShowData.Controls.Clear();
 
-                            new ExeToWinForm(pal_ShowData, string.Empty).Start(fullPath);
+                            form = new ExeToWinForm(pal_ShowData, string.Empty);
+                            form.Start(fullPath);
                         }
                     }
                     else
@@ -283,6 +286,11 @@ namespace 数据采集档案管理系统___课题版
                 else if(Text.Contains("编辑"))
                     UpdateFileInfo();
                 WindowState = FormWindowState.Normal;
+                if(form != null)
+                {
+                    form.Stop();
+                    form = null;
+                }
             }
         }
 
@@ -320,7 +328,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void ResetControl()
         {
-            foreach(Control item in gro_BasicInfo.Controls)
+            foreach(Control item in Controls)
             {
                 if(!(item is Label))
                 {

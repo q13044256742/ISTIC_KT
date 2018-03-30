@@ -29,6 +29,9 @@ namespace 数据采集档案管理系统___课题版
                     user.UserUnitId = GetValue(row["ui_unit"]);
                     user.UserUnitName = SQLiteHelper.GetValueByKey(user.UserUnitId);
                     user.PassWord = password;
+                    DataRow spRow = SQLiteHelper.ExecuteSingleRowQuery($"SELECT spi_name FROM special_info WHERE spi_id='{user.UserSpecialId}'");
+                    if(spRow != null)
+                        user.SpecialName = GetValue(spRow["spi_name"]);
                     Frm_MainFrame frm = new Frm_MainFrame();
                     frm.Show();
                     Hide();

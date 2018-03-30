@@ -57,7 +57,7 @@ namespace 数据采集档案管理系统___课题版
                         pro_Show.Value = pro_Show.Minimum;
                         pro_Show.Maximum = totalFileAmount;
 
-                        string rootFolder = @"\\" + IPAddress + @"\共享文件夹\" + UserHelper.GetUser().RealName + @"\";
+                        string rootFolder = @"\\" + IPAddress + @"\共享文件夹\" + UserHelper.GetUser().SpecialName + @"\";
                         if(!Directory.Exists(rootFolder))
                             Directory.CreateDirectory(rootFolder);
                         string primaryKey = Guid.NewGuid().ToString();

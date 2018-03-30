@@ -456,98 +456,95 @@ namespace 数据采集档案管理系统___课题版
                 int index = tab_Project_Info.SelectedIndex;
                 string key = "dgv_Project_FL_";
                 object objId = tab_Project_Info.Tag;
-                if(objId != null)
+                if(index == 0)
                 {
-                    if(index == 0)
-                    {
-                        objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
-                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
+                    MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                        int maxLength = dgv_Project_FileList.Rows.Count;
-                        if(maxLength > 0)//保存文件信息
+                    int maxLength = dgv_Project_FileList.Rows.Count;
+                    if(maxLength > 1)//保存文件信息
+                    {
+                        for(int i = 0; i < maxLength; i++)
                         {
-                            for(int i = 0; i < maxLength; i++)
+                            object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
+                            if(fileName != null)
                             {
-                                object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
+                                DataGridViewRow row = dgv_Project_FileList.Rows[i];
+                                object fileId = row.Cells[$"{key}id"].Tag;
+                                if(fileId == null)
                                 {
-                                    DataGridViewRow row = dgv_Project_FileList.Rows[i];
-                                    object fileId = row.Cells[$"{key}id"].Tag;
-                                    if(fileId == null)
-                                    {
-                                        fileId = AddFileInfo(key, row, objId);
-                                        row.Cells[$"{key}id"].Value = row.Index + 1;
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row);
+                                    fileId = AddFileInfo(key, row, objId);
+                                    row.Cells[$"{key}id"].Value = row.Index + 1;
+                                    row.Cells[$"{key}id"].Tag = fileId;
                                 }
+                                else
+                                    UpdateFileInfo(key, row);
                             }
-                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
+                        MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else if(index == 1)
+                }
+                else if(index == 1)
+                {
+                    ModifyFileValid(dgv_Project_FileValid, objId, "dgv_Project_FV_");
+                    MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else if(index == 2)
+                {
+                    string code = txt_Project_AJ_Code.Text;
+                    if(!string.IsNullOrEmpty(code))
                     {
-                        ModifyFileValid(dgv_Project_FileValid, objId, "dgv_Project_FV_");
-                        MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else if(index == 2)
-                    {
-                        string code = txt_Project_AJ_Code.Text;
-                        if(!string.IsNullOrEmpty(code))
+                        object aid = txt_Project_AJ_Code.Tag;
+                        string _name = txt_Project_AJ_Name.Text;
+                        string term = txt_Project_AJ_Term.Text;
+                        string secret = txt_Project_AJ_Secret.Text;
+                        string user = txt_Project_AJ_User.Text;
+                        string unit = txt_Project_AJ_Unit.Text;
+                        if(aid == null)
                         {
-                            object aid = txt_Project_AJ_Code.Tag;
-                            string _name = txt_Project_AJ_Name.Text;
-                            string term = txt_Project_AJ_Term.Text;
-                            string secret = txt_Project_AJ_Secret.Text;
-                            string user = txt_Project_AJ_User.Text;
-                            string unit = txt_Project_AJ_Unit.Text;
-                            if(aid == null)
-                            {
-                                aid = Guid.NewGuid().ToString();
-                                string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
-                                SQLiteHelper.ExecuteNonQuery(insertSql);
-                                txt_Project_AJ_Code.Tag = aid;
-                            }
-                            else
-                            {
-                                string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
-                                SQLiteHelper.ExecuteNonQuery(updateSql);
-                            }
-                            MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            aid = Guid.NewGuid().ToString();
+                            string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
+                            SQLiteHelper.ExecuteNonQuery(insertSql);
+                            txt_Project_AJ_Code.Tag = aid;
                         }
                         else
-                            MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else if(index == 3)
-                    {
-                        object boxId = cbo_Project_BoxId.SelectedValue;
-                        if(boxId != null)
                         {
-                            if(!string.IsNullOrEmpty(txt_Project_GCID.Text.Trim()))
+                            string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
+                            SQLiteHelper.ExecuteNonQuery(updateSql);
+                        }
+                        MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                        MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else if(index == 3)
+                {
+                    object boxId = cbo_Project_BoxId.SelectedValue;
+                    if(boxId != null)
+                    {
+                        if(!string.IsNullOrEmpty(txt_Project_GCID.Text.Trim()))
+                        {
+                            //先将当前盒中所有文件置为未归档状态
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=-1 WHERE fi_id IN(SELECT pb_obj_id FROM files_box_info WHERE pb_id='{boxId}')");
+
+                            string ids = string.Empty;
+                            foreach(ListViewItem item in lsv_Project_Right.Items)
+                                ids += "'" + item.SubItems[0].Text + "',";
+                            if(!string.IsNullOrEmpty(ids))
                             {
-                                //先将当前盒中所有文件置为未归档状态
-                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=-1 WHERE fi_id IN(SELECT pb_obj_id FROM files_box_info WHERE pb_id='{boxId}')");
+                                ids = ids.Substring(0, ids.Length - 1);
+                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
+                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
 
-                                string ids = string.Empty;
-                                foreach(ListViewItem item in lsv_Project_Right.Items)
-                                    ids += "'" + item.SubItems[0].Text + "',";
-                                if(!string.IsNullOrEmpty(ids))
-                                {
-                                    ids = ids.Substring(0, ids.Length - 1);
-                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
-                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
-
-                                    MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                    LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                                }
+                                MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                LoadFileBoxTable(boxId, objId, ControlType.Plan);
                             }
-                            else
-                                MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
-                            MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
+                    else
+                        MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             else if(name.Contains("Topic"))
@@ -555,98 +552,95 @@ namespace 数据采集档案管理系统___课题版
                 int index = tab_Topic_Info.SelectedIndex;
                 string key = "dgv_Topic_FL_";
                 object objId = tab_Topic_Info.Tag;
-                if(objId != null)
+                if(index == 0)
                 {
-                    if(index == 0)
-                    {
-                        objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
-                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
+                    MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                        int maxLength = dgv_Topic_FileList.Rows.Count;
-                        if(maxLength > 0)
+                    int maxLength = dgv_Topic_FileList.Rows.Count;
+                    if(maxLength > 1)
+                    {
+                        for(int i = 0; i < maxLength; i++)
                         {
-                            for(int i = 0; i < maxLength; i++)
+                            object fileName = dgv_Topic_FileList.Rows[i].Cells[$"{key}name"].Value;
+                            if(fileName != null)
                             {
-                                object fileName = dgv_Topic_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
+                                DataGridViewRow row = dgv_Topic_FileList.Rows[i];
+                                object fileId = row.Cells[$"{key}id"].Tag;
+                                if(fileId == null)
                                 {
-                                    DataGridViewRow row = dgv_Topic_FileList.Rows[i];
-                                    object fileId = row.Cells[$"{key}id"].Tag;
-                                    if(fileId == null)
-                                    {
-                                        fileId = AddFileInfo(key, row, objId);
-                                        row.Cells[$"{key}id"].Value = row.Index + 1;
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row);
+                                    fileId = AddFileInfo(key, row, objId);
+                                    row.Cells[$"{key}id"].Value = row.Index + 1;
+                                    row.Cells[$"{key}id"].Tag = fileId;
                                 }
+                                else
+                                    UpdateFileInfo(key, row);
                             }
-                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
+                        MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else if(index == 1)
+                }
+                else if(index == 1)
+                {
+                    ModifyFileValid(dgv_Topic_FileValid, objId, "dgv_Topic_FV_");
+                    MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else if(index == 2)
+                {
+                    string code = txt_Topic_AJ_Code.Text;
+                    if(!string.IsNullOrEmpty(code))
                     {
-                        ModifyFileValid(dgv_Topic_FileValid, objId, "dgv_Topic_FV_");
-                        MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else if(index == 2)
-                    {
-                        string code = txt_Topic_AJ_Code.Text;
-                        if(!string.IsNullOrEmpty(code))
+                        object aid = txt_Topic_AJ_Code.Tag;
+                        string _name = txt_Topic_AJ_Name.Text;
+                        string term = txt_Topic_AJ_Term.Text;
+                        string secret = txt_Topic_AJ_Secret.Text;
+                        string user = txt_Topic_AJ_User.Text;
+                        string unit = txt_Topic_AJ_Unit.Text;
+                        if(aid == null)
                         {
-                            object aid = txt_Topic_AJ_Code.Tag;
-                            string _name = txt_Topic_AJ_Name.Text;
-                            string term = txt_Topic_AJ_Term.Text;
-                            string secret = txt_Topic_AJ_Secret.Text;
-                            string user = txt_Topic_AJ_User.Text;
-                            string unit = txt_Topic_AJ_Unit.Text;
-                            if(aid == null)
-                            {
-                                aid = Guid.NewGuid().ToString();
-                                string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
-                                SQLiteHelper.ExecuteNonQuery(insertSql);
-                                txt_Topic_AJ_Code.Tag = aid;
-                            }
-                            else
-                            {
-                                string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
-                                SQLiteHelper.ExecuteNonQuery(updateSql);
-                            }
-                            MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            aid = Guid.NewGuid().ToString();
+                            string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
+                            SQLiteHelper.ExecuteNonQuery(insertSql);
+                            txt_Topic_AJ_Code.Tag = aid;
                         }
                         else
-                            MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else if(index == 3)
-                    {
-                        object boxId = cbo_Topic_BoxId.SelectedValue;
-                        if(boxId != null)
                         {
-                            if(!string.IsNullOrEmpty(txt_Topic_GCID.Text.Trim()))
+                            string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
+                            SQLiteHelper.ExecuteNonQuery(updateSql);
+                        }
+                        MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                        MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else if(index == 3)
+                {
+                    object boxId = cbo_Topic_BoxId.SelectedValue;
+                    if(boxId != null)
+                    {
+                        if(!string.IsNullOrEmpty(txt_Topic_GCID.Text.Trim()))
+                        {
+                            //先将当前盒中所有文件置为未归档状态
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=-1 WHERE fi_id IN(SELECT pb_obj_id FROM files_box_info WHERE pb_id='{boxId}')");
+
+                            string ids = string.Empty;
+                            foreach(ListViewItem item in lsv_Topic_Right.Items)
+                                ids += "'" + item.SubItems[0].Text + "',";
+                            if(!string.IsNullOrEmpty(ids))
                             {
-                                //先将当前盒中所有文件置为未归档状态
-                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=-1 WHERE fi_id IN(SELECT pb_obj_id FROM files_box_info WHERE pb_id='{boxId}')");
+                                ids = ids.Substring(0, ids.Length - 1);
+                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
+                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
 
-                                string ids = string.Empty;
-                                foreach(ListViewItem item in lsv_Topic_Right.Items)
-                                    ids += "'" + item.SubItems[0].Text + "',";
-                                if(!string.IsNullOrEmpty(ids))
-                                {
-                                    ids = ids.Substring(0, ids.Length - 1);
-                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
-                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
-
-                                    MessageBox.Show("保存案卷盒成功。");
-                                    LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                                }
+                                MessageBox.Show("保存案卷盒成功。");
+                                LoadFileBoxTable(boxId, objId, ControlType.Plan);
                             }
-                            else
-                                MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
-                            MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
+                    else
+                        MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             else if(name.Contains("Subject"))
@@ -654,98 +648,95 @@ namespace 数据采集档案管理系统___课题版
                 int index = tab_Subject_Info.SelectedIndex;
                 string key = "dgv_Subject_FL_";
                 object objId = tab_Subject_Info.Tag;
-                if(objId != null)
+                if(index == 0)
                 {
-                    if(index == 0)
-                    {
-                        objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
-                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
+                    MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                        int maxLength = dgv_Subject_FileList.Rows.Count;
-                        if(maxLength > 0)
+                    int maxLength = dgv_Subject_FileList.Rows.Count;
+                    if(maxLength > 1)
+                    {
+                        for(int i = 0; i < maxLength; i++)
                         {
-                            for(int i = 0; i < maxLength; i++)
+                            object fileName = dgv_Subject_FileList.Rows[i].Cells[$"{key}name"].Value;
+                            if(fileName != null)
                             {
-                                object fileName = dgv_Subject_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
+                                DataGridViewRow row = dgv_Subject_FileList.Rows[i];
+                                object fileId = row.Cells[$"{key}id"].Tag;
+                                if(fileId == null)
                                 {
-                                    DataGridViewRow row = dgv_Subject_FileList.Rows[i];
-                                    object fileId = row.Cells[$"{key}id"].Tag;
-                                    if(fileId == null)
-                                    {
-                                        fileId = AddFileInfo(key, row, objId);
-                                        row.Cells[$"{key}id"].Value = row.Index + 1;
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row);
+                                    fileId = AddFileInfo(key, row, objId);
+                                    row.Cells[$"{key}id"].Value = row.Index + 1;
+                                    row.Cells[$"{key}id"].Tag = fileId;
                                 }
+                                else
+                                    UpdateFileInfo(key, row);
                             }
-                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
+                        MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else if(index == 1)
+                }
+                else if(index == 1)
+                {
+                    ModifyFileValid(dgv_Subject_FileValid, objId, "dgv_Subject_FV_");
+                    MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else if(index == 2)
+                {
+                    string code = txt_Subject_AJ_Code.Text;
+                    if(!string.IsNullOrEmpty(code))
                     {
-                        ModifyFileValid(dgv_Subject_FileValid, objId, "dgv_Subject_FV_");
-                        MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else if(index == 2)
-                    {
-                        string code = txt_Subject_AJ_Code.Text;
-                        if(!string.IsNullOrEmpty(code))
+                        object aid = txt_Subject_AJ_Code.Tag;
+                        string _name = txt_Subject_AJ_Name.Text;
+                        string term = txt_Subject_AJ_Term.Text;
+                        string secret = txt_Subject_AJ_Secret.Text;
+                        string user = txt_Subject_AJ_User.Text;
+                        string unit = txt_Subject_AJ_Unit.Text;
+                        if(aid == null)
                         {
-                            object aid = txt_Subject_AJ_Code.Tag;
-                            string _name = txt_Subject_AJ_Name.Text;
-                            string term = txt_Subject_AJ_Term.Text;
-                            string secret = txt_Subject_AJ_Secret.Text;
-                            string user = txt_Subject_AJ_User.Text;
-                            string unit = txt_Subject_AJ_Unit.Text;
-                            if(aid == null)
-                            {
-                                aid = Guid.NewGuid().ToString();
-                                string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
-                                SQLiteHelper.ExecuteNonQuery(insertSql);
-                                txt_Subject_AJ_Code.Tag = aid;
-                            }
-                            else
-                            {
-                                string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
-                                SQLiteHelper.ExecuteNonQuery(updateSql);
-                            }
-                            MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            aid = Guid.NewGuid().ToString();
+                            string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
+                            SQLiteHelper.ExecuteNonQuery(insertSql);
+                            txt_Subject_AJ_Code.Tag = aid;
                         }
                         else
-                            MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                    }
-                    else if(index == 3)
-                    {
-                        object boxId = cbo_Subject_BoxId.SelectedValue;
-                        if(boxId != null)
                         {
-                            if(!string.IsNullOrEmpty(txt_Subject_GCID.Text.Trim()))
+                            string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
+                            SQLiteHelper.ExecuteNonQuery(updateSql);
+                        }
+                        MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                        MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+                else if(index == 3)
+                {
+                    object boxId = cbo_Subject_BoxId.SelectedValue;
+                    if(boxId != null)
+                    {
+                        if(!string.IsNullOrEmpty(txt_Subject_GCID.Text.Trim()))
+                        {
+                            //先将当前盒中所有文件置为未归档状态
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=-1 WHERE fi_id IN(SELECT pb_obj_id FROM files_box_info WHERE pb_id='{boxId}')");
+
+                            string ids = string.Empty;
+                            foreach(ListViewItem item in lsv_Subject_Right.Items)
+                                ids += "'" + item.SubItems[0].Text + "',";
+                            if(!string.IsNullOrEmpty(ids))
                             {
-                                //先将当前盒中所有文件置为未归档状态
-                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=-1 WHERE fi_id IN(SELECT pb_obj_id FROM files_box_info WHERE pb_id='{boxId}')");
+                                ids = ids.Substring(0, ids.Length - 1);
+                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
+                                SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
 
-                                string ids = string.Empty;
-                                foreach(ListViewItem item in lsv_Subject_Right.Items)
-                                    ids += "'" + item.SubItems[0].Text + "',";
-                                if(!string.IsNullOrEmpty(ids))
-                                {
-                                    ids = ids.Substring(0, ids.Length - 1);
-                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
-                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
-
-                                    MessageBox.Show("保存案卷盒成功。");
-                                    LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                                }
+                                MessageBox.Show("保存案卷盒成功。");
+                                LoadFileBoxTable(boxId, objId, ControlType.Plan);
                             }
-                            else
-                                MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
-                            MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
+                    else
+                        MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
         }
@@ -1313,7 +1304,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     if(index == 1)
                     {
-                        LoadFileValidList(dgv_Project_FileValid, objid, "dgv_Project_FV_");
+                        LoadFileValidList(dgv_Project_FileValid, objid, "dgv_Project_FV_", txt_Project_Code.Text, txt_Project_Name.Text);
                         dgv_Project_FileValid.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 10.5f, System.Drawing.FontStyle.Regular);
                     }
                     else if(index == 2)
@@ -1375,7 +1366,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     if(index == 1)
                     {
-                        LoadFileValidList(dgv_Topic_FileValid, objid, "dgv_Topic_FV_");
+                        LoadFileValidList(dgv_Topic_FileValid, objid, "dgv_Topic_FV_", txt_Topic_Code.Text, txt_Topic_Name.Text);
                         dgv_Topic_FileValid.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 10.5f, System.Drawing.FontStyle.Regular);
                     }
                     else if(index == 2)
@@ -1437,7 +1428,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     if(index == 1)
                     {
-                        LoadFileValidList(dgv_Subject_FileValid, objId, "dgv_Subject_FV_");
+                        LoadFileValidList(dgv_Subject_FileValid, objId, "dgv_Subject_FV_", txt_Subject_Code.Text, txt_Subject_Name.Text);
                         dgv_Subject_FileValid.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 10.5f, System.Drawing.FontStyle.Regular);
                     }
                     else if(index == 2)
@@ -1662,7 +1653,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         /// <param name="dataGridView">待校验表格</param>
         /// <param name="objid">主键</param>
-        private void LoadFileValidList(DataGridView dataGridView, object objid, string key)
+        private void LoadFileValidList(DataGridView dataGridView, object objid, string key, string code, string name)
         {
             dataGridView.Rows.Clear();
 
@@ -1678,7 +1669,8 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[indexRow].Cells[key + "id"].Value = i + 1;
                 dataGridView.Rows[indexRow].Cells[key + "categor"].Value = table.Rows[i]["dd_name"];
                 dataGridView.Rows[indexRow].Cells[key + "name"].Value = table.Rows[i]["dd_note"];
-
+                dataGridView.Rows[indexRow].Cells[key + "pcode"].Value = code;
+                dataGridView.Rows[indexRow].Cells[key + "pname"].Value = name;
                 string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{table.Rows[i]["dd_name"]}'";
                 object[] _obj = SQLiteHelper.ExecuteRowsQuery(queryReasonSql);
                 if(_obj != null)
