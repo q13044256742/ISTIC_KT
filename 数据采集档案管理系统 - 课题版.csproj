@@ -309,8 +309,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\add.png" />
-    <None Include="Resources\Comic Icons 3 find.png" />
+    <None Include="Images\png-1165.png" />
+    <None Include="Images\png-1644.png" />
+    <None Include="Images\png-1753.png" />
+    <None Include="Images\png-0010.png" />
+    <Content Include="Images\slogan.ico" />
+    <Content Include="Resources\explain.txt" />
     <None Include="Resources\ooopic_1522400624.ico" />
     <None Include="Resources\login_1.png" />
     <None Include="Images\png-0228.png" />

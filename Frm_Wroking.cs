@@ -146,12 +146,12 @@ namespace 数据采集档案管理系统___课题版
                         else
                         {
                             //课题 >> 子课题
-                            ShowTabPageByName("topic", 1);
-                            gro_Topic_Btns.Tag = 1;
+                            ShowTabPageByName("topic", 0);
+                            gro_Topic_Btns.Tag = 0;
                             topic.Tag = topicRow["ti_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic, topicRow["ti_id"], topicRow);
 
-                            ShowTabPageByName("Subject", 2);
+                            ShowTabPageByName("Subject", 1);
                             Subject.Tag = subjectRow["si_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic_Subject, subjectRow["si_id"], subjectRow);
                         }
@@ -162,12 +162,12 @@ namespace 数据采集档案管理系统___课题版
                         //计划 >> 项目 >> 子课题
                         if(projectRow != null)
                         {
-                            ShowTabPageByName("project", 1);
-                            gro_Project_Btns.Tag = 1;
+                            ShowTabPageByName("project", 0);
+                            gro_Project_Btns.Tag = 0;
                             project.Tag = projectRow["pi_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Project, projectRow["pi_id"], projectRow);
 
-                            ShowTabPageByName("Subject", 2);
+                            ShowTabPageByName("Subject", 1);
                             Subject.Tag = subjectRow["si_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic_Subject, subjectRow["si_id"], subjectRow);
                         }
@@ -425,9 +425,18 @@ namespace 数据采集档案管理系统___课题版
             }
             else
             {
-                ShowTabPageByName("Subject", sort + 1);
-                gro_Subject_Btns.Tag = sort + 1;
-                Subject.Tag = tab_Topic_Info.Tag;
+                object id = tab_Topic_Info.Tag;
+                if(id != null)
+                {
+                    ShowTabPageByName("Subject", sort + 1);
+                    gro_Subject_Btns.Tag = sort + 1;
+                    Subject.Tag = id;
+                }
+                else
+                {
+                    MessageBox.Show("请先保存当前页信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    cbo_Topic_HasNext.SelectedIndex = 0;
+                }
             }
         }
 
@@ -1101,18 +1110,29 @@ namespace 数据采集档案管理系统___课题版
             {
                 ShowTabPageByName(string.Empty, sort + 1);
             }
-            else if(index == 2)//课题
+            else
             {
-                ShowTabPageByName("topic", sort + 1);
-                gro_Topic_Btns.Tag = sort + 1;
-                topic.Tag = tab_Project_Info.Tag;
-
-            }
-            else if(index == 3)//子课题
-            {
-                ShowTabPageByName("Subject", sort + 1);
-                gro_Subject_Btns.Tag = sort + 1;
-                Subject.Tag = tab_Project_Info.Tag;
+                object id = tab_Project_Info.Tag;
+                if(id != null)
+                {
+                    if(index == 2)//课题
+                    {
+                        ShowTabPageByName("topic", sort + 1);
+                        gro_Topic_Btns.Tag = sort + 1;
+                        topic.Tag = id;
+                    }
+                    else if(index == 3)//子课题
+                    {
+                        ShowTabPageByName("Subject", sort + 1);
+                        gro_Subject_Btns.Tag = sort + 1;
+                        Subject.Tag = id;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("请先保存当前页信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    cbo_Project_HasNext.SelectedIndex = 0;
+                }
             }
         }
 

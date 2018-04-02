@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Explain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -80,7 +79,7 @@
             this.richTextBox1.ReadOnly = true;
             this.richTextBox1.Size = new System.Drawing.Size(649, 560);
             this.richTextBox1.TabIndex = 0;
-            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            this.richTextBox1.Text = "";
             // 
             // panel3
             // 
@@ -118,8 +117,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Frm_Explain";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "填报说明";
             this.Load += new System.EventHandler(this.Frm_Explain_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

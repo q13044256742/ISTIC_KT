@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Import));
             this.label1 = new System.Windows.Forms.Label();
             this.txt_FilePath = new System.Windows.Forms.TextBox();
             this.btn_Import = new System.Windows.Forms.Button();
@@ -60,10 +61,10 @@
             // btn_Import
             // 
             this.btn_Import.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.btn_Import.Location = new System.Drawing.Point(177, 174);
+            this.btn_Import.Location = new System.Drawing.Point(180, 179);
             this.btn_Import.Margin = new System.Windows.Forms.Padding(5);
             this.btn_Import.Name = "btn_Import";
-            this.btn_Import.Size = new System.Drawing.Size(102, 32);
+            this.btn_Import.Size = new System.Drawing.Size(96, 30);
             this.btn_Import.TabIndex = 3;
             this.btn_Import.Text = "开始导入";
             this.btn_Import.UseVisualStyleBackColor = true;
@@ -112,6 +113,7 @@
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

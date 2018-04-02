@@ -29,13 +29,14 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("863计划");
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("863计划");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Wroking));
             this.tab_Menu = new System.Windows.Forms.TabControl();
             this.project = new System.Windows.Forms.TabPage();
             this.cbo_Project_Field = new System.Windows.Forms.ComboBox();
@@ -472,14 +473,14 @@
             // 
             // dgv_Project_FileList
             // 
-            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle43.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle43.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle43.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle43.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle43.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle43.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Project_FileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle43;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Project_FileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_Project_FileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Project_FileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Project_FL_id,
@@ -607,14 +608,14 @@
             this.dgv_Project_FileValid.AllowUserToAddRows = false;
             this.dgv_Project_FileValid.AllowUserToDeleteRows = false;
             this.dgv_Project_FileValid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle44.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle44.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle44.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle44.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle44.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle44.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Project_FileValid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Project_FileValid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_Project_FileValid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Project_FileValid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Project_FV_id,
@@ -872,7 +873,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 231);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 233);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -884,7 +885,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 200);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 202);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -904,7 +905,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 169);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 171);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -916,7 +917,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 138);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 140);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -928,7 +929,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 107);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 109);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -940,7 +941,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 76);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 78);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -983,7 +984,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(668, 46);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 222);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 226);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -998,7 +999,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 45);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 222);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 226);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1501,14 +1502,14 @@
             // 
             // dgv_Topic_FileList
             // 
-            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle45.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle45.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle45.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle45.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle45.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle45.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Topic_FileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Topic_FileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_Topic_FileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Topic_FileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Topic_FL_id,
@@ -1664,14 +1665,14 @@
             this.dgv_Topic_FileValid.AllowUserToAddRows = false;
             this.dgv_Topic_FileValid.AllowUserToDeleteRows = false;
             this.dgv_Topic_FileValid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle46.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle46.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle46.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle46.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle46.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle46.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Topic_FileValid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Topic_FileValid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgv_Topic_FileValid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Topic_FileValid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Topic_FV_id,
@@ -1929,7 +1930,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 229);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 231);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1941,7 +1942,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 198);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 200);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -1961,7 +1962,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 167);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 169);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -1973,7 +1974,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 136);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 138);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -1985,7 +1986,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 105);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 107);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -1997,7 +1998,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 74);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 76);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -2040,7 +2041,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(668, 43);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 224);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 228);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -2055,7 +2056,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 43);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 224);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 228);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -2503,14 +2504,14 @@
             // 
             // dgv_Subject_FileList
             // 
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle47.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle47.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle47.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Subject_FileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Subject_FileList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.dgv_Subject_FileList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Subject_FileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Subject_FL_id,
@@ -2656,7 +2657,7 @@
             this.tab_Subject_FileValid.Location = new System.Drawing.Point(4, 26);
             this.tab_Subject_FileValid.Name = "tab_Subject_FileValid";
             this.tab_Subject_FileValid.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Subject_FileValid.Size = new System.Drawing.Size(1248, 260);
+            this.tab_Subject_FileValid.Size = new System.Drawing.Size(1248, 262);
             this.tab_Subject_FileValid.TabIndex = 1;
             this.tab_Subject_FileValid.Text = "文件核查";
             this.tab_Subject_FileValid.UseVisualStyleBackColor = true;
@@ -2666,14 +2667,14 @@
             this.dgv_Subject_FileValid.AllowUserToAddRows = false;
             this.dgv_Subject_FileValid.AllowUserToDeleteRows = false;
             this.dgv_Subject_FileValid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle48.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_Subject_FileValid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_Subject_FileValid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dgv_Subject_FileValid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_Subject_FileValid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgv_Subject_FV_id,
@@ -2687,7 +2688,7 @@
             this.dgv_Subject_FileValid.Location = new System.Drawing.Point(3, 3);
             this.dgv_Subject_FileValid.Name = "dgv_Subject_FileValid";
             this.dgv_Subject_FileValid.RowTemplate.Height = 23;
-            this.dgv_Subject_FileValid.Size = new System.Drawing.Size(1242, 254);
+            this.dgv_Subject_FileValid.Size = new System.Drawing.Size(1242, 256);
             this.dgv_Subject_FileValid.TabIndex = 0;
             // 
             // dgv_Subject_FV_id
@@ -2755,7 +2756,7 @@
             this.tab_Subject_AJ.Controls.Add(this.label29);
             this.tab_Subject_AJ.Location = new System.Drawing.Point(4, 26);
             this.tab_Subject_AJ.Name = "tab_Subject_AJ";
-            this.tab_Subject_AJ.Size = new System.Drawing.Size(1248, 260);
+            this.tab_Subject_AJ.Size = new System.Drawing.Size(1248, 262);
             this.tab_Subject_AJ.TabIndex = 2;
             this.tab_Subject_AJ.Text = "案卷信息";
             // 
@@ -2888,7 +2889,7 @@
             this.tab_Subject_Box.Controls.Add(this.label74);
             this.tab_Subject_Box.Location = new System.Drawing.Point(4, 26);
             this.tab_Subject_Box.Name = "tab_Subject_Box";
-            this.tab_Subject_Box.Size = new System.Drawing.Size(1248, 260);
+            this.tab_Subject_Box.Size = new System.Drawing.Size(1248, 262);
             this.tab_Subject_Box.TabIndex = 3;
             this.tab_Subject_Box.Text = "盒信息";
             // 
@@ -2931,7 +2932,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 228);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 231);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -2943,7 +2944,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 197);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 200);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -2963,7 +2964,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 166);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 169);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -2975,7 +2976,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 135);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 138);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -2987,7 +2988,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 104);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 107);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -2999,7 +3000,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 73);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 76);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(75, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -3042,7 +3043,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(668, 42);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 223);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 229);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -3057,7 +3058,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 42);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 223);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 229);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -3364,10 +3365,10 @@
             this.tv_Working.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tv_Working.Location = new System.Drawing.Point(-240, 0);
             this.tv_Working.Name = "tv_Working";
-            treeNode8.Name = "863计划";
-            treeNode8.Text = "863计划";
+            treeNode1.Name = "863计划";
+            treeNode1.Text = "863计划";
             this.tv_Working.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode8});
+            treeNode1});
             this.tv_Working.Size = new System.Drawing.Size(240, 641);
             this.tv_Working.TabIndex = 0;
             this.tv_Working.Visible = false;
@@ -3380,6 +3381,7 @@
             this.Controls.Add(this.tab_Menu);
             this.Controls.Add(this.tv_Working);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Wroking";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "我的加工-加工中";

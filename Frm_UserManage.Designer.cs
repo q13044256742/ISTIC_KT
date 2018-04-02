@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tab_UseList = new System.Windows.Forms.TabControl();
             this.tp_UserList = new System.Windows.Forms.TabPage();
             this.dgv_UserList = new System.Windows.Forms.DataGridView();
@@ -46,6 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_Search_KeyWord = new System.Windows.Forms.TextBox();
             this.tab_UserAdd = new System.Windows.Forms.TabPage();
+            this.cbo_Unit = new System.Windows.Forms.ComboBox();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.txt_Remark = new System.Windows.Forms.TextBox();
@@ -66,7 +67,6 @@
             this.txt_UserName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.errorTip = new System.Windows.Forms.ErrorProvider(this.components);
-            this.cbo_Unit = new System.Windows.Forms.ComboBox();
             this.tab_UseList.SuspendLayout();
             this.tp_UserList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_UserList)).BeginInit();
@@ -91,6 +91,7 @@
             // 
             this.tp_UserList.Controls.Add(this.dgv_UserList);
             this.tp_UserList.Controls.Add(this.groupBox1);
+            this.tp_UserList.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tp_UserList.Location = new System.Drawing.Point(4, 29);
             this.tp_UserList.Name = "tp_UserList";
             this.tp_UserList.Padding = new System.Windows.Forms.Padding(3);
@@ -104,14 +105,14 @@
             this.dgv_UserList.AllowUserToAddRows = false;
             this.dgv_UserList.AllowUserToDeleteRows = false;
             this.dgv_UserList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_UserList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.realname,
@@ -173,7 +174,6 @@
             this.groupBox1.Size = new System.Drawing.Size(820, 61);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "快速查询";
             // 
             // btn_Refresh
             // 
@@ -262,13 +262,22 @@
             this.tab_UserAdd.Controls.Add(this.label4);
             this.tab_UserAdd.Controls.Add(this.txt_UserName);
             this.tab_UserAdd.Controls.Add(this.label3);
-            this.tab_UserAdd.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tab_UserAdd.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tab_UserAdd.Location = new System.Drawing.Point(4, 29);
             this.tab_UserAdd.Name = "tab_UserAdd";
             this.tab_UserAdd.Padding = new System.Windows.Forms.Padding(3);
             this.tab_UserAdd.Size = new System.Drawing.Size(826, 488);
             this.tab_UserAdd.TabIndex = 1;
             this.tab_UserAdd.Text = "用户添加";
+            // 
+            // cbo_Unit
+            // 
+            this.cbo_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Unit.FormattingEnabled = true;
+            this.cbo_Unit.Location = new System.Drawing.Point(247, 140);
+            this.cbo_Unit.Name = "cbo_Unit";
+            this.cbo_Unit.Size = new System.Drawing.Size(379, 28);
+            this.cbo_Unit.TabIndex = 20;
             // 
             // btn_Reset
             // 
@@ -452,15 +461,6 @@
             // 
             this.errorTip.ContainerControl = this;
             // 
-            // cbo_Unit
-            // 
-            this.cbo_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Unit.FormattingEnabled = true;
-            this.cbo_Unit.Location = new System.Drawing.Point(247, 140);
-            this.cbo_Unit.Name = "cbo_Unit";
-            this.cbo_Unit.Size = new System.Drawing.Size(379, 28);
-            this.cbo_Unit.TabIndex = 20;
-            // 
             // Frm_UserManage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -469,8 +469,8 @@
             this.Controls.Add(this.tab_UseList);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Frm_UserManage";
+            this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "用户信息管理";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Frm_UserManager_Load);
             this.tab_UseList.ResumeLayout(false);

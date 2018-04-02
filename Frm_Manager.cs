@@ -23,31 +23,31 @@ namespace 数据采集档案管理系统___课题版
                 {
                     Name = "userManager",
                     Text = "用户信息管理",
-                    Image = Resources.png_0222
+                    Image = Resources.png_0010
                 },
-                new CreateKyoPanel.KyoPanel
-                {
-                    Name = "unitManager",
-                    Text = "专项基本信息",
-                    Image = Resources.png_0228
-                },
+                //new CreateKyoPanel.KyoPanel
+                //{
+                //    Name = "unitManager",
+                //    Text = "专项基本信息",
+                //    Image = Resources.png_0228
+                //},
                 new CreateKyoPanel.KyoPanel
                 {
                     Name = "dictionaryManage",
                     Text = "字典管理",
-                    Image = Resources.png_0289
+                    Image = Resources.png_1644
                 },
                 new CreateKyoPanel.KyoPanel
                 {
                     Name = "setContextPath",
                     Text = "指定全文路径",
-                    Image = Resources.png_0281
+                    Image = Resources.png_1165
                 },
                 new CreateKyoPanel.KyoPanel
                 {
                     Name = "setCodeRule",
                     Text = "编码规则",
-                    Image = Resources.png_0289
+                    Image = Resources.png_1753
                 }
             });
             CreateKyoPanel.SetPanel(pal_LeftMenu, list, LeftMenu_Click);

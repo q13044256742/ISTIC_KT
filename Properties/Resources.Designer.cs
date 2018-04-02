@@ -91,22 +91,29 @@ namespace 数据采集档案管理系统___课题版.Properties {
         }
         
         /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        ///   查找类似 1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
+        ///
+        ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责 [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
-        internal static System.Drawing.Bitmap add {
+        internal static string explain {
             get {
-                object obj = ResourceManager.GetObject("add", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap Comic_Icons_3_find {
-            get {
-                object obj = ResourceManager.GetObject("Comic_Icons_3_find", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ResourceManager.GetString("explain", resourceCulture);
             }
         }
         
@@ -136,6 +143,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap Mbg {
             get {
                 object obj = ResourceManager.GetObject("Mbg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap png_0010 {
+            get {
+                object obj = ResourceManager.GetObject("png_0010", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -206,6 +223,36 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap png_0289 {
             get {
                 object obj = ResourceManager.GetObject("png_0289", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap png_1165 {
+            get {
+                object obj = ResourceManager.GetObject("png_1165", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap png_1644 {
+            get {
+                object obj = ResourceManager.GetObject("png_1644", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap png_1753 {
+            get {
+                object obj = ResourceManager.GetObject("png_1753", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

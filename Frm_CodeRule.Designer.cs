@@ -306,7 +306,8 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Frm_CodeRule";
-            this.Text = "编码规则设置";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.Frm_CodeRule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_Water)).EndInit();
             this.ResumeLayout(false);

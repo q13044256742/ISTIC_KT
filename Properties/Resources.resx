@@ -157,13 +157,22 @@
   <data name="png_0285" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\png-0285.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Comic_Icons_3_find" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Comic Icons 3 find.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ooopic_1522400624.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="explain" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\explain.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="png_0010" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\png-0010.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_1165" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\png-1165.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_1644" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\png-1644.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_1753" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\png-1753.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

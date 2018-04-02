@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using 数据采集档案管理系统___课题版.Properties;
 
 namespace 数据采集档案管理系统___课题版
 {
@@ -17,7 +18,8 @@ namespace 数据采集档案管理系统___课题版
 
         private void Frm_Explain_Load(object sender, EventArgs e)
         {
-
+            richTextBox1.AppendText(Resources.explain);
+            richTextBox1.Select(0, 0);
         }
     }
 }
