@@ -33,8 +33,8 @@ namespace 数据采集档案管理系统___课题版
         {
             TreeNode node = new TreeNode() { Name = rootId, Tag = ControlType.Plan };
             Frm_Wroking frm_Wroking = new Frm_Wroking(node);
-            frm_Wroking.Show();
-            LoadTreeList(rootId);
+            if(frm_Wroking.ShowDialog() == DialogResult.OK)
+                LoadTreeList(rootId);
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
