@@ -146,6 +146,8 @@ namespace 数据采集档案管理系统___课题版
                         txt_link.Text = fullPath;
                         if(MessageBox.Show("已从服务器拷贝文件到本地，是否现在打开？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
+                            if(form != null)
+                                form.Stop();
                             WindowState = FormWindowState.Maximized;
                             pal_ShowData.Visible = true;
                             pal_ShowData.Controls.Clear();
