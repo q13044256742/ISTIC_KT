@@ -92,7 +92,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SQLite, Version=1.0.108.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\space_zx\bin\Debug\System.Data.SQLite.dll</HintPath>
+      <HintPath>Resources\System.Data.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -231,6 +231,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Tools\CreateKyoPanel.cs" />
     <Compile Include="Tools\DataGridViewStyleHelper.cs" />
     <Compile Include="Tools\DictionaryHelper.cs" />
@@ -304,14 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="app.config" />
     <None Include="bin\Debug\ISTIC.db" />
     <None Include="Properties\Settings.settings">
@@ -325,6 +325,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\System.Data.SQLite.dll" />
     <None Include="Images\png-1165.png" />
     <None Include="Images\png-1644.png" />
     <None Include="Images\png-1753.png" />
@@ -335,8 +336,6 @@
     <None Include="Resources\login_1.png" />
     <None Include="Images\png-0228.png" />
     <None Include="Images\png-0222.png" />
-    <Content Include="bin\Debug\Microsoft.Office.Interop.Word.dll" />
-    <Content Include="bin\Debug\System.Data.SQLite.dll" />
     <Content Include="Images\33.png" />
     <Content Include="Images\34.png" />
     <Content Include="Images\7.png" />
@@ -354,6 +353,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

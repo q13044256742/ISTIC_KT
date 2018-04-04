@@ -266,5 +266,15 @@ namespace 数据采集档案管理系统___课题版.Properties {
                 return ((System.Drawing.Icon)(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] System_Data_SQLite {
+            get {
+                object obj = ResourceManager.GetObject("System_Data_SQLite", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

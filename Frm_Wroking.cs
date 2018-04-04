@@ -453,31 +453,36 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Project_Info.Tag;
                 if(index == 0)
                 {
-                    objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
-                    MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                    int maxLength = dgv_Project_FileList.Rows.Count;
-                    if(maxLength > 1)//保存文件信息
+                    if(!string.IsNullOrEmpty(txt_Project_Code.Text.Trim()))
                     {
-                        for(int i = 0; i < maxLength; i++)
+                        objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
+                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                        int maxLength = dgv_Project_FileList.Rows.Count;
+                        if(maxLength > 1)//保存文件信息
                         {
-                            object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
-                            if(fileName != null)
+                            for(int i = 0; i < maxLength; i++)
                             {
-                                DataGridViewRow row = dgv_Project_FileList.Rows[i];
-                                object fileId = row.Cells[$"{key}id"].Tag;
-                                if(fileId == null)
+                                object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
+                                if(fileName != null)
                                 {
-                                    fileId = AddFileInfo(key, row, objId);
-                                    row.Cells[$"{key}id"].Value = row.Index + 1;
-                                    row.Cells[$"{key}id"].Tag = fileId;
+                                    DataGridViewRow row = dgv_Project_FileList.Rows[i];
+                                    object fileId = row.Cells[$"{key}id"].Tag;
+                                    if(fileId == null)
+                                    {
+                                        fileId = AddFileInfo(key, row, objId);
+                                        row.Cells[$"{key}id"].Value = row.Index + 1;
+                                        row.Cells[$"{key}id"].Tag = fileId;
+                                    }
+                                    else
+                                        UpdateFileInfo(key, row);
                                 }
-                                else
-                                    UpdateFileInfo(key, row);
                             }
+                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
-                        MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
+                    else
+                        MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if(index == 1)
                 {
@@ -549,31 +554,36 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Topic_Info.Tag;
                 if(index == 0)
                 {
-                    objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
-                    MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                    int maxLength = dgv_Topic_FileList.Rows.Count;
-                    if(maxLength > 1)
+                    if(!string.IsNullOrEmpty(txt_Topic_Name.Text.Trim()))
                     {
-                        for(int i = 0; i < maxLength; i++)
+                        objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
+                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                        int maxLength = dgv_Topic_FileList.Rows.Count;
+                        if(maxLength > 1)
                         {
-                            object fileName = dgv_Topic_FileList.Rows[i].Cells[$"{key}name"].Value;
-                            if(fileName != null)
+                            for(int i = 0; i < maxLength; i++)
                             {
-                                DataGridViewRow row = dgv_Topic_FileList.Rows[i];
-                                object fileId = row.Cells[$"{key}id"].Tag;
-                                if(fileId == null)
+                                object fileName = dgv_Topic_FileList.Rows[i].Cells[$"{key}name"].Value;
+                                if(fileName != null)
                                 {
-                                    fileId = AddFileInfo(key, row, objId);
-                                    row.Cells[$"{key}id"].Value = row.Index + 1;
-                                    row.Cells[$"{key}id"].Tag = fileId;
+                                    DataGridViewRow row = dgv_Topic_FileList.Rows[i];
+                                    object fileId = row.Cells[$"{key}id"].Tag;
+                                    if(fileId == null)
+                                    {
+                                        fileId = AddFileInfo(key, row, objId);
+                                        row.Cells[$"{key}id"].Value = row.Index + 1;
+                                        row.Cells[$"{key}id"].Tag = fileId;
+                                    }
+                                    else
+                                        UpdateFileInfo(key, row);
                                 }
-                                else
-                                    UpdateFileInfo(key, row);
                             }
+                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
-                        MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
+                    else
+                        MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if(index == 1)
                 {
@@ -645,31 +655,36 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Subject_Info.Tag;
                 if(index == 0)
                 {
-                    objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
-                    MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                    int maxLength = dgv_Subject_FileList.Rows.Count;
-                    if(maxLength > 1)
+                    if(!string.IsNullOrEmpty(txt_Subject_Name.Text.Trim()))
                     {
-                        for(int i = 0; i < maxLength; i++)
+                        objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
+                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+                        int maxLength = dgv_Subject_FileList.Rows.Count;
+                        if(maxLength > 1)
                         {
-                            object fileName = dgv_Subject_FileList.Rows[i].Cells[$"{key}name"].Value;
-                            if(fileName != null)
+                            for(int i = 0; i < maxLength; i++)
                             {
-                                DataGridViewRow row = dgv_Subject_FileList.Rows[i];
-                                object fileId = row.Cells[$"{key}id"].Tag;
-                                if(fileId == null)
+                                object fileName = dgv_Subject_FileList.Rows[i].Cells[$"{key}name"].Value;
+                                if(fileName != null)
                                 {
-                                    fileId = AddFileInfo(key, row, objId);
-                                    row.Cells[$"{key}id"].Value = row.Index + 1;
-                                    row.Cells[$"{key}id"].Tag = fileId;
+                                    DataGridViewRow row = dgv_Subject_FileList.Rows[i];
+                                    object fileId = row.Cells[$"{key}id"].Tag;
+                                    if(fileId == null)
+                                    {
+                                        fileId = AddFileInfo(key, row, objId);
+                                        row.Cells[$"{key}id"].Value = row.Index + 1;
+                                        row.Cells[$"{key}id"].Tag = fileId;
+                                    }
+                                    else
+                                        UpdateFileInfo(key, row);
                                 }
-                                else
-                                    UpdateFileInfo(key, row);
                             }
+                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
-                        MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
+                    else
+                        MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if(index == 1)
                 {

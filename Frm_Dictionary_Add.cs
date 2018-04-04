@@ -54,11 +54,12 @@ namespace 数据采集档案管理系统___课题版
                 SQLiteHelper.ExecuteNonQuery($"UPDATE data_dictionary SET dd_name='{name}', dd_sort='{sort}', dd_note='{intro}' WHERE dd_id='{id}'");
                 MessageBox.Show("更新成功。");
             }
+            btn_Cancel_Click(sender, e);
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.OK;
             Close();
         }
 
