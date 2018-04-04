@@ -33,8 +33,10 @@ namespace 数据采集档案管理系统___课题版
         {
             TreeNode node = new TreeNode() { Name = rootId, Tag = ControlType.Plan };
             Frm_Wroking frm_Wroking = new Frm_Wroking(node);
+            Hide();
             if(frm_Wroking.ShowDialog() == DialogResult.OK)
                 LoadTreeList(rootId);
+            Show();
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
@@ -266,11 +268,11 @@ namespace 数据采集档案管理系统___课题版
         {
             if(!e.Node.Tag.Equals(ControlType.Plan))
             {
+                Hide();
                 Frm_Wroking frm = new Frm_Wroking(e.Node);
                 if(frm.ShowDialog() == DialogResult.OK)
-                {
                     btn_Refresh_Click(sender, e);
-                }
+                Show();
             }
         }
 
