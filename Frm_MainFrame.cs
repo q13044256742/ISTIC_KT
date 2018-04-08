@@ -105,6 +105,8 @@ namespace 数据采集档案管理系统___课题版
             if(obj != null)
             {
                 rootId = GetValue(obj[0]);
+                UserHelper.GetUser().UserSpecialId = rootId;
+                UserHelper.GetUser().SpecialName = GetValue(obj[1]);
                 LoadTreeList(rootId);
                 Tv_DataTree_AfterSelect(sender, new TreeViewEventArgs(tv_DataTree.Nodes[0]));
 

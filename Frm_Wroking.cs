@@ -503,16 +503,18 @@ namespace 数据采集档案管理系统___课题版
                         if(aid == null)
                         {
                             aid = Guid.NewGuid().ToString();
-                            string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
+                            string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_term, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
+                                $"VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().UserSpecialId}')";
                             SQLiteHelper.ExecuteNonQuery(insertSql);
                             txt_Project_AJ_Code.Tag = aid;
+                            MessageBox.Show("案卷信息更新成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
                         {
                             string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_term='{term}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
                             SQLiteHelper.ExecuteNonQuery(updateSql);
+                            MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
-                        MessageBox.Show("案卷信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else
                         MessageBox.Show("案卷编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -604,7 +606,8 @@ namespace 数据采集档案管理系统___课题版
                         if(aid == null)
                         {
                             aid = Guid.NewGuid().ToString();
-                            string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
+                            string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_term, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
+                                $"VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().UserSpecialId}')";
                             SQLiteHelper.ExecuteNonQuery(insertSql);
                             txt_Topic_AJ_Code.Tag = aid;
                         }
@@ -705,7 +708,8 @@ namespace 数据采集档案管理系统___课题版
                         if(aid == null)
                         {
                             aid = Guid.NewGuid().ToString();
-                            string insertSql = $"INSERT INTO files_tag_info VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}')";
+                            string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_term, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
+                                $"VALUES ('{aid}','{code}','{_name}','{term}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().UserSpecialId}')";
                             SQLiteHelper.ExecuteNonQuery(insertSql);
                             txt_Subject_AJ_Code.Tag = aid;
                         }
@@ -1529,10 +1533,10 @@ namespace 数据采集档案管理系统___课题版
                         int amount = 0;
                         if(type == 0)
                         {
-                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_obj_id='{objId}'") + 1;
+                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_special_id='{UserHelper.GetUser().UserSpecialId}'") + 1;
                         }else if(type == 1)
                         {
-                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_obj_id='{objId}'") + 1;
+                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().UserSpecialId}'") + 1;
                         }
                         code += amount.ToString().PadLeft(length, '0');
                     }
@@ -1992,8 +1996,8 @@ namespace 数据采集档案管理系统___课题版
                         if(!string.IsNullOrEmpty(gch))
                         {
                             int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
-                            string unitCode = string.Empty;
-                            string insertSql = $"INSERT INTO files_box_info VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{unitCode}')";
+                            string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
+                                $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
                             SQLiteHelper.ExecuteNonQuery(insertSql);
                             MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
@@ -2046,8 +2050,8 @@ namespace 数据采集档案管理系统___课题版
                         if(!string.IsNullOrEmpty(gch))
                         {
                             int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
-                            string unitCode = string.Empty;
-                            string insertSql = $"INSERT INTO files_box_info VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{unitCode}')";
+                            string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
+                                $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
                             SQLiteHelper.ExecuteNonQuery(insertSql);
                             MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
@@ -2100,8 +2104,8 @@ namespace 数据采集档案管理系统___课题版
                         if(!string.IsNullOrEmpty(gch))
                         {
                             int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
-                            string unitCode = string.Empty;
-                            string insertSql = $"INSERT INTO files_box_info VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{unitCode}')";
+                            string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
+                                $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
                             SQLiteHelper.ExecuteNonQuery(insertSql);
                             MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }

@@ -125,19 +125,9 @@
             this.num_Water.Enabled = false;
             this.num_Water.Location = new System.Drawing.Point(358, 149);
             this.num_Water.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.num_Water.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.num_Water.Name = "num_Water";
             this.num_Water.Size = new System.Drawing.Size(47, 26);
             this.num_Water.TabIndex = 6;
-            this.num_Water.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             this.num_Water.ValueChanged += new System.EventHandler(this.num_Water_ValueChanged);
             // 
             // label3
