@@ -548,7 +548,7 @@ namespace 数据采集档案管理系统___课题版
                     else
                         MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
-            }
+            } 
             else if(name.Contains("Topic"))
             {
                 int index = tab_Topic_Info.SelectedIndex;
