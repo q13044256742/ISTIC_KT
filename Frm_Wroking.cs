@@ -760,6 +760,7 @@ namespace 数据采集档案管理系统___课题版
             for(int i = 0; i < rows.Count - 1; i++)
             {
                 DataGridViewCell cell1 = rows[i].Cells[key + "name"];
+                if(cell1.Value == null) continue;
                 for(int j = i + 1; j < rows.Count - 1; j++)
                 {
                     DataGridViewCell cell2 = rows[j].Cells[key + "name"];
@@ -1246,9 +1247,11 @@ namespace 数据采集档案管理系统___课题版
             string _date = GetValue(row.Cells[key + "date"].Value);
             if(!string.IsNullOrEmpty(_date))
             {
-                if(_date.Length == 6)
+                if(_date.Length == 4)
+                    _date = _date + "-" + date.Month + "-" + date.Day;
+                else if(_date.Length == 6)
                     _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-01";
-                if(_date.Length == 8)
+                else if(_date.Length == 8)
                     _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + _date.Substring(6, 2);
                 DateTime.TryParse(_date, out date);
             }
@@ -2369,7 +2372,9 @@ namespace 数据采集档案管理系统___课题版
         private void 删除行DToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridView view = (DataGridView)(sender as ToolStripItem).GetCurrentParent().Tag;
-            view.Rows.RemoveAt(view.CurrentCell.RowIndex);
+            int index = view.CurrentCell.RowIndex;
+            if(index != view.RowCount - 1)
+                view.Rows.RemoveAt(index);
         }
 
         private void 刷新RToolStripMenuItem_Click(object sender, EventArgs e)

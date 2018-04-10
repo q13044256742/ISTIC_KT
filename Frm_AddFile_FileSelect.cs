@@ -49,10 +49,12 @@ namespace 数据采集档案管理系统___课题版
             imageList = new ImageList();
             //0：文件夹关闭 1：文件夹打开 2：文件
             imageList.Images.AddRange(new System.Drawing.Image[] {
-                Resources._33, Resources._34, Resources._7
+                Resources.zippo_46, Resources.zippo_45, Resources.zippo_16
             });
             tv_file.ImageList = imageList;
             tv_file.ImageIndex = 1;
+
+            tv_file.Nodes[0].Expand();
         }
 
 
