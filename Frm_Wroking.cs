@@ -456,30 +456,21 @@ namespace 数据采集档案管理系统___课题版
                     if(!string.IsNullOrEmpty(txt_Project_Code.Text.Trim()))
                     {
                         objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
-                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
 
-                        int maxLength = dgv_Project_FileList.Rows.Count;
-                        if(maxLength > 1)//保存文件信息
+                        //先删除，再新增
+                        SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_obj_id='{objId}'");
+                        int maxLength = dgv_Project_FileList.Rows.Count - 1;
+                        for(int i = 0; i < maxLength; i++)
                         {
-                            for(int i = 0; i < maxLength; i++)
+                            object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
+                            if(fileName != null)
                             {
-                                object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
-                                {
-                                    DataGridViewRow row = dgv_Project_FileList.Rows[i];
-                                    object fileId = row.Cells[$"{key}id"].Tag;
-                                    if(fileId == null)
-                                    {
-                                        fileId = AddFileInfo(key, row, objId, i);
-                                        row.Cells[$"{key}id"].Value = row.Index + 1;
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row, i);
-                                }
+                                DataGridViewRow row = dgv_Project_FileList.Rows[i];
+                                object fileId = AddFileInfo(key, row, objId, i);
+                                row.Cells[$"{key}id"].Tag = fileId;
                             }
-                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
+                        MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else
                         MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -562,30 +553,20 @@ namespace 数据采集档案管理系统___课题版
                     if(!string.IsNullOrEmpty(txt_Topic_Name.Text.Trim()))
                     {
                         objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
-                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                        int maxLength = dgv_Topic_FileList.Rows.Count;
-                        if(maxLength > 1)
+                        //先删除，再新增
+                        SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_obj_id='{objId}'");
+                        int maxLength = dgv_Topic_FileList.Rows.Count - 1;
+                        for(int i = 0; i < maxLength; i++)
                         {
-                            for(int i = 0; i < maxLength; i++)
+                            object fileName = dgv_Topic_FileList.Rows[i].Cells[$"{key}name"].Value;
+                            if(fileName != null)
                             {
-                                object fileName = dgv_Topic_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
-                                {
-                                    DataGridViewRow row = dgv_Topic_FileList.Rows[i];
-                                    object fileId = row.Cells[$"{key}id"].Tag;
-                                    if(fileId == null)
-                                    {
-                                        fileId = AddFileInfo(key, row, objId, i);
-                                        row.Cells[$"{key}id"].Value = row.Index + 1;
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row, i);
-                                }
+                                DataGridViewRow row = dgv_Topic_FileList.Rows[i];
+                                object fileId = AddFileInfo(key, row, objId, i);
+                                row.Cells[$"{key}id"].Tag = fileId;
                             }
-                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
+                        MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else
                         MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -667,30 +648,20 @@ namespace 数据采集档案管理系统___课题版
                     if(!string.IsNullOrEmpty(txt_Subject_Name.Text.Trim()))
                     {
                         objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
-                        MessageBox.Show("基本信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-
-                        int maxLength = dgv_Subject_FileList.Rows.Count;
-                        if(maxLength > 1)
+                        //先删除，再新增
+                        SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_obj_id='{objId}'");
+                        int maxLength = dgv_Subject_FileList.Rows.Count - 1;
+                        for(int i = 0; i < maxLength; i++)
                         {
-                            for(int i = 0; i < maxLength; i++)
+                            object fileName = dgv_Subject_FileList.Rows[i].Cells[$"{key}name"].Value;
+                            if(fileName != null)
                             {
-                                object fileName = dgv_Subject_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
-                                {
-                                    DataGridViewRow row = dgv_Subject_FileList.Rows[i];
-                                    object fileId = row.Cells[$"{key}id"].Tag;
-                                    if(fileId == null)
-                                    {
-                                        fileId = AddFileInfo(key, row, objId, i);
-                                        row.Cells[$"{key}id"].Value = row.Index + 1;
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row, i);
-                                }
+                                DataGridViewRow row = dgv_Subject_FileList.Rows[i];
+                                object fileId = AddFileInfo(key, row, objId, i);
+                                row.Cells[$"{key}id"].Tag = fileId;
                             }
-                            MessageBox.Show("文件保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
+                        MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else
                         MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1230,8 +1201,8 @@ namespace 数据采集档案管理系统___课题版
             object user = row.Cells[key + "user"].Value;
             object type = row.Cells[key + "type"].Value;
             object secret = row.Cells[key + "secret"].Value;
-            object pages = row.Cells[key + "pages"].Value;
-            object number = row.Cells[key + "number"].Value;
+            object pages = row.Cells[key + "pages"].Value ?? 0;
+            object number = row.Cells[key + "number"].Value ?? 0;
             DateTime date = DateTime.Now;
             string _date = GetValue(row.Cells[key + "date"].Value);
             if(!string.IsNullOrEmpty(_date))
@@ -1709,19 +1680,22 @@ namespace 数据采集档案管理系统___课题版
             DataTable table = SQLiteHelper.ExecuteQuery(querySql);
             for(int i = 0; i < table.Rows.Count; i++)
             {
-                int indexRow = dataGridView.Rows.Add();
-                dataGridView.Rows[indexRow].Cells[key + "id"].Value = i + 1;
-                dataGridView.Rows[indexRow].Cells[key + "categor"].Value = table.Rows[i]["dd_name"];
-                dataGridView.Rows[indexRow].Cells[key + "name"].Value = table.Rows[i]["dd_note"];
-                dataGridView.Rows[indexRow].Cells[key + "pcode"].Value = code;
-                dataGridView.Rows[indexRow].Cells[key + "pname"].Value = name;
-                string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{table.Rows[i]["dd_name"]}'";
-                object[] _obj = SQLiteHelper.ExecuteRowsQuery(queryReasonSql);
-                if(_obj != null)
+                if(!"其他".Equals(table.Rows[i]["dd_name"]))
                 {
-                    dataGridView.Rows[indexRow].Cells[key + "id"].Tag = GetValue(_obj[0]);
-                    dataGridView.Rows[indexRow].Cells[key + "reason"].Value = GetValue(_obj[1]);
-                    dataGridView.Rows[indexRow].Cells[key + "remark"].Value = GetValue(_obj[2]);
+                    int indexRow = dataGridView.Rows.Add();
+                    dataGridView.Rows[indexRow].Cells[key + "id"].Value = i + 1;
+                    dataGridView.Rows[indexRow].Cells[key + "categor"].Value = table.Rows[i]["dd_name"];
+                    dataGridView.Rows[indexRow].Cells[key + "name"].Value = table.Rows[i]["dd_note"];
+                    dataGridView.Rows[indexRow].Cells[key + "pcode"].Value = code;
+                    dataGridView.Rows[indexRow].Cells[key + "pname"].Value = name;
+                    string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{table.Rows[i]["dd_name"]}'";
+                    object[] _obj = SQLiteHelper.ExecuteRowsQuery(queryReasonSql);
+                    if(_obj != null)
+                    {
+                        dataGridView.Rows[indexRow].Cells[key + "id"].Tag = GetValue(_obj[0]);
+                        dataGridView.Rows[indexRow].Cells[key + "reason"].Value = GetValue(_obj[1]);
+                        dataGridView.Rows[indexRow].Cells[key + "remark"].Value = GetValue(_obj[2]);
+                    }
                 }
             }
         }
@@ -2334,6 +2308,45 @@ namespace 数据采集档案管理系统___课题版
                     view.Rows.Insert(view.SelectedRows[0].Index, 1);
                 }
             }
+            else if(e.Alt && e.KeyCode == Keys.D)
+            {
+                DataGridView view = sender as DataGridView;
+                int i = view.SelectedRows.Count;
+                if(i == 1)
+                {
+                    int index = view.SelectedRows[0].Index;
+                    if(index != view.RowCount - 1)
+                        view.Rows.RemoveAt(index);
+                }
+            }
+        }
+
+        private void 插入行IToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridView view = (DataGridView)(sender as ToolStripItem).GetCurrentParent().Tag;
+            view.Rows.Insert(view.CurrentCell.RowIndex, 1);
+        }
+
+        private void 删除行DToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridView view = (DataGridView)(sender as ToolStripItem).GetCurrentParent().Tag;
+            view.Rows.RemoveAt(view.CurrentCell.RowIndex);
+        }
+
+        private void 刷新RToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridView view = (DataGridView)(sender as ToolStripItem).GetCurrentParent().Tag;
+            string name = view.Parent.Parent.Name;
+            object objId = view.Parent.Parent.Tag;
+            string key = string.Empty;
+            if(name.Contains("Project"))
+                key = "dgv_Project_FL_";
+            else if(name.Contains("Topic"))
+                key = "dgv_Topic_FL_";
+            else if(name.Contains("Subject"))
+                key = "dgv_Subject_FL_";
+            if(!string.IsNullOrEmpty(key))
+                LoadFileInfoById(view, key, objId);
         }
     }
 }
