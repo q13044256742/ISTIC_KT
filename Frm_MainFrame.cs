@@ -417,5 +417,14 @@ namespace 数据采集档案管理系统___课题版
         {
             new Frm_Query(rootId).ShowDialog();
         }
+
+        private void pic_Exit_Click(object sender, EventArgs e)
+        {
+            if(MessageBox.Show("确定要注销当前登录用户吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            {
+                Hide();
+                new Frm_Login().Show();
+            }
+        }
     }
 }

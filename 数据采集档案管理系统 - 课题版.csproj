@@ -325,6 +325,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\png-0098.png" />
+    <None Include="Resources\png-1610.png" />
     <None Include="Resources\System.Data.SQLite.dll" />
     <None Include="Images\png-1165.png" />
     <None Include="Images\png-1644.png" />

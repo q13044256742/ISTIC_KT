@@ -160,6 +160,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap png_0098 {
+            get {
+                object obj = ResourceManager.GetObject("png_0098", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap png_0152 {
             get {
                 object obj = ResourceManager.GetObject("png_0152", resourceCulture);

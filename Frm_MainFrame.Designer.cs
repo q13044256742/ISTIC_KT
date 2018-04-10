@@ -43,6 +43,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pic_Export = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.pic_Exit = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.pic_Query = new System.Windows.Forms.PictureBox();
@@ -84,6 +87,8 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Exit)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Query)).BeginInit();
             this.panel6.SuspendLayout();
@@ -203,6 +208,7 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.panel8);
             this.groupBox1.Controls.Add(this.panel7);
             this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel4);
@@ -216,6 +222,41 @@
             this.groupBox1.Size = new System.Drawing.Size(1342, 96);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.label10);
+            this.panel8.Controls.Add(this.pic_Exit);
+            this.panel8.Location = new System.Drawing.Point(743, 10);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(91, 82);
+            this.panel8.TabIndex = 10;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(31, 64);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(29, 12);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "注销";
+            // 
+            // pic_Exit
+            // 
+            this.pic_Exit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pic_Exit.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0098;
+            this.pic_Exit.Location = new System.Drawing.Point(18, 7);
+            this.pic_Exit.Name = "pic_Exit";
+            this.pic_Exit.Size = new System.Drawing.Size(55, 48);
+            this.pic_Exit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pic_Exit.TabIndex = 0;
+            this.pic_Exit.TabStop = false;
+            this.pic_Exit.Click += new System.EventHandler(this.pic_Exit_Click);
+            this.pic_Exit.MouseEnter += new System.EventHandler(this.Pic_MouseEnter);
+            this.pic_Exit.MouseLeave += new System.EventHandler(this.Pic_MouseLeave);
             // 
             // panel7
             // 
@@ -354,7 +395,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::数据采集档案管理系统___课题版.Properties.Resources.login_1;
-            this.pictureBox1.Location = new System.Drawing.Point(799, 19);
+            this.pictureBox1.Location = new System.Drawing.Point(858, 16);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(484, 67);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -604,6 +645,9 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Exit)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Query)).EndInit();
@@ -671,5 +715,8 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pic_Query;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.PictureBox pic_Exit;
     }
 }

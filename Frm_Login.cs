@@ -45,5 +45,10 @@ namespace 数据采集档案管理系统___课题版
         {
             return uid == null ? string.Empty : uid.ToString();
         }
+
+        private void Frm_Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+        }
     }
 }
