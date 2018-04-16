@@ -29,7 +29,11 @@ namespace 数据采集档案管理系统___课题版
             else if(!string.IsNullOrEmpty(txt_Mdi.Text))
             {
                 if(!string.IsNullOrEmpty(lbl_Template.Text))
-                    lbl_Template.Text = lbl_Template.Text.Remove(lbl_Template.Text.LastIndexOf(txt_Mdi.Text) + 1);
+                {
+                    int startIndex = lbl_Template.Text.LastIndexOf(txt_Mdi.Text) + 1;
+                    if(startIndex < lbl_Template.Text.Length)
+                        lbl_Template.Text = lbl_Template.Text.Remove(startIndex);
+                }
             }
         }
 

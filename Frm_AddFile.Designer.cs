@@ -230,6 +230,11 @@
             // 
             this.num_amount.Location = new System.Drawing.Point(126, 250);
             this.num_amount.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.num_amount.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
             this.num_amount.Name = "num_amount";
             this.num_amount.Size = new System.Drawing.Size(152, 26);
             this.num_amount.TabIndex = 43;
@@ -248,6 +253,11 @@
             // 
             this.num_page.Location = new System.Drawing.Point(428, 192);
             this.num_page.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.num_page.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
             this.num_page.Name = "num_page";
             this.num_page.Size = new System.Drawing.Size(149, 26);
             this.num_page.TabIndex = 40;

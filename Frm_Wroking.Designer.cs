@@ -335,6 +335,7 @@
             this.插入行IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -365,6 +366,7 @@
             this.gro_Subject_Btns.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.contextMenuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // tab_Menu
@@ -431,7 +433,7 @@
             this.txt_Project_Intro.Name = "txt_Project_Intro";
             this.txt_Project_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Project_Intro.Size = new System.Drawing.Size(916, 48);
-            this.txt_Project_Intro.TabIndex = 120;
+            this.txt_Project_Intro.TabIndex = 15;
             // 
             // cbo_Project_Field
             // 
@@ -439,7 +441,7 @@
             this.cbo_Project_Field.Location = new System.Drawing.Point(107, 42);
             this.cbo_Project_Field.Name = "cbo_Project_Field";
             this.cbo_Project_Field.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Project_Field.TabIndex = 119;
+            this.cbo_Project_Field.TabIndex = 3;
             // 
             // cbo_Project_Province
             // 
@@ -448,7 +450,7 @@
             this.cbo_Project_Province.MaxDropDownItems = 5;
             this.cbo_Project_Province.Name = "cbo_Project_Province";
             this.cbo_Project_Province.Size = new System.Drawing.Size(200, 24);
-            this.cbo_Project_Province.TabIndex = 118;
+            this.cbo_Project_Province.TabIndex = 10;
             // 
             // cbo_Project_Unit
             // 
@@ -456,7 +458,7 @@
             this.cbo_Project_Unit.Location = new System.Drawing.Point(107, 108);
             this.cbo_Project_Unit.Name = "cbo_Project_Unit";
             this.cbo_Project_Unit.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Project_Unit.TabIndex = 117;
+            this.cbo_Project_Unit.TabIndex = 9;
             // 
             // tab_Project_Info
             // 
@@ -894,7 +896,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 298);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 300);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -906,7 +908,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 267);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 269);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -926,7 +928,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 236);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 238);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -938,7 +940,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 205);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 207);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -950,7 +952,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 174);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 176);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -962,7 +964,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 143);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 145);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -1005,7 +1007,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(682, 46);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 356);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 360);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -1020,7 +1022,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 45);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 356);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 360);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1118,7 +1120,7 @@
             this.txt_Project_ConPhone.Location = new System.Drawing.Point(814, 140);
             this.txt_Project_ConPhone.Name = "txt_Project_ConPhone";
             this.txt_Project_ConPhone.Size = new System.Drawing.Size(209, 26);
-            this.txt_Project_ConPhone.TabIndex = 114;
+            this.txt_Project_ConPhone.TabIndex = 14;
             // 
             // label1
             // 
@@ -1135,7 +1137,7 @@
             this.txt_Project_Connecter.Location = new System.Drawing.Point(457, 140);
             this.txt_Project_Connecter.Name = "txt_Project_Connecter";
             this.txt_Project_Connecter.Size = new System.Drawing.Size(200, 26);
-            this.txt_Project_Connecter.TabIndex = 112;
+            this.txt_Project_Connecter.TabIndex = 13;
             // 
             // label2
             // 
@@ -1152,7 +1154,7 @@
             this.txt_Project_Proer.Location = new System.Drawing.Point(107, 140);
             this.txt_Project_Proer.Name = "txt_Project_Proer";
             this.txt_Project_Proer.Size = new System.Drawing.Size(210, 26);
-            this.txt_Project_Proer.TabIndex = 110;
+            this.txt_Project_Proer.TabIndex = 12;
             // 
             // label3
             // 
@@ -1170,7 +1172,7 @@
             this.dtp_Project_StartDate.Location = new System.Drawing.Point(107, 74);
             this.dtp_Project_StartDate.Name = "dtp_Project_StartDate";
             this.dtp_Project_StartDate.Size = new System.Drawing.Size(210, 26);
-            this.dtp_Project_StartDate.TabIndex = 108;
+            this.dtp_Project_StartDate.TabIndex = 6;
             // 
             // dtp_Project_FinishDate
             // 
@@ -1178,7 +1180,7 @@
             this.dtp_Project_FinishDate.Location = new System.Drawing.Point(457, 74);
             this.dtp_Project_FinishDate.Name = "dtp_Project_FinishDate";
             this.dtp_Project_FinishDate.Size = new System.Drawing.Size(200, 26);
-            this.dtp_Project_FinishDate.TabIndex = 107;
+            this.dtp_Project_FinishDate.TabIndex = 7;
             // 
             // cbo_Project_HasNext
             // 
@@ -1192,7 +1194,7 @@
             this.cbo_Project_HasNext.Location = new System.Drawing.Point(107, 222);
             this.cbo_Project_HasNext.Name = "cbo_Project_HasNext";
             this.cbo_Project_HasNext.Size = new System.Drawing.Size(119, 24);
-            this.cbo_Project_HasNext.TabIndex = 106;
+            this.cbo_Project_HasNext.TabIndex = 16;
             this.cbo_Project_HasNext.SelectionChangeCommitted += new System.EventHandler(this.Cbo_Project_HasNext_SelectionChangeCommitted);
             // 
             // txt_Project_Uniter
@@ -1200,42 +1202,43 @@
             this.txt_Project_Uniter.Location = new System.Drawing.Point(814, 107);
             this.txt_Project_Uniter.Name = "txt_Project_Uniter";
             this.txt_Project_Uniter.Size = new System.Drawing.Size(209, 26);
-            this.txt_Project_Uniter.TabIndex = 104;
+            this.txt_Project_Uniter.TabIndex = 11;
             // 
             // txt_Project_Year
             // 
             this.txt_Project_Year.Location = new System.Drawing.Point(814, 74);
             this.txt_Project_Year.Name = "txt_Project_Year";
             this.txt_Project_Year.Size = new System.Drawing.Size(144, 26);
-            this.txt_Project_Year.TabIndex = 101;
+            this.txt_Project_Year.TabIndex = 8;
             // 
             // txt_Project_Funds
             // 
             this.txt_Project_Funds.Location = new System.Drawing.Point(814, 41);
             this.txt_Project_Funds.Name = "txt_Project_Funds";
             this.txt_Project_Funds.Size = new System.Drawing.Size(144, 26);
-            this.txt_Project_Funds.TabIndex = 100;
+            this.txt_Project_Funds.TabIndex = 5;
             // 
             // txt_Project_Theme
             // 
             this.txt_Project_Theme.Location = new System.Drawing.Point(457, 41);
             this.txt_Project_Theme.Name = "txt_Project_Theme";
             this.txt_Project_Theme.Size = new System.Drawing.Size(200, 26);
-            this.txt_Project_Theme.TabIndex = 99;
+            this.txt_Project_Theme.TabIndex = 4;
             // 
             // txt_Project_Name
             // 
             this.txt_Project_Name.Location = new System.Drawing.Point(457, 8);
             this.txt_Project_Name.Name = "txt_Project_Name";
             this.txt_Project_Name.Size = new System.Drawing.Size(569, 26);
-            this.txt_Project_Name.TabIndex = 96;
+            this.txt_Project_Name.TabIndex = 2;
             // 
             // txt_Project_Code
             // 
             this.txt_Project_Code.Location = new System.Drawing.Point(107, 8);
             this.txt_Project_Code.Name = "txt_Project_Code";
             this.txt_Project_Code.Size = new System.Drawing.Size(210, 26);
-            this.txt_Project_Code.TabIndex = 95;
+            this.txt_Project_Code.TabIndex = 1;
+            this.txt_Project_Code.Leave += new System.EventHandler(this.txt_Project_Code_Leave);
             // 
             // label4
             // 
@@ -1416,7 +1419,7 @@
             this.cbo_Topic_Province.Location = new System.Drawing.Point(457, 108);
             this.cbo_Topic_Province.Name = "cbo_Topic_Province";
             this.cbo_Topic_Province.Size = new System.Drawing.Size(200, 24);
-            this.cbo_Topic_Province.TabIndex = 83;
+            this.cbo_Topic_Province.TabIndex = 10;
             // 
             // cbo_Topic_Unit
             // 
@@ -1424,7 +1427,7 @@
             this.cbo_Topic_Unit.Location = new System.Drawing.Point(107, 108);
             this.cbo_Topic_Unit.Name = "cbo_Topic_Unit";
             this.cbo_Topic_Unit.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Topic_Unit.TabIndex = 82;
+            this.cbo_Topic_Unit.TabIndex = 9;
             // 
             // cbo_Topic_Field
             // 
@@ -1432,14 +1435,14 @@
             this.cbo_Topic_Field.Location = new System.Drawing.Point(107, 42);
             this.cbo_Topic_Field.Name = "cbo_Topic_Field";
             this.cbo_Topic_Field.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Topic_Field.TabIndex = 81;
+            this.cbo_Topic_Field.TabIndex = 3;
             // 
             // txt_Topic_ConnertPhone
             // 
             this.txt_Topic_ConnertPhone.Location = new System.Drawing.Point(814, 140);
             this.txt_Topic_ConnertPhone.Name = "txt_Topic_ConnertPhone";
             this.txt_Topic_ConnertPhone.Size = new System.Drawing.Size(209, 26);
-            this.txt_Topic_ConnertPhone.TabIndex = 80;
+            this.txt_Topic_ConnertPhone.TabIndex = 14;
             // 
             // label36
             // 
@@ -1456,7 +1459,7 @@
             this.txt_Topic_Connecter.Location = new System.Drawing.Point(457, 140);
             this.txt_Topic_Connecter.Name = "txt_Topic_Connecter";
             this.txt_Topic_Connecter.Size = new System.Drawing.Size(200, 26);
-            this.txt_Topic_Connecter.TabIndex = 78;
+            this.txt_Topic_Connecter.TabIndex = 13;
             // 
             // label35
             // 
@@ -1473,7 +1476,7 @@
             this.txt_Topic_Proer.Location = new System.Drawing.Point(107, 140);
             this.txt_Topic_Proer.Name = "txt_Topic_Proer";
             this.txt_Topic_Proer.Size = new System.Drawing.Size(210, 26);
-            this.txt_Topic_Proer.TabIndex = 76;
+            this.txt_Topic_Proer.TabIndex = 12;
             // 
             // label31
             // 
@@ -1948,7 +1951,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 296);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 298);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1960,7 +1963,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 265);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 267);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -1980,7 +1983,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 234);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 236);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -1992,7 +1995,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 203);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 205);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -2004,7 +2007,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 172);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 174);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -2016,7 +2019,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 141);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 143);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -2059,7 +2062,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(682, 43);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 358);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 362);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -2074,7 +2077,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 43);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 358);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 362);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -2115,7 +2118,7 @@
             this.dtp_Topic_StartDate.Location = new System.Drawing.Point(107, 74);
             this.dtp_Topic_StartDate.Name = "dtp_Topic_StartDate";
             this.dtp_Topic_StartDate.Size = new System.Drawing.Size(210, 26);
-            this.dtp_Topic_StartDate.TabIndex = 70;
+            this.dtp_Topic_StartDate.TabIndex = 6;
             // 
             // dtp_Topic_FinishDate
             // 
@@ -2123,7 +2126,7 @@
             this.dtp_Topic_FinishDate.Location = new System.Drawing.Point(457, 74);
             this.dtp_Topic_FinishDate.Name = "dtp_Topic_FinishDate";
             this.dtp_Topic_FinishDate.Size = new System.Drawing.Size(200, 26);
-            this.dtp_Topic_FinishDate.TabIndex = 69;
+            this.dtp_Topic_FinishDate.TabIndex = 7;
             // 
             // cbo_Topic_HasNext
             // 
@@ -2135,7 +2138,7 @@
             this.cbo_Topic_HasNext.Location = new System.Drawing.Point(107, 224);
             this.cbo_Topic_HasNext.Name = "cbo_Topic_HasNext";
             this.cbo_Topic_HasNext.Size = new System.Drawing.Size(119, 24);
-            this.cbo_Topic_HasNext.TabIndex = 68;
+            this.cbo_Topic_HasNext.TabIndex = 16;
             this.cbo_Topic_HasNext.SelectionChangeCommitted += new System.EventHandler(this.Cbo_Topic_HasNext_SelectionChangeCommitted);
             // 
             // txt_Topic_Intro
@@ -2146,49 +2149,50 @@
             this.txt_Topic_Intro.Name = "txt_Topic_Intro";
             this.txt_Topic_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Topic_Intro.Size = new System.Drawing.Size(919, 48);
-            this.txt_Topic_Intro.TabIndex = 67;
+            this.txt_Topic_Intro.TabIndex = 15;
             // 
             // txt_Topic_Uniter
             // 
             this.txt_Topic_Uniter.Location = new System.Drawing.Point(814, 107);
             this.txt_Topic_Uniter.Name = "txt_Topic_Uniter";
             this.txt_Topic_Uniter.Size = new System.Drawing.Size(209, 26);
-            this.txt_Topic_Uniter.TabIndex = 66;
+            this.txt_Topic_Uniter.TabIndex = 11;
             // 
             // txt_Topic_Year
             // 
             this.txt_Topic_Year.Location = new System.Drawing.Point(814, 74);
             this.txt_Topic_Year.Name = "txt_Topic_Year";
             this.txt_Topic_Year.Size = new System.Drawing.Size(144, 26);
-            this.txt_Topic_Year.TabIndex = 63;
+            this.txt_Topic_Year.TabIndex = 8;
             // 
             // txt_Topic_Funds
             // 
             this.txt_Topic_Funds.Location = new System.Drawing.Point(814, 41);
             this.txt_Topic_Funds.Name = "txt_Topic_Funds";
             this.txt_Topic_Funds.Size = new System.Drawing.Size(144, 26);
-            this.txt_Topic_Funds.TabIndex = 62;
+            this.txt_Topic_Funds.TabIndex = 5;
             // 
             // txt_Topic_Theme
             // 
             this.txt_Topic_Theme.Location = new System.Drawing.Point(457, 41);
             this.txt_Topic_Theme.Name = "txt_Topic_Theme";
             this.txt_Topic_Theme.Size = new System.Drawing.Size(200, 26);
-            this.txt_Topic_Theme.TabIndex = 61;
+            this.txt_Topic_Theme.TabIndex = 4;
             // 
             // txt_Topic_Name
             // 
             this.txt_Topic_Name.Location = new System.Drawing.Point(457, 8);
             this.txt_Topic_Name.Name = "txt_Topic_Name";
             this.txt_Topic_Name.Size = new System.Drawing.Size(566, 26);
-            this.txt_Topic_Name.TabIndex = 58;
+            this.txt_Topic_Name.TabIndex = 2;
             // 
             // txt_Topic_Code
             // 
             this.txt_Topic_Code.Location = new System.Drawing.Point(107, 8);
             this.txt_Topic_Code.Name = "txt_Topic_Code";
             this.txt_Topic_Code.Size = new System.Drawing.Size(210, 26);
-            this.txt_Topic_Code.TabIndex = 57;
+            this.txt_Topic_Code.TabIndex = 1;
+            this.txt_Topic_Code.Leave += new System.EventHandler(this.txt_Project_Code_Leave);
             // 
             // label56
             // 
@@ -2425,7 +2429,7 @@
             this.cbo_Subject_Province.Location = new System.Drawing.Point(460, 111);
             this.cbo_Subject_Province.Name = "cbo_Subject_Province";
             this.cbo_Subject_Province.Size = new System.Drawing.Size(200, 24);
-            this.cbo_Subject_Province.TabIndex = 85;
+            this.cbo_Subject_Province.TabIndex = 10;
             // 
             // cbo_Subject_Unit
             // 
@@ -2433,7 +2437,7 @@
             this.cbo_Subject_Unit.Location = new System.Drawing.Point(107, 111);
             this.cbo_Subject_Unit.Name = "cbo_Subject_Unit";
             this.cbo_Subject_Unit.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Subject_Unit.TabIndex = 84;
+            this.cbo_Subject_Unit.TabIndex = 9;
             // 
             // cbo_Subject_Field
             // 
@@ -2441,14 +2445,14 @@
             this.cbo_Subject_Field.Location = new System.Drawing.Point(107, 43);
             this.cbo_Subject_Field.Name = "cbo_Subject_Field";
             this.cbo_Subject_Field.Size = new System.Drawing.Size(210, 24);
-            this.cbo_Subject_Field.TabIndex = 83;
+            this.cbo_Subject_Field.TabIndex = 3;
             // 
             // txt_Subject_ConnectPhone
             // 
             this.txt_Subject_ConnectPhone.Location = new System.Drawing.Point(811, 144);
             this.txt_Subject_ConnectPhone.Name = "txt_Subject_ConnectPhone";
             this.txt_Subject_ConnectPhone.Size = new System.Drawing.Size(225, 26);
-            this.txt_Subject_ConnectPhone.TabIndex = 82;
+            this.txt_Subject_ConnectPhone.TabIndex = 14;
             // 
             // label72
             // 
@@ -2465,7 +2469,7 @@
             this.txt_Subject_Connecter.Location = new System.Drawing.Point(460, 144);
             this.txt_Subject_Connecter.Name = "txt_Subject_Connecter";
             this.txt_Subject_Connecter.Size = new System.Drawing.Size(200, 26);
-            this.txt_Subject_Connecter.TabIndex = 80;
+            this.txt_Subject_Connecter.TabIndex = 13;
             // 
             // label71
             // 
@@ -2482,7 +2486,7 @@
             this.txt_Subject_Proer.Location = new System.Drawing.Point(107, 144);
             this.txt_Subject_Proer.Name = "txt_Subject_Proer";
             this.txt_Subject_Proer.Size = new System.Drawing.Size(210, 26);
-            this.txt_Subject_Proer.TabIndex = 78;
+            this.txt_Subject_Proer.TabIndex = 12;
             // 
             // label32
             // 
@@ -2957,7 +2961,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 296);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 298);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -2969,7 +2973,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 265);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 267);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -2989,7 +2993,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 234);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 236);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -3001,7 +3005,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 203);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 205);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -3013,7 +3017,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 172);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 174);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -3025,7 +3029,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 141);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 143);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -3068,7 +3072,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(682, 42);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 359);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 363);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -3083,7 +3087,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 42);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 359);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 363);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -3124,7 +3128,7 @@
             this.dtp_Subject_StartDate.Location = new System.Drawing.Point(107, 76);
             this.dtp_Subject_StartDate.Name = "dtp_Subject_StartDate";
             this.dtp_Subject_StartDate.Size = new System.Drawing.Size(210, 26);
-            this.dtp_Subject_StartDate.TabIndex = 70;
+            this.dtp_Subject_StartDate.TabIndex = 6;
             // 
             // dtp_Subject_FinishDate
             // 
@@ -3132,7 +3136,7 @@
             this.dtp_Subject_FinishDate.Location = new System.Drawing.Point(460, 76);
             this.dtp_Subject_FinishDate.Name = "dtp_Subject_FinishDate";
             this.dtp_Subject_FinishDate.Size = new System.Drawing.Size(200, 26);
-            this.dtp_Subject_FinishDate.TabIndex = 69;
+            this.dtp_Subject_FinishDate.TabIndex = 7;
             // 
             // txt_Subject_Intro
             // 
@@ -3142,49 +3146,50 @@
             this.txt_Subject_Intro.Name = "txt_Subject_Intro";
             this.txt_Subject_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Subject_Intro.Size = new System.Drawing.Size(929, 55);
-            this.txt_Subject_Intro.TabIndex = 67;
+            this.txt_Subject_Intro.TabIndex = 15;
             // 
             // txt_Subject_Uniter
             // 
             this.txt_Subject_Uniter.Location = new System.Drawing.Point(811, 110);
             this.txt_Subject_Uniter.Name = "txt_Subject_Uniter";
             this.txt_Subject_Uniter.Size = new System.Drawing.Size(225, 26);
-            this.txt_Subject_Uniter.TabIndex = 66;
+            this.txt_Subject_Uniter.TabIndex = 11;
             // 
             // txt_Subject_Year
             // 
             this.txt_Subject_Year.Location = new System.Drawing.Point(811, 76);
             this.txt_Subject_Year.Name = "txt_Subject_Year";
             this.txt_Subject_Year.Size = new System.Drawing.Size(160, 26);
-            this.txt_Subject_Year.TabIndex = 63;
+            this.txt_Subject_Year.TabIndex = 8;
             // 
             // txt_Subject_Funds
             // 
             this.txt_Subject_Funds.Location = new System.Drawing.Point(811, 42);
             this.txt_Subject_Funds.Name = "txt_Subject_Funds";
             this.txt_Subject_Funds.Size = new System.Drawing.Size(160, 26);
-            this.txt_Subject_Funds.TabIndex = 62;
+            this.txt_Subject_Funds.TabIndex = 5;
             // 
             // txt_Subject_Theme
             // 
             this.txt_Subject_Theme.Location = new System.Drawing.Point(460, 42);
             this.txt_Subject_Theme.Name = "txt_Subject_Theme";
             this.txt_Subject_Theme.Size = new System.Drawing.Size(200, 26);
-            this.txt_Subject_Theme.TabIndex = 61;
+            this.txt_Subject_Theme.TabIndex = 4;
             // 
             // txt_Subject_Name
             // 
             this.txt_Subject_Name.Location = new System.Drawing.Point(460, 8);
             this.txt_Subject_Name.Name = "txt_Subject_Name";
             this.txt_Subject_Name.Size = new System.Drawing.Size(576, 26);
-            this.txt_Subject_Name.TabIndex = 58;
+            this.txt_Subject_Name.TabIndex = 2;
             // 
             // txt_Subject_Code
             // 
             this.txt_Subject_Code.Location = new System.Drawing.Point(107, 8);
             this.txt_Subject_Code.Name = "txt_Subject_Code";
             this.txt_Subject_Code.Size = new System.Drawing.Size(210, 26);
-            this.txt_Subject_Code.TabIndex = 57;
+            this.txt_Subject_Code.TabIndex = 1;
+            this.txt_Subject_Code.Leave += new System.EventHandler(this.txt_Project_Code_Leave);
             // 
             // label90
             // 
@@ -3407,13 +3412,13 @@
             this.删除行DToolStripMenuItem,
             this.刷新RToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(130, 70);
             // 
             // 插入行IToolStripMenuItem
             // 
             this.插入行IToolStripMenuItem.Image = global::数据采集档案管理系统___课题版.Properties.Resources._69_Plus;
             this.插入行IToolStripMenuItem.Name = "插入行IToolStripMenuItem";
-            this.插入行IToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.插入行IToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.插入行IToolStripMenuItem.Text = "插入行(&I)";
             this.插入行IToolStripMenuItem.Click += new System.EventHandler(this.插入行IToolStripMenuItem_Click);
             // 
@@ -3421,7 +3426,7 @@
             // 
             this.删除行DToolStripMenuItem.Image = global::数据采集档案管理系统___课题版.Properties.Resources._153_Delete;
             this.删除行DToolStripMenuItem.Name = "删除行DToolStripMenuItem";
-            this.删除行DToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.删除行DToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.删除行DToolStripMenuItem.Text = "删除行(&D)";
             this.删除行DToolStripMenuItem.Click += new System.EventHandler(this.删除行DToolStripMenuItem_Click);
             // 
@@ -3429,9 +3434,13 @@
             // 
             this.刷新RToolStripMenuItem.Image = global::数据采集档案管理系统___课题版.Properties.Resources._55_Refresh;
             this.刷新RToolStripMenuItem.Name = "刷新RToolStripMenuItem";
-            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.刷新RToolStripMenuItem.Text = "刷新(&R)";
             this.刷新RToolStripMenuItem.Click += new System.EventHandler(this.刷新RToolStripMenuItem_Click);
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // Frm_Wroking
             // 
@@ -3488,6 +3497,7 @@
             this.gro_Subject_Btns.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.contextMenuStrip2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -3791,5 +3801,6 @@
         private System.Windows.Forms.ToolStripMenuItem 插入行IToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 删除行DToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 刷新RToolStripMenuItem;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

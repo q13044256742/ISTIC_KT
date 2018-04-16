@@ -441,6 +441,21 @@ namespace 数据采集档案管理系统___课题版
         }
 
         /// <summary>
+        /// 检查编码是否重复
+        /// </summary>
+        private bool CheckCode(string code, int type)
+        {
+            int result = 0;
+            if(type == 0)
+                result = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM project_info WHERE pi_code='{code}'");
+            else if(type == 1)
+                result = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM topic_info WHERE ti_code='{code}'");
+            else if(type == 2)
+                result = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM subject_info WHERE si_code='{code}'");
+            return result == 0 ? true : false;
+        }
+
+        /// <summary>
         /// 项目保存操作
         /// </summary>
         private void Btn_Save_Click(object sender, EventArgs e)
@@ -2391,6 +2406,35 @@ namespace 数据采集档案管理系统___课题版
                 key = "dgv_Subject_FL_";
             if(!string.IsNullOrEmpty(key))
                 LoadFileInfoById(view, key, objId);
+        }
+
+        private void txt_Project_Code_Leave(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if(!string.IsNullOrEmpty(textBox.Text.Trim()))
+            {
+                if(textBox.Name.Contains("Project"))
+                {
+                    if(!CheckCode(textBox.Text, 0))
+                        errorProvider1.SetError(textBox, "提示：此编号已存在");
+                    else
+                        errorProvider1.SetError(textBox, string.Empty);
+                }
+                else if(textBox.Name.Contains("Topic"))
+                {
+                    if(!CheckCode(textBox.Text, 1))
+                        errorProvider1.SetError(textBox, "提示：此编号已存在");
+                    else
+                        errorProvider1.SetError(textBox, string.Empty);
+                }
+                else if(textBox.Name.Contains("Subject"))
+                {
+                    if(!CheckCode(textBox.Text, 2))
+                        errorProvider1.SetError(textBox, "提示：此编号已存在");
+                    else
+                        errorProvider1.SetError(textBox, string.Empty);
+                }
+            }
         }
     }
 }

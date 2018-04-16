@@ -250,22 +250,27 @@ namespace 数据采集档案管理系统___课题版
         {
             DirectoryInfo info = new DirectoryInfo(sPath);
             FileInfo[] file = info.GetFiles();
-            count += file.Length;
-            for(int i = 0; i < file.Length; i++)
+            //排除数据库文件和清单文件
+            if(file.Length != 2 || !(file[0].Name.Contains("ISTIC") && file[0].Extension.Contains("db")))
             {
-                string primaryKey = Guid.NewGuid().ToString();
-                try
+                count += file.Length;
+                for(int i = 0; i < file.Length; i++)
                 {
-                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
-                        $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
-                    ServerHelper.UploadFile(file[i].FullName, rootFolder, file[i].Name);
-                    okCount++;
+                    string primaryKey = Guid.NewGuid().ToString();
+                    try
+                    {
+                        SetTip($"正在备份文件[{file[i].Name}]");
+                        SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
+                            $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                        ServerHelper.UploadFile(file[i].FullName, rootFolder, file[i].Name);
+                        okCount++;
+                    }
+                    catch(Exception)
+                    {
+                        noCount++;
+                    }
+                    pro_Show.Value += 1;
                 }
-                catch(Exception)
-                {
-                    noCount++;
-                }
-                pro_Show.Value += 1;
             }
             DirectoryInfo[] infos = info.GetDirectories();
             for(int i = 0; i < infos.Length; i++)
