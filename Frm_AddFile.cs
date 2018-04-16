@@ -63,6 +63,7 @@ namespace 数据采集档案管理系统___课题版
             if(row != null)
             {
                 cbo_stage.SelectedValue = row["fi_stage"];
+                Cbo_stage_SelectionChangeCommitted(null, null);
                 cbo_categor.SelectedValue = row["fi_categor"];
                 txt_fileName.Text = GetValue(row["fi_name"]);
                 txt_user.Text = GetValue(row["fi_user"]);
@@ -70,7 +71,9 @@ namespace 数据采集档案管理系统___课题版
                 cbo_secret.SelectedValue = row["fi_secret"];
                 num_page.Value = Convert.ToInt32(row["fi_pages"]);
                 num_amount.Value = Convert.ToInt32(row["fi_number"]);
-                dtp_date.Value = Convert.ToDateTime(row["fi_create_date"]);
+                DateTime dateTime = Convert.ToDateTime(row["fi_create_date"]);
+                if(dateTime != DateTime.MinValue)
+                    dtp_date.Value = dateTime;
                 txt_unit.Text = GetValue(row["fi_unit"]);
                 cbo_carrier.SelectedValue = row["fi_carrier"];
                 cbo_format.SelectedValue = row["fi_format"];
@@ -213,8 +216,8 @@ namespace 数据采集档案管理系统___课题版
                 object link = row.Cells[key + "link"].Value;
 
                 string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_number, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id) " +
-                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}')";
+                "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_number, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
+                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{row.Index}')";
                 SQLiteHelper.ExecuteNonQuery(insertSql);
 
                 row.Cells[key + "id"].Tag = primaryKey;
