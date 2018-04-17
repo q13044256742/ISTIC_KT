@@ -338,6 +338,8 @@
     <None Include="Images\png-1644.png" />
     <None Include="Images\png-1753.png" />
     <None Include="Images\png-0010.png" />
+    <Content Include="bin\x86\Debug\Microsoft.Office.Interop.Word.dll" />
+    <Content Include="bin\x86\Debug\System.Data.SQLite.dll" />
     <Content Include="Images\slogan.ico" />
     <None Include="Resources\69-Plus.png" />
     <None Include="Resources\153-Delete.png" />

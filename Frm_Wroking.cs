@@ -477,8 +477,6 @@ namespace 数据采集档案管理系统___课题版
                         objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
                         if(CheckFileName(dgv_Project_FileList.Rows, key))
                         {
-                            //先删除，再新增
-                            SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_obj_id='{objId}'");
                             int maxLength = dgv_Project_FileList.Rows.Count - 1;
                             for(int i = 0; i < maxLength; i++)
                             {
@@ -486,8 +484,14 @@ namespace 数据采集档案管理系统___课题版
                                 if(fileName != null)
                                 {
                                     DataGridViewRow row = dgv_Project_FileList.Rows[i];
-                                    object fileId = AddFileInfo(key, row, objId, i);
-                                    row.Cells[$"{key}id"].Tag = fileId;
+                                    object id = row.Cells[$"{key}id"].Tag;
+                                    if(id != null)
+                                    {
+                                        object fileId = AddFileInfo(key, row, objId, row.Index);
+                                        row.Cells[$"{key}id"].Tag = fileId;
+                                    }
+                                    else
+                                        UpdateFileInfo(key, row, row.Index);
                                 }
                             }
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -580,8 +584,6 @@ namespace 数据采集档案管理系统___课题版
                         objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
                         if(CheckFileName(dgv_Topic_FileList.Rows, key))
                         {
-                            //先删除，再新增
-                            SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_obj_id='{objId}'");
                             int maxLength = dgv_Topic_FileList.Rows.Count - 1;
                             for(int i = 0; i < maxLength; i++)
                             {
@@ -589,8 +591,14 @@ namespace 数据采集档案管理系统___课题版
                                 if(fileName != null)
                                 {
                                     DataGridViewRow row = dgv_Topic_FileList.Rows[i];
-                                    object fileId = AddFileInfo(key, row, objId, i);
-                                    row.Cells[$"{key}id"].Tag = fileId;
+                                    object id = row.Cells[$"{key}id"].Tag;
+                                    if(id == null)
+                                    {
+                                        object fileId = AddFileInfo(key, row, objId, row.Index);
+                                        row.Cells[$"{key}id"].Tag = fileId;
+                                    }
+                                    else
+                                        UpdateFileInfo(key, row, row.Index);
                                 }
                             }
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -681,8 +689,6 @@ namespace 数据采集档案管理系统___课题版
                         objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
                         if(CheckFileName(dgv_Subject_FileList.Rows, key))
                         {
-                            //先删除，再新增
-                            SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_obj_id='{objId}'");
                             int maxLength = dgv_Subject_FileList.Rows.Count - 1;
                             for(int i = 0; i < maxLength; i++)
                             {
@@ -690,8 +696,14 @@ namespace 数据采集档案管理系统___课题版
                                 if(fileName != null)
                                 {
                                     DataGridViewRow row = dgv_Subject_FileList.Rows[i];
-                                    object fileId = AddFileInfo(key, row, objId, i);
-                                    row.Cells[$"{key}id"].Tag = fileId;
+                                    object id = row.Cells[$"{key}id"].Tag;
+                                    if(id == null)
+                                    {
+                                        object fileId = AddFileInfo(key, row, objId, row.Index);
+                                        row.Cells[$"{key}id"].Tag = fileId;
+                                    }
+                                    else
+                                        UpdateFileInfo(key, row, row.Index);
                                 }
                             }
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1274,8 +1286,8 @@ namespace 数据采集档案管理系统___课题版
             object user = row.Cells[key + "user"].Value;
             object type = row.Cells[key + "type"].Value;
             object secret = row.Cells[key + "secret"].Value;
-            object pages = row.Cells[key + "pages"].Value ?? 0;
-            object number = row.Cells[key + "number"].Value ?? 0;
+            object pages = row.Cells[key + "pages"].Value;
+            object number = row.Cells[key + "number"].Value;
             DateTime now = DateTime.MinValue;
             string _date = GetValue(row.Cells[key + "date"].Value);
             if(!string.IsNullOrEmpty(_date))
@@ -1582,7 +1594,7 @@ namespace 数据采集档案管理系统___课题版
                     else if("CCCC".Equals(strs[i]))//来源单位
                         code += GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().UserUnitId}'"));
                     else if("2018".Equals(strs[i]))
-                        code += DateTime.Now.Year;
+                        code += dtp_Project_StartDate.Value.Year;
                     else
                     {
                         int length = strs[i].Length;
@@ -1937,7 +1949,7 @@ namespace 数据采集档案管理系统___课题版
                                 item.Remove();
                             }
                         }
-                        else if(name.Contains("Top"))
+                        else if(name.Contains("btn_Topic_Top"))
                         {
                             foreach(ListViewItem item in lsv_Topic_Right.SelectedItems)
                             {
@@ -1949,7 +1961,7 @@ namespace 数据采集档案管理系统___课题版
                                 }
                             }
                         }
-                        else if(name.Contains("Bottom"))
+                        else if(name.Contains("btn_Topic_Bottom"))
                         {
                             int size = lsv_Topic_Right.Items.Count - 1;
                             for(int i = size; i >= 0; i--)
