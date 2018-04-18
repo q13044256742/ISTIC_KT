@@ -230,7 +230,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 17);
             this.label8.TabIndex = 17;
-            this.label8.Text = "(2018)";
+            this.label8.Text = "(YYYY)";
             // 
             // chk_Year
             // 

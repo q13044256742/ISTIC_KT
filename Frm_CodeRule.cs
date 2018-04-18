@@ -112,11 +112,11 @@ namespace 数据采集档案管理系统___课题版
         {
             if(chk_Year.Checked)
             {
-                lbl_Template.Text += "2018" + txt_Mdi.Text;
+                lbl_Template.Text += "YYYY" + txt_Mdi.Text;
             }
             else
             {
-                lbl_Template.Text = lbl_Template.Text.Replace("2018" + txt_Mdi.Text, string.Empty);
+                lbl_Template.Text = lbl_Template.Text.Replace("YYYY" + txt_Mdi.Text, string.Empty);
             }
         }
 
@@ -171,10 +171,10 @@ namespace 数据采集档案管理系统___课题版
                     chk_KT_Code.Checked = true;
                 if(template.Contains("CCCC"))
                     chk_Unit.Checked = true;
-                if(template.Contains("2018"))
+                if(template.Contains("YYYY"))
                     chk_Year.Checked = true;
                 num_Water.Value = num_Water.Minimum;
-                string water = template.Replace("2018-", string.Empty);
+                string water = template.Replace("YYYY-", string.Empty);
                 if(water.Contains("0"))
                 {
                     chk_Water.Checked = true;

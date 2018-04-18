@@ -14,6 +14,11 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         Dictionary<string, TabPage> tabPages;
 
+        /// <summary>
+        /// 待删除文件ID
+        /// </summary>
+        List<object> removeIdList = new List<object>();
+
         public Frm_Wroking(TreeNode treeNode)
         {
             InitializeComponent();
@@ -196,7 +201,7 @@ namespace 数据采集档案管理系统___课题版
                 dtp_Project_StartDate.Value = GetDateTimeValue(row["pi_startdate"]);
                 dtp_Project_FinishDate.Value = GetDateTimeValue(row["pi_finishdate"]);
                 txt_Project_Year.Text = GetValue(row["pi_year"]);
-                cbo_Project_Unit.Text = GetValue(row["pi_unit"]);
+                txt_Project_Unit.Text = GetValue(row["pi_unit"]);
                 cbo_Project_Province.Text = GetValue(row["pi_province"]);
                 txt_Project_Uniter.Text = GetValue(row["pi_unit_user"]);
                 txt_Project_Proer.Text = GetValue(row["pi_project_user"]);
@@ -217,7 +222,7 @@ namespace 数据采集档案管理系统___课题版
                 dtp_Topic_StartDate.Value = GetDateTimeValue(row["ti_startdate"]);
                 dtp_Topic_FinishDate.Value = GetDateTimeValue(row["ti_finishdate"]);
                 txt_Topic_Year.Text = GetValue(row["ti_year"]);
-                cbo_Topic_Unit.Text = GetValue(row["ti_unit"]);
+                txt_Topic_Unit.Text = GetValue(row["ti_unit"]);
                 cbo_Topic_Province.Text = GetValue(row["ti_province"]);
                 txt_Topic_Uniter.Text = GetValue(row["ti_unit_user"]);
                 txt_Topic_Proer.Text = GetValue(row["ti_project_user"]);
@@ -238,7 +243,7 @@ namespace 数据采集档案管理系统___课题版
                 dtp_Subject_StartDate.Value = GetDateTimeValue(row["si_startdate"]);
                 dtp_Subject_FinishDate.Value = GetDateTimeValue(row["si_finishdate"]);
                 txt_Subject_Year.Text = GetValue(row["si_year"]);
-                cbo_Subject_Unit.Text = GetValue(row["si_unit"]);
+                txt_Subject_Unit.Text = GetValue(row["si_unit"]);
                 cbo_Subject_Province.Text = GetValue(row["si_province"]);
                 txt_Subject_Uniter.Text = GetValue(row["si_unit_user"]);
                 txt_Subject_Proer.Text = GetValue(row["si_project_user"]);
@@ -472,7 +477,7 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Project_Info.Tag;
                 if(index == 0)
                 {
-                    if(!string.IsNullOrEmpty(txt_Project_Code.Text.Trim()))
+                    if(CheckMustEnter(name))
                     {
                         objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
                         if(CheckFileName(dgv_Project_FileList.Rows, key))
@@ -485,7 +490,7 @@ namespace 数据采集档案管理系统___课题版
                                 {
                                     DataGridViewRow row = dgv_Project_FileList.Rows[i];
                                     object id = row.Cells[$"{key}id"].Tag;
-                                    if(id != null)
+                                    if(id == null)
                                     {
                                         object fileId = AddFileInfo(key, row, objId, row.Index);
                                         row.Cells[$"{key}id"].Tag = fileId;
@@ -494,14 +499,14 @@ namespace 数据采集档案管理系统___课题版
                                         UpdateFileInfo(key, row, row.Index);
                                 }
                             }
+                            RemoveFileList();
+                            UpdateSecretById(objId);
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Project_FileList, key, objId);
                         }
                         else
                             MessageBox.Show("存在重复的文件名。", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else
-                        MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if(index == 1)
                 {
@@ -579,7 +584,7 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Topic_Info.Tag;
                 if(index == 0)
                 {
-                    if(!string.IsNullOrEmpty(txt_Topic_Name.Text.Trim()))
+                    if(CheckMustEnter(name))
                     {
                         objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
                         if(CheckFileName(dgv_Topic_FileList.Rows, key))
@@ -601,14 +606,14 @@ namespace 数据采集档案管理系统___课题版
                                         UpdateFileInfo(key, row, row.Index);
                                 }
                             }
+                            RemoveFileList();
+                            UpdateSecretById(objId);
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Topic_FileList, key, objId);
                         }
                         else
                             MessageBox.Show("存在重复的文件名。", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else
-                        MessageBox.Show("编号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else if(index == 1)
                 {
@@ -684,7 +689,7 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Subject_Info.Tag;
                 if(index == 0)
                 {
-                    if(!string.IsNullOrEmpty(txt_Subject_Name.Text.Trim()))
+                    if(CheckMustEnter(name))
                     {
                         objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
                         if(CheckFileName(dgv_Subject_FileList.Rows, key))
@@ -706,6 +711,8 @@ namespace 数据采集档案管理系统___课题版
                                         UpdateFileInfo(key, row, row.Index);
                                 }
                             }
+                            RemoveFileList();
+                            UpdateSecretById(objId);
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Subject_FileList, key, objId);
                         }
@@ -784,6 +791,129 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
+        /// <summary>
+        /// 移除文件列表中的文件
+        /// </summary>
+        void RemoveFileList()
+        {
+            string idsString = string.Empty;
+            for(int i = 0; i < removeIdList.Count; i++)
+            {
+                if(removeIdList[i] != null)
+                    idsString += $"'{removeIdList[i]}',";
+            }
+            if(!string.IsNullOrEmpty(idsString))
+            {
+                idsString = idsString.Substring(0, idsString.Length - 1);
+                SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id IN ({idsString})");
+            }
+            removeIdList.Clear();
+        }
+
+        /// <summary>
+        /// 更新文件的最高密级
+        /// </summary>
+        void UpdateSecretById(object objId) => SQLiteHelper.ExecuteNonQuery($"UPDATE files_tag_info SET pt_secret='{GetMaxSecretById(objId)}' WHERE pt_obj_id='{objId}'");
+
+        private bool CheckMustEnter(string name)
+        {
+            bool result = true;
+            if(name.Contains("Project"))
+            {
+                if(string.IsNullOrEmpty(txt_Project_Code.Text))
+                {
+                    errorProvider1.SetError(txt_Project_Code, "提示：课题编号不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Project_Code, null);
+                if(string.IsNullOrEmpty(txt_Project_Year.Text))
+                {
+                    errorProvider1.SetError(txt_Project_Year, "提示：立项年度不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Project_Year, null);
+                if(string.IsNullOrEmpty(txt_Project_Unit.Text))
+                {
+                    errorProvider1.SetError(txt_Project_Unit, "提示：承担单位不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Project_Unit, null);
+                if(string.IsNullOrEmpty(txt_Project_Proer.Text))
+                {
+                    errorProvider1.SetError(txt_Project_Proer, "提示：负责人不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Project_Proer, null);
+            }
+            else if(name.Contains("Topic"))
+            {
+                if(string.IsNullOrEmpty(txt_Topic_Code.Text))
+                {
+                    errorProvider1.SetError(txt_Topic_Code, "提示：课题编号不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Topic_Code, null);
+                if(string.IsNullOrEmpty(txt_Topic_Year.Text))
+                {
+                    errorProvider1.SetError(txt_Topic_Year, "提示：立项年度不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Topic_Year, null);
+                if(string.IsNullOrEmpty(txt_Topic_Unit.Text))
+                {
+                    errorProvider1.SetError(txt_Topic_Unit, "提示：承担单位不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Topic_Unit, null);
+                if(string.IsNullOrEmpty(txt_Topic_Proer.Text))
+                {
+                    errorProvider1.SetError(txt_Topic_Proer, "提示：负责人不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Topic_Proer, null);
+            }
+            else if(name.Contains("Subject"))
+            {
+                if(string.IsNullOrEmpty(txt_Subject_Code.Text))
+                {
+                    errorProvider1.SetError(txt_Subject_Code, "提示：课题编号不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Subject_Code, null);
+                if(string.IsNullOrEmpty(txt_Subject_Year.Text))
+                {
+                    errorProvider1.SetError(txt_Subject_Year, "提示：立项年度不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Subject_Year, null);
+                if(string.IsNullOrEmpty(txt_Subject_Unit.Text))
+                {
+                    errorProvider1.SetError(txt_Subject_Unit, "提示：承担单位不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Subject_Unit, null);
+                if(string.IsNullOrEmpty(txt_Subject_Proer.Text))
+                {
+                    errorProvider1.SetError(txt_Subject_Proer, "提示：负责人不能为空");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_Subject_Proer, null);
+            }
+            return result;
+        }
+
         private string GetIds(object boxId)
         {
             string result = null;
@@ -838,7 +968,7 @@ namespace 数据采集档案管理系统___课题版
                 object sdate = dtp_Project_StartDate.Value.ToString("s");
                 object fdate = dtp_Project_FinishDate.Value.ToString("s");
                 object year = txt_Project_Year.Text;
-                object unit = cbo_Project_Unit.Text;
+                object unit = txt_Project_Unit.Text;
                 object province = cbo_Project_Province.Text;
                 object uniter = txt_Project_Uniter.Text;
                 object proer = txt_Project_Proer.Text;
@@ -884,7 +1014,7 @@ namespace 数据采集档案管理系统___课题版
                 object sdate = dtp_Topic_StartDate.Value.ToString("s");
                 object fdate = dtp_Topic_FinishDate.Value.ToString("s");
                 object year = txt_Topic_Year.Text;
-                object unit = cbo_Topic_Unit.Text;
+                object unit = txt_Topic_Unit.Text;
                 object province = cbo_Topic_Province.Text;
                 object uniter = txt_Topic_Uniter.Text;
                 object proer = txt_Topic_Proer.Text;
@@ -930,7 +1060,7 @@ namespace 数据采集档案管理系统___课题版
                 object sdate = dtp_Subject_StartDate.Value.ToString("s");
                 object fdate = dtp_Subject_FinishDate.Value.ToString("s");
                 object year = txt_Subject_Year.Text;
-                object unit = cbo_Subject_Unit.Text;
+                object unit = txt_Subject_Unit.Text;
                 object province = cbo_Subject_Province.Text;
                 object uniter = txt_Subject_Uniter.Text;
                 object proer = txt_Subject_Proer.Text;
@@ -1416,7 +1546,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                         else
                         {
-                            string code = GetAJCode(objid, txt_Project_Code.Text, 0);
+                            string code = GetAJCode(objid, txt_Project_Code.Text, 0, txt_Project_Year.Text);
                             if(!string.IsNullOrEmpty(code))
                             {
                                 txt_Project_AJ_Code.Text = code;
@@ -1478,7 +1608,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                         else
                         {
-                            string code = GetAJCode(objid, txt_Topic_Code.Text, 0);
+                            string code = GetAJCode(objid, txt_Topic_Code.Text, 0, txt_Topic_Year.Text);
                             if(!string.IsNullOrEmpty(code))
                             {
                                 txt_Topic_AJ_Code.Text = code;
@@ -1540,7 +1670,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                         else
                         {
-                            string code = GetAJCode(objId, txt_Subject_Code.Text, 0);
+                            string code = GetAJCode(objId, txt_Subject_Code.Text, 0, txt_Subject_Year.Text);
                             if(!string.IsNullOrEmpty(code))
                             {
                                 txt_Subject_AJ_Code.Text = code;
@@ -1576,7 +1706,7 @@ namespace 数据采集档案管理系统___课题版
         /// 根据预设规则获取编码
         /// </summary>
         /// <param name="type">0：案卷 1：馆藏号</param>
-        private string GetAJCode(object objId, object objCode, int type)
+        private string GetAJCode(object objId, object objCode, int type, string year)
         {
             string code = string.Empty;
             DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM code_rule WHERE cr_type='{type}' AND cr_special_id='{UserHelper.GetUser().UserSpecialId}'");
@@ -1593,8 +1723,8 @@ namespace 数据采集档案管理系统___课题版
                         code += objCode;
                     else if("CCCC".Equals(strs[i]))//来源单位
                         code += GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().UserUnitId}'"));
-                    else if("2018".Equals(strs[i]))
-                        code += dtp_Project_StartDate.Value.Year;
+                    else if("YYYY".Equals(strs[i]))
+                        code += year;
                     else
                     {
                         int length = strs[i].Length;
@@ -2072,7 +2202,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(name.Contains("Add"))
                     {
-                        string gch = GetAJCode(objId, txt_Project_Code.Text, 1);
+                        string gch = GetAJCode(objId, txt_Project_Code.Text, 1, txt_Project_Year.Text);
                         if(!string.IsNullOrEmpty(gch))
                         {
                             int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
@@ -2126,7 +2256,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(name.Contains("Add"))
                     {
-                        string gch = GetAJCode(objId, txt_Topic_Code.Text, 1);
+                        string gch = GetAJCode(objId, txt_Topic_Code.Text, 1, txt_Topic_Year.Text);
                         if(!string.IsNullOrEmpty(gch))
                         {
                             int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
@@ -2180,7 +2310,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(name.Contains("Add"))
                     {
-                        string gch = GetAJCode(objId, txt_Subject_Code.Text, 1);
+                        string gch = GetAJCode(objId, txt_Subject_Code.Text, 1, txt_Subject_Year.Text);
                         if(!string.IsNullOrEmpty(gch))
                         {
                             int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
@@ -2419,7 +2549,10 @@ namespace 数据采集档案管理系统___课题版
             DataGridView view = (DataGridView)(sender as ToolStripItem).GetCurrentParent().Tag;
             int index = view.CurrentCell.RowIndex;
             if(index != view.RowCount - 1)
+            {
+                removeIdList.Add(view.Rows[index].Cells[0].Tag);
                 view.Rows.RemoveAt(index);
+            }
         }
 
         private void 刷新RToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2436,6 +2569,7 @@ namespace 数据采集档案管理系统___课题版
                 key = "dgv_Subject_FL_";
             if(!string.IsNullOrEmpty(key))
                 LoadFileInfoById(view, key, objId);
+            removeIdList.Clear();
         }
 
         private void txt_Project_Code_Leave(object sender, EventArgs e)
@@ -2466,5 +2600,7 @@ namespace 数据采集档案管理系统___课题版
                 }
             }
         }
+
+        private void dgv_Project_FileList_UserDeletedRow(object sender, DataGridViewRowEventArgs e) => removeIdList.Add(e.Row.Cells[0].Tag);
     }
 }
