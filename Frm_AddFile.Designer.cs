@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.lbl_OpenFile = new System.Windows.Forms.LinkLabel();
             this.btn_Quit = new System.Windows.Forms.Button();
@@ -61,8 +62,10 @@
             this.cbo_stage = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pal_ShowData = new System.Windows.Forms.Panel();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.num_amount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Reset
@@ -228,6 +231,7 @@
             // 
             // num_amount
             // 
+            this.num_amount.Enabled = false;
             this.num_amount.Location = new System.Drawing.Point(126, 250);
             this.num_amount.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.num_amount.Maximum = new decimal(new int[] {
@@ -261,6 +265,8 @@
             this.num_page.Name = "num_page";
             this.num_page.Size = new System.Drawing.Size(149, 26);
             this.num_page.TabIndex = 40;
+            this.num_page.ValueChanged += new System.EventHandler(this.num_page_ValueChanged);
+            this.num_page.KeyDown += new System.Windows.Forms.KeyEventHandler(this.num_page_KeyDown);
             // 
             // label7
             // 
@@ -400,6 +406,10 @@
             this.pal_ShowData.Size = new System.Drawing.Size(0, 590);
             this.pal_ShowData.TabIndex = 63;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -447,6 +457,7 @@
             this.Load += new System.EventHandler(this.Frm_AddFile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_amount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -487,5 +498,6 @@
         private System.Windows.Forms.ComboBox cbo_stage;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pal_ShowData;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

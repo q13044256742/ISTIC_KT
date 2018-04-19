@@ -27,8 +27,16 @@ namespace 数据采集档案管理系统___课题版
                 txt_name.Tag = id;
                 txt_name.Text = GetValue(obj[0]);
                 txt_Intro.Text = GetValue(obj[1]);
-                txt_Sort.Value = Convert.ToInt32(obj[2]);
+                txt_Sort.Value = GetIntValue(obj[2]);
             }
+        }
+
+        private int GetIntValue(object v)
+        {
+            int index = 0;
+            if(v != null)
+                int.TryParse(v.ToString(), out index);
+            return index;
         }
 
         private string GetValue(object v)
@@ -48,6 +56,9 @@ namespace 数据采集档案管理系统___课题版
                 id = Guid.NewGuid().ToString();
                 SQLiteHelper.ExecuteNonQuery($"INSERT INTO data_dictionary(dd_id, dd_name, dd_sort, dd_note, dd_pId) VALUES('{id}', '{name}', '{sort}', '{intro}', '{pid}')");
                 MessageBox.Show("新增成功。");
+                txt_Sort.Value += 1;
+                txt_name.Clear();
+                txt_Intro.Clear();
             }
             else
             {

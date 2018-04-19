@@ -32,11 +32,8 @@ namespace 数据采集档案管理系统___课题版
         private void Pic_Add_Click(object sender, EventArgs e)
         {
             TreeNode node = new TreeNode() { Name = rootId, Tag = ControlType.Plan };
-            Frm_Wroking frm_Wroking = new Frm_Wroking(node);
-            Hide();
-            if(frm_Wroking.ShowDialog() == DialogResult.OK)
-                LoadTreeList(rootId);
-            Show();
+            Frm_Wroking frm_Wroking = new Frm_Wroking(node, LoadTreeList);
+            frm_Wroking.Show();
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
@@ -118,12 +115,12 @@ namespace 数据采集档案管理系统___课题版
         /// 加载目录树
         /// </summary>
         /// <param name="specialId">专项ID</param>
-        public void LoadTreeList(string specialId)
+        public void LoadTreeList(object specialId)
         {
             tv_DataTree.Nodes.Clear();
             TreeNode rootNode = null;
             //【计划】
-            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT spi_id, spi_code, spi_name FROM special_info WHERE spi_id='{specialId}'");
+            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT spi_id, spi_code, spi_name FROM special_info WHERE spi_id='{specialId ?? rootId}'");
             if(row != null)
             {
                 rootNode = new TreeNode()
@@ -271,10 +268,8 @@ namespace 数据采集档案管理系统___课题版
             if(!e.Node.Tag.Equals(ControlType.Plan))
             {
                 Hide();
-                Frm_Wroking frm = new Frm_Wroking(e.Node);
-                if(frm.ShowDialog() == DialogResult.OK)
-                    btn_Refresh_Click(sender, e);
-                Show();
+                Frm_Wroking frm = new Frm_Wroking(e.Node, LoadTreeList);
+                frm.Show();
             }
         }
 
@@ -290,7 +285,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     Name = GetValue(dgv_DataList.CurrentRow.Cells["id"].Tag),
                     Tag = dgv_DataList.CurrentRow.Tag
-                }).ShowDialog();
+                }, LoadTreeList).Show();
             }
         }
 
