@@ -345,6 +345,7 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[index].Cells[key + "format"].Value = dataTable.Rows[i]["fi_format"];
                 dataGridView.Rows[index].Cells[key + "form"].Value = dataTable.Rows[i]["fi_form"];
                 dataGridView.Rows[index].Cells[key + "link"].Value = dataTable.Rows[i]["fi_link"];
+                dataGridView.Rows[index].Cells[key + "link"].Tag = dataTable.Rows[i]["fi_file_id"];
             }
         }
 
@@ -1570,10 +1571,15 @@ namespace 数据采集档案管理系统___课题版
             object format = row.Cells[key + "format"].Value;
             object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
-
             string insertSql = "INSERT INTO files_info (" +
             "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_number, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
-            $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{sort}')";
+            $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{sort}');";
+            object fileId = row.Cells[key + "link"].Tag;
+            if(fileId != null)
+            {
+                int value = link == null ? 0 : 1;
+                insertSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
+            }
             SQLiteHelper.ExecuteNonQuery(insertSql);
             return primaryKey;
         }
@@ -2553,10 +2559,10 @@ namespace 数据采集档案管理系统___课题版
         private void 添加文件AToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridView view = (DataGridView)((sender as ToolStripItem).GetCurrentParent() as ContextMenuStrip).Tag;
-            object rootId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name = '{UserHelper.GetUser().RealName}' AND bfi_code = '-1'");
-            if(rootId != null)
+            object[] rootIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
+            if(rootIds.Length > 0)
             {
-                Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootId);
+                Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootIds);
                 if(frm.ShowDialog() == DialogResult.OK)
                 {
                     string fullPath = frm.SelectedFileName;
@@ -2568,6 +2574,7 @@ namespace 数据采集档案管理系统___课题版
                         string filePath = savePath + new FileInfo(fullPath).Name;
                         File.Copy(fullPath, filePath, true);
                         view.CurrentCell.Value = fullPath;
+                        view.CurrentCell.Tag = frm.SelectedFileId;
                         if(MessageBox.Show("已从服务器拷贝文件到本地，是否现在打开？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             System.Diagnostics.Process.Start("Explorer.exe", filePath);
                     }
@@ -2742,6 +2749,19 @@ namespace 数据采集档案管理系统___课题版
                 {
                     view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].ReadOnly = false;
                     view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Style.BackColor = System.Drawing.Color.White;
+                }
+            }
+        }
+
+        private void btn_ViewFileTree_Click(object sender, EventArgs e)
+        {
+            object[] rootIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
+            if(rootIds.Length > 0)
+            {
+                Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootIds);
+                if(frm.ShowDialog() == DialogResult.OK)
+                {
+
                 }
             }
         }

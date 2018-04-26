@@ -203,5 +203,22 @@ namespace 数据采集档案管理系统___课题版
             else
                 return 0;
         }
+
+        /// <summary>
+        /// 获取单列数据
+        /// </summary>
+        public static object[] ExecuteSingleColumnQuery(string querySql)
+        {
+            List<object> list = new List<object>();
+            SQLiteDataReader sqlDataReader = ExecuteQueryWithReader(querySql);
+            while(sqlDataReader.Read())
+            {
+                if(sqlDataReader.FieldCount > 0)
+                    list.Add(sqlDataReader.GetValue(0));
+            }
+            sqlDataReader.Close();
+            CloseConnect();
+            return list.ToArray();
+        }
     }
 }

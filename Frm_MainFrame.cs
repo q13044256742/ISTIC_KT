@@ -267,7 +267,6 @@ namespace 数据采集档案管理系统___课题版
         {
             if(!e.Node.Tag.Equals(ControlType.Plan))
             {
-                Hide();
                 Frm_Wroking frm = new Frm_Wroking(e.Node, LoadTreeList);
                 frm.Show();
             }

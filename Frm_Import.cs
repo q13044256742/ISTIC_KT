@@ -45,46 +45,57 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void btn_Import_Click_1(object sender, EventArgs e)
         {
+            string bName = txt_BatchName.Text;
             string sPath = txt_FilePath.Text;
-            if(!string.IsNullOrEmpty(sPath))
+            string tPath = txt_TarPath.Text;
+            if(!string.IsNullOrEmpty(bName) && !string.IsNullOrEmpty(sPath) && !string.IsNullOrEmpty(tPath))
             {
-                if(SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM backup_files_info WHERE bfi_name='{UserHelper.GetUser().RealName}' AND bfi_code='-1'") == 0)
+                object localKey = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{bName}'");
+                if(localKey != null)
+                    if(MessageBox.Show("继续导入将覆盖原数据中的同名文件，是否继续？", "批次名称已存在", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                        return;
+                SaveTargetPath(); //如果是首次添加目标路径，则保存
+                btn_Import.Enabled = false;
+                count = okCount = noCount = indexCount = 0;
+                int totalFileAmount = Directory.GetFiles(sPath, "*", SearchOption.AllDirectories).Length;
+                pro_Show.Value = pro_Show.Minimum;
+                pro_Show.Maximum = totalFileAmount;
+
+                string rootFolder = tPath;
+                if(!Directory.Exists(rootFolder))
+                    Directory.CreateDirectory(rootFolder);
+                if(localKey != null)
+                    SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_date='{DateTime.Now.ToString("s")}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{localKey}'");
+                else
                 {
-                    object IPAddress = null;
-                    if(ServerHelper.GetConnectState(ref IPAddress))
-                    {
-                        btn_Import.Enabled = false;
-                        count = okCount = noCount = indexCount = 0;
-                        int totalFileAmount = Directory.GetFiles(sPath, "*", SearchOption.AllDirectories).Length;
-                        pro_Show.Value = pro_Show.Minimum;
-                        pro_Show.Maximum = totalFileAmount;
-
-                        string rootFolder = @"\\" + IPAddress + @"\共享文件夹\" + UserHelper.GetUser().SpecialName + @"\";
-                        if(!Directory.Exists(rootFolder))
-                            Directory.CreateDirectory(rootFolder);
-                        string primaryKey = Guid.NewGuid().ToString();
-                        SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_date, bfi_userid) VALUES " +
-                            $"('{primaryKey}', '{-1}', '{UserHelper.GetUser().RealName}', '{DateTime.Now.ToString("s")}', '{UserHelper.GetUser().UserId}')");
-                        new Thread(delegate ()
-                        {
-                            CopyFile(sPath, rootFolder, primaryKey);
-
-                            CopyDataTable(sPath, rootFolder);
-
-                            MessageBox.Show($"读取完毕,共计{count}个文件。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                            DialogResult = DialogResult.OK;
-                            Close();
-                            Thread.CurrentThread.Abort();
-                        }).Start();
-                    }
-                    else
-                        MessageBox.Show("访问备份服务器失败。", "连接错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    localKey = Guid.NewGuid().ToString();
+                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_date, bfi_userid) VALUES " +
+                        $"('{localKey}', '{-1}', '{bName}', '{DateTime.Now.ToString("s")}', '{UserHelper.GetUser().UserId}')");
                 }
-                else if(MessageBox.Show("当前专项已导入,是否删除当前文件。", "操作失败", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                new Thread(delegate ()
                 {
-                    SQLiteHelper.ExecuteNonQuery($"DELETE FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}'");
-                    MessageBox.Show("删除完毕，重新导入即可。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
+                    CopyFile(sPath, rootFolder, GetValue(localKey));
+
+                    CopyDataTable(sPath, rootFolder);
+
+                    MessageBox.Show($"导入完毕,共计{count}个文件。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    DialogResult = DialogResult.OK;
+                    Close();
+                    Thread.CurrentThread.Abort();
+                }).Start();
+            }
+            else
+                SetTip("请先填写必要信息。");
+        }
+
+        private void SaveTargetPath()
+        {
+            if(!txt_TarPath.ReadOnly)
+            {
+                string primaryKey = Guid.NewGuid().ToString();
+                string targetPath = txt_TarPath.Text;
+                string insertSql = $"INSERT INTO private_info(pri_id, pri_key, pri_value, pri_userid) VALUES('{primaryKey}','TARGET_PATH','{targetPath}','{UserHelper.GetUser().UserId}')";
+                SQLiteHelper.ExecuteNonQuery(insertSql);
             }
         }
 
@@ -117,7 +128,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void CopyDataTableInstince(string dataBasePath, string rootFolder)
         {
-            SQLiteBackupHelper helper = new SQLiteBackupHelper(dataBasePath);
+            数据采集档案管理系统___加工版.Tools.SQLiteBackupHelper helper = new 数据采集档案管理系统___加工版.Tools.SQLiteBackupHelper(dataBasePath);
             DataTable projectTable = helper.ExecuteQuery($"SELECT * FROM project_info");
             int length = projectTable.Rows.Count;
             for(int i = 0; i < length; i++)
@@ -278,7 +289,7 @@ namespace 数据采集档案管理系统___课题版
                 string primaryKey = Guid.NewGuid().ToString();
                 SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
                         $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
-                CopyFile(infos[i].FullName, rootFolder + infos[i].Name + @"\", primaryKey);
+                CopyFile(infos[i].FullName, rootFolder + "\\" + infos[i].Name + @"\", primaryKey);
             }
         }
 
@@ -288,6 +299,31 @@ namespace 数据采集档案管理系统___课题版
             {
                 MessageBox.Show("请等待导入完毕,中途退出会导致数据错误。", "无法关闭", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Cancel = true;
+            }
+        }
+
+        private void btn_TarPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                txt_TarPath.Text = dialog.SelectedPath;
+            }
+        }
+
+        private void Frm_Import_Load(object sender, EventArgs e)
+        {
+            string _querySql = $"SELECT bfi_name FROM backup_files_info WHERE bfi_code=-1";
+            object[] list = SQLiteHelper.ExecuteSingleColumnQuery(_querySql);
+            txt_BatchName.Items.AddRange(list);
+            //目标路径
+            string querySql = "SELECT pri_value FROM private_info WHERE pri_key='TARGET_PATH'";
+            object value = SQLiteHelper.ExecuteOnlyOneQuery(querySql);
+            if(value != null)
+            {
+                txt_TarPath.Text = GetValue(value);
+                txt_TarPath.ReadOnly = true;
+                btn_TarPath.Enabled = false;
             }
         }
     }

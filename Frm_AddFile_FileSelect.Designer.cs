@@ -36,19 +36,21 @@
             // 
             // tv_file
             // 
-            this.tv_file.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tv_file.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tv_file.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tv_file.LineColor = System.Drawing.Color.DimGray;
             this.tv_file.Location = new System.Drawing.Point(2, 47);
             this.tv_file.Name = "tv_file";
-            this.tv_file.Size = new System.Drawing.Size(462, 301);
+            this.tv_file.Size = new System.Drawing.Size(550, 383);
             this.tv_file.TabIndex = 0;
             this.tv_file.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_file_AfterSelect);
             // 
             // btn_sure
             // 
-            this.btn_sure.Location = new System.Drawing.Point(196, 360);
+            this.btn_sure.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_sure.Location = new System.Drawing.Point(240, 442);
             this.btn_sure.Name = "btn_sure";
             this.btn_sure.Size = new System.Drawing.Size(75, 31);
             this.btn_sure.TabIndex = 1;
@@ -81,12 +83,11 @@
             this.AcceptButton = this.btn_sure;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 401);
+            this.ClientSize = new System.Drawing.Size(554, 483);
             this.Controls.Add(this.lbl_filename);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_sure);
             this.Controls.Add(this.tv_file);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

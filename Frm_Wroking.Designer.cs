@@ -336,6 +336,9 @@
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btn_ViewFileTree = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -384,6 +387,7 @@
             // 
             // project
             // 
+            this.project.Controls.Add(this.btn_ViewFileTree);
             this.project.Controls.Add(this.txt_Project_Unit);
             this.project.Controls.Add(this.txt_Project_Intro);
             this.project.Controls.Add(this.cbo_Project_Field);
@@ -897,7 +901,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 310);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 312);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -909,7 +913,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 279);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 281);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -929,7 +933,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 248);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 250);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -941,7 +945,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 217);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 219);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -953,7 +957,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 186);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 188);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -965,7 +969,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 155);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 157);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -1008,7 +1012,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(682, 46);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 380);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 384);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -1023,7 +1027,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 45);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 380);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 384);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1373,6 +1377,7 @@
             // 
             // topic
             // 
+            this.topic.Controls.Add(this.button2);
             this.topic.Controls.Add(this.txt_Topic_Unit);
             this.topic.Controls.Add(this.cbo_Topic_Province);
             this.topic.Controls.Add(this.cbo_Topic_Field);
@@ -1953,7 +1958,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 308);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 310);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1965,7 +1970,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 277);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 279);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -1985,7 +1990,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 246);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 248);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -1997,7 +2002,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 215);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 217);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -2009,7 +2014,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 184);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 186);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -2021,7 +2026,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 153);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 155);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -2064,7 +2069,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(682, 43);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 382);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 386);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -2079,7 +2084,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 43);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 382);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 386);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -2386,6 +2391,7 @@
             // 
             // Subject
             // 
+            this.Subject.Controls.Add(this.button3);
             this.Subject.Controls.Add(this.txt_Subject_Unit);
             this.Subject.Controls.Add(this.cbo_Subject_Province);
             this.Subject.Controls.Add(this.cbo_Subject_Field);
@@ -2964,7 +2970,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 308);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 310);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -2976,7 +2982,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 277);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 279);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -2996,7 +3002,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 246);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 248);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -3008,7 +3014,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 215);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 217);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -3020,7 +3026,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 184);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 186);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -3032,7 +3038,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 153);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 155);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -3075,7 +3081,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(682, 42);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 383);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 387);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -3090,7 +3096,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 42);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 383);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 387);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -3444,6 +3450,42 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // btn_ViewFileTree
+            // 
+            this.btn_ViewFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_ViewFileTree.Font = new System.Drawing.Font("宋体", 10F);
+            this.btn_ViewFileTree.Location = new System.Drawing.Point(1181, 247);
+            this.btn_ViewFileTree.Name = "btn_ViewFileTree";
+            this.btn_ViewFileTree.Size = new System.Drawing.Size(86, 28);
+            this.btn_ViewFileTree.TabIndex = 117;
+            this.btn_ViewFileTree.Text = "查看文件";
+            this.btn_ViewFileTree.UseVisualStyleBackColor = true;
+            this.btn_ViewFileTree.Click += new System.EventHandler(this.btn_ViewFileTree_Click);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("宋体", 10F);
+            this.button2.Location = new System.Drawing.Point(1181, 247);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(86, 28);
+            this.button2.TabIndex = 118;
+            this.button2.Text = "查看文件";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.btn_ViewFileTree_Click);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Font = new System.Drawing.Font("宋体", 10F);
+            this.button3.Location = new System.Drawing.Point(1181, 248);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(86, 28);
+            this.button3.TabIndex = 119;
+            this.button3.Text = "查看文件";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.btn_ViewFileTree_Click);
             // 
             // Frm_Wroking
             // 
@@ -3805,5 +3847,8 @@
         private System.Windows.Forms.TextBox txt_Project_Unit;
         private System.Windows.Forms.TextBox txt_Topic_Unit;
         private System.Windows.Forms.TextBox txt_Subject_Unit;
+        private System.Windows.Forms.Button btn_ViewFileTree;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

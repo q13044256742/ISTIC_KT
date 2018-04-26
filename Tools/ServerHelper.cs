@@ -92,7 +92,7 @@ namespace 数据采集档案管理系统___课题版
             FileStream inFileStream = new FileStream(src, FileMode.Open);    //此处假定本地文件存在，不然程序会报错     
             if(!Directory.Exists(dst))        //判断上传到的远程服务器路径是否存在  
                 Directory.CreateDirectory(dst);
-            dst = dst + fileName;             //上传到远程服务器共享文件夹后文件的绝对路径  
+            dst = dst + "\\" + fileName;            //上传到远程服务器共享文件夹后文件的绝对路径  
             FileStream outFileStream = new FileStream(dst, FileMode.OpenOrCreate);
             byte[] buf = new byte[inFileStream.Length];
             int byteCount;

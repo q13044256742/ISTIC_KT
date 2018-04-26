@@ -8,20 +8,23 @@ namespace 数据采集档案管理系统___课题版
     public partial class Frm_AddFile_FileSelect : Form
     {
         public string SelectedFileName;
+        public string SelectedFileId;
         private ImageList imageList;
-        public Frm_AddFile_FileSelect(object rootId)
+        public Frm_AddFile_FileSelect(object[] rootId)
         {
             InitializeComponent();
-            object[] objs = SQLiteHelper.ExecuteRowsQuery($"SELECT bfi_id, bfi_name, bfi_path FROM backup_files_info WHERE bfi_id='{rootId}'");
-            TreeNode treeNode = new TreeNode()
+            for(int i = 0; i < rootId.Length; i++)
             {
-                Name = GetValue(objs[0]),
-                Text = GetValue(objs[1]),
-                Tag = GetValue(objs[2])
-            };
-            treeNode.Expand();
-            tv_file.Nodes.Add(treeNode);
-            InitialTree(rootId, treeNode);
+                object[] objs = SQLiteHelper.ExecuteRowsQuery($"SELECT bfi_id, bfi_name, bfi_path FROM backup_files_info WHERE bfi_id='{rootId[i]}'");
+                TreeNode treeNode = new TreeNode()
+                {
+                    Name = GetValue(objs[0]),
+                    Text = GetValue(objs[1]),
+                    Tag = GetValue(objs[2])
+                };
+                tv_file.Nodes.Add(treeNode);
+                InitialTree(rootId[i], treeNode);
+            }
         }
 
         private string GetValue(object v) => v == null ? string.Empty : v.ToString();
@@ -54,7 +57,6 @@ namespace 数据采集档案管理系统___课题版
             tv_file.ImageList = imageList;
             tv_file.ImageIndex = 1;
 
-            tv_file.Nodes[0].Expand();
         }
 
 
@@ -62,6 +64,7 @@ namespace 数据采集档案管理系统___课题版
         {
             if(e.Node.Nodes.Count == 0)
             {
+                SelectedFileId = e.Node.Name;
                 lbl_filename.Text = e.Node.Text;
                 SelectedFileName = e.Node.Tag + e.Node.Text;
             }
@@ -69,6 +72,7 @@ namespace 数据采集档案管理系统___课题版
             {
                 lbl_filename.Text = string.Empty;
                 SelectedFileName = string.Empty;
+                SelectedFileId = string.Empty;
             }
 
         }

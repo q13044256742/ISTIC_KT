@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Data.SQLite;
 using 数据采集档案管理系统___课题版;
 
-namespace 数据采集档案管理系统___加工版
+namespace 数据采集档案管理系统___加工版.Tools
 {
     /// <summary>  
     /// SqlServer数据访问帮助类  

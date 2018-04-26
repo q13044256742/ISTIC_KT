@@ -132,8 +132,8 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void Btn_OpenFile_Click(object sender, EventArgs e)
         {
-            object rootId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name = '{UserHelper.GetUser().RealName}' AND bfi_code = '-1'");
-            if(rootId != null)
+            object[] rootId = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
+            if(rootId.Length > 0)
             {
                 Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootId);
                 if(frm.ShowDialog() == DialogResult.OK)
@@ -147,16 +147,18 @@ namespace 数据采集档案管理系统___课题版
                         string filePath = savePath + new FileInfo(fullPath).Name;
                         File.Copy(fullPath, filePath, true);
                         txt_link.Text = fullPath;
+                        txt_link.Tag = frm.SelectedFileId;
                         if(MessageBox.Show("已从服务器拷贝文件到本地，是否现在打开？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            if(form != null)
-                                form.Stop();
-                            WindowState = FormWindowState.Maximized;
-                            pal_ShowData.Visible = true;
-                            pal_ShowData.Controls.Clear();
+                            System.Diagnostics.Process.Start("Explorer.exe", filePath);
+                            //if(form != null)
+                            //    form.Stop();
+                            //WindowState = FormWindowState.Maximized;
+                            //pal_ShowData.Visible = true;
+                            //pal_ShowData.Controls.Clear();
 
-                            form = new ExeToWinForm(pal_ShowData, string.Empty);
-                            form.Start(fullPath);
+                            //form = new ExeToWinForm(pal_ShowData, string.Empty);
+                            //form.Start(fullPath);
                         }
                     }
                     else
@@ -227,10 +229,15 @@ namespace 数据采集档案管理系统___课题版
                 object format = row.Cells[key + "format"].Value;
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
-
                 string insertSql = "INSERT INTO files_info (" +
                 "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_number, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
-                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{row.Index}')";
+                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{row.Index}');";
+                object fileId = txt_link.Tag;
+                if(fileId != null)
+                {
+                    int value = link == null ? 0 : 1;
+                    insertSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
+                }
                 SQLiteHelper.ExecuteNonQuery(insertSql);
 
                 row.Cells[key + "id"].Tag = primaryKey;
