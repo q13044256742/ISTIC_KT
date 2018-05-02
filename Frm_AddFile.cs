@@ -31,26 +31,6 @@ namespace 数据采集档案管理系统___课题版
             cbo_stage.ValueMember = "dd_id";
             //类别
             LoadCategorByStage(cbo_stage.SelectedValue);
-            //类型
-            cbo_type.DataSource = DictionaryHelper.GetTableByCode("dic_file_type");
-            cbo_type.DisplayMember = "dd_name";
-            cbo_type.ValueMember = "dd_id";
-            //密级
-            cbo_secret.DataSource = DictionaryHelper.GetTableByCode("dic_file_mj");
-            cbo_secret.DisplayMember = "dd_name";
-            cbo_secret.ValueMember = "dd_id";
-            //载体
-            cbo_carrier.DataSource = DictionaryHelper.GetTableByCode("dic_file_zt");
-            cbo_carrier.DisplayMember = "dd_name";
-            cbo_carrier.ValueMember = "dd_id";
-            //格式
-            cbo_format.DataSource = DictionaryHelper.GetTableByCode("dic_file_format");
-            cbo_format.DisplayMember = "dd_name";
-            cbo_format.ValueMember = "dd_id";
-            //形态
-            cbo_form.DataSource = DictionaryHelper.GetTableByCode("dic_file_state");
-            cbo_form.DisplayMember = "dd_name";
-            cbo_form.ValueMember = "dd_id";
             //默认焦点
             cbo_stage.Focus();
             //编辑状态加载信息
@@ -67,19 +47,49 @@ namespace 数据采集档案管理系统___课题版
                 cbo_categor.SelectedValue = row["fi_categor"];
                 txt_fileName.Text = GetValue(row["fi_name"]);
                 txt_user.Text = GetValue(row["fi_user"]);
-                cbo_type.SelectedValue = row["fi_type"];
-                cbo_secret.SelectedValue = row["fi_secret"];
+                SetFileRadio(pal_type, row["fi_type"]);
+                SetFileRadio(pal_secret, row["fi_secret"]);
                 num_page.Value = Convert.ToInt32(row["fi_pages"]);
-                num_amount.Value = Convert.ToInt32(row["fi_number"]);
                 DateTime dateTime = Convert.ToDateTime(row["fi_create_date"]);
                 if(dateTime != DateTime.MinValue)
                     dtp_date.Value = dateTime;
                 txt_unit.Text = GetValue(row["fi_unit"]);
-                cbo_carrier.SelectedValue = row["fi_carrier"];
-                cbo_format.SelectedValue = row["fi_format"];
-                cbo_form.SelectedValue = row["fi_form"];
+                SetFileRadio(pal_carrier, row["fi_carrier"]);
+                SetFileRadio(pal_form, row["fi_form"]);
                 txt_link.Text = GetValue(row["fi_link"]);
             }
+        }
+
+        /// <summary>
+        /// 选中指定ID的单选框
+        /// </summary>
+        private void SetFileRadio(Panel panel, object id)
+        {
+            foreach(RadioButton item in panel.Controls)
+            {
+                if(item.Tag.Equals(id))
+                {
+                    item.Checked = true;
+                    break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取选定单选框的ID
+        /// </summary>
+        private object GetFileRadio(Panel panel)
+        {
+            object result = null;
+            foreach(RadioButton item in panel.Controls)
+            {
+                if(item.Checked)
+                {
+                    result = item.Tag;
+                    break;
+                }
+            }
+            return result;
         }
 
         /// <summary>
@@ -122,7 +132,14 @@ namespace 数据采集档案管理系统___课题版
         private void Cbo_categor_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(cbo_categor.SelectedIndex != -1)
-                LoadFileNameByCategor(cbo_categor.SelectedValue);
+            {
+                object key = cbo_categor.Text;
+                object value = cbo_categor.SelectedValue;
+                //生成编号
+                int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM files_info WHERE fi_categor='{value}'");
+                txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
+                LoadFileNameByCategor(value);
+            }
         }
 
         private ExeToWinForm form;
@@ -180,38 +197,27 @@ namespace 数据采集档案管理系统___课题版
             SetCategorByStage(cbo_stage.SelectedValue, row, key);
             row.Cells[key + "categor"].Value = cbo_categor.SelectedValue;
             row.Cells[key + "name"].Value = txt_fileName.Text;
+            row.Cells[key + "code"].Value = txt_fileCode.Text;
             row.Cells[key + "user"].Value = txt_user.Text;
-            row.Cells[key + "type"].Value = cbo_type.SelectedValue;
-            row.Cells[key + "secret"].Value = cbo_secret.SelectedValue;
+            row.Cells[key + "type"].Value = GetFileRadio(pal_type);
+            row.Cells[key + "secret"].Value = GetFileRadio(pal_secret);
             row.Cells[key + "pages"].Value = num_page.Value;
-            if(num_page.Value != 0)
-            {
-                row.Cells[key + "number"].ReadOnly = false;
-                row.Cells[key + "number"].Style.BackColor = System.Drawing.Color.White;
-                row.Cells[key + "number"].Value = num_amount.Value;
-            }
-            else
-            {
-                row.Cells[key + "number"].ReadOnly = true;
-                row.Cells[key + "number"].Style.BackColor = System.Drawing.Color.Wheat;
-                row.Cells[key + "number"].Value = null;
-            }
             row.Cells[key + "date"].Value = dtp_date.Value.ToString("yyyyMMdd");
             row.Cells[key + "unit"].Value = txt_unit.Text;
-            row.Cells[key + "carrier"].Value = cbo_carrier.SelectedValue;
-            row.Cells[key + "format"].Value = cbo_format.SelectedValue;
-            row.Cells[key + "form"].Value = cbo_form.SelectedValue;
+            row.Cells[key + "carrier"].Value = GetFileRadio(pal_carrier);
+            row.Cells[key + "form"].Value = GetFileRadio(pal_form);
+            row.Cells[key + "format"].Value = Path.GetExtension(txt_link.Text).Replace(".", string.Empty);
             row.Cells[key + "link"].Value = txt_link.Text;
             if(isAdd)
             {
                 object stage = row.Cells[key + "stage"].Value;
                 object categor = row.Cells[key + "categor"].Value;
+                object code = row.Cells[key + "code"].Value;
                 object name = row.Cells[key + "name"].Value;
                 object user = row.Cells[key + "user"].Value;
                 object type = row.Cells[key + "type"].Value;
                 object secret = row.Cells[key + "secret"].Value;
                 object pages = row.Cells[key + "pages"].Value;
-                object number = row.Cells[key + "number"].Value;
                 DateTime date = DateTime.Now;
                 string _date = GetValue(row.Cells[key + "date"].Value);
                 if(!string.IsNullOrEmpty(_date))
@@ -230,8 +236,8 @@ namespace 数据采集档案管理系统___课题版
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_number, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
-                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{row.Index}');";
+                "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
+                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{row.Index}');";
                 object fileId = txt_link.Tag;
                 if(fileId != null)
                 {
@@ -247,12 +253,12 @@ namespace 数据采集档案管理系统___课题版
                 primaryKey = row.Cells[key + "id"].Tag;
                 object stage = row.Cells[key + "stage"].Value;
                 object categor = row.Cells[key + "categor"].Value;
+                object code = row.Cells[key + "code"].Value;
                 object name = row.Cells[key + "name"].Value;
                 object user = row.Cells[key + "user"].Value;
                 object type = row.Cells[key + "type"].Value;
                 object secret = row.Cells[key + "secret"].Value;
                 object pages = row.Cells[key + "pages"].Value;
-                object number = row.Cells[key + "number"].Value;
                 DateTime date = DateTime.Now;
                 string _date = GetValue(row.Cells[key + "date"].Value);
                 if(!string.IsNullOrEmpty(_date))
@@ -274,12 +280,12 @@ namespace 数据采集档案管理系统___课题版
                 string updateSql = "UPDATE files_info SET " +
                     $"fi_stage = '{stage}', " +
                     $"fi_categor = '{categor}', " +
+                    $"fi_code = '{code}', " +
                     $"fi_name = '{name}', " +
                     $"fi_user = '{user}', " +
                     $"fi_type = '{type}', " +
                     $"fi_secret = '{secret}', " +
                     $"fi_pages = '{pages}', " +
-                    $"fi_number = '{number}', " +
                     $"fi_create_date = '{date.ToString("s")}', " +
                     $"fi_unit = '{unit}', " +
                     $"fi_carrier = '{carrier}', " +
@@ -322,36 +328,15 @@ namespace 数据采集档案管理系统___课题版
         private bool CheckDatas()
         {
             bool result = true;
-            //判断文件类型的选择，如果选择汇编，那份数就不能为0或空，如果选择除汇编外的类型，页数不能为0或空
-            ComboBox typeCell = cbo_type;
-            NumericUpDown numberCell = num_amount;
             NumericUpDown pagesCell = num_page;
-            string hbKey = "24a8c0ca-5536-4dd1-b37b-dcb67d68c16c";
-            if(hbKey.Equals(typeCell.SelectedValue))
+            if(pagesCell.Value == 0)
             {
-                errorProvider1.SetError(pagesCell, null);
-                if(numberCell.Value == 0)
-                {
-                    errorProvider1.SetError(numberCell, "温馨提示：当前文件类型为汇编，份数不能为0。");
-                    result = false;
-                }
-                else
-                {
-                    errorProvider1.SetError(numberCell, null);
-                }
+                errorProvider1.SetError(pagesCell, "温馨提示：页数不能为0。");
+                result = false;
             }
             else
             {
-                errorProvider1.SetError(numberCell, null);
-                if(pagesCell.Value == 0)
-                {
-                    errorProvider1.SetError(pagesCell, "温馨提示：当前文件类型非汇编，页数不能为0。");
-                    result = false;
-                }
-                else
-                {
-                    errorProvider1.SetError(pagesCell, null);
-                }
+                errorProvider1.SetError(pagesCell, null);
             }
             return result;
         }
@@ -431,22 +416,6 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 Close();
-        }
-
-        private void num_page_KeyDown(object sender, KeyEventArgs e)
-        {
-            num_page_ValueChanged(sender, e);
-        }
-
-        private void num_page_ValueChanged(object sender, EventArgs e)
-        {
-            if(num_page.Value == 0)
-            {
-                num_amount.Enabled = false;
-                num_amount.Value = 0;
-            }
-            else
-                num_amount.Enabled = true;
         }
     }
 }

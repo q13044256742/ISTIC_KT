@@ -72,10 +72,6 @@ namespace 数据采集档案管理系统___课题版
             InitialCarrierList(dgv_Project_FileList, "dgv_Project_FL_");
             InitialCarrierList(dgv_Topic_FileList, "dgv_Topic_FL_");
             InitialCarrierList(dgv_Subject_FileList, "dgv_Subject_FL_");
-            //【文件格式】
-            InitialFormatList(dgv_Project_FileList, "dgv_Project_FL_");
-            InitialFormatList(dgv_Topic_FileList, "dgv_Topic_FL_");
-            InitialFormatList(dgv_Subject_FileList, "dgv_Subject_FL_");
             //文件形态
             InitialFormList(dgv_Project_FileList, "dgv_Project_FL_");
             InitialFormList(dgv_Topic_FileList, "dgv_Topic_FL_");
@@ -327,12 +323,13 @@ namespace 数据采集档案管理系统___课题版
                 SetCategorByStage(dataTable.Rows[i]["fi_stage"], dataGridView.Rows[index], key);
 
                 dataGridView.Rows[index].Cells[key + "categor"].Value = dataTable.Rows[i]["fi_categor"];
+                dataGridView.Rows[index].Cells[key + "code"].Value = dataTable.Rows[i]["fi_code"];
                 dataGridView.Rows[index].Cells[key + "name"].Value = dataTable.Rows[i]["fi_name"];
                 dataGridView.Rows[index].Cells[key + "user"].Value = dataTable.Rows[i]["fi_user"];
                 dataGridView.Rows[index].Cells[key + "type"].Value = dataTable.Rows[i]["fi_type"];
                 dataGridView.Rows[index].Cells[key + "secret"].Value = dataTable.Rows[i]["fi_secret"];
                 dataGridView.Rows[index].Cells[key + "pages"].Value = dataTable.Rows[i]["fi_pages"];
-                dataGridView.Rows[index].Cells[key + "number"].Value = dataTable.Rows[i]["fi_number"];
+                dataGridView.Rows[index].Cells[key + "code"].Value = dataTable.Rows[i]["fi_code"];
                 object _date = dataTable.Rows[i]["fi_create_date"];
                 if(_date != null)
                 {
@@ -987,36 +984,16 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                 }
-                //判断文件类型的选择，如果选择汇编，那份数就不能为0或空，如果选择除汇编外的类型，页数不能为0或空
-                DataGridViewCell typeCell = rows[i].Cells[key + "type"];
-                DataGridViewCell numberCell = rows[i].Cells[key + "number"];
                 DataGridViewCell pagesCell = rows[i].Cells[key + "pages"];
-                string hbKey = "24a8c0ca-5536-4dd1-b37b-dcb67d68c16c";
-                if(hbKey.Equals(typeCell.Value))
+
+                if(pagesCell.Value == null || string.IsNullOrEmpty(GetValue(pagesCell.Value)) || Convert.ToInt32(pagesCell.Value) == 0)
+                {
+                    pagesCell.ErrorText = "温馨提示：页数不能为0或空。";
+                    result = false;
+                }
+                else
                 {
                     pagesCell.ErrorText = null;
-                    if(numberCell.Value == null || string.IsNullOrEmpty(GetValue(numberCell.Value)) || Convert.ToInt32(numberCell.Value) == 0)
-                    {
-                        numberCell.ErrorText = "温馨提示：当前文件类型为汇编，份数不能为0或空。";
-                        result = false;
-                    }
-                    else
-                    {
-                        numberCell.ErrorText = null;
-                    }
-                }
-                else if(typeCell.Value != null && !string.IsNullOrEmpty(GetValue(typeCell.Value)))
-                {
-                    numberCell.ErrorText = null;
-                    if(pagesCell.Value == null || string.IsNullOrEmpty(GetValue(pagesCell.Value)) || Convert.ToInt32(pagesCell.Value) == 0)
-                    {
-                        pagesCell.ErrorText = "温馨提示：当前文件类型非汇编，页数不能为0或空。";
-                        result = false;
-                    }
-                    else
-                    {
-                        pagesCell.ErrorText = null;
-                    }
                 }
             }
             return result;
@@ -1416,18 +1393,6 @@ namespace 数据采集档案管理系统___课题版
         }
 
         /// <summary>
-        /// 格式
-        /// </summary>
-        private void InitialFormatList(DataGridView dataGridView, string key)
-        {
-            DataGridViewComboBoxColumn formatColumn = dataGridView.Columns[key + "format"] as DataGridViewComboBoxColumn;
-            formatColumn.DataSource = DictionaryHelper.GetTableByCode("dic_file_format");
-            formatColumn.DisplayMember = "dd_name";
-            formatColumn.ValueMember = "dd_id";
-            formatColumn.DefaultCellStyle = new DataGridViewCellStyle() { Font = new System.Drawing.Font("宋体", 10.5f) };
-        }
-
-        /// <summary>
         /// 初始化文件核查原因
         /// </summary>
         private void InitialLostReasonList(DataGridView view, string key)
@@ -1497,7 +1462,7 @@ namespace 数据采集档案管理系统___课题版
             object type = row.Cells[key + "type"].Value;
             object secret = row.Cells[key + "secret"].Value;
             object pages = row.Cells[key + "pages"].Value;
-            object number = row.Cells[key + "number"].Value;
+            object code = row.Cells[key + "code"].Value;
             DateTime date = DateTime.MinValue;
             string _date = GetValue(row.Cells[key + "date"].Value);
             if(!string.IsNullOrEmpty(_date))
@@ -1524,7 +1489,7 @@ namespace 数据采集档案管理系统___课题版
                 $"fi_type = '{type}', " +
                 $"fi_secret = '{secret}', " +
                 $"fi_pages = '{pages}', " +
-                $"fi_number = '{number}', " +
+                $"fi_code = '{code}', " +
                 $"fi_create_date = '{date.ToString("s")}', " +
                 $"fi_unit = '{unit}', " +
                 $"fi_carrier = '{carrier}', " +
@@ -1553,7 +1518,7 @@ namespace 数据采集档案管理系统___课题版
             object type = row.Cells[key + "type"].Value;
             object secret = row.Cells[key + "secret"].Value;
             object pages = row.Cells[key + "pages"].Value;
-            object number = row.Cells[key + "number"].Value;
+            object code = row.Cells[key + "code"].Value;
             DateTime now = DateTime.MinValue;
             string _date = GetValue(row.Cells[key + "date"].Value);
             if(!string.IsNullOrEmpty(_date))
@@ -1572,8 +1537,8 @@ namespace 数据采集档案管理系统___课题版
             object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
             string insertSql = "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_number, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
-            $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{number}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{sort}');";
+            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
+            $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{sort}');";
             object fileId = row.Cells[key + "link"].Tag;
             if(fileId != null)
             {
@@ -2621,11 +2586,7 @@ namespace 数据采集档案管理系统___课题版
         private void btn_Project_Add_Click(object sender, EventArgs e)
         {
             string name = (sender as Control).Name;
-            if(name.Contains("Project"))
-            {
-                ClearText(project, true);
-            }
-            else if(name.Contains("Topic"))
+            if(name.Contains("Topic"))
             {
                 ClearText(topic, true);
             }
@@ -2693,10 +2654,10 @@ namespace 数据采集档案管理系统___课题版
             removeIdList.Clear();
         }
 
-        private void txt_Project_Code_Leave(object sender, EventArgs e)
+        private void Txt_Project_Code_Leave(object sender, EventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            if(!string.IsNullOrEmpty(textBox.Text.Trim()))
+            ComboBox textBox = sender as ComboBox;
+            if(!string.IsNullOrEmpty(textBox.Text))
             {
                 if(textBox.Name.Contains("Project"))
                 {
@@ -2753,7 +2714,7 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void btn_ViewFileTree_Click(object sender, EventArgs e)
+        private void Btn_ViewFileTree_Click(object sender, EventArgs e)
         {
             object[] rootIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
             if(rootIds.Length > 0)
@@ -2764,6 +2725,18 @@ namespace 数据采集档案管理系统___课题版
 
                 }
             }
+        }
+
+        private void FileList_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridView view = sender as DataGridView;
+            object id = view.Rows[e.RowIndex].Cells[0].Tag;
+            if(view.Name.Contains("Project"))
+                Btn_AddFile_Click(btn_Project_AddFile, e);
+            else if(view.Name.Contains("Topic"))
+                Btn_AddFile_Click(btn_Topic_AddFile, e);
+            else if(view.Name.Contains("Subject"))
+                Btn_AddFile_Click(btn_Subject_AddFile, e);
         }
     }
 }

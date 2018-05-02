@@ -39,6 +39,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Wroking));
             this.tab_Menu = new System.Windows.Forms.TabControl();
             this.project = new System.Windows.Forms.TabPage();
+            this.txt_Project_Code = new System.Windows.Forms.ComboBox();
+            this.btn_ViewFileTree = new System.Windows.Forms.Button();
             this.txt_Project_Unit = new System.Windows.Forms.TextBox();
             this.txt_Project_Intro = new System.Windows.Forms.TextBox();
             this.cbo_Project_Field = new System.Windows.Forms.ComboBox();
@@ -49,16 +51,16 @@
             this.dgv_Project_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Project_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Project_FL_secret = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Project_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_format = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_format = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Project_FL_form = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Project_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_FileValid = new System.Windows.Forms.TabPage();
@@ -105,7 +107,6 @@
             this.gro_Project_Btns = new System.Windows.Forms.GroupBox();
             this.lbl_Project_FileDetail = new System.Windows.Forms.Label();
             this.btn_Project_AddFile = new System.Windows.Forms.Button();
-            this.btn_Project_Add = new System.Windows.Forms.Button();
             this.btn_Project_Save = new System.Windows.Forms.Button();
             this.txt_Project_ConPhone = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -121,7 +122,6 @@
             this.txt_Project_Funds = new System.Windows.Forms.TextBox();
             this.txt_Project_Theme = new System.Windows.Forms.TextBox();
             this.txt_Project_Name = new System.Windows.Forms.TextBox();
-            this.txt_Project_Code = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -136,6 +136,8 @@
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.topic = new System.Windows.Forms.TabPage();
+            this.txt_Topic_Code = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.txt_Topic_Unit = new System.Windows.Forms.TextBox();
             this.cbo_Topic_Province = new System.Windows.Forms.ComboBox();
             this.cbo_Topic_Field = new System.Windows.Forms.ComboBox();
@@ -151,16 +153,16 @@
             this.dgv_Topic_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Topic_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Topic_FL_secret = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Topic_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_format = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_format = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Topic_FL_form = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Topic_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Topic_FileValid = new System.Windows.Forms.TabPage();
@@ -213,7 +215,6 @@
             this.txt_Topic_Funds = new System.Windows.Forms.TextBox();
             this.txt_Topic_Theme = new System.Windows.Forms.TextBox();
             this.txt_Topic_Name = new System.Windows.Forms.TextBox();
-            this.txt_Topic_Code = new System.Windows.Forms.TextBox();
             this.label56 = new System.Windows.Forms.Label();
             this.label57 = new System.Windows.Forms.Label();
             this.label58 = new System.Windows.Forms.Label();
@@ -233,6 +234,8 @@
             this.btn_Topic_Add = new System.Windows.Forms.Button();
             this.btn_Topic_Save = new System.Windows.Forms.Button();
             this.Subject = new System.Windows.Forms.TabPage();
+            this.txt_Subject_Code = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.txt_Subject_Unit = new System.Windows.Forms.TextBox();
             this.cbo_Subject_Province = new System.Windows.Forms.ComboBox();
             this.cbo_Subject_Field = new System.Windows.Forms.ComboBox();
@@ -248,16 +251,16 @@
             this.dgv_Subject_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Subject_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Subject_FL_secret = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Subject_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_number = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_format = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_format = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgv_Subject_FL_form = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.dgv_Subject_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Subject_FileValid = new System.Windows.Forms.TabPage();
@@ -309,7 +312,6 @@
             this.txt_Subject_Funds = new System.Windows.Forms.TextBox();
             this.txt_Subject_Theme = new System.Windows.Forms.TextBox();
             this.txt_Subject_Name = new System.Windows.Forms.TextBox();
-            this.txt_Subject_Code = new System.Windows.Forms.TextBox();
             this.label90 = new System.Windows.Forms.Label();
             this.label91 = new System.Windows.Forms.Label();
             this.label92 = new System.Windows.Forms.Label();
@@ -336,9 +338,6 @@
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btn_ViewFileTree = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -387,6 +386,7 @@
             // 
             // project
             // 
+            this.project.Controls.Add(this.txt_Project_Code);
             this.project.Controls.Add(this.btn_ViewFileTree);
             this.project.Controls.Add(this.txt_Project_Unit);
             this.project.Controls.Add(this.txt_Project_Intro);
@@ -408,7 +408,6 @@
             this.project.Controls.Add(this.txt_Project_Funds);
             this.project.Controls.Add(this.txt_Project_Theme);
             this.project.Controls.Add(this.txt_Project_Name);
-            this.project.Controls.Add(this.txt_Project_Code);
             this.project.Controls.Add(this.label4);
             this.project.Controls.Add(this.label5);
             this.project.Controls.Add(this.label6);
@@ -428,6 +427,26 @@
             this.project.TabIndex = 4;
             this.project.Text = "项目";
             this.project.UseVisualStyleBackColor = true;
+            // 
+            // txt_Project_Code
+            // 
+            this.txt_Project_Code.Location = new System.Drawing.Point(107, 10);
+            this.txt_Project_Code.Name = "txt_Project_Code";
+            this.txt_Project_Code.Size = new System.Drawing.Size(210, 24);
+            this.txt_Project_Code.TabIndex = 118;
+            this.txt_Project_Code.Leave += new System.EventHandler(this.Txt_Project_Code_Leave);
+            // 
+            // btn_ViewFileTree
+            // 
+            this.btn_ViewFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_ViewFileTree.Font = new System.Drawing.Font("宋体", 10F);
+            this.btn_ViewFileTree.Location = new System.Drawing.Point(1181, 247);
+            this.btn_ViewFileTree.Name = "btn_ViewFileTree";
+            this.btn_ViewFileTree.Size = new System.Drawing.Size(86, 28);
+            this.btn_ViewFileTree.TabIndex = 117;
+            this.btn_ViewFileTree.Text = "查看文件";
+            this.btn_ViewFileTree.UseVisualStyleBackColor = true;
+            this.btn_ViewFileTree.Click += new System.EventHandler(this.Btn_ViewFileTree_Click);
             // 
             // txt_Project_Unit
             // 
@@ -507,12 +526,12 @@
             this.dgv_Project_FL_id,
             this.dgv_Project_FL_stage,
             this.dgv_Project_FL_categor,
+            this.dgv_Project_FL_code,
             this.dgv_Project_FL_name,
             this.dgv_Project_FL_user,
             this.dgv_Project_FL_type,
             this.dgv_Project_FL_secret,
             this.dgv_Project_FL_pages,
-            this.dgv_Project_FL_number,
             this.dgv_Project_FL_date,
             this.dgv_Project_FL_unit,
             this.dgv_Project_FL_carrier,
@@ -531,6 +550,7 @@
             this.dgv_Project_FileList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.Dgv_DataError);
             this.dgv_Project_FileList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Dgv_File_EditingControlShowing);
             this.dgv_Project_FileList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Special_FileList_RowEnter);
+            this.dgv_Project_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Project_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             this.dgv_Project_FileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgv_FileList_KeyDown);
             // 
@@ -551,6 +571,11 @@
             this.dgv_Project_FL_categor.HeaderText = "文件类别";
             this.dgv_Project_FL_categor.Name = "dgv_Project_FL_categor";
             this.dgv_Project_FL_categor.Width = 130;
+            // 
+            // dgv_Project_FL_code
+            // 
+            this.dgv_Project_FL_code.HeaderText = "文件编号";
+            this.dgv_Project_FL_code.Name = "dgv_Project_FL_code";
             // 
             // dgv_Project_FL_name
             // 
@@ -579,12 +604,6 @@
             this.dgv_Project_FL_pages.Name = "dgv_Project_FL_pages";
             this.dgv_Project_FL_pages.Width = 50;
             // 
-            // dgv_Project_FL_number
-            // 
-            this.dgv_Project_FL_number.HeaderText = "份数";
-            this.dgv_Project_FL_number.Name = "dgv_Project_FL_number";
-            this.dgv_Project_FL_number.Width = 50;
-            // 
             // dgv_Project_FL_date
             // 
             this.dgv_Project_FL_date.HeaderText = "形成日期";
@@ -605,6 +624,8 @@
             // 
             this.dgv_Project_FL_format.HeaderText = "格式";
             this.dgv_Project_FL_format.Name = "dgv_Project_FL_format";
+            this.dgv_Project_FL_format.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Project_FL_format.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // dgv_Project_FL_form
             // 
@@ -901,7 +922,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 312);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 320);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -913,7 +934,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 281);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 289);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -933,7 +954,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 250);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 258);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -945,7 +966,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 219);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 227);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -957,7 +978,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 188);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 196);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -969,7 +990,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 157);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 165);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -1012,7 +1033,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(682, 46);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 384);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 400);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -1027,7 +1048,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 45);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 384);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 400);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1066,7 +1087,6 @@
             // 
             this.gro_Project_Btns.Controls.Add(this.lbl_Project_FileDetail);
             this.gro_Project_Btns.Controls.Add(this.btn_Project_AddFile);
-            this.gro_Project_Btns.Controls.Add(this.btn_Project_Add);
             this.gro_Project_Btns.Controls.Add(this.btn_Project_Save);
             this.gro_Project_Btns.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.gro_Project_Btns.Location = new System.Drawing.Point(0, 632);
@@ -1095,18 +1115,6 @@
             this.btn_Project_AddFile.Text = "添加文件";
             this.btn_Project_AddFile.UseVisualStyleBackColor = true;
             this.btn_Project_AddFile.Click += new System.EventHandler(this.Btn_AddFile_Click);
-            // 
-            // btn_Project_Add
-            // 
-            this.btn_Project_Add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Add.Location = new System.Drawing.Point(1108, 16);
-            this.btn_Project_Add.Name = "btn_Project_Add";
-            this.btn_Project_Add.Size = new System.Drawing.Size(75, 30);
-            this.btn_Project_Add.TabIndex = 2;
-            this.btn_Project_Add.Text = "新增";
-            this.btn_Project_Add.UseVisualStyleBackColor = true;
-            this.btn_Project_Add.Click += new System.EventHandler(this.btn_Project_Add_Click);
             // 
             // btn_Project_Save
             // 
@@ -1236,14 +1244,6 @@
             this.txt_Project_Name.Name = "txt_Project_Name";
             this.txt_Project_Name.Size = new System.Drawing.Size(569, 26);
             this.txt_Project_Name.TabIndex = 2;
-            // 
-            // txt_Project_Code
-            // 
-            this.txt_Project_Code.Location = new System.Drawing.Point(107, 8);
-            this.txt_Project_Code.Name = "txt_Project_Code";
-            this.txt_Project_Code.Size = new System.Drawing.Size(210, 26);
-            this.txt_Project_Code.TabIndex = 1;
-            this.txt_Project_Code.Leave += new System.EventHandler(this.txt_Project_Code_Leave);
             // 
             // label4
             // 
@@ -1377,6 +1377,7 @@
             // 
             // topic
             // 
+            this.topic.Controls.Add(this.txt_Topic_Code);
             this.topic.Controls.Add(this.button2);
             this.topic.Controls.Add(this.txt_Topic_Unit);
             this.topic.Controls.Add(this.cbo_Topic_Province);
@@ -1397,7 +1398,6 @@
             this.topic.Controls.Add(this.txt_Topic_Funds);
             this.topic.Controls.Add(this.txt_Topic_Theme);
             this.topic.Controls.Add(this.txt_Topic_Name);
-            this.topic.Controls.Add(this.txt_Topic_Code);
             this.topic.Controls.Add(this.label56);
             this.topic.Controls.Add(this.label57);
             this.topic.Controls.Add(this.label58);
@@ -1418,6 +1418,27 @@
             this.topic.TabIndex = 2;
             this.topic.Text = "课题";
             this.topic.UseVisualStyleBackColor = true;
+            // 
+            // txt_Topic_Code
+            // 
+            this.txt_Topic_Code.FormattingEnabled = true;
+            this.txt_Topic_Code.Location = new System.Drawing.Point(107, 9);
+            this.txt_Topic_Code.Name = "txt_Topic_Code";
+            this.txt_Topic_Code.Size = new System.Drawing.Size(210, 24);
+            this.txt_Topic_Code.TabIndex = 119;
+            this.txt_Topic_Code.Leave += new System.EventHandler(this.Txt_Project_Code_Leave);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.Font = new System.Drawing.Font("宋体", 10F);
+            this.button2.Location = new System.Drawing.Point(1181, 247);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(86, 28);
+            this.button2.TabIndex = 118;
+            this.button2.Text = "查看文件";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Btn_ViewFileTree_Click);
             // 
             // txt_Topic_Unit
             // 
@@ -1537,12 +1558,12 @@
             this.dgv_Topic_FL_id,
             this.dgv_Topic_FL_stage,
             this.dgv_Topic_FL_categor,
+            this.dgv_Topic_FL_code,
             this.dgv_Topic_FL_name,
             this.dgv_Topic_FL_user,
             this.dgv_Topic_FL_type,
             this.dgv_Topic_FL_secret,
             this.dgv_Topic_FL_pages,
-            this.dgv_Topic_FL_number,
             this.dgv_Topic_FL_date,
             this.dgv_Topic_FL_unit,
             this.dgv_Topic_FL_carrier,
@@ -1561,6 +1582,7 @@
             this.dgv_Topic_FileList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.Dgv_DataError);
             this.dgv_Topic_FileList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Dgv_File_EditingControlShowing);
             this.dgv_Topic_FileList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Special_FileList_RowEnter);
+            this.dgv_Topic_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Topic_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
             // dgv_Topic_FL_id
@@ -1585,6 +1607,11 @@
             this.dgv_Topic_FL_categor.HeaderText = "文件类别";
             this.dgv_Topic_FL_categor.Name = "dgv_Topic_FL_categor";
             this.dgv_Topic_FL_categor.Width = 130;
+            // 
+            // dgv_Topic_FL_code
+            // 
+            this.dgv_Topic_FL_code.HeaderText = "文件编号";
+            this.dgv_Topic_FL_code.Name = "dgv_Topic_FL_code";
             // 
             // dgv_Topic_FL_name
             // 
@@ -1625,12 +1652,6 @@
             this.dgv_Topic_FL_pages.Name = "dgv_Topic_FL_pages";
             this.dgv_Topic_FL_pages.Width = 50;
             // 
-            // dgv_Topic_FL_number
-            // 
-            this.dgv_Topic_FL_number.HeaderText = "份数";
-            this.dgv_Topic_FL_number.Name = "dgv_Topic_FL_number";
-            this.dgv_Topic_FL_number.Width = 50;
-            // 
             // dgv_Topic_FL_date
             // 
             this.dgv_Topic_FL_date.HeaderText = "形成日期";
@@ -1654,11 +1675,9 @@
             // dgv_Topic_FL_format
             // 
             this.dgv_Topic_FL_format.HeaderText = "格式";
-            this.dgv_Topic_FL_format.Items.AddRange(new object[] {
-            "PDF",
-            "DOC",
-            "EXCEL"});
             this.dgv_Topic_FL_format.Name = "dgv_Topic_FL_format";
+            this.dgv_Topic_FL_format.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Topic_FL_format.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // dgv_Topic_FL_form
             // 
@@ -1958,7 +1977,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 310);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 318);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1970,7 +1989,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 279);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 287);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -1990,7 +2009,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 248);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 256);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -2002,7 +2021,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 217);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 225);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -2014,7 +2033,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 186);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 194);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -2026,7 +2045,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 155);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 163);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -2069,7 +2088,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(682, 43);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 386);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 402);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -2084,7 +2103,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 43);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 386);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 402);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -2192,14 +2211,6 @@
             this.txt_Topic_Name.Name = "txt_Topic_Name";
             this.txt_Topic_Name.Size = new System.Drawing.Size(566, 26);
             this.txt_Topic_Name.TabIndex = 2;
-            // 
-            // txt_Topic_Code
-            // 
-            this.txt_Topic_Code.Location = new System.Drawing.Point(107, 8);
-            this.txt_Topic_Code.Name = "txt_Topic_Code";
-            this.txt_Topic_Code.Size = new System.Drawing.Size(210, 26);
-            this.txt_Topic_Code.TabIndex = 1;
-            this.txt_Topic_Code.Leave += new System.EventHandler(this.txt_Project_Code_Leave);
             // 
             // label56
             // 
@@ -2369,11 +2380,11 @@
             // 
             this.btn_Topic_Add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Add.Location = new System.Drawing.Point(1108, 16);
+            this.btn_Topic_Add.Location = new System.Drawing.Point(1089, 16);
             this.btn_Topic_Add.Name = "btn_Topic_Add";
-            this.btn_Topic_Add.Size = new System.Drawing.Size(75, 30);
+            this.btn_Topic_Add.Size = new System.Drawing.Size(94, 30);
             this.btn_Topic_Add.TabIndex = 2;
-            this.btn_Topic_Add.Text = "新增";
+            this.btn_Topic_Add.Text = "新增课题";
             this.btn_Topic_Add.UseVisualStyleBackColor = true;
             this.btn_Topic_Add.Click += new System.EventHandler(this.btn_Project_Add_Click);
             // 
@@ -2391,6 +2402,7 @@
             // 
             // Subject
             // 
+            this.Subject.Controls.Add(this.txt_Subject_Code);
             this.Subject.Controls.Add(this.button3);
             this.Subject.Controls.Add(this.txt_Subject_Unit);
             this.Subject.Controls.Add(this.cbo_Subject_Province);
@@ -2410,7 +2422,6 @@
             this.Subject.Controls.Add(this.txt_Subject_Funds);
             this.Subject.Controls.Add(this.txt_Subject_Theme);
             this.Subject.Controls.Add(this.txt_Subject_Name);
-            this.Subject.Controls.Add(this.txt_Subject_Code);
             this.Subject.Controls.Add(this.label90);
             this.Subject.Controls.Add(this.label91);
             this.Subject.Controls.Add(this.label92);
@@ -2430,6 +2441,27 @@
             this.Subject.TabIndex = 3;
             this.Subject.Text = "子课题";
             this.Subject.UseVisualStyleBackColor = true;
+            // 
+            // txt_Subject_Code
+            // 
+            this.txt_Subject_Code.FormattingEnabled = true;
+            this.txt_Subject_Code.Location = new System.Drawing.Point(107, 9);
+            this.txt_Subject_Code.Name = "txt_Subject_Code";
+            this.txt_Subject_Code.Size = new System.Drawing.Size(210, 24);
+            this.txt_Subject_Code.TabIndex = 120;
+            this.txt_Subject_Code.Leave += new System.EventHandler(this.Txt_Project_Code_Leave);
+            // 
+            // button3
+            // 
+            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button3.Font = new System.Drawing.Font("宋体", 10F);
+            this.button3.Location = new System.Drawing.Point(1181, 248);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(86, 28);
+            this.button3.TabIndex = 119;
+            this.button3.Text = "查看文件";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Btn_ViewFileTree_Click);
             // 
             // txt_Subject_Unit
             // 
@@ -2549,12 +2581,12 @@
             this.dgv_Subject_FL_id,
             this.dgv_Subject_FL_stage,
             this.dgv_Subject_FL_categor,
+            this.dgv_Subject_FL_code,
             this.dgv_Subject_FL_name,
             this.dgv_Subject_FL_user,
             this.dgv_Subject_FL_type,
             this.dgv_Subject_FL_secret,
             this.dgv_Subject_FL_pages,
-            this.dgv_Subject_FL_number,
             this.dgv_Subject_FL_date,
             this.dgv_Subject_FL_unit,
             this.dgv_Subject_FL_carrier,
@@ -2573,6 +2605,7 @@
             this.dgv_Subject_FileList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.Dgv_DataError);
             this.dgv_Subject_FileList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Dgv_File_EditingControlShowing);
             this.dgv_Subject_FileList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Special_FileList_RowEnter);
+            this.dgv_Subject_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Subject_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
             // dgv_Subject_FL_id
@@ -2597,6 +2630,11 @@
             this.dgv_Subject_FL_categor.HeaderText = "文件类别";
             this.dgv_Subject_FL_categor.Name = "dgv_Subject_FL_categor";
             this.dgv_Subject_FL_categor.Width = 130;
+            // 
+            // dgv_Subject_FL_code
+            // 
+            this.dgv_Subject_FL_code.HeaderText = "文件编号";
+            this.dgv_Subject_FL_code.Name = "dgv_Subject_FL_code";
             // 
             // dgv_Subject_FL_name
             // 
@@ -2637,12 +2675,6 @@
             this.dgv_Subject_FL_pages.Name = "dgv_Subject_FL_pages";
             this.dgv_Subject_FL_pages.Width = 50;
             // 
-            // dgv_Subject_FL_number
-            // 
-            this.dgv_Subject_FL_number.HeaderText = "份数";
-            this.dgv_Subject_FL_number.Name = "dgv_Subject_FL_number";
-            this.dgv_Subject_FL_number.Width = 50;
-            // 
             // dgv_Subject_FL_date
             // 
             this.dgv_Subject_FL_date.HeaderText = "形成日期";
@@ -2666,11 +2698,9 @@
             // dgv_Subject_FL_format
             // 
             this.dgv_Subject_FL_format.HeaderText = "格式";
-            this.dgv_Subject_FL_format.Items.AddRange(new object[] {
-            "PDF",
-            "DOC",
-            "EXCEL"});
             this.dgv_Subject_FL_format.Name = "dgv_Subject_FL_format";
+            this.dgv_Subject_FL_format.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Subject_FL_format.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // dgv_Subject_FL_form
             // 
@@ -2970,7 +3000,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 310);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 318);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -2982,7 +3012,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 279);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 287);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -3002,7 +3032,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 248);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 256);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -3014,7 +3044,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 217);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 225);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -3026,7 +3056,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 186);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 194);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -3038,7 +3068,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 155);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 163);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -3081,7 +3111,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(682, 42);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 387);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 403);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -3096,7 +3126,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 42);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 387);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 403);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -3191,14 +3221,6 @@
             this.txt_Subject_Name.Name = "txt_Subject_Name";
             this.txt_Subject_Name.Size = new System.Drawing.Size(576, 26);
             this.txt_Subject_Name.TabIndex = 2;
-            // 
-            // txt_Subject_Code
-            // 
-            this.txt_Subject_Code.Location = new System.Drawing.Point(107, 8);
-            this.txt_Subject_Code.Name = "txt_Subject_Code";
-            this.txt_Subject_Code.Size = new System.Drawing.Size(210, 26);
-            this.txt_Subject_Code.TabIndex = 1;
-            this.txt_Subject_Code.Leave += new System.EventHandler(this.txt_Project_Code_Leave);
             // 
             // label90
             // 
@@ -3358,11 +3380,11 @@
             // 
             this.btn_Subject_Add.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Add.Location = new System.Drawing.Point(1108, 16);
+            this.btn_Subject_Add.Location = new System.Drawing.Point(1069, 16);
             this.btn_Subject_Add.Name = "btn_Subject_Add";
-            this.btn_Subject_Add.Size = new System.Drawing.Size(75, 30);
+            this.btn_Subject_Add.Size = new System.Drawing.Size(114, 30);
             this.btn_Subject_Add.TabIndex = 2;
-            this.btn_Subject_Add.Text = "新增";
+            this.btn_Subject_Add.Text = "新增子课题";
             this.btn_Subject_Add.UseVisualStyleBackColor = true;
             this.btn_Subject_Add.Click += new System.EventHandler(this.btn_Project_Add_Click);
             // 
@@ -3451,42 +3473,6 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // btn_ViewFileTree
-            // 
-            this.btn_ViewFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ViewFileTree.Font = new System.Drawing.Font("宋体", 10F);
-            this.btn_ViewFileTree.Location = new System.Drawing.Point(1181, 247);
-            this.btn_ViewFileTree.Name = "btn_ViewFileTree";
-            this.btn_ViewFileTree.Size = new System.Drawing.Size(86, 28);
-            this.btn_ViewFileTree.TabIndex = 117;
-            this.btn_ViewFileTree.Text = "查看文件";
-            this.btn_ViewFileTree.UseVisualStyleBackColor = true;
-            this.btn_ViewFileTree.Click += new System.EventHandler(this.btn_ViewFileTree_Click);
-            // 
-            // button2
-            // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Font = new System.Drawing.Font("宋体", 10F);
-            this.button2.Location = new System.Drawing.Point(1181, 247);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(86, 28);
-            this.button2.TabIndex = 118;
-            this.button2.Text = "查看文件";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.btn_ViewFileTree_Click);
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Font = new System.Drawing.Font("宋体", 10F);
-            this.button3.Location = new System.Drawing.Point(1181, 248);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(86, 28);
-            this.button3.TabIndex = 119;
-            this.button3.Text = "查看文件";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.btn_ViewFileTree_Click);
-            // 
             // Frm_Wroking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3559,7 +3545,6 @@
         private System.Windows.Forms.TextBox txt_Topic_Funds;
         private System.Windows.Forms.TextBox txt_Topic_Theme;
         private System.Windows.Forms.TextBox txt_Topic_Name;
-        private System.Windows.Forms.TextBox txt_Topic_Code;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.Label label58;
@@ -3584,7 +3569,6 @@
         private System.Windows.Forms.TextBox txt_Subject_Funds;
         private System.Windows.Forms.TextBox txt_Subject_Theme;
         private System.Windows.Forms.TextBox txt_Subject_Name;
-        private System.Windows.Forms.TextBox txt_Subject_Code;
         private System.Windows.Forms.Label label90;
         private System.Windows.Forms.Label label91;
         private System.Windows.Forms.Label label92;
@@ -3644,7 +3628,6 @@
         private System.Windows.Forms.TextBox txt_Project_Funds;
         private System.Windows.Forms.TextBox txt_Project_Theme;
         private System.Windows.Forms.TextBox txt_Project_Name;
-        private System.Windows.Forms.TextBox txt_Project_Code;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
@@ -3674,7 +3657,6 @@
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.GroupBox gro_Project_Btns;
         private System.Windows.Forms.Button btn_Project_AddFile;
-        private System.Windows.Forms.Button btn_Project_Add;
         private System.Windows.Forms.Button btn_Project_Save;
         private System.Windows.Forms.TextBox txt_Project_AJ_Secret;
         private System.Windows.Forms.TextBox txt_Project_AJ_Term;
@@ -3793,51 +3775,6 @@
         private System.Windows.Forms.ComboBox cbo_Topic_Field;
         private System.Windows.Forms.ComboBox cbo_Subject_Province;
         private System.Windows.Forms.ComboBox cbo_Subject_Field;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_id;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_stage;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_user;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_type;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_secret;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_pages;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_unit;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_carrier;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_format;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_form;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_link;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_id;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_stage;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_user;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_type;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_secret;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_pages;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_unit;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_carrier;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_format;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_form;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_link;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_id;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_stage;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_user;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_type;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_secret;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_pages;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_date;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_unit;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_carrier;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_format;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_form;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_link;
         private System.Windows.Forms.TextBox txt_Project_Intro;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip2;
         private System.Windows.Forms.ToolStripMenuItem 插入行IToolStripMenuItem;
@@ -3850,5 +3787,53 @@
         private System.Windows.Forms.Button btn_ViewFileTree;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox txt_Project_Code;
+        private System.Windows.Forms.ComboBox txt_Topic_Code;
+        private System.Windows.Forms.ComboBox txt_Subject_Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_stage;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_user;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_type;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_secret;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_pages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_unit;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_carrier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_format;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_form;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_link;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_stage;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_user;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_type;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_secret;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_pages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_unit;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_carrier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_format;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FL_form;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FL_link;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_id;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_stage;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_user;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_type;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_secret;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_pages;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_unit;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_carrier;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_format;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_form;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_link;
     }
 }

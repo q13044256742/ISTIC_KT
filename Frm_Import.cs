@@ -271,8 +271,12 @@ namespace 数据采集档案管理系统___课题版
                     try
                     {
                         SetTip($"正在备份文件[{file[i].Name}]");
-                        SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
-                            $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                        object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{file[i].Name}' AND bfi_path='{rootFolder}'");
+                        if(string.IsNullOrEmpty(GetValue(value)))
+                            SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
+                                $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                        else
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
                         ServerHelper.UploadFile(file[i].FullName, rootFolder, file[i].Name);
                         okCount++;
                     }
@@ -287,8 +291,15 @@ namespace 数据采集档案管理系统___课题版
             for(int i = 0; i < infos.Length; i++)
             {
                 string primaryKey = Guid.NewGuid().ToString();
-                SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
-                        $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{infos[i].Name}' AND bfi_path='{rootFolder}'");
+                if(string.IsNullOrEmpty(GetValue(value)))
+                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
+                       $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                else
+                {
+                    SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
+                    primaryKey = GetValue(value);
+                }
                 CopyFile(infos[i].FullName, rootFolder + "\\" + infos[i].Name + @"\", primaryKey);
             }
         }

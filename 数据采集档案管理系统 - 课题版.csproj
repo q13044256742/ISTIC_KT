@@ -327,6 +327,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\file2.jpg" />
+    <None Include="Resources\file.jpg" />
+    <None Include="Resources\lock.jpg" />
+    <None Include="Resources\png-0054.png" />
     <None Include="Resources\zippo_26.png" />
     <None Include="Resources\zippo_16.png" />
     <None Include="Resources\zippo_46.png" />
@@ -347,9 +351,6 @@
     <None Include="Resources\login_1.png" />
     <None Include="Images\png-0228.png" />
     <None Include="Images\png-0222.png" />
-    <Content Include="Images\33.png" />
-    <Content Include="Images\34.png" />
-    <Content Include="Images\7.png" />
     <Content Include="Images\Mbg.jpg" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\png-0152.png" />

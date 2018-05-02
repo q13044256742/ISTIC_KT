@@ -91,6 +91,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap _lock {
+            get {
+                object obj = ResourceManager.GetObject("_lock", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
         ///
         ///1．项目（课题）合同书甲方为专项牵头组织单位（专项实施管理办公室），乙方为项目（课题）责任单位。
@@ -114,6 +124,26 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static string explain {
             get {
                 return ResourceManager.GetString("explain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap file {
+            get {
+                object obj = ResourceManager.GetObject("file", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap file2 {
+            get {
+                object obj = ResourceManager.GetObject("file2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         
@@ -284,36 +314,6 @@ namespace 数据采集档案管理系统___课题版.Properties {
             get {
                 object obj = ResourceManager.GetObject("System_Data_SQLite", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap zippo_16 {
-            get {
-                object obj = ResourceManager.GetObject("zippo_16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap zippo_45 {
-            get {
-                object obj = ResourceManager.GetObject("zippo_45", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Bitmap zippo_46 {
-            get {
-                object obj = ResourceManager.GetObject("zippo_46", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }
