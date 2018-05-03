@@ -45,6 +45,7 @@ namespace 数据采集档案管理系统___课题版
                 cbo_stage.SelectedValue = row["fi_stage"];
                 Cbo_stage_SelectionChangeCommitted(null, null);
                 cbo_categor.SelectedValue = row["fi_categor"];
+                txt_fileCode.Text = GetValue(row["fi_code"]);
                 txt_fileName.Text = GetValue(row["fi_name"]);
                 txt_user.Text = GetValue(row["fi_user"]);
                 SetFileRadio(pal_type, row["fi_type"]);
@@ -106,10 +107,13 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 根据类别加载文件名称
         /// </summary>
-        private void LoadFileNameByCategor(object categorValue)
+        private void LoadFileNameByCategor(ComboBox comboBox)
         {
-            string value = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{categorValue}'"));
-            txt_fileName.Text = value;
+            object key = comboBox.Text;
+            object value = comboBox.SelectedValue;
+            int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{value}'");
+            txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
+            txt_fileName.Text = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{value}'"));
         }
 
         /// <summary>
@@ -133,12 +137,7 @@ namespace 数据采集档案管理系统___课题版
         {
             if(cbo_categor.SelectedIndex != -1)
             {
-                object key = cbo_categor.Text;
-                object value = cbo_categor.SelectedValue;
-                //生成编号
-                int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM files_info WHERE fi_categor='{value}'");
-                txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
-                LoadFileNameByCategor(value);
+                LoadFileNameByCategor(cbo_categor);
             }
         }
 
@@ -206,7 +205,7 @@ namespace 数据采集档案管理系统___课题版
             row.Cells[key + "unit"].Value = txt_unit.Text;
             row.Cells[key + "carrier"].Value = GetFileRadio(pal_carrier);
             row.Cells[key + "form"].Value = GetFileRadio(pal_form);
-            row.Cells[key + "format"].Value = Path.GetExtension(txt_link.Text).Replace(".", string.Empty);
+            object format = Path.GetExtension(txt_link.Text).Replace(".", string.Empty);
             row.Cells[key + "link"].Value = txt_link.Text;
             if(isAdd)
             {
@@ -232,13 +231,12 @@ namespace 数据采集档案管理系统___课题版
                 }
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
-                object format = row.Cells[key + "format"].Value;
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
-                string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
-                $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{row.Index}');";
                 object fileId = txt_link.Tag;
+                string insertSql = "INSERT INTO files_info (" +
+                "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
+                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{row.Index}');";
                 if(fileId != null)
                 {
                     int value = link == null ? 0 : 1;
@@ -273,10 +271,9 @@ namespace 数据采集档案管理系统___课题版
                 }
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
-                object format = row.Cells[key + "format"].Value;
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
-
+                object fileId = txt_link.Tag;
                 string updateSql = "UPDATE files_info SET " +
                     $"fi_stage = '{stage}', " +
                     $"fi_categor = '{categor}', " +
@@ -292,9 +289,15 @@ namespace 数据采集档案管理系统___课题版
                     $"fi_format = '{format}', " +
                     $"fi_form = '{form}', " +
                     $"fi_link = '{link}' " +
-                    $"WHERE fi_id = '{primaryKey}'";
+                    $"fi_file_id = '{fileId}' " +
+                    $"WHERE fi_id = '{primaryKey}';";
+                if(fileId != null)
+                {
+                    int value = link == null ? 0 : 1;
+                    updateSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
+                }
                 SQLiteHelper.ExecuteNonQuery(updateSql);
-                MessageBox.Show("数据已保存。");
+                MessageBox.Show("数据已保存。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             return primaryKey;
         }

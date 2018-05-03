@@ -331,10 +331,6 @@
     <None Include="Resources\file.jpg" />
     <None Include="Resources\lock.jpg" />
     <None Include="Resources\png-0054.png" />
-    <None Include="Resources\zippo_26.png" />
-    <None Include="Resources\zippo_16.png" />
-    <None Include="Resources\zippo_46.png" />
-    <None Include="Resources\zippo_45.png" />
     <None Include="Resources\png-0098.png" />
     <None Include="Resources\png-1610.png" />
     <None Include="Resources\System.Data.SQLite.dll" />
@@ -343,9 +339,9 @@
     <None Include="Images\png-1753.png" />
     <None Include="Images\png-0010.png" />
     <Content Include="Images\slogan.ico" />
-    <None Include="Resources\69-Plus.png" />
-    <None Include="Resources\153-Delete.png" />
-    <None Include="Resources\55-Refresh.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\1.png" />
+    <None Include="Resources\2.png" />
     <Content Include="Resources\explain.txt" />
     <None Include="Resources\ooopic_1522400624.ico" />
     <None Include="Resources\login_1.png" />

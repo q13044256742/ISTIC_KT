@@ -55,11 +55,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.pal_secret = new System.Windows.Forms.Panel();
-            this.rdo_secret_gk = new System.Windows.Forms.RadioButton();
-            this.rdo_secret_gn = new System.Windows.Forms.RadioButton();
-            this.rdo_secret_mm = new System.Windows.Forms.RadioButton();
-            this.rdo_secret_jm = new System.Windows.Forms.RadioButton();
             this.rdo_secret_jum = new System.Windows.Forms.RadioButton();
+            this.rdo_secret_jm = new System.Windows.Forms.RadioButton();
+            this.rdo_secret_mm = new System.Windows.Forms.RadioButton();
+            this.rdo_secret_gn = new System.Windows.Forms.RadioButton();
+            this.rdo_secret_gk = new System.Windows.Forms.RadioButton();
             this.txt_fileCode = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pal_carrier = new System.Windows.Forms.Panel();
@@ -70,10 +70,10 @@
             this.rdo_form_fyj = new System.Windows.Forms.RadioButton();
             this.rdo_form_yj = new System.Windows.Forms.RadioButton();
             this.pal_type = new System.Windows.Forms.Panel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.rdo_type_ps = new System.Windows.Forms.RadioButton();
             this.rdo_type_cw = new System.Windows.Forms.RadioButton();
             this.rdo_type_js = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_secret.SuspendLayout();
@@ -291,7 +291,7 @@
             this.cbo_categor.Name = "cbo_categor";
             this.cbo_categor.Size = new System.Drawing.Size(204, 28);
             this.cbo_categor.TabIndex = 33;
-            this.cbo_categor.SelectedIndexChanged += new System.EventHandler(this.Cbo_categor_SelectedIndexChanged);
+            this.cbo_categor.SelectionChangeCommitted += new System.EventHandler(this.Cbo_categor_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -340,41 +340,17 @@
             this.pal_secret.Size = new System.Drawing.Size(311, 39);
             this.pal_secret.TabIndex = 63;
             // 
-            // rdo_secret_gk
+            // rdo_secret_jum
             // 
-            this.rdo_secret_gk.AutoSize = true;
-            this.rdo_secret_gk.Location = new System.Drawing.Point(6, 7);
-            this.rdo_secret_gk.Name = "rdo_secret_gk";
-            this.rdo_secret_gk.Size = new System.Drawing.Size(55, 24);
-            this.rdo_secret_gk.TabIndex = 0;
-            this.rdo_secret_gk.TabStop = true;
-            this.rdo_secret_gk.Tag = "09270691-d1f3-48e8-9632-7c08e5b1c286";
-            this.rdo_secret_gk.Text = "公开";
-            this.rdo_secret_gk.UseVisualStyleBackColor = true;
-            // 
-            // rdo_secret_gn
-            // 
-            this.rdo_secret_gn.AutoSize = true;
-            this.rdo_secret_gn.Location = new System.Drawing.Point(67, 7);
-            this.rdo_secret_gn.Name = "rdo_secret_gn";
-            this.rdo_secret_gn.Size = new System.Drawing.Size(55, 24);
-            this.rdo_secret_gn.TabIndex = 1;
-            this.rdo_secret_gn.TabStop = true;
-            this.rdo_secret_gn.Tag = "0987e1aa-65e5-4b14-b220-e030e2594327";
-            this.rdo_secret_gn.Text = "国内";
-            this.rdo_secret_gn.UseVisualStyleBackColor = true;
-            // 
-            // rdo_secret_mm
-            // 
-            this.rdo_secret_mm.AutoSize = true;
-            this.rdo_secret_mm.Location = new System.Drawing.Point(128, 7);
-            this.rdo_secret_mm.Name = "rdo_secret_mm";
-            this.rdo_secret_mm.Size = new System.Drawing.Size(55, 24);
-            this.rdo_secret_mm.TabIndex = 2;
-            this.rdo_secret_mm.TabStop = true;
-            this.rdo_secret_mm.Tag = "e2a57ffd-7041-4d2b-98b2-6494e648c74f";
-            this.rdo_secret_mm.Text = "秘密";
-            this.rdo_secret_mm.UseVisualStyleBackColor = true;
+            this.rdo_secret_jum.AutoSize = true;
+            this.rdo_secret_jum.Location = new System.Drawing.Point(250, 7);
+            this.rdo_secret_jum.Name = "rdo_secret_jum";
+            this.rdo_secret_jum.Size = new System.Drawing.Size(55, 24);
+            this.rdo_secret_jum.TabIndex = 4;
+            this.rdo_secret_jum.TabStop = true;
+            this.rdo_secret_jum.Tag = "6a7bca7f-996b-49b7-8c7e-aabd2c437c66";
+            this.rdo_secret_jum.Text = "绝密";
+            this.rdo_secret_jum.UseVisualStyleBackColor = true;
             // 
             // rdo_secret_jm
             // 
@@ -388,17 +364,41 @@
             this.rdo_secret_jm.Text = "机密";
             this.rdo_secret_jm.UseVisualStyleBackColor = true;
             // 
-            // rdo_secret_jum
+            // rdo_secret_mm
             // 
-            this.rdo_secret_jum.AutoSize = true;
-            this.rdo_secret_jum.Location = new System.Drawing.Point(250, 7);
-            this.rdo_secret_jum.Name = "rdo_secret_jum";
-            this.rdo_secret_jum.Size = new System.Drawing.Size(55, 24);
-            this.rdo_secret_jum.TabIndex = 4;
-            this.rdo_secret_jum.TabStop = true;
-            this.rdo_secret_jum.Tag = "6a7bca7f-996b-49b7-8c7e-aabd2c437c66";
-            this.rdo_secret_jum.Text = "绝密";
-            this.rdo_secret_jum.UseVisualStyleBackColor = true;
+            this.rdo_secret_mm.AutoSize = true;
+            this.rdo_secret_mm.Location = new System.Drawing.Point(128, 7);
+            this.rdo_secret_mm.Name = "rdo_secret_mm";
+            this.rdo_secret_mm.Size = new System.Drawing.Size(55, 24);
+            this.rdo_secret_mm.TabIndex = 2;
+            this.rdo_secret_mm.TabStop = true;
+            this.rdo_secret_mm.Tag = "e2a57ffd-7041-4d2b-98b2-6494e648c74f";
+            this.rdo_secret_mm.Text = "秘密";
+            this.rdo_secret_mm.UseVisualStyleBackColor = true;
+            // 
+            // rdo_secret_gn
+            // 
+            this.rdo_secret_gn.AutoSize = true;
+            this.rdo_secret_gn.Location = new System.Drawing.Point(67, 7);
+            this.rdo_secret_gn.Name = "rdo_secret_gn";
+            this.rdo_secret_gn.Size = new System.Drawing.Size(55, 24);
+            this.rdo_secret_gn.TabIndex = 1;
+            this.rdo_secret_gn.TabStop = true;
+            this.rdo_secret_gn.Tag = "0987e1aa-65e5-4b14-b220-e030e2594327";
+            this.rdo_secret_gn.Text = "国内";
+            this.rdo_secret_gn.UseVisualStyleBackColor = true;
+            // 
+            // rdo_secret_gk
+            // 
+            this.rdo_secret_gk.AutoSize = true;
+            this.rdo_secret_gk.Location = new System.Drawing.Point(6, 7);
+            this.rdo_secret_gk.Name = "rdo_secret_gk";
+            this.rdo_secret_gk.Size = new System.Drawing.Size(55, 24);
+            this.rdo_secret_gk.TabIndex = 0;
+            this.rdo_secret_gk.TabStop = true;
+            this.rdo_secret_gk.Tag = "09270691-d1f3-48e8-9632-7c08e5b1c286";
+            this.rdo_secret_gk.Text = "公开";
+            this.rdo_secret_gk.UseVisualStyleBackColor = true;
             // 
             // txt_fileCode
             // 
@@ -509,6 +509,18 @@
             this.pal_type.Size = new System.Drawing.Size(305, 39);
             this.pal_type.TabIndex = 68;
             // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(70, 7);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(55, 24);
+            this.radioButton1.TabIndex = 3;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Tag = "ef8d18ad-18a7-433d-8875-aac496f844e9";
+            this.radioButton1.Text = "财务";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
             // rdo_type_ps
             // 
             this.rdo_type_ps.AutoSize = true;
@@ -544,18 +556,6 @@
             this.rdo_type_js.Tag = "ef8d18ad-18a7-433d-8875-aac496f844e7";
             this.rdo_type_js.Text = "技术";
             this.rdo_type_js.UseVisualStyleBackColor = true;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(70, 7);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(55, 24);
-            this.radioButton1.TabIndex = 3;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Tag = "ef8d18ad-18a7-433d-8875-aac496f844e9";
-            this.radioButton1.Text = "财务";
-            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // Frm_AddFile
             // 

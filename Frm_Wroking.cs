@@ -339,7 +339,6 @@ namespace 数据采集档案管理系统___课题版
                 }
                 dataGridView.Rows[index].Cells[key + "unit"].Value = dataTable.Rows[i]["fi_unit"];
                 dataGridView.Rows[index].Cells[key + "carrier"].Value = dataTable.Rows[i]["fi_carrier"];
-                dataGridView.Rows[index].Cells[key + "format"].Value = dataTable.Rows[i]["fi_format"];
                 dataGridView.Rows[index].Cells[key + "form"].Value = dataTable.Rows[i]["fi_form"];
                 dataGridView.Rows[index].Cells[key + "link"].Value = dataTable.Rows[i]["fi_link"];
                 dataGridView.Rows[index].Cells[key + "link"].Tag = dataTable.Rows[i]["fi_file_id"];
@@ -516,8 +515,13 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(index == 1)
                     {
-                        ModifyFileValid(dgv_Project_FileValid, objId, "dgv_Project_FV_");
-                        MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        if(CheckValidMustEnter(dgv_Project_FileValid, "dgv_Project_FV_"))
+                        {
+                            ModifyFileValid(dgv_Project_FileValid, objId, "dgv_Project_FV_");
+                            MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                            MessageBox.Show("请填写完整信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if(index == 2)
                     {
@@ -629,8 +633,13 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(index == 1)
                     {
-                        ModifyFileValid(dgv_Topic_FileValid, objId, "dgv_Topic_FV_");
-                        MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        if(CheckValidMustEnter(dgv_Topic_FileValid, "dgv_Topic_FV_"))
+                        {
+                            ModifyFileValid(dgv_Topic_FileValid, objId, "dgv_Topic_FV_");
+                            MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                            MessageBox.Show("请填写完整信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if(index == 2)
                     {
@@ -744,8 +753,13 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(index == 1)
                     {
-                        ModifyFileValid(dgv_Subject_FileValid, objId, "dgv_Subject_FV_");
-                        MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        if(CheckValidMustEnter(dgv_Subject_FileValid, "dgv_Subject_FV_"))
+                        {
+                            ModifyFileValid(dgv_Subject_FileValid, objId, "dgv_Subject_FV_");
+                            MessageBox.Show("文件核查信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                            MessageBox.Show("请填写完整信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if(index == 2)
                     {
@@ -815,6 +829,28 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 验证比存项缺失时是否填写原因
+        /// </summary>
+        private bool CheckValidMustEnter(DataGridView view, string key)
+        {
+            bool result = true;
+            foreach(DataGridViewRow row in view.Rows)
+            {
+                object reason = row.Cells[key + "reason"].Value;
+                object remark = row.Cells[key + "remark"].Value;
+                object flag = row.Tag;
+                if(flag != null && (reason == null || remark == null))
+                {
+                    row.Cells[key + "reason"].ErrorText = "提示：此类型为必存文件，请说明缺失原因。";
+                    result = false;
+                }
+                else
+                    row.Cells[key + "reason"].ErrorText = string.Empty;
+            }
+            return result;
         }
 
         /// <summary>
@@ -1321,11 +1357,11 @@ namespace 数据采集档案管理系统___课题版
         {
             ComboBox comboBox = sender as ComboBox;
             if((ControlType)comboBox.Tag == ControlType.Plan_Project)
-                SetNameByCategor(comboBox.SelectedValue, dgv_Project_FileList.CurrentRow, "dgv_Project_FL_");
+                SetNameByCategor(comboBox, dgv_Project_FileList.CurrentRow, "dgv_Project_FL_");
             else if((ControlType)comboBox.Tag == ControlType.Plan_Topic)
-                SetNameByCategor(comboBox.SelectedValue, dgv_Topic_FileList.CurrentRow, "dgv_Topic_FL_");
+                SetNameByCategor(comboBox, dgv_Topic_FileList.CurrentRow, "dgv_Topic_FL_");
             else if((ControlType)comboBox.Tag == ControlType.Plan_Topic_Subject)
-                SetNameByCategor(comboBox.SelectedValue, dgv_Subject_FileList.CurrentRow, "dgv_Subject_FL_");
+                SetNameByCategor(comboBox, dgv_Subject_FileList.CurrentRow, "dgv_Subject_FL_");
             comboBox.Leave += new EventHandler(delegate (object obj, EventArgs eve)
             {
                 ComboBox _comboBox = obj as ComboBox;
@@ -1338,10 +1374,13 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         /// <param name="catogerCode">文件类别编号</param>
         /// <param name="currentRow">当前行</param>
-        private void SetNameByCategor(object catogerId, DataGridViewRow currentRow, string key)
+        private void SetNameByCategor(ComboBox comboBox, DataGridViewRow currentRow, string key)
         {
-            string value = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{catogerId}'"));
+            string value = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{comboBox.SelectedValue}'"));
             currentRow.Cells[key + "name"].Value = value;
+
+            int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{comboBox.SelectedValue}'");
+            currentRow.Cells[key + "code"].Value = comboBox.Text + "-" + (amount + 1).ToString().PadLeft(2, '0');
         }
 
         /// <summary>
@@ -1477,10 +1516,10 @@ namespace 数据采集档案管理系统___课题版
             }
             object unit = row.Cells[key + "unit"].Value;
             object carrier = row.Cells[key + "carrier"].Value;
-            object format = row.Cells[key + "format"].Value;
             object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
-
+            object fileId = row.Cells[key + "link"].Tag;
+            object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
             string updateSql = "UPDATE files_info SET " +
                 $"fi_stage = '{stage}', " +
                 $"fi_categor = '{categor}', " +
@@ -1496,8 +1535,14 @@ namespace 数据采集档案管理系统___课题版
                 $"fi_format = '{format}', " +
                 $"fi_form = '{form}', " +
                 $"fi_link = '{link}', " +
+                $"fi_file_id = '{fileId}', " +
                 $"fi_sort = '{sort}' " +
-                $"WHERE fi_id = '{primaryKey}'";
+                $"WHERE fi_id = '{primaryKey}';";
+            if(fileId != null)
+            {
+                int value = link == null ? 0 : 1;
+                updateSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
+            }
             SQLiteHelper.ExecuteNonQuery(updateSql);
         }
 
@@ -1533,13 +1578,13 @@ namespace 数据采集档案管理系统___课题版
             }
             object unit = row.Cells[key + "unit"].Value;
             object carrier = row.Cells[key + "carrier"].Value;
-            object format = row.Cells[key + "format"].Value;
             object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
-            string insertSql = "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_obj_id, fi_sort) " +
-            $"VALUES( '{primaryKey}', '', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}','{parentId}', '{sort}');";
             object fileId = row.Cells[key + "link"].Tag;
+            object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
+            string insertSql = "INSERT INTO files_info (" +
+            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
+            $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}');";
             if(fileId != null)
             {
                 int value = link == null ? 0 : 1;
@@ -1560,17 +1605,14 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Project_Info.Tag;
                 if(objId != null)
                 {
+                    Frm_AddFile frm = null;
                     if(dgv_Project_FileList.SelectedRows.Count == 1)
-                    {
-                        Frm_AddFile frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", dgv_Project_FileList.CurrentRow.Cells[0].Tag);
-                        frm.ShowDialog();
-                    }
+                        frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", dgv_Project_FileList.CurrentRow.Cells[0].Tag);
                     else
-                    {
-                        Frm_AddFile frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", null);
-                        frm.parentId = objId;
-                        frm.ShowDialog();
-                    }
+                        frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", null);
+
+                    frm.parentId = objId;
+                    frm.ShowDialog();
                 }
                 else
                     MessageBox.Show("请先保存基本信息。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1580,17 +1622,13 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Topic_Info.Tag;
                 if(objId != null)
                 {
+                    Frm_AddFile frm = null;
                     if(dgv_Topic_FileList.SelectedRows.Count == 1)
-                    {
-                        Frm_AddFile frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", dgv_Topic_FileList.CurrentRow.Cells[0].Tag);
-                        frm.ShowDialog();
-                    }
+                        frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", dgv_Topic_FileList.CurrentRow.Cells[0].Tag);
                     else
-                    {
-                        Frm_AddFile frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", null);
-                        frm.parentId = objId;
-                        frm.ShowDialog();
-                    }
+                        frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", null);
+                    frm.parentId = objId;
+                    frm.ShowDialog();
                 }
                 else
                     MessageBox.Show("请先保存基本信息。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1600,17 +1638,13 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Subject_Info.Tag;
                 if(objId != null)
                 {
+                    Frm_AddFile frm = null;
                     if(dgv_Subject_FileList.SelectedRows.Count == 1)
-                    {
-                        Frm_AddFile frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", dgv_Subject_FileList.CurrentRow.Cells[0].Tag);
-                        frm.ShowDialog();
-                    }
+                        frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", dgv_Subject_FileList.CurrentRow.Cells[0].Tag);
                     else
-                    {
-                        Frm_AddFile frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", null);
-                        frm.parentId = objId;
-                        frm.ShowDialog();
-                    }
+                        frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", null);
+                    frm.parentId = objId;
+                    frm.ShowDialog();
                 }
                 else
                     MessageBox.Show("请先保存基本信息。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1974,7 +2008,7 @@ namespace 数据采集档案管理系统___课题版
         {
             dataGridView.Rows.Clear();
 
-            string querySql = "SELECT dd_name, dd_note FROM data_dictionary WHERE dd_pId in(" +
+            string querySql = "SELECT dd_name, dd_note, extend_2 FROM data_dictionary WHERE dd_pId in(" +
                 "SELECT dd_id FROM data_dictionary WHERE dd_pId = (" +
                 "SELECT dd_id FROM data_dictionary  WHERE dd_code = 'dic_file_jd')) AND dd_name NOT IN(" +
                 $"SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id where fi.fi_obj_id='{objid}')" +
@@ -1998,6 +2032,9 @@ namespace 数据采集档案管理系统___课题版
                         dataGridView.Rows[indexRow].Cells[key + "reason"].Value = GetValue(_obj[1]);
                         dataGridView.Rows[indexRow].Cells[key + "remark"].Value = GetValue(_obj[2]);
                     }
+                    string musted = GetValue(table.Rows[i]["extend_2"]);
+                    if(!string.IsNullOrEmpty(musted))
+                        dataGridView.Rows[indexRow].Tag = musted;
                 }
             }
         }
@@ -2017,12 +2054,12 @@ namespace 数据采集档案管理系统___课题版
                 object name = row.Cells[key + "name"].Value;
                 if(name != null)
                 {
+                    object reason = row.Cells[key + "reason"].Value;
+                    object remark = row.Cells[key + "remark"].Value;
                     object rid = dataGridView.Rows[i].Cells[key + "id"].Tag;
                     object pcode = row.Cells[key + "pcode"].Value;
                     object pname = row.Cells[key + "pname"].Value;
                     object categor = row.Cells[key + "categor"].Value;
-                    object reason = row.Cells[key + "reason"].Value;
-                    object remark = row.Cells[key + "remark"].Value;
                     if(rid == null)
                     {
                         rid = Guid.NewGuid().ToString();
@@ -2700,7 +2737,7 @@ namespace 数据采集档案管理系统___课题版
             if("页数".Equals(view.Columns[e.ColumnIndex].HeaderText))
             {
                 DataGridViewCell cell = view.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if(cell.Value != null && !string.IsNullOrEmpty(GetValue(cell.Value)) && Convert.ToInt32(cell.Value) == 0)
+                if(cell.Value != null && !string.IsNullOrEmpty(GetValue(cell.Value).Trim()) && Convert.ToInt32(cell.Value) == 0)
                 {
                     view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].ReadOnly = true;
                     view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Style.BackColor = System.Drawing.Color.Wheat;
