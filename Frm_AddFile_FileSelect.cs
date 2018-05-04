@@ -27,12 +27,13 @@ namespace 数据采集档案管理系统___课题版
             tv_file.Nodes.Clear();
             for(int i = 0; i < rootId.Length; i++)
             {
-                object[] objs = SQLiteHelper.ExecuteRowsQuery($"SELECT bfi_id, bfi_name, bfi_path FROM backup_files_info WHERE bfi_id='{rootId[i]}'");
+                object[] objs = SQLiteHelper.ExecuteRowsQuery($"SELECT bfi_id, bfi_name, bfi_path, bfi_type FROM backup_files_info WHERE bfi_id='{rootId[i]}'");
                 TreeNode treeNode = new TreeNode()
                 {
                     Name = GetValue(objs[0]),
                     Text = GetValue(objs[1]),
-                    Tag = GetValue(objs[2])
+                    Tag = GetValue(objs[2]),
+                    ToolTipText = GetValue(objs[3]),
                 };
                 tv_file.Nodes.Add(treeNode);
                 InitialTree(rootId[i], treeNode, isShowAll);
@@ -42,7 +43,7 @@ namespace 数据采集档案管理系统___课题版
                 tv_file.Nodes[0].Expand();
                 if(!rdo_ShowAll.Checked)
                 {
-                    ClearHasWorded(tv_file.Nodes[0]);
+                    ClearHasWordedWithFolder(tv_file.Nodes[0]);
                 }
             }
         }
@@ -50,26 +51,31 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 判断指定文件夹节点下的所有文件是否全部已加工，如果是，则移除此文件夹
         /// </summary>
-        /// <param name="node"></param>
-        private void ClearHasWorded(TreeNode node)
+        private bool ClearHasWordedWithFolder(TreeNode node)
         {
-            bool flag = true;
+            bool result = true;
             foreach(TreeNode item in node.Nodes)
             {
-                if(item.ImageIndex != 3)
-                {
-                    flag = false;
-                    break;
-                }
-                else if(item.ImageIndex == 0)
-                {
-                    ClearHasWorded(item);
-                }
+                int type = Convert.ToInt32(item.ToolTipText);//0:文件 1:文件夹
+                if(type == 1)
+                    result = ClearHasWordedWithFolder(item);
             }
-            if(flag)
+            if(result)
             {
-                node.Remove();
+                foreach(TreeNode item in node.Nodes)
+                {
+                    int type = Convert.ToInt32(item.ToolTipText);//0:文件 1:文件夹
+                    int state = item.ImageIndex;//3:已加工
+                    if(type == 0 && state != 3)
+                    {
+                        result = false;
+                        break;
+                    }
+                }
             }
+            if(result)
+                node.Remove();
+            return result;
         }
 
         private string GetValue(object v) => v == null ? string.Empty : v.ToString();
@@ -82,7 +88,7 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="isShowAll">是否显示已加工节点</param>
         private void InitialTree(object parentId, TreeNode parentNode, bool isShowAll)
         {
-            List<object[]> list = SQLiteHelper.ExecuteColumnsQuery($"SELECT bfi_id, bfi_name, bfi_path, bfi_state FROM backup_files_info WHERE bfi_pid='{parentId}' ORDER BY rowid", 4);
+            List<object[]> list = SQLiteHelper.ExecuteColumnsQuery($"SELECT bfi_id, bfi_name, bfi_path, bfi_state, bfi_type FROM backup_files_info WHERE bfi_pid='{parentId}' ORDER BY rowid", 5);
             for(int i = 0; i < list.Count; i++)
             {
                 int state = Convert.ToInt32(list[i][3]);
@@ -93,7 +99,8 @@ namespace 数据采集档案管理系统___课题版
                         Name = GetValue(list[i][0]),
                         Text = GetValue(list[i][1]),
                         Tag = GetValue(list[i][2]),
-                        ImageIndex = (state == 1) ? 3 : -1
+                        ImageIndex = (state == 1) ? 3 : -1,
+                        ToolTipText = GetValue(list[i][4]),
                     };
                     parentNode.Nodes.Add(treeNode);
                     InitialTree(treeNode.Name, treeNode, isShowAll);
@@ -122,7 +129,9 @@ namespace 数据采集档案管理系统___课题版
         private void tv_file_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
-            if(node.ImageIndex != 3 && node.ImageIndex != 1 && node.Nodes.Count == 0)
+            int type = Convert.ToInt32(node.ToolTipText);//0:文件 1:文件夹
+            int state = node.ImageIndex;//3:已加工
+            if(type == 0 && state != 3)
             {
                 SelectedFileId = node.Name;
                 lbl_filename.Text = node.Text;

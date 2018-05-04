@@ -69,8 +69,8 @@ namespace 数据采集档案管理系统___课题版
                 else
                 {
                     localKey = Guid.NewGuid().ToString();
-                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_date, bfi_userid) VALUES " +
-                        $"('{localKey}', '{-1}', '{bName}', '{DateTime.Now.ToString("s")}', '{UserHelper.GetUser().UserId}')");
+                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_date, bfi_userid, bfi_type) VALUES " +
+                        $"('{localKey}', '{-1}', '{bName}', '{DateTime.Now.ToString("s")}', '{UserHelper.GetUser().UserId}', '{-1}')");
                 }
                 new Thread(delegate ()
                 {
@@ -273,8 +273,8 @@ namespace 数据采集档案管理系统___课题版
                         SetTip($"正在备份文件[{file[i].Name}]");
                         object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{file[i].Name}' AND bfi_path='{rootFolder}'");
                         if(string.IsNullOrEmpty(GetValue(value)))
-                            SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
-                                $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                            SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid, bfi_type) VALUES " +
+                                $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}', '{0}')");
                         else
                             SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
                         ServerHelper.UploadFile(file[i].FullName, rootFolder, file[i].Name);
@@ -293,8 +293,8 @@ namespace 数据采集档案管理系统___课题版
                 string primaryKey = Guid.NewGuid().ToString();
                 object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{infos[i].Name}' AND bfi_path='{rootFolder}'");
                 if(string.IsNullOrEmpty(GetValue(value)))
-                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid) VALUES " +
-                       $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}')");
+                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid, bfi_type) VALUES " +
+                       $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}', '{1}')");
                 else
                 {
                     SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");

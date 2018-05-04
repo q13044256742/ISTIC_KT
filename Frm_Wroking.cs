@@ -859,15 +859,27 @@ namespace 数据采集档案管理系统___课题版
         void RemoveFileList()
         {
             string idsString = string.Empty;
+            string fileString = string.Empty;
             for(int i = 0; i < removeIdList.Count; i++)
             {
+                //重置文件备份表中的状态为0
                 if(removeIdList[i] != null)
+                {
                     idsString += $"'{removeIdList[i]}',";
+                    string fileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';"));
+                    if(!string.IsNullOrEmpty(fileId))
+                        fileString += $"'{fileId}',";
+                }
             }
             if(!string.IsNullOrEmpty(idsString))
             {
                 idsString = idsString.Substring(0, idsString.Length - 1);
-                SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id IN ({idsString})");
+                SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id IN ({idsString});");
+                if(!string.IsNullOrEmpty(fileString))
+                {
+                    fileString = fileString.Substring(0, fileString.Length - 1);
+                    SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({fileString});");
+                }
             }
             removeIdList.Clear();
         }
