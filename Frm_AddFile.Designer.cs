@@ -47,7 +47,6 @@
             this.txt_user = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.txt_fileName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbo_categor = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,7 +59,6 @@
             this.rdo_secret_mm = new System.Windows.Forms.RadioButton();
             this.rdo_secret_gn = new System.Windows.Forms.RadioButton();
             this.rdo_secret_gk = new System.Windows.Forms.RadioButton();
-            this.txt_fileCode = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.pal_carrier = new System.Windows.Forms.Panel();
             this.rdo_carrier_zd = new System.Windows.Forms.RadioButton();
@@ -74,6 +72,8 @@
             this.rdo_type_ps = new System.Windows.Forms.RadioButton();
             this.rdo_type_cw = new System.Windows.Forms.RadioButton();
             this.rdo_type_js = new System.Windows.Forms.RadioButton();
+            this.txt_fileName = new System.Windows.Forms.ComboBox();
+            this.txt_fileCode = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_secret.SuspendLayout();
@@ -264,14 +264,6 @@
             this.label4.TabIndex = 41;
             this.label4.Text = "文件责任者";
             // 
-            // txt_fileName
-            // 
-            this.txt_fileName.Location = new System.Drawing.Point(126, 138);
-            this.txt_fileName.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.txt_fileName.Name = "txt_fileName";
-            this.txt_fileName.Size = new System.Drawing.Size(543, 26);
-            this.txt_fileName.TabIndex = 35;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -399,15 +391,6 @@
             this.rdo_secret_gk.Tag = "09270691-d1f3-48e8-9632-7c08e5b1c286";
             this.rdo_secret_gk.Text = "公开";
             this.rdo_secret_gk.UseVisualStyleBackColor = true;
-            // 
-            // txt_fileCode
-            // 
-            this.txt_fileCode.Location = new System.Drawing.Point(126, 80);
-            this.txt_fileCode.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.txt_fileCode.Name = "txt_fileCode";
-            this.txt_fileCode.ReadOnly = true;
-            this.txt_fileCode.Size = new System.Drawing.Size(204, 26);
-            this.txt_fileCode.TabIndex = 64;
             // 
             // label12
             // 
@@ -557,11 +540,29 @@
             this.rdo_type_js.Text = "技术";
             this.rdo_type_js.UseVisualStyleBackColor = true;
             // 
+            // txt_fileName
+            // 
+            this.txt_fileName.FormattingEnabled = true;
+            this.txt_fileName.Location = new System.Drawing.Point(126, 139);
+            this.txt_fileName.Name = "txt_fileName";
+            this.txt_fileName.Size = new System.Drawing.Size(543, 28);
+            this.txt_fileName.TabIndex = 69;
+            // 
+            // txt_fileCode
+            // 
+            this.txt_fileCode.Location = new System.Drawing.Point(126, 80);
+            this.txt_fileCode.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.txt_fileCode.Name = "txt_fileCode";
+            this.txt_fileCode.ReadOnly = true;
+            this.txt_fileCode.Size = new System.Drawing.Size(204, 26);
+            this.txt_fileCode.TabIndex = 64;
+            // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 638);
+            this.Controls.Add(this.txt_fileName);
             this.Controls.Add(this.pal_type);
             this.Controls.Add(this.pal_form);
             this.Controls.Add(this.pal_carrier);
@@ -586,7 +587,6 @@
             this.Controls.Add(this.txt_user);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.txt_fileName);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.cbo_categor);
             this.Controls.Add(this.label2);
@@ -636,7 +636,6 @@
         private System.Windows.Forms.TextBox txt_user;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox txt_fileName;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbo_categor;
         private System.Windows.Forms.Label label2;
@@ -660,8 +659,9 @@
         private System.Windows.Forms.RadioButton rdo_carrier_zd;
         private System.Windows.Forms.RadioButton rdo_carrier_dz;
         private System.Windows.Forms.RadioButton rdo_carrier_zz;
-        private System.Windows.Forms.TextBox txt_fileCode;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.ComboBox txt_fileName;
+        private System.Windows.Forms.TextBox txt_fileCode;
     }
 }

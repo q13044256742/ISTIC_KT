@@ -114,6 +114,8 @@ namespace 数据采集档案管理系统___课题版
             int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{value}'");
             txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
             txt_fileName.Text = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{value}'"));
+
+
         }
 
         /// <summary>
