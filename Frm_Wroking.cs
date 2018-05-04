@@ -858,29 +858,29 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         void RemoveFileList()
         {
-            string idsString = string.Empty;
             string fileString = string.Empty;
             for(int i = 0; i < removeIdList.Count; i++)
             {
-                //重置文件备份表中的状态为0
-                if(removeIdList[i] != null)
+                //将删除后的编号的后续文件编号减1
+                object[] code = SQLiteHelper.ExecuteRowsQuery($"SELECT fi_code, fi_obj_id FROM files_info WHERE fi_id='{removeIdList[i]}'");
+                string key = GetValue(code[0]).Split('-')[0], value = GetValue(code[0]).Split('-')[1];
+                List<object[]> idsString = SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_id, fi_code FROM files_info WHERE fi_code LIKE '%{key}%' AND fi_code>'{code[0]}' AND fi_obj_id='{code[1]}'", 2);
+                for(int j = 0; j < idsString.Count; j++)
                 {
-                    idsString += $"'{removeIdList[i]}',";
-                    string fileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';"));
-                    if(!string.IsNullOrEmpty(fileId))
-                        fileString += $"'{fileId}',";
+                    string oldValue = GetValue(idsString[j][1]).Split('-')[1];
+                    string newCode = key + "-" + (Convert.ToInt32(oldValue) - 1).ToString().PadLeft(2, '0');
+                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_code='{newCode}' WHERE fi_id='{idsString[j][0]}'");
                 }
+                string fileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';"));
+                if(!string.IsNullOrEmpty(fileId))
+                    fileString += $"'{fileId}',";
+                //删除当前文件
+                SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id='{removeIdList[i]}';");
             }
-            if(!string.IsNullOrEmpty(idsString))
-            {
-                idsString = idsString.Substring(0, idsString.Length - 1);
-                SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id IN ({idsString});");
-                if(!string.IsNullOrEmpty(fileString))
-                {
-                    fileString = fileString.Substring(0, fileString.Length - 1);
-                    SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({fileString});");
-                }
-            }
+            //重置文件备份表中的状态为0
+            if(!string.IsNullOrEmpty(fileString))
+                fileString = fileString.Substring(0, fileString.Length - 1);
+            SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({fileString});");
             removeIdList.Clear();
         }
 

@@ -108,6 +108,7 @@ namespace 数据采集档案管理系统___课题版
                 Tv_DataTree_AfterSelect(sender, new TreeViewEventArgs(tv_DataTree.Nodes[0]));
 
                 new Frm_Explain().ShowDialog();
+                LoadStateTip();
             }
         }
         
@@ -202,6 +203,8 @@ namespace 数据采集档案管理系统___课题版
                 tv_DataTree.Nodes.Add(rootNode);
             }
             tv_DataTree.ExpandAll();
+
+            LoadStateTip();
         }
 
         private void Frm_MainFrame_FormClosing(object sender, FormClosingEventArgs e)
@@ -420,5 +423,15 @@ namespace 数据采集档案管理系统___课题版
                 new Frm_Login().Show();
             }
         }
+
+        private void LoadStateTip()
+        {
+            int totalFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_type=0");
+            int workedFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_state=1 AND bfi_type=0");
+            int disWorkedFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_state=0 AND bfi_type=0");
+            string tipString = $"总文件数：{totalFileAmount}，已处理：{workedFileAmount}，未处理：{disWorkedFileAmount}，已归档：{0}，未归档：{0}";
+            stateTip.Text = "当前加工统计：" + tipString;
+        }
+
     }
 }
