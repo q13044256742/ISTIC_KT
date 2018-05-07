@@ -82,8 +82,7 @@ namespace 数据采集档案管理系统___课题版
                 string rootFolder = value + "\\" + UserHelper.GetUser().SpecialName;
                 if(!Directory.Exists(rootFolder))
                     Directory.CreateDirectory(rootFolder);
-                //专项下的文件
-                CopyFile(ref okcount, ref nocount, rootFolder, GetFileLinkByObjId(UserHelper.GetUser().UserSpecialId), true);
+               
                 //专项下的项目
                 List<object[]> list2 = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id, pi_name FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().UserSpecialId}'", 2);
                 for(int i = 0; i < list2.Count; i++)
@@ -177,7 +176,7 @@ namespace 数据采集档案管理系统___课题版
                 MessageBox.Show("请先指定归档文件存放路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private static List<object[]> GetFileLinkByObjId(object objId) => SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_link FROM files_info WHERE fi_obj_id='{objId}'", 1);
+        private static List<object[]> GetFileLinkByObjId(object objId) => SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_link, fi_file_id FROM files_info WHERE fi_obj_id='{objId}'", 2);
 
         /// <summary>
         /// 复制文件
@@ -191,13 +190,19 @@ namespace 数据采集档案管理系统___课题版
                 string filePath = GetValue(list[i][0]);
                 if(!string.IsNullOrEmpty(filePath))
                 {
+
                     if(File.Exists(filePath))
                     {
+                        //进行归档操作【文件复制】
                         string destFile = rootFolder + "\\" + Path.GetFileName(filePath);
                         if(!File.Exists(destFile))
                             File.Create(destFile).Close();
                         File.Copy(filePath, destFile, true);
                         okcount++;
+
+                        //已归档的文件进行记录
+                        string fileId = GetValue(list[i][1]);
+                        SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state_gd=1 WHERE bfi_id='{fileId}'");
                     }
                     else
                         nocount++;

@@ -321,8 +321,13 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[index].Cells[key + "id"].Tag = dataTable.Rows[i]["fi_id"];
                 dataGridView.Rows[index].Cells[key + "stage"].Value = dataTable.Rows[i]["fi_stage"];
                 SetCategorByStage(dataTable.Rows[i]["fi_stage"], dataGridView.Rows[index], key);
-
-                dataGridView.Rows[index].Cells[key + "categor"].Value = dataTable.Rows[i]["fi_categor"];
+                dataGridView.Rows[index].Cells[key + "categor"].Value = dataTable.Rows[i]["fi_categor"]; 
+                object categorName = dataTable.Rows[i]["fi_categor_name"];
+                if(!string.IsNullOrEmpty(GetValue(categorName)))
+                {
+                    dataGridView.Columns[key + "categor_name"].Visible = true;
+                    dataGridView.Rows[index].Cells[$"{key}categor_name"].Value = categorName;
+                }
                 dataGridView.Rows[index].Cells[key + "code"].Value = dataTable.Rows[i]["fi_code"];
                 dataGridView.Rows[index].Cells[key + "name"].Value = dataTable.Rows[i]["fi_name"];
                 dataGridView.Rows[index].Cells[key + "user"].Value = dataTable.Rows[i]["fi_user"];
@@ -1393,6 +1398,12 @@ namespace 数据采集档案管理系统___课题版
 
             int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{comboBox.SelectedValue}'");
             currentRow.Cells[key + "code"].Value = comboBox.Text + "-" + (amount + 1).ToString().PadLeft(2, '0');
+
+            if(comboBox.SelectedIndex == comboBox.Items.Count - 1)
+            {
+                currentRow.DataGridView.Columns[key + "categor_name"].Visible = true;
+                currentRow.Cells[key + "categor_name"].Value = null;
+            }
         }
 
         /// <summary>
@@ -1508,6 +1519,7 @@ namespace 数据采集档案管理系统___课题版
             object primaryKey = row.Cells[key + "id"].Tag;
             object stage = row.Cells[key + "stage"].Value;
             object categor = row.Cells[key + "categor"].Value;
+            object categorName = row.Cells[key + "categor_name"] != null ? row.Cells[key + "categor_name"].Value : null;
             object name = row.Cells[key + "name"].Value;
             object user = row.Cells[key + "user"].Value;
             object type = row.Cells[key + "type"].Value;
@@ -1535,6 +1547,7 @@ namespace 数据采集档案管理系统___课题版
             string updateSql = "UPDATE files_info SET " +
                 $"fi_stage = '{stage}', " +
                 $"fi_categor = '{categor}', " +
+                $"fi_categor_name = '{categorName}', " +
                 $"fi_name = '{name}', " +
                 $"fi_user = '{user}', " +
                 $"fi_type = '{type}', " +
@@ -1570,6 +1583,7 @@ namespace 数据采集档案管理系统___课题版
             object primaryKey = Guid.NewGuid().ToString();
             object stage = row.Cells[key + "stage"].Value;
             object categor = row.Cells[key + "categor"].Value;
+            object categorName = row.Cells[key + "categor_name"] != null ? row.Cells[key + "categor_name"].Value : null;
             object name = row.Cells[key + "name"].Value;
             object user = row.Cells[key + "user"].Value;
             object type = row.Cells[key + "type"].Value;
@@ -1595,8 +1609,8 @@ namespace 数据采集档案管理系统___课题版
             object fileId = row.Cells[key + "link"].Tag;
             object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
             string insertSql = "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
-            $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}');";
+            "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
+            $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}');";
             if(fileId != null)
             {
                 int value = link == null ? 0 : 1;
@@ -1621,8 +1635,19 @@ namespace 数据采集档案管理系统___课题版
                     if(dgv_Project_FileList.SelectedRows.Count == 1)
                         frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", dgv_Project_FileList.CurrentRow.Cells[0].Tag);
                     else
+                    {
                         frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", null);
-
+                        string value = txt_Project_Year.Text;
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
+                        {
+                            txt_Project_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                frm.dtp_date.Value = time;
+                        }
+                        frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
+                    }
                     frm.parentId = objId;
                     frm.ShowDialog();
                 }
@@ -1638,7 +1663,19 @@ namespace 数据采集档案管理系统___课题版
                     if(dgv_Topic_FileList.SelectedRows.Count == 1)
                         frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", dgv_Topic_FileList.CurrentRow.Cells[0].Tag);
                     else
+                    {
                         frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", null);
+                        string value = txt_Topic_Year.Text;
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
+                        {
+                            txt_Topic_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                frm.dtp_date.Value = time;
+                        }
+                        frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
+                    }
                     frm.parentId = objId;
                     frm.ShowDialog();
                 }
@@ -1654,7 +1691,19 @@ namespace 数据采集档案管理系统___课题版
                     if(dgv_Subject_FileList.SelectedRows.Count == 1)
                         frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", dgv_Subject_FileList.CurrentRow.Cells[0].Tag);
                     else
+                    {
                         frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", null);
+                        string value = txt_Subject_Year.Text;
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
+                        {
+                            txt_Subject_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                frm.dtp_date.Value = time;
+                        }
+                        frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
+                    }
                     frm.parentId = objId;
                     frm.ShowDialog();
                 }
@@ -2626,7 +2675,7 @@ namespace 数据采集档案管理系统___课题版
         private void 删除文件DToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DataGridView view = (DataGridView)((sender as ToolStripItem).GetCurrentParent() as ContextMenuStrip).Tag;
-            view.CurrentCell.Value = string.Empty;
+            view.CurrentCell.Value = null;
         }
 
         /// <summary>
@@ -2706,36 +2755,76 @@ namespace 数据采集档案管理系统___课题版
         private void Txt_Project_Code_Leave(object sender, EventArgs e)
         {
             ComboBox textBox = sender as ComboBox;
-            if(!string.IsNullOrEmpty(textBox.Text))
+            string value = textBox.Text;
+            if(!string.IsNullOrEmpty(value))
             {
                 if(textBox.Name.Contains("Project"))
                 {
                     if(tab_Project_Info.Tag == null)
                     {
-                        if(!CheckCode(textBox.Text, 0))
+                        if(!CheckCode(value, 0))
                             errorProvider1.SetError(textBox, "提示：此编号已存在");
                         else
+                        {
                             errorProvider1.SetError(textBox, string.Empty);
+                        }
+                    }
+                    if(value.Length > 4)
+                    {
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
+                        {
+                            txt_Project_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                dtp_Project_StartDate.Value = time;
+                        }
                     }
                 }
                 else if(textBox.Name.Contains("Topic"))
                 {
                     if(tab_Topic_Info.Tag == null)
                     {
-                        if(!CheckCode(textBox.Text, 1))
+                        if(!CheckCode(value, 1))
                             errorProvider1.SetError(textBox, "提示：此编号已存在");
                         else
+                        {
                             errorProvider1.SetError(textBox, string.Empty);
+                        }
+                    }
+                    if(value.Length > 4)
+                    {
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
+                        {
+                            txt_Topic_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                dtp_Topic_StartDate.Value = time;
+                        }
                     }
                 }
                 else if(textBox.Name.Contains("Subject"))
                 {
                     if(tab_Subject_Info.Tag == null)
                     {
-                        if(!CheckCode(textBox.Text, 2))
+                        if(!CheckCode(value, 2))
                             errorProvider1.SetError(textBox, "提示：此编号已存在");
                         else
+                        {
                             errorProvider1.SetError(textBox, string.Empty);
+                        }
+                    }
+                    if(value.Length > 4)
+                    {
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
+                        {
+                            txt_Subject_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                dtp_Subject_StartDate.Value = time;
+                        }
                     }
                 }
             }
@@ -2771,7 +2860,13 @@ namespace 数据采集档案管理系统___课题版
                 Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootIds);
                 if(frm.ShowDialog() == DialogResult.OK)
                 {
-
+                    string fileId = frm.SelectedFileId;
+                    string filePath = frm.SelectedFileName;
+                    if(File.Exists(filePath))
+                    {
+                        if(MessageBox.Show("是否需要打开文件？", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            System.Diagnostics.Process.Start("Explorer.exe", filePath);
+                    }
                 }
             }
         }
@@ -2787,5 +2882,6 @@ namespace 数据采集档案管理系统___课题版
             else if(view.Name.Contains("Subject"))
                 Btn_AddFile_Click(btn_Subject_AddFile, e);
         }
+
     }
 }

@@ -74,9 +74,9 @@ namespace 数据采集档案管理系统___课题版
                 }
                 new Thread(delegate ()
                 {
-                    CopyFile(sPath, rootFolder, GetValue(localKey));
+                    CopyFile(sPath, rootFolder + "\\" + bName, GetValue(localKey));
 
-                    CopyDataTable(sPath, rootFolder);
+                    CopyDataTable(sPath, rootFolder + "\\" + bName);
 
                     MessageBox.Show($"导入完毕,共计{count}个文件。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     DialogResult = DialogResult.OK;

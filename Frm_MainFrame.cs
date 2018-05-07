@@ -97,7 +97,10 @@ namespace 数据采集档案管理系统___课题版
             {
                 Frm_IdentityChoose frm_Identity = new Frm_IdentityChoose();
                 if(frm_Identity.ShowDialog() == DialogResult.OK)
+                {
                     obj = SQLiteHelper.ExecuteRowsQuery(querySql);
+                    new Frm_Explain().ShowDialog();
+                }
             }
             if(obj != null)
             {
@@ -107,7 +110,6 @@ namespace 数据采集档案管理系统___课题版
                 LoadTreeList(rootId);
                 Tv_DataTree_AfterSelect(sender, new TreeViewEventArgs(tv_DataTree.Nodes[0]));
 
-                new Frm_Explain().ShowDialog();
                 LoadStateTip();
             }
         }
@@ -429,7 +431,10 @@ namespace 数据采集档案管理系统___课题版
             int totalFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_type=0");
             int workedFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_state=1 AND bfi_type=0");
             int disWorkedFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_state=0 AND bfi_type=0");
-            string tipString = $"总文件数：{totalFileAmount}，已处理：{workedFileAmount}，未处理：{disWorkedFileAmount}，已归档：{0}，未归档：{0}";
+
+            int gdFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_state_gd=1 AND bfi_type=0");
+            int disGdFileAmount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(bfi_id) FROM backup_files_info WHERE bfi_userid='{UserHelper.GetUser().UserId}' AND bfi_state_gd=0 AND bfi_type=0");
+            string tipString = $"总文件数：{totalFileAmount}，已处理：{workedFileAmount}，未处理：{disWorkedFileAmount}，已归档：{gdFileAmount}，未归档：{disGdFileAmount}";
             stateTip.Text = "当前加工统计：" + tipString;
         }
 

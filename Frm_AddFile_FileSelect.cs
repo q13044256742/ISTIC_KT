@@ -135,7 +135,7 @@ namespace 数据采集档案管理系统___课题版
             {
                 SelectedFileId = node.Name;
                 lbl_filename.Text = node.Text;
-                SelectedFileName = node.Tag + node.Text;
+                SelectedFileName = node.Tag + "\\" + node.Text;
             }
             else
             {

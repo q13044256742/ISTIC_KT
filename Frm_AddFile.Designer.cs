@@ -60,10 +60,6 @@
             this.rdo_secret_gn = new System.Windows.Forms.RadioButton();
             this.rdo_secret_gk = new System.Windows.Forms.RadioButton();
             this.label12 = new System.Windows.Forms.Label();
-            this.pal_carrier = new System.Windows.Forms.Panel();
-            this.rdo_carrier_zd = new System.Windows.Forms.RadioButton();
-            this.rdo_carrier_dz = new System.Windows.Forms.RadioButton();
-            this.rdo_carrier_zz = new System.Windows.Forms.RadioButton();
             this.pal_form = new System.Windows.Forms.Panel();
             this.rdo_form_fyj = new System.Windows.Forms.RadioButton();
             this.rdo_form_yj = new System.Windows.Forms.RadioButton();
@@ -72,14 +68,17 @@
             this.rdo_type_ps = new System.Windows.Forms.RadioButton();
             this.rdo_type_cw = new System.Windows.Forms.RadioButton();
             this.rdo_type_js = new System.Windows.Forms.RadioButton();
-            this.txt_fileName = new System.Windows.Forms.ComboBox();
             this.txt_fileCode = new System.Windows.Forms.TextBox();
+            this.pal_carrier = new System.Windows.Forms.Panel();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.txt_fileName = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_secret.SuspendLayout();
-            this.pal_carrier.SuspendLayout();
             this.pal_form.SuspendLayout();
             this.pal_type.SuspendLayout();
+            this.pal_carrier.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Reset
@@ -190,7 +189,7 @@
             this.dtp_date.Location = new System.Drawing.Point(126, 200);
             this.dtp_date.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dtp_date.Name = "dtp_date";
-            this.dtp_date.Size = new System.Drawing.Size(186, 26);
+            this.dtp_date.Size = new System.Drawing.Size(204, 26);
             this.dtp_date.TabIndex = 44;
             // 
             // label9
@@ -402,52 +401,6 @@
             this.label12.TabIndex = 65;
             this.label12.Text = "文件编号";
             // 
-            // pal_carrier
-            // 
-            this.pal_carrier.Controls.Add(this.rdo_carrier_zd);
-            this.pal_carrier.Controls.Add(this.rdo_carrier_dz);
-            this.pal_carrier.Controls.Add(this.rdo_carrier_zz);
-            this.pal_carrier.Location = new System.Drawing.Point(126, 401);
-            this.pal_carrier.Name = "pal_carrier";
-            this.pal_carrier.Size = new System.Drawing.Size(240, 39);
-            this.pal_carrier.TabIndex = 66;
-            // 
-            // rdo_carrier_zd
-            // 
-            this.rdo_carrier_zd.AutoSize = true;
-            this.rdo_carrier_zd.Location = new System.Drawing.Point(131, 7);
-            this.rdo_carrier_zd.Name = "rdo_carrier_zd";
-            this.rdo_carrier_zd.Size = new System.Drawing.Size(101, 24);
-            this.rdo_carrier_zd.TabIndex = 2;
-            this.rdo_carrier_zd.TabStop = true;
-            this.rdo_carrier_zd.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aabb";
-            this.rdo_carrier_zd.Text = "纸质 + 电子";
-            this.rdo_carrier_zd.UseVisualStyleBackColor = true;
-            // 
-            // rdo_carrier_dz
-            // 
-            this.rdo_carrier_dz.AutoSize = true;
-            this.rdo_carrier_dz.Location = new System.Drawing.Point(70, 7);
-            this.rdo_carrier_dz.Name = "rdo_carrier_dz";
-            this.rdo_carrier_dz.Size = new System.Drawing.Size(55, 24);
-            this.rdo_carrier_dz.TabIndex = 1;
-            this.rdo_carrier_dz.TabStop = true;
-            this.rdo_carrier_dz.Tag = "6ffdf849-31fa-4401-a640-c371cd994daf";
-            this.rdo_carrier_dz.Text = "电子";
-            this.rdo_carrier_dz.UseVisualStyleBackColor = true;
-            // 
-            // rdo_carrier_zz
-            // 
-            this.rdo_carrier_zz.AutoSize = true;
-            this.rdo_carrier_zz.Location = new System.Drawing.Point(9, 7);
-            this.rdo_carrier_zz.Name = "rdo_carrier_zz";
-            this.rdo_carrier_zz.Size = new System.Drawing.Size(55, 24);
-            this.rdo_carrier_zz.TabIndex = 0;
-            this.rdo_carrier_zz.TabStop = true;
-            this.rdo_carrier_zz.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aaba";
-            this.rdo_carrier_zz.Text = "纸质";
-            this.rdo_carrier_zz.UseVisualStyleBackColor = true;
-            // 
             // pal_form
             // 
             this.pal_form.Controls.Add(this.rdo_form_fyj);
@@ -495,7 +448,7 @@
             // radioButton1
             // 
             this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(70, 7);
+            this.radioButton1.Location = new System.Drawing.Point(67, 7);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(55, 24);
             this.radioButton1.TabIndex = 3;
@@ -507,7 +460,7 @@
             // rdo_type_ps
             // 
             this.rdo_type_ps.AutoSize = true;
-            this.rdo_type_ps.Location = new System.Drawing.Point(229, 7);
+            this.rdo_type_ps.Location = new System.Drawing.Point(221, 7);
             this.rdo_type_ps.Name = "rdo_type_ps";
             this.rdo_type_ps.Size = new System.Drawing.Size(55, 24);
             this.rdo_type_ps.TabIndex = 2;
@@ -519,7 +472,7 @@
             // rdo_type_cw
             // 
             this.rdo_type_cw.AutoSize = true;
-            this.rdo_type_cw.Location = new System.Drawing.Point(134, 7);
+            this.rdo_type_cw.Location = new System.Drawing.Point(128, 7);
             this.rdo_type_cw.Name = "rdo_type_cw";
             this.rdo_type_cw.Size = new System.Drawing.Size(83, 24);
             this.rdo_type_cw.TabIndex = 1;
@@ -540,14 +493,6 @@
             this.rdo_type_js.Text = "技术";
             this.rdo_type_js.UseVisualStyleBackColor = true;
             // 
-            // txt_fileName
-            // 
-            this.txt_fileName.FormattingEnabled = true;
-            this.txt_fileName.Location = new System.Drawing.Point(126, 139);
-            this.txt_fileName.Name = "txt_fileName";
-            this.txt_fileName.Size = new System.Drawing.Size(543, 28);
-            this.txt_fileName.TabIndex = 69;
-            // 
             // txt_fileCode
             // 
             this.txt_fileCode.Location = new System.Drawing.Point(126, 80);
@@ -557,15 +502,56 @@
             this.txt_fileCode.Size = new System.Drawing.Size(204, 26);
             this.txt_fileCode.TabIndex = 64;
             // 
+            // pal_carrier
+            // 
+            this.pal_carrier.Controls.Add(this.checkBox2);
+            this.pal_carrier.Controls.Add(this.checkBox1);
+            this.pal_carrier.Location = new System.Drawing.Point(126, 401);
+            this.pal_carrier.Name = "pal_carrier";
+            this.pal_carrier.Size = new System.Drawing.Size(185, 39);
+            this.pal_carrier.TabIndex = 70;
+            this.pal_carrier.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aabb";
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(67, 7);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(56, 24);
+            this.checkBox2.TabIndex = 1;
+            this.checkBox2.Tag = "6ffdf849-31fa-4401-a640-c371cd994daf";
+            this.checkBox2.Text = "电子";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 7);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(56, 24);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aaba";
+            this.checkBox1.Text = "纸质";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // txt_fileName
+            // 
+            this.txt_fileName.FormattingEnabled = true;
+            this.txt_fileName.Location = new System.Drawing.Point(126, 139);
+            this.txt_fileName.Name = "txt_fileName";
+            this.txt_fileName.Size = new System.Drawing.Size(543, 28);
+            this.txt_fileName.TabIndex = 71;
+            this.txt_fileName.SelectionChangeCommitted += new System.EventHandler(this.txt_fileName_SelectionChangeCommitted);
+            // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 638);
             this.Controls.Add(this.txt_fileName);
+            this.Controls.Add(this.pal_carrier);
             this.Controls.Add(this.pal_type);
             this.Controls.Add(this.pal_form);
-            this.Controls.Add(this.pal_carrier);
             this.Controls.Add(this.txt_fileCode);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.pal_secret);
@@ -605,12 +591,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pal_secret.ResumeLayout(false);
             this.pal_secret.PerformLayout();
-            this.pal_carrier.ResumeLayout(false);
-            this.pal_carrier.PerformLayout();
             this.pal_form.ResumeLayout(false);
             this.pal_form.PerformLayout();
             this.pal_type.ResumeLayout(false);
             this.pal_type.PerformLayout();
+            this.pal_carrier.ResumeLayout(false);
+            this.pal_carrier.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -626,9 +612,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox txt_unit;
+        public System.Windows.Forms.TextBox txt_unit;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.DateTimePicker dtp_date;
+        public System.Windows.Forms.DateTimePicker dtp_date;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown num_page;
         private System.Windows.Forms.Label label7;
@@ -655,13 +641,12 @@
         private System.Windows.Forms.Panel pal_form;
         private System.Windows.Forms.RadioButton rdo_form_fyj;
         private System.Windows.Forms.RadioButton rdo_form_yj;
-        private System.Windows.Forms.Panel pal_carrier;
-        private System.Windows.Forms.RadioButton rdo_carrier_zd;
-        private System.Windows.Forms.RadioButton rdo_carrier_dz;
-        private System.Windows.Forms.RadioButton rdo_carrier_zz;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.ComboBox txt_fileName;
         private System.Windows.Forms.TextBox txt_fileCode;
+        private System.Windows.Forms.Panel pal_carrier;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ComboBox txt_fileName;
     }
 }
