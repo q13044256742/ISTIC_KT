@@ -73,6 +73,16 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.txt_fileName = new System.Windows.Forms.ComboBox();
+            this.txt_Remark = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_secret.SuspendLayout();
@@ -83,7 +93,7 @@
             // 
             // btn_Reset
             // 
-            this.btn_Reset.Location = new System.Drawing.Point(240, 591);
+            this.btn_Reset.Location = new System.Drawing.Point(240, 664);
             this.btn_Reset.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Reset.Name = "btn_Reset";
             this.btn_Reset.Size = new System.Drawing.Size(71, 33);
@@ -107,7 +117,7 @@
             // 
             // btn_Quit
             // 
-            this.btn_Quit.Location = new System.Drawing.Point(396, 591);
+            this.btn_Quit.Location = new System.Drawing.Point(396, 664);
             this.btn_Quit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Quit.Name = "btn_Quit";
             this.btn_Quit.Size = new System.Drawing.Size(71, 33);
@@ -118,7 +128,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(318, 591);
+            this.btn_Save.Location = new System.Drawing.Point(318, 664);
             this.btn_Save.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(71, 33);
@@ -143,7 +153,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(106, 22);
             this.label14.TabIndex = 60;
-            this.label14.Text = "文件地址链接";
+            this.label14.Text = "电子文件挂接";
             // 
             // label13
             // 
@@ -442,7 +452,7 @@
             this.pal_type.Controls.Add(this.rdo_type_js);
             this.pal_type.Location = new System.Drawing.Point(126, 261);
             this.pal_type.Name = "pal_type";
-            this.pal_type.Size = new System.Drawing.Size(305, 39);
+            this.pal_type.Size = new System.Drawing.Size(263, 39);
             this.pal_type.TabIndex = 68;
             // 
             // radioButton1
@@ -460,7 +470,7 @@
             // rdo_type_ps
             // 
             this.rdo_type_ps.AutoSize = true;
-            this.rdo_type_ps.Location = new System.Drawing.Point(221, 7);
+            this.rdo_type_ps.Location = new System.Drawing.Point(189, 7);
             this.rdo_type_ps.Name = "rdo_type_ps";
             this.rdo_type_ps.Size = new System.Drawing.Size(55, 24);
             this.rdo_type_ps.TabIndex = 2;
@@ -474,11 +484,11 @@
             this.rdo_type_cw.AutoSize = true;
             this.rdo_type_cw.Location = new System.Drawing.Point(128, 7);
             this.rdo_type_cw.Name = "rdo_type_cw";
-            this.rdo_type_cw.Size = new System.Drawing.Size(83, 24);
+            this.rdo_type_cw.Size = new System.Drawing.Size(55, 24);
             this.rdo_type_cw.TabIndex = 1;
             this.rdo_type_cw.TabStop = true;
             this.rdo_type_cw.Tag = "6996e983-384d-4cc3-a801-33cc08a2d9ee";
-            this.rdo_type_cw.Text = "评审管理";
+            this.rdo_type_cw.Text = "管理";
             this.rdo_type_cw.UseVisualStyleBackColor = true;
             // 
             // rdo_type_js
@@ -498,7 +508,6 @@
             this.txt_fileCode.Location = new System.Drawing.Point(126, 80);
             this.txt_fileCode.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_fileCode.Name = "txt_fileCode";
-            this.txt_fileCode.ReadOnly = true;
             this.txt_fileCode.Size = new System.Drawing.Size(204, 26);
             this.txt_fileCode.TabIndex = 64;
             // 
@@ -543,11 +552,121 @@
             this.txt_fileName.TabIndex = 71;
             this.txt_fileName.SelectionChangeCommitted += new System.EventHandler(this.txt_fileName_SelectionChangeCommitted);
             // 
+            // txt_Remark
+            // 
+            this.txt_Remark.Location = new System.Drawing.Point(126, 592);
+            this.txt_Remark.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.txt_Remark.Multiline = true;
+            this.txt_Remark.Name = "txt_Remark";
+            this.txt_Remark.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_Remark.Size = new System.Drawing.Size(543, 52);
+            this.txt_Remark.TabIndex = 72;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
+            this.label8.Location = new System.Drawing.Point(68, 594);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(42, 22);
+            this.label8.TabIndex = 73;
+            this.label8.Text = "说明";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.Red;
+            this.label15.Location = new System.Drawing.Point(358, 23);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(15, 20);
+            this.label15.TabIndex = 74;
+            this.label15.Text = "*";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.ForeColor = System.Drawing.Color.Red;
+            this.label16.Location = new System.Drawing.Point(23, 83);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(15, 20);
+            this.label16.TabIndex = 75;
+            this.label16.Text = "*";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.ForeColor = System.Drawing.Color.Red;
+            this.label17.Location = new System.Drawing.Point(23, 144);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(15, 20);
+            this.label17.TabIndex = 76;
+            this.label17.Text = "*";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.ForeColor = System.Drawing.Color.Red;
+            this.label18.Location = new System.Drawing.Point(23, 270);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(15, 20);
+            this.label18.TabIndex = 77;
+            this.label18.Text = "*";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.ForeColor = System.Drawing.Color.Red;
+            this.label19.Location = new System.Drawing.Point(53, 341);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(15, 20);
+            this.label19.TabIndex = 78;
+            this.label19.Text = "*";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.ForeColor = System.Drawing.Color.Red;
+            this.label20.Location = new System.Drawing.Point(53, 410);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(15, 20);
+            this.label20.TabIndex = 79;
+            this.label20.Text = "*";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.ForeColor = System.Drawing.Color.Red;
+            this.label21.Location = new System.Drawing.Point(358, 410);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(15, 20);
+            this.label21.TabIndex = 80;
+            this.label21.Text = "*";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.ForeColor = System.Drawing.Color.Red;
+            this.label22.Location = new System.Drawing.Point(23, 480);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(15, 20);
+            this.label22.TabIndex = 81;
+            this.label22.Text = "*";
+            // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 638);
+            this.ClientSize = new System.Drawing.Size(706, 711);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.label20);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.label18);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txt_Remark);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txt_fileName);
             this.Controls.Add(this.pal_carrier);
             this.Controls.Add(this.pal_type);
@@ -648,5 +767,15 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.ComboBox txt_fileName;
+        public System.Windows.Forms.TextBox txt_Remark;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
     }
 }

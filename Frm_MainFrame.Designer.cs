@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -68,7 +69,6 @@
             this.txt_Query_Code = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.btn_Delete = new System.Windows.Forms.Button();
-            this.lbl_TotalAmount = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgv_DataList = new System.Windows.Forms.DataGridView();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,6 +82,12 @@
             this.tv_DataTree = new System.Windows.Forms.TreeView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stateTip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.cms_TreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.添加子节点AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.课题TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.子课题SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.删除节点DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Add)).BeginInit();
             this.panel2.SuspendLayout();
@@ -104,6 +110,7 @@
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).BeginInit();
             this.statusStrip1.SuspendLayout();
+            this.cms_TreeView.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -417,7 +424,6 @@
             this.groupBox2.Controls.Add(this.txt_Query_Code);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.btn_Delete);
-            this.groupBox2.Controls.Add(this.lbl_TotalAmount);
             this.groupBox2.Location = new System.Drawing.Point(4, 83);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(1336, 70);
@@ -435,7 +441,7 @@
             // 
             // btn_Edit
             // 
-            this.btn_Edit.Location = new System.Drawing.Point(300, 26);
+            this.btn_Edit.Location = new System.Drawing.Point(178, 27);
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(75, 27);
             this.btn_Edit.TabIndex = 7;
@@ -445,7 +451,7 @@
             // 
             // btn_Query
             // 
-            this.btn_Query.Location = new System.Drawing.Point(806, 26);
+            this.btn_Query.Location = new System.Drawing.Point(1258, 26);
             this.btn_Query.Name = "btn_Query";
             this.btn_Query.Size = new System.Drawing.Size(70, 27);
             this.btn_Query.TabIndex = 6;
@@ -455,7 +461,7 @@
             // 
             // txt_Query_Name
             // 
-            this.txt_Query_Name.Location = new System.Drawing.Point(623, 29);
+            this.txt_Query_Name.Location = new System.Drawing.Point(1075, 29);
             this.txt_Query_Name.Name = "txt_Query_Name";
             this.txt_Query_Name.Size = new System.Drawing.Size(176, 21);
             this.txt_Query_Name.TabIndex = 5;
@@ -463,7 +469,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(588, 34);
+            this.label6.Location = new System.Drawing.Point(1040, 34);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 4;
@@ -471,7 +477,7 @@
             // 
             // txt_Query_Code
             // 
-            this.txt_Query_Code.Location = new System.Drawing.Point(448, 29);
+            this.txt_Query_Code.Location = new System.Drawing.Point(900, 29);
             this.txt_Query_Code.Name = "txt_Query_Code";
             this.txt_Query_Code.Size = new System.Drawing.Size(134, 21);
             this.txt_Query_Code.TabIndex = 3;
@@ -479,7 +485,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(413, 34);
+            this.label5.Location = new System.Drawing.Point(865, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 2;
@@ -487,22 +493,13 @@
             // 
             // btn_Delete
             // 
-            this.btn_Delete.Location = new System.Drawing.Point(206, 26);
+            this.btn_Delete.Location = new System.Drawing.Point(93, 27);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(75, 27);
             this.btn_Delete.TabIndex = 1;
             this.btn_Delete.Text = "删除";
             this.btn_Delete.UseVisualStyleBackColor = true;
             this.btn_Delete.Click += new System.EventHandler(this.Btn_Delete_Click);
-            // 
-            // lbl_TotalAmount
-            // 
-            this.lbl_TotalAmount.AutoSize = true;
-            this.lbl_TotalAmount.Location = new System.Drawing.Point(114, 34);
-            this.lbl_TotalAmount.Name = "lbl_TotalAmount";
-            this.lbl_TotalAmount.Size = new System.Drawing.Size(83, 12);
-            this.lbl_TotalAmount.TabIndex = 0;
-            this.lbl_TotalAmount.Text = "共有 0 条数据";
             // 
             // groupBox3
             // 
@@ -620,7 +617,7 @@
             this.tv_DataTree.Name = "tv_DataTree";
             this.tv_DataTree.Size = new System.Drawing.Size(229, 524);
             this.tv_DataTree.TabIndex = 1;
-            this.tv_DataTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Tv_DataTree_AfterSelect);
+            this.tv_DataTree.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.NodeMouseClick);
             this.tv_DataTree.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tv_DataTree_NodeMouseClick);
             // 
             // statusStrip1
@@ -638,6 +635,52 @@
             // 
             this.stateTip.Name = "stateTip";
             this.stateTip.Size = new System.Drawing.Size(0, 17);
+            // 
+            // cms_TreeView
+            // 
+            this.cms_TreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.添加子节点AToolStripMenuItem,
+            this.删除节点DToolStripMenuItem,
+            this.刷新RToolStripMenuItem});
+            this.cms_TreeView.Name = "contextMenuStrip1";
+            this.cms_TreeView.Size = new System.Drawing.Size(118, 70);
+            // 
+            // 添加子节点AToolStripMenuItem
+            // 
+            this.添加子节点AToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.课题TToolStripMenuItem,
+            this.子课题SToolStripMenuItem});
+            this.添加子节点AToolStripMenuItem.Name = "添加子节点AToolStripMenuItem";
+            this.添加子节点AToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.添加子节点AToolStripMenuItem.Text = "添加(&A)";
+            // 
+            // 课题TToolStripMenuItem
+            // 
+            this.课题TToolStripMenuItem.Name = "课题TToolStripMenuItem";
+            this.课题TToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.课题TToolStripMenuItem.Text = "课题(&T)";
+            this.课题TToolStripMenuItem.Click += new System.EventHandler(this.课题TToolStripMenuItem_Click);
+            // 
+            // 子课题SToolStripMenuItem
+            // 
+            this.子课题SToolStripMenuItem.Name = "子课题SToolStripMenuItem";
+            this.子课题SToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.子课题SToolStripMenuItem.Text = "子课题(&S)";
+            this.子课题SToolStripMenuItem.Click += new System.EventHandler(this.子课题SToolStripMenuItem_Click);
+            // 
+            // 删除节点DToolStripMenuItem
+            // 
+            this.删除节点DToolStripMenuItem.Name = "删除节点DToolStripMenuItem";
+            this.删除节点DToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.删除节点DToolStripMenuItem.Text = "删除(&D)";
+            this.删除节点DToolStripMenuItem.Click += new System.EventHandler(this.删除节点DToolStripMenuItem_Click);
+            // 
+            // 刷新RToolStripMenuItem
+            // 
+            this.刷新RToolStripMenuItem.Name = "刷新RToolStripMenuItem";
+            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.刷新RToolStripMenuItem.Text = "刷新(&R)";
+            this.刷新RToolStripMenuItem.Click += new System.EventHandler(this.刷新RToolStripMenuItem_Click);
             // 
             // Frm_MainFrame
             // 
@@ -687,6 +730,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.cms_TreeView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -711,7 +755,6 @@
         private System.Windows.Forms.TextBox txt_Query_Code;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_Delete;
-        private System.Windows.Forms.Label lbl_TotalAmount;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgv_DataList;
         private System.Windows.Forms.TreeView tv_DataTree;
@@ -743,5 +786,11 @@
         private System.Windows.Forms.PictureBox pic_Exit;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stateTip;
+        private System.Windows.Forms.ContextMenuStrip cms_TreeView;
+        private System.Windows.Forms.ToolStripMenuItem 添加子节点AToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 删除节点DToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 课题TToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 子课题SToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 刷新RToolStripMenuItem;
     }
 }

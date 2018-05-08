@@ -58,6 +58,7 @@ namespace 数据采集档案管理系统___课题版
                 SetFileCheckBox(pal_carrier, row["fi_carrier"]);
                 SetFileRadio(pal_form, row["fi_form"]);
                 txt_link.Text = GetValue(row["fi_link"]);
+                txt_Remark.Text = GetValue(row["fi_remark"]);
             }
         }
 
@@ -154,10 +155,10 @@ namespace 数据采集档案管理系统___课题版
             object[] fileName = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT fi_name FROM files_info WHERE fi_categor='{value}'");
             txt_fileName.Items.Clear();
             txt_fileName.Items.AddRange(fileName);
+            txt_fileName.Text = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{value}'"));
 
             int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{value}'");
             txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
-            txt_fileName.Text = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{value}'"));
 
         }
 
@@ -220,6 +221,17 @@ namespace 数据采集档案管理系统___课题版
                         File.Copy(fullPath, filePath, true);
                         txt_link.Text = fullPath;
                         txt_link.Tag = frm.SelectedFileId;
+                        
+                        //尝试获取页数
+                        try
+                        {
+                            string format = Path.GetExtension(fullPath).ToLower();
+                            if(format.Contains("doc") || format.Contains("docx"))
+                                num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetWordPageCount(fullPath);
+                            else if(format.Contains("pdf"))
+                                num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetPDFPageCount(fullPath);
+                        } catch(Exception) { }
+
                         if(MessageBox.Show("已从服务器拷贝文件到本地，是否现在打开？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
                             System.Diagnostics.Process.Start("Explorer.exe", filePath);
@@ -251,6 +263,7 @@ namespace 数据采集档案管理系统___课题版
             row.Cells[key + "stage"].Value = cbo_stage.SelectedValue;
             SetCategorByStage(cbo_stage.SelectedValue, row, key);
             row.Cells[key + "categor"].Value = cbo_categor.SelectedValue ?? cbo_categor.Tag;
+            object categorName = cbo_categor.SelectedIndex == cbo_categor.Items.Count - 1 ? cbo_categor.Text : null;
             row.Cells[key + "name"].Value = txt_fileName.Text;
             row.Cells[key + "code"].Value = txt_fileCode.Text;
             row.Cells[key + "user"].Value = txt_user.Text;
@@ -267,7 +280,6 @@ namespace 数据采集档案管理系统___课题版
             {
                 object stage = row.Cells[key + "stage"].Value;
                 object categor = row.Cells[key + "categor"].Value;
-                object categorName = cbo_categor.Text;
                 object code = row.Cells[key + "code"].Value;
                 object name = row.Cells[key + "name"].Value;
                 object user = row.Cells[key + "user"].Value;
@@ -291,9 +303,10 @@ namespace 数据采集档案管理系统___课题版
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 object fileId = txt_link.Tag;
+                object remark = txt_Remark.Text;
                 string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
-                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{row.Index}');";
+                "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
+                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{row.Index}', '{remark}');";
                 if(fileId != null)
                 {
                     int value = link == null ? 0 : 1;
@@ -308,7 +321,6 @@ namespace 数据采集档案管理系统___课题版
                 primaryKey = row.Cells[key + "id"].Tag;
                 object stage = row.Cells[key + "stage"].Value;
                 object categor = row.Cells[key + "categor"].Value;
-                object categorName = cbo_categor.Text;
                 object code = row.Cells[key + "code"].Value;
                 object name = row.Cells[key + "name"].Value;
                 object user = row.Cells[key + "user"].Value;
@@ -332,6 +344,7 @@ namespace 数据采集档案管理系统___课题版
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 object fileId = txt_link.Tag;
+                object remark = txt_Remark.Text;
                 string updateSql = "UPDATE files_info SET " +
                     $"fi_stage = '{stage}', " +
                     $"fi_categor = '{categor}', " +
@@ -348,6 +361,7 @@ namespace 数据采集档案管理系统___课题版
                     $"fi_format = '{format}', " +
                     $"fi_form = '{form}', " +
                     $"fi_link = '{link}', " +
+                    $"fi_remark = '{remark}', " +
                     $"fi_file_id = '{fileId}' " +
                     $"WHERE fi_id = '{primaryKey}';";
                 if(fileId != null)
@@ -366,7 +380,6 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void Btn_Save_Add_Click(object sender, EventArgs e)
         {
-            string nameValue = txt_fileName.Text.Trim();
             if(CheckDatas())
             {
                 if(Text.Contains("新增"))
@@ -390,16 +403,98 @@ namespace 数据采集档案管理系统___课题版
         private bool CheckDatas()
         {
             bool result = true;
+            //页数
             NumericUpDown pagesCell = num_page;
             if(pagesCell.Value == 0)
             {
-                errorProvider1.SetError(pagesCell, "温馨提示：页数不能为0。");
+                errorProvider1.SetError(pagesCell, "提示：页数不能为0。");
                 result = false;
             }
             else
-            {
                 errorProvider1.SetError(pagesCell, null);
+            //文件名
+            string nameValue = txt_fileName.Text.Trim();
+            if(string.IsNullOrEmpty(nameValue))
+            {
+                errorProvider1.SetError(txt_fileName, "提示：文件名不能为空。");
+                result = false;
             }
+            else if(Text.Contains("新增"))
+            {
+                int _count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_name='{nameValue}'");
+                if(_count > 0)
+                {
+                    errorProvider1.SetError(txt_fileName, "提示：文件名已存在，请重新输入。");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(txt_fileName, null);
+            }
+            //编号
+            if(string.IsNullOrEmpty(txt_fileCode.Text.Trim()))
+            {
+                errorProvider1.SetError(txt_fileCode, "提示：编号不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(txt_fileCode, null);
+            //文件类型
+            int count = 0;
+            foreach(RadioButton item in pal_type.Controls)
+                if(item.Checked)
+                { count++; break; }
+            if(count == 0)
+            {
+                errorProvider1.SetError(pal_type, "提示：文件类型不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(pal_type, null);
+            //密级
+            count = 0;
+            foreach(RadioButton item in pal_secret.Controls)
+                if(item.Checked)
+                { count++; break; }
+            if(count == 0)
+            {
+                errorProvider1.SetError(pal_secret, "提示：密级不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(pal_secret, null);
+            //载体
+            count = 0;
+            foreach(CheckBox item in pal_carrier.Controls)
+                if(item.Checked)
+                { count++; break; }
+            if(count == 0)
+            {
+                errorProvider1.SetError(pal_carrier, "提示：载体不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(pal_carrier, null);
+            //形态
+            count = 0;
+            foreach(RadioButton item in pal_form.Controls)
+                if(item.Checked)
+                { count++; break; }
+            if(count == 0)
+            {
+                errorProvider1.SetError(pal_form, "提示：文件形态不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(pal_form, null);
+
+            //存放单位
+            if(string.IsNullOrEmpty(txt_unit.Text.Trim()))
+            {
+                errorProvider1.SetError(txt_unit, "提示：存放单位不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(txt_unit, null);
             return result;
         }
 
@@ -484,8 +579,8 @@ namespace 数据采集档案管理系统___课题版
 
         private void txt_fileName_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string fileName = txt_fileName.Text;
-            if(!string.IsNullOrEmpty(fileName))
+            object fileName = txt_fileName.SelectedItem;
+            if(fileName != null)
             {
                 Hide();
                 DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_id FROM files_info WHERE fi_name='{fileName}'");

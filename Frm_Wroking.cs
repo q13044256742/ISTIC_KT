@@ -432,7 +432,7 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 有无子课题事件
         /// </summary>
-        private void Cbo_Topic_HasNext_SelectionChangeCommitted(object sender, EventArgs e)
+        public void Cbo_Topic_HasNext_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int index = cbo_Topic_HasNext.SelectedIndex;
             int sort = Convert.ToInt32(gro_Topic_Btns.Tag);
@@ -448,6 +448,10 @@ namespace 数据采集档案管理系统___课题版
                     ShowTabPageByName("Subject", sort + 1);
                     gro_Subject_Btns.Tag = sort + 1;
                     Subject.Tag = id;
+
+                    int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'") + 1;
+                    txt_Subject_Code.Text = txt_Topic_Code.Text + "-" + _index.ToString().PadLeft(2, '0');
+                    Txt_Project_Code_Leave(txt_Subject_Code, null);
                 }
                 else
                 {
@@ -530,7 +534,9 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 2)
                     {
-                        string code = GetAJCode(objId, txt_Project_Code.Text, 0, txt_Project_Year.Text);
+                        string code = txt_Project_AJ_Code.Text;
+                        if(string.IsNullOrEmpty(code))
+                           code = GetAJCode(objId, txt_Project_Code.Text, 0, txt_Project_Year.Text);
                         if(!string.IsNullOrEmpty(code))
                         {
                             object aid = txt_Project_AJ_Code.Tag;
@@ -565,28 +571,24 @@ namespace 数据采集档案管理系统___课题版
                             object boxId = cbo_Project_BoxId.SelectedValue;
                             if(boxId != null)
                             {
-                                if(!string.IsNullOrEmpty(txt_Project_GCID.Text.Trim()))
-                                {
-                                    //先将当前盒中所有文件置为未归档状态
-                                    string updateSql =
-                                        $"UPDATE files_info SET fi_status = -1 WHERE fi_id IN({GetIds(boxId)});" +
-                                        $"UPDATE files_box_info SET pb_files_id=NULL WHERE pb_id='{boxId}';";
-                                    SQLiteHelper.ExecuteNonQuery(updateSql);
+                                string gch = txt_Project_GCID.Text;
+                                //先将当前盒中所有文件置为未归档状态
+                                string updateSql =
+                                    $"UPDATE files_info SET fi_status = -1 WHERE fi_id IN({GetIds(boxId)});" +
+                                    $"UPDATE files_box_info SET pb_gc_id='{gch}', pb_files_id=NULL WHERE pb_id='{boxId}';";
+                                SQLiteHelper.ExecuteNonQuery(updateSql);
 
-                                    string ids = string.Empty;
-                                    foreach(ListViewItem item in lsv_Project_Right.Items)
-                                        ids += "'" + item.SubItems[0].Text + "',";
-                                    if(!string.IsNullOrEmpty(ids))
-                                    {
-                                        ids = ids.Substring(0, ids.Length - 1);
-                                        SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
-                                        SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
-                                    }
-                                    LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                                    MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                string ids = string.Empty;
+                                foreach(ListViewItem item in lsv_Project_Right.Items)
+                                    ids += "'" + item.SubItems[0].Text + "',";
+                                if(!string.IsNullOrEmpty(ids))
+                                {
+                                    ids = ids.Substring(0, ids.Length - 1);
+                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
+                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                                 }
-                                else
-                                    MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                LoadFileBoxTable(boxId, objId, ControlType.Plan);
+                                MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             }
                             else
                                 MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -648,7 +650,9 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 2)
                     {
-                        string code = GetAJCode(objId, txt_Topic_Code.Text, 0, txt_Topic_Year.Text);
+                        string code = txt_Topic_AJ_Code.Text;
+                        if(string.IsNullOrEmpty(code))
+                            code = GetAJCode(objId, txt_Topic_Code.Text, 0, txt_Topic_Year.Text);
                         if(!string.IsNullOrEmpty(code))
                         {
                             object aid = txt_Topic_AJ_Code.Tag;
@@ -683,28 +687,24 @@ namespace 数据采集档案管理系统___课题版
                             object boxId = cbo_Topic_BoxId.SelectedValue;
                             if(boxId != null)
                             {
-                                if(!string.IsNullOrEmpty(txt_Topic_GCID.Text.Trim()))
-                                {
-                                    //先将当前盒中所有文件置为未归档状态
-                                    string updateSql =
-                                        $"UPDATE files_info SET fi_status = -1 WHERE fi_id IN({GetIds(boxId)});" +
-                                        $"UPDATE files_box_info SET pb_files_id=NULL WHERE pb_id='{boxId}';";
-                                    SQLiteHelper.ExecuteNonQuery(updateSql);
+                                string gch = txt_Topic_GCID.Text;
+                                //先将当前盒中所有文件置为未归档状态
+                                string updateSql =
+                                    $"UPDATE files_info SET fi_status = -1 WHERE fi_id IN({GetIds(boxId)});" +
+                                    $"UPDATE files_box_info SET pb_gc_id='{gch}', pb_files_id=NULL WHERE pb_id='{boxId}';";
+                                SQLiteHelper.ExecuteNonQuery(updateSql);
 
-                                    string ids = string.Empty;
-                                    foreach(ListViewItem item in lsv_Topic_Right.Items)
-                                        ids += "'" + item.SubItems[0].Text + "',";
-                                    if(!string.IsNullOrEmpty(ids))
-                                    {
-                                        ids = ids.Substring(0, ids.Length - 1);
-                                        SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
-                                        SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
-                                    }
-                                    LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                                    MessageBox.Show("保存案卷盒成功。");
+                                string ids = string.Empty;
+                                foreach(ListViewItem item in lsv_Topic_Right.Items)
+                                    ids += "'" + item.SubItems[0].Text + "',";
+                                if(!string.IsNullOrEmpty(ids))
+                                {
+                                    ids = ids.Substring(0, ids.Length - 1);
+                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
+                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                                 }
-                                else
-                                    MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                LoadFileBoxTable(boxId, objId, ControlType.Plan);
+                                MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             }
                             else
                                 MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -768,7 +768,9 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 2)
                     {
-                        string code = GetAJCode(objId, txt_Subject_Code.Text, 0, txt_Subject_Year.Text);
+                        string code = txt_Subject_AJ_Code.Text;
+                        if(string.IsNullOrEmpty(code))
+                            code = GetAJCode(objId, txt_Subject_Code.Text, 0, txt_Subject_Year.Text);
                         if(!string.IsNullOrEmpty(code))
                         {
                             object aid = txt_Subject_AJ_Code.Tag;
@@ -803,28 +805,24 @@ namespace 数据采集档案管理系统___课题版
                             object boxId = cbo_Subject_BoxId.SelectedValue;
                             if(boxId != null)
                             {
-                                if(!string.IsNullOrEmpty(txt_Subject_GCID.Text.Trim()))
-                                {
-                                    //先将当前盒中所有文件置为未归档状态
-                                    string updateSql =
-                                        $"UPDATE files_info SET fi_status = -1 WHERE fi_id IN({GetIds(boxId)});" +
-                                        $"UPDATE files_box_info SET pb_files_id = NULL WHERE pb_id='{boxId}';";
-                                    SQLiteHelper.ExecuteNonQuery(updateSql);
+                                string gch = txt_Subject_GCID.Text;
+                                //先将当前盒中所有文件置为未归档状态
+                                string updateSql =
+                                    $"UPDATE files_info SET fi_status = -1 WHERE fi_id IN({GetIds(boxId)});" +
+                                    $"UPDATE files_box_info SET pb_gc_id='{gch}', pb_files_id = NULL WHERE pb_id='{boxId}';";
+                                SQLiteHelper.ExecuteNonQuery(updateSql);
 
-                                    string ids = string.Empty;
-                                    foreach(ListViewItem item in lsv_Subject_Right.Items)
-                                        ids += "'" + item.SubItems[0].Text + "',";
-                                    if(!string.IsNullOrEmpty(ids))
-                                    {
-                                        ids = ids.Substring(0, ids.Length - 1);
-                                        SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
-                                        SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
-                                    }
-                                    LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                                    MessageBox.Show("保存案卷盒成功。");
+                                string ids = string.Empty;
+                                foreach(ListViewItem item in lsv_Subject_Right.Items)
+                                    ids += "'" + item.SubItems[0].Text + "',";
+                                if(!string.IsNullOrEmpty(ids))
+                                {
+                                    ids = ids.Substring(0, ids.Length - 1);
+                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
+                                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                                 }
-                                else
-                                    MessageBox.Show("馆藏号不能为空。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                LoadFileBoxTable(boxId, objId, ControlType.Plan);
+                                MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             }
                             else
                                 MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1477,7 +1475,7 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void Cbo_Project_HasNext_SelectionChangeCommitted(object sender, EventArgs e)
+        public void Cbo_Project_HasNext_SelectionChangeCommitted(object sender, EventArgs e)
         {
             int index = cbo_Project_HasNext.SelectedIndex;
             int sort = Convert.ToInt32(gro_Project_Btns.Tag);
@@ -1495,12 +1493,20 @@ namespace 数据采集档案管理系统___课题版
                         ShowTabPageByName("topic", sort + 1);
                         gro_Topic_Btns.Tag = sort + 1;
                         topic.Tag = id;
+
+                        int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{id}'") + 1;
+                        txt_Topic_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
+                        Txt_Project_Code_Leave(txt_Topic_Code, null);
                     }
                     else if(index == 3)//子课题
                     {
                         ShowTabPageByName("Subject", sort + 1);
                         gro_Subject_Btns.Tag = sort + 1;
                         Subject.Tag = id;
+
+                        int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'") + 1;
+                        txt_Subject_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(2, '0');
+                        Txt_Project_Code_Leave(txt_Subject_Code, null);
                     }
                 }
                 else
@@ -2386,16 +2392,11 @@ namespace 数据采集档案管理系统___课题版
                     if(name.Contains("Add"))
                     {
                         string gch = GetAJCode(objId, txt_Project_Code.Text, 1, txt_Project_Year.Text);
-                        if(!string.IsNullOrEmpty(gch))
-                        {
-                            int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
-                            string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
-                                $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
-                            SQLiteHelper.ExecuteNonQuery(insertSql);
-                            MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        }
-                        else
-                            MessageBox.Show("生成馆藏号失败，请检查是否预设生成规则。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
+                        string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
+                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
+                        SQLiteHelper.ExecuteNonQuery(insertSql);
+                        MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if(name.Contains("Delete"))
                     {
@@ -2440,16 +2441,11 @@ namespace 数据采集档案管理系统___课题版
                     if(name.Contains("Add"))
                     {
                         string gch = GetAJCode(objId, txt_Topic_Code.Text, 1, txt_Topic_Year.Text);
-                        if(!string.IsNullOrEmpty(gch))
-                        {
-                            int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
-                            string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
-                                $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
-                            SQLiteHelper.ExecuteNonQuery(insertSql);
-                            MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        }
-                        else
-                            MessageBox.Show("生成馆藏号失败，请检查是否预设生成规则。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
+                        string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
+                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
+                        SQLiteHelper.ExecuteNonQuery(insertSql);
+                        MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if(name.Contains("Delete"))
                     {
@@ -2473,7 +2469,7 @@ namespace 数据采集档案管理系统___课题版
                                         for(int i = 0; i < _ids.Length; i++)
                                             sb.Append($"'{_ids[i]}'{(_ids.Length - 1 != i ? "," : ")")}");
                                         SQLiteHelper.ExecuteNonQuery(sb.ToString());
-                                    }   
+                                    }
                                     //删除当前盒信息
                                     SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_box_info WHERE pb_id='{boxId}'");
 
@@ -2494,16 +2490,11 @@ namespace 数据采集档案管理系统___课题版
                     if(name.Contains("Add"))
                     {
                         string gch = GetAJCode(objId, txt_Subject_Code.Text, 1, txt_Subject_Year.Text);
-                        if(!string.IsNullOrEmpty(gch))
-                        {
-                            int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
-                            string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
-                                $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
-                            SQLiteHelper.ExecuteNonQuery(insertSql);
-                            MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        }
-                        else
-                            MessageBox.Show("生成馆藏号失败，请检查是否预设生成规则。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
+                        string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
+                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
+                        SQLiteHelper.ExecuteNonQuery(insertSql);
+                        MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
                     else if(name.Contains("Delete"))
                     {
@@ -2555,6 +2546,8 @@ namespace 数据采集档案管理系统___课题版
                 object gcid = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_gc_id FROM files_box_info WHERE pb_id='{pbId}'");
                 if(gcid != null)
                     txt_Project_GCID.Text = GetValue(gcid);
+                else
+                    txt_Project_GCID.Text = null;
             }
             else if("cbo_Topic_BoxId".Equals(comboBox.Name))
             {
@@ -2563,6 +2556,8 @@ namespace 数据采集档案管理系统___课题版
                 object gcid = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_gc_id FROM files_box_info WHERE pb_id='{pbId}'");
                 if(gcid != null)
                     txt_Topic_GCID.Text = GetValue(gcid);
+                else
+                    txt_Topic_GCID.Text = null;
             }
             else if("cbo_Subject_BoxId".Equals(comboBox.Name))
             {
@@ -2571,6 +2566,8 @@ namespace 数据采集档案管理系统___课题版
                 object gcid = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_gc_id FROM files_box_info WHERE pb_id='{pbId}'");
                 if(gcid != null)
                     txt_Subject_GCID.Text = GetValue(gcid);
+                else
+                    txt_Subject_GCID.Text = null;
             }
         }
 
@@ -2883,5 +2880,10 @@ namespace 数据采集档案管理系统___课题版
                 Btn_AddFile_Click(btn_Subject_AddFile, e);
         }
 
+        private void lbl_AJ_Code_MouseHover(object sender, EventArgs e)
+        {
+            Label label = sender as Label;
+            toolTip1.SetToolTip(label, label.Text);
+        }
     }
 }
