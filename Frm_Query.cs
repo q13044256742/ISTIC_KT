@@ -378,7 +378,7 @@ namespace 数据采集档案管理系统___课题版
                         bool flag = false;
                         foreach(DataGridViewCell cell in row.Cells)
                         {
-                            if(GetValue(cell.Value).Contains(key))
+                            if(GetValue(cell.Value).ToUpper().Contains(key.ToUpper()))
                             {
                                 flag = true;
                                 break;
@@ -389,12 +389,11 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else
                     {
-
                         foreach(DataGridViewCell cell in row.Cells)
                         {
                             if(cell.OwningColumn.HeaderText.Equals(type))
                             {
-                                if(!GetValue(cell.Value).Contains(key))
+                                if(!GetValue(cell.Value).ToUpper().Contains(key.ToUpper()))
                                 {
                                     rowList.Add(row);
                                 }
@@ -416,7 +415,7 @@ namespace 数据采集档案管理系统___课题版
             object tag = btn_Query.Tag;
             object id = dgv_ShowData.Tag ?? rootId;
             if("FILE".Equals(tag))
-                LoadFileList(tag);
+                LoadFileList(id);
             else if("PROJECT".Equals(tag))
                 LoadProjectList(id);
             else if("TOPIC".Equals(tag))
@@ -438,7 +437,7 @@ namespace 数据采集档案管理系统___课题版
 
             if(cbo_Type.Items.Count > 0)
                 cbo_Type.SelectedIndex = 0;
-            txt_Key.ResetText();
+            //txt_Key.ResetText();
         }
 
     }

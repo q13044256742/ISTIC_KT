@@ -193,9 +193,9 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                 }
-                string insertSql = "INSERT INTO files_info VALUES(" +
-                    $"'{row["fi_id"]}', '{row["fi_code"]}', '{row["fi_stage"]}', '{row["fi_categor"]}', '{row["fi_name"]}', '{row["fi_user"]}', '{row["fi_type"]}', '{row["fi_secret"]}', '{row["fi_pages"]}'," +
-                    $"'{row["fi_number"]}', '{GetFormatDate(row["fi_create_date"])}', '{row["fi_unit"]}', '{row["fi_carrier"]}', '{row["fi_format"]}', '{row["fi_form"]}', '{link}', '{row["fi_status"]}', '{row["fi_obj_id"]}', '{row["fi_sort"]}')";
+                string insertSql = "INSERT INTO files_info(fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort, fi_remark) VALUES(" +
+                    $"'{row["fi_id"]}', '{row["fi_code"]}', '{row["fi_stage"]}', '{row["fi_categor"]}', '{row["fi_categor_name"]}', '{row["fi_name"]}', '{row["fi_user"]}', '{row["fi_type"]}', '{row["fi_secret"]}', '{row["fi_pages"]}'," +
+                    $"'{GetFormatDate(row["fi_create_date"])}', '{row["fi_unit"]}', '{row["fi_carrier"]}', '{row["fi_format"]}', '{row["fi_form"]}', '{link}', '{row["fi_file_id"]}', '{row["fi_status"]}', '{row["fi_obj_id"]}', '{row["fi_sort"]}', '{row["fi_remark"]}')";
                 SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id='{row["fi_id"]}'");
                 SQLiteHelper.ExecuteNonQuery(insertSql);
             }

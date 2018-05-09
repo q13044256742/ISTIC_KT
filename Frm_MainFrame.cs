@@ -256,6 +256,8 @@ namespace 数据采集档案管理系统___课题版
                     File.Copy(sourFile, destPath, true);
                     MessageBox.Show("备份完毕。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
+                else
+                    MessageBox.Show("尚未指定数据存放路径。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 

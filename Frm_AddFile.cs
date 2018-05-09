@@ -138,7 +138,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void LoadCategorByStage(object stageValue)
         {
-            string querySql = $"SELECT dd_id, dd_name FROM data_dictionary WHERE dd_pId='{stageValue}' ORDER BY dd_sort";
+            string querySql = $"SELECT dd_id, dd_name||' '||extend_3 AS dd_name FROM data_dictionary WHERE dd_pId='{stageValue}' ORDER BY dd_sort";
             cbo_categor.DataSource = SQLiteHelper.ExecuteQuery(querySql);
             cbo_categor.DisplayMember = "dd_name";
             cbo_categor.ValueMember = "dd_id";
@@ -149,15 +149,15 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void LoadFileNameByCategor(ComboBox comboBox)
         {
-            object key = comboBox.Text;
+            object key = comboBox.Text.Split(' ')[0];
             object value = comboBox.SelectedValue;
 
-            object[] fileName = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT fi_name FROM files_info WHERE fi_categor='{value}'");
+            object[] fileName = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT fi_name FROM files_info WHERE fi_categor='{value}' AND fi_obj_id='{parentId}'");
             txt_fileName.Items.Clear();
             txt_fileName.Items.AddRange(fileName);
             txt_fileName.Text = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{value}'"));
 
-            int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{value}'");
+            int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{value}' AND fi_obj_id='{parentId}'");
             txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
 
         }
@@ -421,7 +421,7 @@ namespace 数据采集档案管理系统___课题版
             }
             else if(Text.Contains("新增"))
             {
-                int _count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_name='{nameValue}'");
+                int _count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_name='{nameValue}' AND fi_obj_id='{parentId}'");
                 if(_count > 0)
                 {
                     errorProvider1.SetError(txt_fileName, "提示：文件名已存在，请重新输入。");

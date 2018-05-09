@@ -517,7 +517,7 @@
             this.pal_carrier.Controls.Add(this.checkBox1);
             this.pal_carrier.Location = new System.Drawing.Point(126, 401);
             this.pal_carrier.Name = "pal_carrier";
-            this.pal_carrier.Size = new System.Drawing.Size(185, 39);
+            this.pal_carrier.Size = new System.Drawing.Size(135, 39);
             this.pal_carrier.TabIndex = 70;
             this.pal_carrier.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aabb";
             // 

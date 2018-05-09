@@ -365,7 +365,7 @@ namespace 数据采集档案管理系统___课题版
             string _formatDate = null, value = GetValue(date);
             if(!string.IsNullOrEmpty(value))
                 _formatDate = Convert.ToDateTime(value).ToString(format);
-            return _formatDate;
+            return _formatDate.Contains("0001-") ? null : _formatDate;
         }
 
         /// <summary>
@@ -1299,7 +1299,7 @@ namespace 数据采集档案管理系统___课题版
             //文件类别
             DataGridViewComboBoxCell categorCell = dataGridViewRow.Cells[key + "categor"] as DataGridViewComboBoxCell;
 
-            string querySql = $"SELECT dd_id, dd_name FROM data_dictionary WHERE dd_pId='{jdId}' ORDER BY dd_sort";
+            string querySql = $"SELECT dd_id, dd_name||' '||extend_3 as dd_name FROM data_dictionary WHERE dd_pId='{jdId}' ORDER BY dd_sort";
             categorCell.DataSource = SQLiteHelper.ExecuteQuery(querySql);
             categorCell.DisplayMember = "dd_name";
             categorCell.ValueMember = "dd_id";
@@ -1344,6 +1344,12 @@ namespace 数据采集档案管理系统___课题版
                 else if("dgv_Subject_FL_categor".Equals(columnName))
                     (con as ComboBox).SelectionChangeCommitted += new EventHandler(CategorComboBox_SelectionChangeCommitted);
             }
+            if(e.Control is ComboBox)
+            {
+                ComboBox box = e.Control as ComboBox;
+                if(box.Items.Count > 0)
+                    box.SelectedValue = box.Items[0];
+            }
         }
 
         /// <summary>
@@ -1372,11 +1378,11 @@ namespace 数据采集档案管理系统___课题版
         {
             ComboBox comboBox = sender as ComboBox;
             if((ControlType)comboBox.Tag == ControlType.Plan_Project)
-                SetNameByCategor(comboBox, dgv_Project_FileList.CurrentRow, "dgv_Project_FL_");
+                SetNameByCategor(comboBox, dgv_Project_FileList.CurrentRow, "dgv_Project_FL_", tab_Project_Info.Tag);
             else if((ControlType)comboBox.Tag == ControlType.Plan_Topic)
-                SetNameByCategor(comboBox, dgv_Topic_FileList.CurrentRow, "dgv_Topic_FL_");
+                SetNameByCategor(comboBox, dgv_Topic_FileList.CurrentRow, "dgv_Topic_FL_", tab_Topic_Info.Tag);
             else if((ControlType)comboBox.Tag == ControlType.Plan_Topic_Subject)
-                SetNameByCategor(comboBox, dgv_Subject_FileList.CurrentRow, "dgv_Subject_FL_");
+                SetNameByCategor(comboBox, dgv_Subject_FileList.CurrentRow, "dgv_Subject_FL_", tab_Subject_Info.Tag);
             comboBox.Leave += new EventHandler(delegate (object obj, EventArgs eve)
             {
                 ComboBox _comboBox = obj as ComboBox;
@@ -1389,13 +1395,14 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         /// <param name="catogerCode">文件类别编号</param>
         /// <param name="currentRow">当前行</param>
-        private void SetNameByCategor(ComboBox comboBox, DataGridViewRow currentRow, string key)
+        private void SetNameByCategor(ComboBox comboBox, DataGridViewRow currentRow, string key, object pid)
         {
             string value = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{comboBox.SelectedValue}'"));
             currentRow.Cells[key + "name"].Value = value;
 
-            int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{comboBox.SelectedValue}'");
-            currentRow.Cells[key + "code"].Value = comboBox.Text + "-" + (amount + 1).ToString().PadLeft(2, '0');
+            int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{comboBox.SelectedValue}' AND fi_obj_id='{pid}'");
+            string _key = comboBox.Text.Split(' ')[0];
+            currentRow.Cells[key + "code"].Value = _key + "-" + (amount + 1).ToString().PadLeft(2, '0');
 
             if(comboBox.SelectedIndex == comboBox.Items.Count - 1)
             {
@@ -2688,30 +2695,6 @@ namespace 数据采集档案管理系统___课题版
             else if(name.Contains("Subject"))
             {
                 ClearText(Subject, true);
-            }
-        }
-
-        private void dgv_FileList_KeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Alt && e.KeyCode == Keys.A)
-            {
-                DataGridView view = sender as DataGridView;
-                int i = view.SelectedRows.Count;
-                if(i == 1)
-                {
-                    view.Rows.Insert(view.SelectedRows[0].Index, 1);
-                }
-            }
-            else if(e.Alt && e.KeyCode == Keys.D)
-            {
-                DataGridView view = sender as DataGridView;
-                int i = view.SelectedRows.Count;
-                if(i == 1)
-                {
-                    int index = view.SelectedRows[0].Index;
-                    if(index != view.RowCount - 1)
-                        view.Rows.RemoveAt(index);
-                }
             }
         }
 

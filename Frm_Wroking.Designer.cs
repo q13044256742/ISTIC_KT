@@ -553,7 +553,6 @@
             this.dgv_Project_FileList.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Special_FileList_RowEnter);
             this.dgv_Project_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Project_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
-            this.dgv_Project_FileList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgv_FileList_KeyDown);
             // 
             // dgv_Project_FL_id
             // 
@@ -924,7 +923,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 330);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 263);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -936,7 +935,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 299);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 232);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -955,7 +954,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 268);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 201);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -967,7 +966,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 237);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 170);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -979,7 +978,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 206);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 139);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -991,7 +990,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 175);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 108);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -1034,7 +1033,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(682, 46);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 420);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(576, 319);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -1049,7 +1048,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 45);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 420);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 319);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1125,7 +1124,7 @@
             this.btn_Project_Save.Name = "btn_Project_Save";
             this.btn_Project_Save.Size = new System.Drawing.Size(75, 30);
             this.btn_Project_Save.TabIndex = 0;
-            this.btn_Project_Save.Text = "保存";
+            this.btn_Project_Save.Text = "保存(&S)";
             this.btn_Project_Save.UseVisualStyleBackColor = true;
             this.btn_Project_Save.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
@@ -1979,7 +1978,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 328);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 270);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1991,7 +1990,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 297);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 239);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -2010,7 +2009,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 266);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 208);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -2022,7 +2021,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 235);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 177);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -2034,7 +2033,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 204);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 146);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -2046,7 +2045,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 173);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 115);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -2089,7 +2088,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(682, 43);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 422);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(573, 319);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -2104,7 +2103,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 43);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 422);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 319);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -2397,7 +2396,7 @@
             this.btn_Topic_Save.Name = "btn_Topic_Save";
             this.btn_Topic_Save.Size = new System.Drawing.Size(75, 30);
             this.btn_Topic_Save.TabIndex = 0;
-            this.btn_Topic_Save.Text = "保存";
+            this.btn_Topic_Save.Text = "保存(&S)";
             this.btn_Topic_Save.UseVisualStyleBackColor = true;
             this.btn_Topic_Save.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
@@ -3002,7 +3001,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 328);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 272);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -3014,7 +3013,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 297);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 241);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -3033,7 +3032,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 266);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 210);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -3045,7 +3044,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 235);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 179);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -3057,7 +3056,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 204);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 148);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -3069,7 +3068,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 173);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 117);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -3112,7 +3111,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(682, 42);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 423);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(574, 319);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -3127,7 +3126,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 42);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 423);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 319);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -3397,7 +3396,7 @@
             this.btn_Subject_Save.Name = "btn_Subject_Save";
             this.btn_Subject_Save.Size = new System.Drawing.Size(75, 30);
             this.btn_Subject_Save.TabIndex = 0;
-            this.btn_Subject_Save.Text = "保存";
+            this.btn_Subject_Save.Text = "保存(&S)";
             this.btn_Subject_Save.UseVisualStyleBackColor = true;
             this.btn_Subject_Save.Click += new System.EventHandler(this.Btn_Save_Click);
             // 
@@ -3481,7 +3480,6 @@
             this.ClientSize = new System.Drawing.Size(1278, 712);
             this.Controls.Add(this.tab_Menu);
             this.Controls.Add(this.tv_Working);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_Wroking";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
