@@ -50,13 +50,22 @@ namespace 数据采集档案管理系统___课题版
                 txt_user.Text = GetValue(row["fi_user"]);
                 SetFileRadio(pal_type, row["fi_type"]);
                 SetFileRadio(pal_secret, row["fi_secret"]);
-                num_page.Value = Convert.ToInt32(row["fi_pages"]);
+                string _page = GetValue(row["fi_pages"]);
+                if(!string.IsNullOrEmpty(_page))
+                    num_page.Value = Convert.ToInt32(_page);
+                string _count = GetValue(row["fi_count"]);
+                if(!string.IsNullOrEmpty(_count))
+                    num_count.Value = Convert.ToInt32(_count);
                 DateTime dateTime = Convert.ToDateTime(row["fi_create_date"]);
                 if(dateTime != DateTime.MinValue)
                     dtp_date.Value = dateTime;
                 txt_unit.Text = GetValue(row["fi_unit"]);
                 SetFileCheckBox(pal_carrier, row["fi_carrier"]);
                 SetFileRadio(pal_form, row["fi_form"]);
+                if(((long)0).Equals(row["fi_transfer"]))
+                    rdo_Transfer_Y.Checked = true;
+                else if(((long)1).Equals(row["fi_transfer"]))
+                    rdo_Transfer_N.Checked = true;
                 txt_link.Text = GetValue(row["fi_link"]);
                 txt_Remark.Text = GetValue(row["fi_remark"]);
             }
@@ -149,7 +158,14 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void LoadFileNameByCategor(ComboBox comboBox)
         {
-            object key = comboBox.Text.Split(' ')[0];
+            string _tempKey = comboBox.Text.Split(' ')[0];
+            if(string.IsNullOrEmpty(_tempKey))
+            {
+                string _tempKeyObj = GetValue(((DataRowView)comboBox.Items[comboBox.SelectedIndex]).Row.ItemArray[1]);
+                if(!string.IsNullOrEmpty(_tempKeyObj))
+                    _tempKey = _tempKeyObj.Split(' ')[0];
+            }
+            object key = _tempKey;
             object value = comboBox.SelectedValue;
 
             object[] fileName = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT fi_name FROM files_info WHERE fi_categor='{value}' AND fi_obj_id='{parentId}'");
@@ -158,8 +174,16 @@ namespace 数据采集档案管理系统___课题版
             txt_fileName.Text = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_note FROM data_dictionary WHERE dd_id='{value}'"));
 
             int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{value}' AND fi_obj_id='{parentId}'");
-            txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
 
+            int _amount = comboBox.Items.Count;
+            if(comboBox.SelectedIndex == _amount - 1)
+            {
+                string tempKey = ((DataRowView)comboBox.Items[0]).Row.ItemArray[1].ToString();
+                string _key = GetValue(tempKey).Substring(0, 1) + _amount.ToString().PadLeft(2, '0');
+                txt_fileCode.Text = _key + "-" + (amount + 1).ToString().PadLeft(2, '0');
+            }
+            else
+                txt_fileCode.Text = key + "-" + (amount + 1).ToString().PadLeft(2, '0');
         }
 
         /// <summary>
@@ -185,20 +209,22 @@ namespace 数据采集档案管理系统___课题版
             {
                 int index = cbo_categor.SelectedIndex;
                 int maxIndex = cbo_categor.Items.Count;
-                if(index == maxIndex - 1)
+                LoadFileNameByCategor(cbo_categor);
+
+                if(index == maxIndex - 1)//其他
                 {
                     cbo_categor.Tag = cbo_categor.SelectedValue;
                     cbo_categor.DropDownStyle = ComboBoxStyle.DropDown;
+                    cbo_categor.Text = null;
                 }
                 else
                 {
                     cbo_categor.DropDownStyle = ComboBoxStyle.DropDownList;
                 }
-                LoadFileNameByCategor(cbo_categor);
             }
         }
 
-        private ExeToWinForm form;
+        //private ExeToWinForm form;
 
         /// <summary>
         /// 打开文件
@@ -258,22 +284,26 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private object SaveFileInfo(DataGridViewRow row, bool isAdd)
         {
+            bool isOtherType = cbo_categor.SelectedIndex == -1;
             object primaryKey = Guid.NewGuid().ToString();
             row.Cells[key + "id"].Value = row.Index + 1;
             row.Cells[key + "stage"].Value = cbo_stage.SelectedValue;
             SetCategorByStage(cbo_stage.SelectedValue, row, key);
             row.Cells[key + "categor"].Value = cbo_categor.SelectedValue ?? cbo_categor.Tag;
-            object categorName = cbo_categor.SelectedIndex == cbo_categor.Items.Count - 1 ? cbo_categor.Text : null;
+            object categorName = isOtherType ? cbo_categor.Text : null;
+            row.Cells[key + "categor_name"].Value = categorName;
             row.Cells[key + "name"].Value = txt_fileName.Text;
             row.Cells[key + "code"].Value = txt_fileCode.Text;
             row.Cells[key + "user"].Value = txt_user.Text;
             row.Cells[key + "type"].Value = GetFileRadio(pal_type);
             row.Cells[key + "secret"].Value = GetFileRadio(pal_secret);
             row.Cells[key + "pages"].Value = num_page.Value;
+            row.Cells[key + "count"].Value = num_count.Value;
             row.Cells[key + "date"].Value = dtp_date.Value.ToString("yyyyMMdd");
             row.Cells[key + "unit"].Value = txt_unit.Text;
             row.Cells[key + "carrier"].Value = GetFileCheckBox(pal_carrier);
             row.Cells[key + "form"].Value = GetFileRadio(pal_form);
+            row.Cells[key + "transfer"].Value = rdo_Transfer_Y.Checked ? "是" : "否";
             object format = Path.GetExtension(txt_link.Text).Replace(".", string.Empty);
             row.Cells[key + "link"].Value = txt_link.Text;
             if(isAdd)
@@ -286,6 +316,7 @@ namespace 数据采集档案管理系统___课题版
                 object type = row.Cells[key + "type"].Value;
                 object secret = row.Cells[key + "secret"].Value;
                 object pages = row.Cells[key + "pages"].Value;
+                object count = row.Cells[key + "count"].Value;
                 DateTime date = DateTime.Now;
                 string _date = GetValue(row.Cells[key + "date"].Value);
                 if(!string.IsNullOrEmpty(_date))
@@ -303,10 +334,24 @@ namespace 数据采集档案管理系统___课题版
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 object fileId = txt_link.Tag;
+                object transfer = rdo_Transfer_Y.Checked ? 0 : 1;
                 object remark = txt_Remark.Text;
+
+                if(isOtherType)
+                {
+                    categor = Guid.NewGuid().ToString();
+                    object pid = cbo_stage.SelectedValue;
+                    string value = txt_fileCode.Text.Split('-')[0];
+                    int sort = cbo_categor.Items.Count - 1;
+
+                    string _insertSql = "INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_sort, extend_3, extend_4) " +
+                        $"VALUES('{categor}', '{value}', '{pid}', '{sort}', ' ', '{1}');";
+                    SQLiteHelper.ExecuteNonQuery(_insertSql);
+                }
+
                 string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
-                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{row.Index}', '{remark}');";
+                "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_transfer, fi_remark) " +
+                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{row.Index}', '{transfer}', '{remark}');";
                 if(fileId != null)
                 {
                     int value = link == null ? 0 : 1;
@@ -327,6 +372,7 @@ namespace 数据采集档案管理系统___课题版
                 object type = row.Cells[key + "type"].Value;
                 object secret = row.Cells[key + "secret"].Value;
                 object pages = row.Cells[key + "pages"].Value;
+                object count = row.Cells[key + "count"].Value;
                 DateTime date = DateTime.Now;
                 string _date = GetValue(row.Cells[key + "date"].Value);
                 if(!string.IsNullOrEmpty(_date))
@@ -344,6 +390,7 @@ namespace 数据采集档案管理系统___课题版
                 object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 object fileId = txt_link.Tag;
+                object transfer = rdo_Transfer_Y.Checked ? 0 : 1;
                 object remark = txt_Remark.Text;
                 string updateSql = "UPDATE files_info SET " +
                     $"fi_stage = '{stage}', " +
@@ -355,12 +402,14 @@ namespace 数据采集档案管理系统___课题版
                     $"fi_type = '{type}', " +
                     $"fi_secret = '{secret}', " +
                     $"fi_pages = '{pages}', " +
+                    $"fi_count = '{count}', " +
                     $"fi_create_date = '{date.ToString("s")}', " +
                     $"fi_unit = '{unit}', " +
                     $"fi_carrier = '{carrier}', " +
                     $"fi_format = '{format}', " +
                     $"fi_form = '{form}', " +
                     $"fi_link = '{link}', " +
+                    $"fi_transfer = '{transfer}', " +
                     $"fi_remark = '{remark}', " +
                     $"fi_file_id = '{fileId}' " +
                     $"WHERE fi_id = '{primaryKey}';";
@@ -390,19 +439,30 @@ namespace 数据采集档案管理系统___课题版
                 else if(Text.Contains("编辑"))
                     UpdateFileInfo();
                 WindowState = FormWindowState.Normal;
-                if(form != null)
-                {
-                    form.Stop();
-                    form = null;
-                }
+                //if(form != null)
+                //{
+                //    form.Stop();
+                //    form = null;
+                //}
             }
             else
-                MessageBox.Show("请检查数据是否正确", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("检查数据是否完整。", "保存失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private bool CheckDatas()
         {
             bool result = true;
+            //文件类别
+            if(cbo_categor.SelectedIndex == -1)
+            {
+                if(string.IsNullOrEmpty(cbo_categor.Text))
+                {
+                    errorProvider1.SetError(cbo_categor, "提示：请输入文件类别名称。");
+                    result = false;
+                }
+                else
+                    errorProvider1.SetError(cbo_categor, null);
+            }
             //页数
             NumericUpDown pagesCell = num_page;
             if(pagesCell.Value == 0)
@@ -549,6 +609,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
             }
+            txt_unit.Text = UserHelper.GetUser().UserUnitName;
         }
 
         private void Frm_AddFile_KeyDown(object sender, KeyEventArgs e)

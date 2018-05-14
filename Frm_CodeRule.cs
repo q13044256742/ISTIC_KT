@@ -64,8 +64,9 @@ namespace 数据采集档案管理系统___课题版
         {
             chk_Year.Checked = chk_KT_Code.Checked = chk_ZX_Code.Checked = chk_Unit.Checked = chk_Water.Checked = false;
             num_Water.Value = num_Water.Minimum;
-            lbl_Template.Text = string.Empty;
+            lbl_Template.ResetText();
             cbo_Type.Tag = null;
+            txt_Fixed.ResetText();
         }
 
         private void num_Water_ValueChanged(object sender, EventArgs e)
@@ -136,10 +137,10 @@ namespace 数据采集档案管理系统___课题版
                 object type = cbo_Type.SelectedIndex;
                 object symbol = txt_Mdi.Text;
                 object[] values = lbl_Template.Text.Split(txt_Mdi.Text.ToCharArray());
-                string insertSql = "INSERT INTO code_rule(cr_id, cr_type,";
+                string insertSql = "INSERT INTO code_rule(cr_id, cr_type, cr_fixed, ";
                 for(int i = 0; i < values.Length; i++)
                     insertSql += $"cr_param_{i + 1},";
-                insertSql += $" cr_split_symbol, cr_template, cr_create_date, cr_special_id) VALUES ('{Guid.NewGuid().ToString()}', '{type}', ";
+                insertSql += $" cr_split_symbol, cr_template, cr_create_date, cr_special_id) VALUES ('{Guid.NewGuid().ToString()}', '{type}', '{txt_Fixed.Text}', ";
                 for(int i = 0; i < values.Length; i++)
                     insertSql += $"'{values[i]}', ";
                 insertSql += $"'{symbol}', '{lbl_Template.Text}', '{DateTime.Now.ToString("s")}', '{specialId}')";
@@ -160,7 +161,7 @@ namespace 数据采集档案管理系统___课题版
             btn_Reset_Click(sender, e);
 
             int index = cbo_Type.SelectedIndex;
-            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT cr_id, cr_template FROM code_rule WHERE cr_special_id='{specialId}' AND cr_type='{index}'");
+            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT cr_id, cr_template, cr_fixed FROM code_rule WHERE cr_special_id='{specialId}' AND cr_type='{index}'");
             if(row != null)
             {
                 cbo_Type.Tag = row["cr_id"];
@@ -183,6 +184,7 @@ namespace 数据采集档案管理系统___课题版
                             num_Water.Value += 1;
                 }
                 lbl_Template.Text = template;
+                txt_Fixed.Text = GetValue(row["cr_fixed"]);
             }
         }
 

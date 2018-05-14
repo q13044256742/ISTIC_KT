@@ -25,12 +25,6 @@ namespace 数据采集档案管理系统___课题版
                     Text = "用户信息管理",
                     Image = Resources.png_0010
                 },
-                //new CreateKyoPanel.KyoPanel
-                //{
-                //    Name = "unitManager",
-                //    Text = "专项基本信息",
-                //    Image = Resources.png_0228
-                //},
                 new CreateKyoPanel.KyoPanel
                 {
                     Name = "dictionaryManage",
@@ -96,6 +90,13 @@ namespace 数据采集档案管理系统___课题版
             else if("dic_normal".Equals(control.Name))
                 key = "19B6FF50-3C10-4B19-9C34-7EE25FA0996B";
             new Frm_DictionaryManage(key) { MdiParent = this }.Show();
+
+            foreach(Control item in control.Parent.Controls)
+            {
+                if(!item.Equals(control))
+                    item.BackColor = System.Drawing.Color.Transparent;
+            }
+            control.BackColor = System.Drawing.Color.FromArgb(0, 120, 245);
         }
 
         private void LeftMenu_Click(object sender, System.EventArgs e)

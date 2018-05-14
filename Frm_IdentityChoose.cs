@@ -22,8 +22,13 @@ namespace 数据采集档案管理系统___课题版
         private void btn_Sure_Click(object sender, EventArgs e)
         {
             object id = cbo_ChooseIdentity.SelectedValue;
+            string name = cbo_ChooseIdentity.Text;
             string depName = txt_Unit.Text;
-            if(MessageBox.Show("选择后不可修改，确定要选择当前身份吗?", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            if(string.IsNullOrEmpty(depName))
+            {
+                new ErrorProvider().SetError(txt_Unit, "提示：单位名称不能为空。");
+            }
+            else if(MessageBox.Show($"选择后不可修改，确定是属于{name}吗？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
             {
                 SQLiteHelper.ExecuteNonQuery($"UPDATE user_info SET ui_department='{depName}', ui_special_id='{id}' WHERE ui_id='{UserHelper.GetUser().UserId}'");
                 DialogResult = DialogResult.OK;

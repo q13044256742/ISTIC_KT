@@ -43,6 +43,11 @@ namespace 数据采集档案管理系统___课题版
                 ShowTabPageByName("project", 0);
                 project.Tag = treeNode.Name;
             }
+            else if((ControlType)treeNode.Tag == ControlType.Topic)
+            {
+                ShowTabPageByName("topic", 0);
+                topic.Tag = treeNode.Name;
+            }
             else
                 LoadBasicInfo(treeNode);
         }
@@ -118,6 +123,13 @@ namespace 数据采集档案管理系统___课题版
 
                         ShowTabPageByName("topic", 1);
                         gro_Topic_Btns.Tag = 1;
+                        topic.Tag = row["ti_obj_id"];
+                        LoadBasicInfoInstince(ControlType.Plan_Topic, row["ti_id"], row);
+                    }
+                    else
+                    {
+                        ShowTabPageByName("topic", 0);
+                        gro_Topic_Btns.Tag = 0;
                         topic.Tag = row["ti_obj_id"];
                         LoadBasicInfoInstince(ControlType.Plan_Topic, row["ti_id"], row);
                     }
@@ -334,6 +346,7 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[index].Cells[key + "type"].Value = dataTable.Rows[i]["fi_type"];
                 dataGridView.Rows[index].Cells[key + "secret"].Value = dataTable.Rows[i]["fi_secret"];
                 dataGridView.Rows[index].Cells[key + "pages"].Value = dataTable.Rows[i]["fi_pages"];
+                dataGridView.Rows[index].Cells[key + "count"].Value = dataTable.Rows[i]["fi_count"];
                 dataGridView.Rows[index].Cells[key + "code"].Value = dataTable.Rows[i]["fi_code"];
                 object _date = dataTable.Rows[i]["fi_create_date"];
                 if(_date != null)
@@ -346,6 +359,9 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[index].Cells[key + "carrier"].Value = dataTable.Rows[i]["fi_carrier"];
                 dataGridView.Rows[index].Cells[key + "form"].Value = dataTable.Rows[i]["fi_form"];
                 dataGridView.Rows[index].Cells[key + "link"].Value = dataTable.Rows[i]["fi_link"];
+                string _transfer = GetValue(dataTable.Rows[i]["fi_transfer"]);
+                if(!string.IsNullOrEmpty(_transfer))
+                    dataGridView.Rows[index].Cells[key + "transfer"].Value = Convert.ToInt32(_transfer) == 0 ? "是" : "否";
                 dataGridView.Rows[index].Cells[key + "link"].Tag = dataTable.Rows[i]["fi_file_id"];
             }
         }
@@ -450,7 +466,7 @@ namespace 数据采集档案管理系统___课题版
                     Subject.Tag = id;
 
                     int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'") + 1;
-                    txt_Subject_Code.Text = txt_Topic_Code.Text + "-" + _index.ToString().PadLeft(2, '0');
+                    txt_Subject_Code.Text = txt_Topic_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
                     Txt_Project_Code_Leave(txt_Subject_Code, null);
                 }
                 else
@@ -1012,40 +1028,53 @@ namespace 数据采集档案管理系统___课题版
             bool result = true;
             for(int i = 0; i < rows.Count - 1; i++)
             {
-                DataGridViewCell cell1 = rows[i].Cells[key + "name"];
-                if(cell1.Value == null)
+                DataGridViewCell cellName = rows[i].Cells[key + "name"];
+                if(cellName.Value == null || string.IsNullOrEmpty(GetValue(cellName.Value).Trim()))
                 {
-                    cell1.ErrorText = $"温馨提示：文件名不能为空。";
+                    cellName.ErrorText = "温馨提示：文件名不能为空。";
                     result = false;
                 }
                 else
                 {
-                    cell1.ErrorText = null;
+                    cellName.ErrorText = null;
                     for(int j = i + 1; j < rows.Count - 1; j++)
                     {
                         DataGridViewCell cell2 = rows[j].Cells[key + "name"];
-                        if(cell1.Value.Equals(cell2.Value))
+                        if(cellName.Value.Equals(cell2.Value))
                         {
-                            cell1.ErrorText = $"温馨提示：与{j + 1}行的文件名重复。";
+                            cellName.ErrorText = $"温馨提示：与{j + 1}行的文件名重复。";
                             result = false;
                         }
                         else
                         {
-                            cell1.ErrorText = null;
+                            cellName.ErrorText = null;
                         }
                     }
                 }
-                DataGridViewCell pagesCell = rows[i].Cells[key + "pages"];
 
+                DataGridViewCell pagesCell = rows[i].Cells[key + "pages"];
                 if(pagesCell.Value == null || string.IsNullOrEmpty(GetValue(pagesCell.Value)) || Convert.ToInt32(pagesCell.Value) == 0)
                 {
                     pagesCell.ErrorText = "温馨提示：页数不能为0或空。";
                     result = false;
                 }
                 else
-                {
                     pagesCell.ErrorText = null;
+
+                bool isOtherType = "其他".Equals(GetValue(rows[i].Cells[key + "categor"].FormattedValue).Trim());
+                DataGridViewCell cellCode = rows[i].Cells[key + "categor_name"];
+                if(isOtherType)
+                {
+                    if(cellCode.Value == null || string.IsNullOrEmpty(GetValue(cellCode.Value).Trim()))
+                    {
+                        cellCode.ErrorText = "温馨提示：类型名称不能为空。";
+                        result = false;
+                    }
+                    else
+                        cellCode.ErrorText = null;
                 }
+                else
+                    cellCode.ErrorText = null;
             }
             return result;
         }
@@ -1401,13 +1430,21 @@ namespace 数据采集档案管理系统___课题版
             currentRow.Cells[key + "name"].Value = value;
 
             int amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_categor='{comboBox.SelectedValue}' AND fi_obj_id='{pid}'");
-            string _key = comboBox.Text.Split(' ')[0];
-            currentRow.Cells[key + "code"].Value = _key + "-" + (amount + 1).ToString().PadLeft(2, '0');
 
+            currentRow.Cells[key + "categor_name"].Value = null;
             if(comboBox.SelectedIndex == comboBox.Items.Count - 1)
             {
                 currentRow.DataGridView.Columns[key + "categor_name"].Visible = true;
-                currentRow.Cells[key + "categor_name"].Value = null;
+
+                int _amount = comboBox.Items.Count;
+                string tempKey = ((DataRowView)comboBox.Items[0]).Row.ItemArray[1].ToString();
+                string _key = GetValue(tempKey).Substring(0, 1) + _amount.ToString().PadLeft(2, '0');
+                currentRow.Cells[key + "code"].Value = _key + "-" + (amount + 1).ToString().PadLeft(2, '0');
+            }
+            else
+            {
+                string _key = comboBox.Text.Split(' ')[0];
+                currentRow.Cells[key + "code"].Value = _key + "-" + (amount + 1).ToString().PadLeft(2, '0');
             }
         }
 
@@ -1621,6 +1658,19 @@ namespace 数据采集档案管理系统___课题版
             object link = row.Cells[key + "link"].Value;
             object fileId = row.Cells[key + "link"].Tag;
             object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
+
+            bool isOtherType = "其他".Equals(GetValue(row.Cells[key + "categor"].FormattedValue).Trim());
+            if(isOtherType)
+            {
+                categor = Guid.NewGuid().ToString();
+                string value = GetValue(code).Split('-')[0];
+                int _sort = ((DataGridViewComboBoxCell)row.Cells[key + "categor"]).Items.Count - 1;
+
+                string _insertSql = "INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_sort, extend_3, extend_4) " +
+                    $"VALUES('{categor}', '{value}', '{stage}', '{_sort}', ' ', '{1}');";
+                SQLiteHelper.ExecuteNonQuery(_insertSql);
+            }
+
             string insertSql = "INSERT INTO files_info (" +
             "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
             $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}');";
@@ -1905,17 +1955,32 @@ namespace 数据采集档案管理系统___课题版
             DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM code_rule WHERE cr_type='{type}' AND cr_special_id='{UserHelper.GetUser().UserSpecialId}'");
             if(row != null)
             {
+                string fix = GetValue(row["cr_fixed"]);
                 string symbol = GetValue(row["cr_split_symbol"]);
+                if(!string.IsNullOrEmpty(fix))
+                    code += $"{fix + symbol}";
                 string template = GetValue(row["cr_template"]);
                 string[] strs = template.Split(symbol.ToCharArray());
                 for(int i = 0; i < strs.Length; i++)
                 {
                     if("AAAA".Equals(strs[i]))//专项编号
-                        code += GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT spi_code FROM special_info WHERE spi_id='{UserHelper.GetUser().UserSpecialId}'"));
+                    {
+                        string zxCode = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT spi_code FROM special_info WHERE spi_id='{UserHelper.GetUser().UserSpecialId}'"));
+                        if(!string.IsNullOrEmpty(zxCode))
+                            code += zxCode;
+                        else
+                            continue;
+                    }
                     else if("BBBB".Equals(strs[i]))//项目/课题编号
                         code += objCode;
                     else if("CCCC".Equals(strs[i]))//来源单位
-                        code += GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().UserUnitId}'"));
+                    {
+                        string unitCode = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().UserUnitId}'"));
+                        if(!string.IsNullOrEmpty(unitCode))
+                            code += unitCode;
+                        else
+                            continue;
+                    }
                     else if("YYYY".Equals(strs[i]))
                         code += year;
                     else
@@ -1923,12 +1988,9 @@ namespace 数据采集档案管理系统___课题版
                         int length = strs[i].Length;
                         int amount = 0;
                         if(type == 0)
-                        {
                             amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_special_id='{UserHelper.GetUser().UserSpecialId}'") + 1;
-                        }else if(type == 1)
-                        {
+                        else if(type == 1)
                             amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().UserSpecialId}'") + 1;
-                        }
                         code += amount.ToString().PadLeft(length, '0');
                     }
                     code += symbol;
@@ -1976,17 +2038,18 @@ namespace 数据采集档案管理系统___课题版
 
             leftView.Columns.AddRange(new ColumnHeader[]
             {
-                    new ColumnHeader{ Name = $"{key}_file1_id", Text = "主键", Width = 0},
+                    new ColumnHeader{ Name = $"{key}_file1_id", Width = 0},
                     new ColumnHeader{ Name = $"{key}_file1_type", Text = "文件类别", TextAlign = HorizontalAlignment.Center ,Width = 75},
                     new ColumnHeader{ Name = $"{key}_file1_name", Text = "文件名称", Width = 250},
                     new ColumnHeader{ Name = $"{key}_file1_date", Text = "形成日期", Width = 100}
             });
             rightView.Columns.AddRange(new ColumnHeader[]
             {
-                    new ColumnHeader{ Name = $"{key}_file2_id", Text = "主键", Width = 0},
-                    new ColumnHeader{ Name = $"{key}_file2_type", Text = "文件类别", TextAlign = HorizontalAlignment.Center ,Width = 75},
-                    new ColumnHeader{ Name = $"{key}_file2_name", Text = "文件名称", Width = 250},
-                    new ColumnHeader{ Name = $"{key}_file2_date", Text = "形成日期", Width = 100}
+                new ColumnHeader{ Name = $"{key}_file2_id", Width = 0},
+                new ColumnHeader{ Name = $"{key}_file2_number", Text = "序号", Width = 50},
+                new ColumnHeader{ Name = $"{key}_file2_type", Text = "文件类别", TextAlign = HorizontalAlignment.Center ,Width = 75},
+                new ColumnHeader{ Name = $"{key}_file2_name", Text = "文件名称", Width = 250},
+                new ColumnHeader{ Name = $"{key}_file2_date", Text = "形成日期", Width = 100}
             });
             //未归档
             string querySql = $"SELECT fi_id, dd_name, fi_name, fi_create_date FROM files_info LEFT JOIN data_dictionary " +
@@ -1997,9 +2060,9 @@ namespace 数据采集档案管理系统___课题版
                 ListViewItem item = leftView.Items.Add(GetValue(dataTable.Rows[i]["fi_id"]));
                 item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
                 {
-                        new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["dd_name"]) },
-                        new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_name"]) },
-                        new ListViewItem.ListViewSubItem(){ Text = GetDateValue(dataTable.Rows[i]["fi_create_date"], "yyyy-MM-dd") },
+                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["dd_name"]) },
+                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_name"]) },
+                    new ListViewItem.ListViewSubItem(){ Text = GetDateValue(dataTable.Rows[i]["fi_create_date"], "yyyy-MM-dd") },
                 });
             }
             //已归档
@@ -2016,9 +2079,10 @@ namespace 数据采集档案管理系统___课题版
                         ListViewItem item = rightView.Items.Add(GetValue(row["fi_id"]));
                         item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
                         {
-                        new ListViewItem.ListViewSubItem(){ Text = GetValue(row["dd_name"]) },
-                        new ListViewItem.ListViewSubItem(){ Text = GetValue(row["fi_name"]) },
-                        new ListViewItem.ListViewSubItem(){ Text = GetDateValue(row["fi_create_date"], "yyyy-MM-dd") },
+                            new ListViewItem.ListViewSubItem(){ Text = GetValue(i + 1).ToString().PadLeft(2,'0') },
+                            new ListViewItem.ListViewSubItem(){ Text = GetValue(row["dd_name"]) },
+                            new ListViewItem.ListViewSubItem(){ Text = GetValue(row["fi_name"]) },
+                            new ListViewItem.ListViewSubItem(){ Text = GetDateValue(row["fi_create_date"], "yyyy-MM-dd") },
                         });
                     }
                 }
@@ -2092,10 +2156,11 @@ namespace 数据采集档案管理系统___课题版
             {
                 if(!"其他".Equals(table.Rows[i]["dd_name"]))
                 {
+                    string _name = GetValue(table.Rows[i]["dd_note"]);
                     int indexRow = dataGridView.Rows.Add();
                     dataGridView.Rows[indexRow].Cells[key + "id"].Value = i + 1;
                     dataGridView.Rows[indexRow].Cells[key + "categor"].Value = table.Rows[i]["dd_name"];
-                    dataGridView.Rows[indexRow].Cells[key + "name"].Value = table.Rows[i]["dd_note"];
+                    dataGridView.Rows[indexRow].Cells[key + "name"].Value = _name;
                     dataGridView.Rows[indexRow].Cells[key + "pcode"].Value = code;
                     dataGridView.Rows[indexRow].Cells[key + "pname"].Value = name;
                     string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{table.Rows[i]["dd_name"]}'";
@@ -2108,7 +2173,10 @@ namespace 数据采集档案管理系统___课题版
                     }
                     string musted = GetValue(table.Rows[i]["extend_2"]);
                     if(!string.IsNullOrEmpty(musted))
+                    {
                         dataGridView.Rows[indexRow].Tag = musted;
+                        dataGridView.Rows[indexRow].Cells[key + "name"].Value = "*" + _name;
+                    }
                 }
             }
         }
@@ -2173,7 +2241,10 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Project_Left.SelectedItems)
                             {
-                                lsv_Project_Right.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                string number = (lsv_Project_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                                lsv_Project_Right.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2181,7 +2252,9 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Project_Right.SelectedItems)
                             {
-                                lsv_Project_Left.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                _item.SubItems.RemoveAt(1);
+                                lsv_Project_Left.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2189,7 +2262,10 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Project_Left.Items)
                             {
-                                lsv_Project_Right.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                string number = (lsv_Project_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                                lsv_Project_Right.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2197,7 +2273,9 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Project_Right.Items)
                             {
-                                lsv_Project_Left.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                _item.SubItems.RemoveAt(1);
+                                lsv_Project_Left.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2247,7 +2325,10 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Topic_Left.SelectedItems)
                             {
-                                lsv_Topic_Right.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                string number = (lsv_Topic_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                                lsv_Topic_Right.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2255,7 +2336,9 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Topic_Right.SelectedItems)
                             {
-                                lsv_Topic_Left.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                _item.SubItems.RemoveAt(1);
+                                lsv_Topic_Left.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2263,7 +2346,10 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Topic_Left.Items)
                             {
-                                lsv_Topic_Right.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                string number = (lsv_Topic_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                                lsv_Topic_Right.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2271,7 +2357,9 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Topic_Right.Items)
                             {
-                                lsv_Topic_Left.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                _item.SubItems.RemoveAt(1);
+                                lsv_Topic_Left.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2321,7 +2409,10 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Subject_Left.SelectedItems)
                             {
-                                lsv_Subject_Right.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                string number = (lsv_Subject_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                                lsv_Subject_Right.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2329,7 +2420,9 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Subject_Right.SelectedItems)
                             {
-                                lsv_Subject_Left.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                _item.SubItems.RemoveAt(1);
+                                lsv_Subject_Left.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2337,7 +2430,10 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Subject_Left.Items)
                             {
-                                lsv_Subject_Right.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                string number = (lsv_Subject_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                                lsv_Subject_Right.Items.Add(_item);
                                 item.Remove();
                             }
                         }
@@ -2345,7 +2441,9 @@ namespace 数据采集档案管理系统___课题版
                         {
                             foreach(ListViewItem item in lsv_Subject_Right.Items)
                             {
-                                lsv_Subject_Left.Items.Add((ListViewItem)item.Clone());
+                                ListViewItem _item = (ListViewItem)item.Clone();
+                                _item.SubItems.RemoveAt(1);
+                                lsv_Subject_Left.Items.Add(_item);
                                 item.Remove();
                             }
                         }

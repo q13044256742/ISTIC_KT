@@ -21,13 +21,21 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         Plan_Project = 2,
         /// <summary>
-        /// 课题
+        /// 项目-课题
         /// </summary>
         Plan_Topic = 3,
         /// <summary>
-        /// 子课题
+        /// 项目-课题-子课题
         /// </summary>
         Plan_Topic_Subject = 4,
+        /// <summary>
+        /// 课题
+        /// </summary>
+        Topic = 5,
+        /// <summary>
+        /// 课题-子课题
+        /// </summary>
+        Topic_Subject = 6,
     }
     /// <summary>
     /// 数据库字典帮助类

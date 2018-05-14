@@ -83,12 +83,21 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.num_count = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.rdo_Transfer_N = new System.Windows.Forms.RadioButton();
+            this.rdo_Transfer_Y = new System.Windows.Forms.RadioButton();
+            this.label25 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_secret.SuspendLayout();
             this.pal_form.SuspendLayout();
             this.pal_type.SuspendLayout();
             this.pal_carrier.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_count)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btn_Reset
@@ -159,7 +168,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(372, 409);
+            this.label13.Location = new System.Drawing.Point(423, 409);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(74, 22);
             this.label13.TabIndex = 59;
@@ -199,7 +208,7 @@
             this.dtp_date.Location = new System.Drawing.Point(126, 200);
             this.dtp_date.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dtp_date.Name = "dtp_date";
-            this.dtp_date.Size = new System.Drawing.Size(204, 26);
+            this.dtp_date.Size = new System.Drawing.Size(135, 26);
             this.dtp_date.TabIndex = 44;
             // 
             // label9
@@ -214,7 +223,7 @@
             // 
             // num_page
             // 
-            this.num_page.Location = new System.Drawing.Point(465, 200);
+            this.num_page.Location = new System.Drawing.Point(362, 200);
             this.num_page.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.num_page.Maximum = new decimal(new int[] {
             999999999,
@@ -222,14 +231,14 @@
             0,
             0});
             this.num_page.Name = "num_page";
-            this.num_page.Size = new System.Drawing.Size(204, 26);
+            this.num_page.Size = new System.Drawing.Size(92, 26);
             this.num_page.TabIndex = 40;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(404, 202);
+            this.label7.Location = new System.Drawing.Point(311, 202);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 22);
             this.label7.TabIndex = 49;
@@ -415,7 +424,7 @@
             // 
             this.pal_form.Controls.Add(this.rdo_form_fyj);
             this.pal_form.Controls.Add(this.rdo_form_yj);
-            this.pal_form.Location = new System.Drawing.Point(465, 401);
+            this.pal_form.Location = new System.Drawing.Point(516, 401);
             this.pal_form.Name = "pal_form";
             this.pal_form.Size = new System.Drawing.Size(153, 39);
             this.pal_form.TabIndex = 67;
@@ -508,6 +517,7 @@
             this.txt_fileCode.Location = new System.Drawing.Point(126, 80);
             this.txt_fileCode.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_fileCode.Name = "txt_fileCode";
+            this.txt_fileCode.ReadOnly = true;
             this.txt_fileCode.Size = new System.Drawing.Size(204, 26);
             this.txt_fileCode.TabIndex = 64;
             // 
@@ -636,7 +646,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(358, 410);
+            this.label21.Location = new System.Drawing.Point(409, 410);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(15, 20);
             this.label21.TabIndex = 80;
@@ -652,11 +662,92 @@
             this.label22.TabIndex = 81;
             this.label22.Text = "*";
             // 
+            // num_count
+            // 
+            this.num_count.Location = new System.Drawing.Point(577, 200);
+            this.num_count.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.num_count.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.num_count.Name = "num_count";
+            this.num_count.Size = new System.Drawing.Size(92, 26);
+            this.num_count.TabIndex = 82;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
+            this.label23.Location = new System.Drawing.Point(526, 202);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(42, 22);
+            this.label23.TabIndex = 83;
+            this.label23.Text = "份数";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.ForeColor = System.Drawing.Color.Red;
+            this.label24.Location = new System.Drawing.Point(444, 270);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(15, 20);
+            this.label24.TabIndex = 86;
+            this.label24.Text = "*";
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.rdo_Transfer_N);
+            this.panel1.Controls.Add(this.rdo_Transfer_Y);
+            this.panel1.Location = new System.Drawing.Point(551, 261);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(118, 39);
+            this.panel1.TabIndex = 85;
+            // 
+            // rdo_Transfer_N
+            // 
+            this.rdo_Transfer_N.AutoSize = true;
+            this.rdo_Transfer_N.Location = new System.Drawing.Point(64, 7);
+            this.rdo_Transfer_N.Name = "rdo_Transfer_N";
+            this.rdo_Transfer_N.Size = new System.Drawing.Size(41, 24);
+            this.rdo_Transfer_N.TabIndex = 1;
+            this.rdo_Transfer_N.TabStop = true;
+            this.rdo_Transfer_N.Tag = "3c2a5f32-1c9f-4662-8aa3-12161ca508f3";
+            this.rdo_Transfer_N.Text = "否";
+            this.rdo_Transfer_N.UseVisualStyleBackColor = true;
+            // 
+            // rdo_Transfer_Y
+            // 
+            this.rdo_Transfer_Y.AutoSize = true;
+            this.rdo_Transfer_Y.Location = new System.Drawing.Point(6, 7);
+            this.rdo_Transfer_Y.Name = "rdo_Transfer_Y";
+            this.rdo_Transfer_Y.Size = new System.Drawing.Size(41, 24);
+            this.rdo_Transfer_Y.TabIndex = 0;
+            this.rdo_Transfer_Y.TabStop = true;
+            this.rdo_Transfer_Y.Tag = "303f8da8-6992-4110-a55a-381f8d01b4c8";
+            this.rdo_Transfer_Y.Text = "是";
+            this.rdo_Transfer_Y.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
+            this.label25.Location = new System.Drawing.Point(458, 269);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(74, 22);
+            this.label25.TabIndex = 84;
+            this.label25.Text = "是否移交";
+            // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 711);
+            this.Controls.Add(this.label24);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.num_count);
+            this.Controls.Add(this.label23);
             this.Controls.Add(this.label22);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
@@ -716,6 +807,9 @@
             this.pal_type.PerformLayout();
             this.pal_carrier.ResumeLayout(false);
             this.pal_carrier.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_count)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -777,5 +871,12 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.NumericUpDown num_count;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.RadioButton rdo_Transfer_N;
+        private System.Windows.Forms.RadioButton rdo_Transfer_Y;
+        private System.Windows.Forms.Label label25;
     }
 }

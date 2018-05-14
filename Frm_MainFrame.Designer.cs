@@ -84,10 +84,9 @@
             this.stateTip = new System.Windows.Forms.ToolStripStatusLabel();
             this.cms_TreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.添加子节点AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.项目toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.课题TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.子课题SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除节点DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Add)).BeginInit();
             this.panel2.SuspendLayout();
@@ -639,20 +638,26 @@
             // cms_TreeView
             // 
             this.cms_TreeView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.添加子节点AToolStripMenuItem,
-            this.删除节点DToolStripMenuItem,
-            this.刷新RToolStripMenuItem});
+            this.添加子节点AToolStripMenuItem});
             this.cms_TreeView.Name = "contextMenuStrip1";
-            this.cms_TreeView.Size = new System.Drawing.Size(118, 70);
+            this.cms_TreeView.Size = new System.Drawing.Size(117, 26);
             // 
             // 添加子节点AToolStripMenuItem
             // 
             this.添加子节点AToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.项目toolStripMenuItem1,
             this.课题TToolStripMenuItem,
             this.子课题SToolStripMenuItem});
             this.添加子节点AToolStripMenuItem.Name = "添加子节点AToolStripMenuItem";
-            this.添加子节点AToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
+            this.添加子节点AToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.添加子节点AToolStripMenuItem.Text = "添加(&A)";
+            // 
+            // 项目toolStripMenuItem1
+            // 
+            this.项目toolStripMenuItem1.Name = "项目toolStripMenuItem1";
+            this.项目toolStripMenuItem1.Size = new System.Drawing.Size(127, 22);
+            this.项目toolStripMenuItem1.Text = "项目(&P)";
+            this.项目toolStripMenuItem1.Click += new System.EventHandler(this.项目toolStripMenuItem1_Click);
             // 
             // 课题TToolStripMenuItem
             // 
@@ -668,20 +673,6 @@
             this.子课题SToolStripMenuItem.Text = "子课题(&S)";
             this.子课题SToolStripMenuItem.Click += new System.EventHandler(this.子课题SToolStripMenuItem_Click);
             // 
-            // 删除节点DToolStripMenuItem
-            // 
-            this.删除节点DToolStripMenuItem.Name = "删除节点DToolStripMenuItem";
-            this.删除节点DToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.删除节点DToolStripMenuItem.Text = "删除(&D)";
-            this.删除节点DToolStripMenuItem.Click += new System.EventHandler(this.删除节点DToolStripMenuItem_Click);
-            // 
-            // 刷新RToolStripMenuItem
-            // 
-            this.刷新RToolStripMenuItem.Name = "刷新RToolStripMenuItem";
-            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
-            this.刷新RToolStripMenuItem.Text = "刷新(&R)";
-            this.刷新RToolStripMenuItem.Click += new System.EventHandler(this.刷新RToolStripMenuItem_Click);
-            // 
             // Frm_MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -695,7 +686,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_MainFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "著录加工系统[课题组]";
+            this.Text = "科技计划项目档案数据采集系统[课题组版]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_MainFrame_FormClosing);
             this.Shown += new System.EventHandler(this.Frm_MainFrame_Shown);
             this.panel1.ResumeLayout(false);
@@ -788,9 +779,8 @@
         private System.Windows.Forms.ToolStripStatusLabel stateTip;
         private System.Windows.Forms.ContextMenuStrip cms_TreeView;
         private System.Windows.Forms.ToolStripMenuItem 添加子节点AToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 删除节点DToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 课题TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 子课题SToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 刷新RToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 项目toolStripMenuItem1;
     }
 }

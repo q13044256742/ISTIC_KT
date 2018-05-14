@@ -40,6 +40,10 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private static int DEFAULT_SUB_LABEL_HEIGHT = 40;
         /// <summary>
+        /// 选中点击色
+        /// </summary>
+        private static Color DEFAULT_CLICKED_COLOR = Color.Firebrick;
+        /// <summary>
         /// 设置一级菜单
         /// </summary>
         /// <param name="parentPanel"></param>
@@ -178,9 +182,8 @@ namespace 数据采集档案管理系统___课题版
         private static void Panel_MouseEnter(object sender, System.EventArgs e)
         {
             Panel panel = sender as Panel;
-            foreach (Control item in panel.Parent.Controls)
-                item.BackColor = Color.Transparent;
-            panel.BackColor = Color.FromArgb(0, 120, 215);
+            if(panel.BackColor != Color.FromArgb(0, 120, 245))
+                panel.BackColor = Color.FromArgb(0, 120, 185);
         }
 
         /// <summary>
@@ -205,6 +208,12 @@ namespace 数据采集档案管理系统___课题版
                 };
                 panel.MouseEnter += Panel_MouseEnter;
                 panel.Click += new EventHandler(action);
+                panel.MouseLeave += new EventHandler(delegate (object sender, EventArgs args)
+                 {
+                     Panel _p = sender as Panel;
+                     if(_p.BackColor != Color.FromArgb(0, 120, 245))
+                         _p.BackColor = Color.Transparent;
+                 });
                 basicPanel.Controls.Add(panel);
 
                 Label _label = new Label

@@ -42,7 +42,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            object id = Guid.NewGuid().ToString();
+            object id = txt_UserName.Tag;
             object username = txt_UserName.Text;
             object password = txt_PassWord.Text;
             object passwordAgain = txt_PassWordAagin.Text;
@@ -52,11 +52,31 @@ namespace 数据采集档案管理系统___课题版
             object email = txt_Email.Text;
             object phone = txt_Phone.Text;
             object remark = txt_Remark.Text;
-            string insertSql = "INSERT INTO user_info (ui_id, ui_username, ui_password, ui_unit, ui_department, ui_realname, ui_email, ui_phone, ui_remark) VALUES( " +
-                $"'{id}', '{username}', '{password}', '{unit}', '{department}', '{realname}', '{email}', '{phone}', '{remark}')";
+            if(id == null)
+            {
+                id = Guid.NewGuid().ToString();
+                string insertSql = "INSERT INTO user_info (ui_id, ui_username, ui_password, ui_unit, ui_department, ui_realname, ui_email, ui_phone, ui_remark) VALUES( " +
+                    $"'{id}', '{username}', '{password}', '{unit}', '{department}', '{realname}', '{email}', '{phone}', '{remark}')";
 
-            SQLiteHelper.ExecuteNonQuery(insertSql);
-            MessageBox.Show("保存成功。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                SQLiteHelper.ExecuteNonQuery(insertSql);
+                MessageBox.Show("保存成功。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                txt_UserName.Tag = id;
+            }
+            else
+            {
+                string updateSql = "UPDATE user_info SET " +
+                    $"ui_username = '{username}', " +
+                    $"ui_password = '{password}', " +
+                    $"ui_unit = '{unit}', " +
+                    $"ui_department = '{department}', " +
+                    $"ui_realname = '{realname}', " +
+                    $"ui_email = '{email}', " +
+                    $"ui_phone = '{phone}', " +
+                    $"ui_remark = '{remark}' " +
+                    $"WHERE ui_id = '{id}'";
+                SQLiteHelper.ExecuteNonQuery(updateSql);
+                MessageBox.Show("更新成功。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
 
         private void btn_Reset_Click(object sender, EventArgs e)
@@ -105,5 +125,35 @@ namespace 数据采集档案管理系统___课题版
                 LoadUserList(cdn);
             }
         }
+
+        private void dgv_UserList_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            object id = dgv_UserList.Rows[e.RowIndex].Cells[0].Tag;
+            if(id != null)
+            {
+                LoadUserInfoById(id);
+                tab_UseList.SelectedIndex = tab_UseList.TabCount - 1;
+            }
+        }
+
+        private void LoadUserInfoById(object _id)
+        {
+            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM user_info WHERE ui_id='{_id}'");
+            if(row != null)
+            {
+                txt_UserName.Tag = row["ui_id"];
+                txt_UserName.Text = GetValue(row["ui_username"]);
+                txt_PassWord.Text = GetValue(row["ui_password"]);
+                txt_PassWordAagin.Text = txt_PassWord.Text;
+                cbo_Unit.SelectedValue = row["ui_unit"];
+                txt_Department.Text = GetValue(row["ui_department"]);
+                txt_RealName.Text = GetValue(row["ui_realname"]);
+                txt_Email.Text = GetValue(row["ui_email"]);
+                txt_Phone.Text = GetValue(row["ui_phone"]);
+                txt_Remark.Text = GetValue(row["ui_remark"]);
+            }
+        }
+
+        private string GetValue(object _obj) => _obj == null ? string.Empty : _obj.ToString();
     }
 }

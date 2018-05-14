@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tab_UseList = new System.Windows.Forms.TabControl();
             this.tp_UserList = new System.Windows.Forms.TabPage();
             this.dgv_UserList = new System.Windows.Forms.DataGridView();
@@ -105,14 +105,14 @@
             this.dgv_UserList.AllowUserToAddRows = false;
             this.dgv_UserList.AllowUserToDeleteRows = false;
             this.dgv_UserList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_UserList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.realname,
@@ -126,6 +126,7 @@
             this.dgv_UserList.RowTemplate.Height = 23;
             this.dgv_UserList.Size = new System.Drawing.Size(820, 421);
             this.dgv_UserList.TabIndex = 0;
+            this.dgv_UserList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_UserList_RowHeaderMouseDoubleClick);
             // 
             // id
             // 
@@ -388,17 +389,17 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(65, 19);
             this.label7.TabIndex = 8;
-            this.label7.Text = "归属部门";
+            this.label7.Text = "单位名称";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label6.Location = new System.Drawing.Point(118, 144);
+            this.label6.Location = new System.Drawing.Point(83, 144);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 19);
+            this.label6.Size = new System.Drawing.Size(100, 19);
             this.label6.TabIndex = 6;
-            this.label6.Text = "所属单位";
+            this.label6.Text = "所属计划/专项";
             // 
             // txt_PassWordAagin
             // 

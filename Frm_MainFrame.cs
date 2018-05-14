@@ -448,20 +448,31 @@ namespace 数据采集档案管理系统___课题版
                     tv_DataTree.SelectedNode = node;
                     cms_TreeView.Show(MousePosition);
 
-                    string typeValue = GetValue(node.Tag);
-                    if("Plan_Project".Equals(typeValue))
+                    ControlType type = (ControlType)node.Tag;
+                    if(type == ControlType.Plan)
                     {
-                        添加子节点AToolStripMenuItem.Visible = true;
+                        项目toolStripMenuItem1.Visible = true;
                         课题TToolStripMenuItem.Visible = true;
-                    }
-                    else if("Plan_Topic".Equals(typeValue))
-                    {
-                        课题TToolStripMenuItem.Visible = false;
+                        子课题SToolStripMenuItem.Visible = false;
                         添加子节点AToolStripMenuItem.Visible = true;
                     }
-                    else if("Plan_Topic_Subject".Equals(typeValue))
+                    else if(type == ControlType.Plan_Project)
                     {
-                        添加子节点AToolStripMenuItem.Visible = false;
+                        项目toolStripMenuItem1.Visible = false;
+                        课题TToolStripMenuItem.Visible = true;
+                        子课题SToolStripMenuItem.Visible = true;
+                        添加子节点AToolStripMenuItem.Visible = true;
+                    }
+                    else if(type == ControlType.Plan_Topic)
+                    {
+                        项目toolStripMenuItem1.Visible = false;
+                        课题TToolStripMenuItem.Visible = false;
+                        子课题SToolStripMenuItem.Visible = true;
+                        添加子节点AToolStripMenuItem.Visible = true;
+                    }
+                    else if(type == ControlType.Plan_Topic_Subject)
+                    {
+                        cms_TreeView.Close();
                     }
                 }
             }
@@ -482,6 +493,12 @@ namespace 数据采集档案管理系统___课题版
                 frm.cbo_Project_HasNext.SelectedIndex = 2;
                 frm.Cbo_Project_HasNext_SelectionChangeCommitted(sender, e);
                 frm.tab_Menu.SelectedIndex = frm.tab_Menu.TabCount - 1;
+            }
+            else
+            {
+                TreeNode _node = new TreeNode() { Name = rootId, Tag = ControlType.Topic };
+                Frm_Wroking frm_Wroking = new Frm_Wroking(_node, LoadTreeList);
+                frm_Wroking.Show();
             }
         }
 
@@ -524,6 +541,11 @@ namespace 数据采集档案管理系统___课题版
                     btn_Refresh_Click(sender, e);
                 }
             }
+        }
+
+        private void 项目toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Pic_Add_Click(null, null);
         }
     }
 }
