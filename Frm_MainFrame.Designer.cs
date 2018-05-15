@@ -545,6 +545,7 @@
             this.dgv_DataList.Size = new System.Drawing.Size(1101, 524);
             this.dgv_DataList.TabIndex = 0;
             this.dgv_DataList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.Dgv_DataList_CellContentClick);
+            this.dgv_DataList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_DataList_RowHeaderMouseDoubleClick);
             // 
             // id
             // 

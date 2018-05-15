@@ -547,5 +547,14 @@ namespace 数据采集档案管理系统___课题版
         {
             Pic_Add_Click(null, null);
         }
+
+        private void dgv_DataList_RowHeaderMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            new Frm_Wroking(new TreeNode()
+            {
+                Name = GetValue(dgv_DataList.Rows[e.RowIndex].Cells["id"].Tag),
+                Tag = dgv_DataList.Rows[e.RowIndex].Tag
+            }, LoadTreeList).Show();
+        }
     }
 }

@@ -2867,10 +2867,42 @@ namespace 数据采集档案管理系统___课题版
                 Btn_AddFile_Click(btn_Subject_AddFile, e);
         }
 
-        private void lbl_AJ_Code_MouseHover(object sender, EventArgs e)
+        private void btn_Export_Click(object sender, EventArgs e)
         {
-            Label label = sender as Label;
-            toolTip1.SetToolTip(label, label.Text);
+            string name = (sender as Button).Name;
+            object objId = null, _name = null, code = null;
+            ControlType type = ControlType.Plan_Project;
+            if(name.Contains("Project"))
+            {
+                objId = tab_Project_Info.Tag;
+                _name = txt_Project_Name.Text;
+                code = txt_Project_Code.Text;
+            }
+            else if(name.Contains("Topic"))
+            {
+                objId = tab_Topic_Info.Tag;
+                _name = txt_Topic_Name.Text;
+                code = txt_Topic_Code.Text;
+                type = ControlType.Topic;
+            }
+            else if(name.Contains("Subject"))
+            {
+                objId = tab_Subject_Info.Tag;
+                _name = txt_Subject_Name.Text;
+                code = txt_Subject_Code.Text;
+                type = ControlType.Default;
+            }
+            if(objId != null)
+            {
+                Frm_ExportList frm = new Frm_ExportList(objId, type);
+                frm.SpeCode = code;
+                frm.SpeName = _name;
+                frm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("请先保存基本信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
         }
     }
 }
