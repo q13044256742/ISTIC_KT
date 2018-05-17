@@ -86,10 +86,13 @@
             this.num_count = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pal_IsTransfer = new System.Windows.Forms.Panel();
             this.rdo_Transfer_N = new System.Windows.Forms.RadioButton();
             this.rdo_Transfer_Y = new System.Windows.Forms.RadioButton();
             this.label25 = new System.Windows.Forms.Label();
+            this.pal_Wait = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label26 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_secret.SuspendLayout();
@@ -97,7 +100,9 @@
             this.pal_type.SuspendLayout();
             this.pal_carrier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_count)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.pal_IsTransfer.SuspendLayout();
+            this.pal_Wait.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Reset
@@ -115,7 +120,7 @@
             // 
             this.lbl_OpenFile.AutoSize = true;
             this.lbl_OpenFile.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_OpenFile.Location = new System.Drawing.Point(641, 545);
+            this.lbl_OpenFile.Location = new System.Drawing.Point(641, 509);
             this.lbl_OpenFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_OpenFile.Name = "lbl_OpenFile";
             this.lbl_OpenFile.Size = new System.Drawing.Size(28, 14);
@@ -148,7 +153,7 @@
             // 
             // txt_link
             // 
-            this.txt_link.Location = new System.Drawing.Point(126, 537);
+            this.txt_link.Location = new System.Drawing.Point(126, 501);
             this.txt_link.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_link.Name = "txt_link";
             this.txt_link.Size = new System.Drawing.Size(508, 26);
@@ -158,7 +163,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label14.Location = new System.Drawing.Point(4, 537);
+            this.label14.Location = new System.Drawing.Point(4, 501);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(106, 22);
             this.label14.TabIndex = 60;
@@ -168,7 +173,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label13.Location = new System.Drawing.Point(423, 409);
+            this.label13.Location = new System.Drawing.Point(423, 387);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(74, 22);
             this.label13.TabIndex = 59;
@@ -178,7 +183,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(68, 409);
+            this.label11.Location = new System.Drawing.Point(68, 387);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(42, 22);
             this.label11.TabIndex = 57;
@@ -186,7 +191,7 @@
             // 
             // txt_unit
             // 
-            this.txt_unit.Location = new System.Drawing.Point(126, 477);
+            this.txt_unit.Location = new System.Drawing.Point(126, 447);
             this.txt_unit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_unit.Name = "txt_unit";
             this.txt_unit.Size = new System.Drawing.Size(543, 26);
@@ -196,7 +201,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(36, 479);
+            this.label10.Location = new System.Drawing.Point(36, 449);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(74, 22);
             this.label10.TabIndex = 56;
@@ -205,7 +210,7 @@
             // dtp_date
             // 
             this.dtp_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtp_date.Location = new System.Drawing.Point(126, 200);
+            this.dtp_date.Location = new System.Drawing.Point(126, 185);
             this.dtp_date.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dtp_date.Name = "dtp_date";
             this.dtp_date.Size = new System.Drawing.Size(135, 26);
@@ -215,7 +220,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label9.Location = new System.Drawing.Point(36, 202);
+            this.label9.Location = new System.Drawing.Point(36, 187);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(74, 22);
             this.label9.TabIndex = 54;
@@ -223,7 +228,7 @@
             // 
             // num_page
             // 
-            this.num_page.Location = new System.Drawing.Point(362, 200);
+            this.num_page.Location = new System.Drawing.Point(362, 185);
             this.num_page.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.num_page.Maximum = new decimal(new int[] {
             999999999,
@@ -238,7 +243,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(311, 202);
+            this.label7.Location = new System.Drawing.Point(311, 187);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 22);
             this.label7.TabIndex = 49;
@@ -248,7 +253,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label6.Location = new System.Drawing.Point(68, 340);
+            this.label6.Location = new System.Drawing.Point(68, 318);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(42, 22);
             this.label6.TabIndex = 46;
@@ -266,7 +271,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label5.Location = new System.Drawing.Point(36, 269);
+            this.label5.Location = new System.Drawing.Point(36, 253);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 22);
             this.label5.TabIndex = 42;
@@ -286,7 +291,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label3.Location = new System.Drawing.Point(36, 142);
+            this.label3.Location = new System.Drawing.Point(36, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 22);
             this.label3.TabIndex = 37;
@@ -345,7 +350,7 @@
             this.pal_secret.Controls.Add(this.rdo_secret_mm);
             this.pal_secret.Controls.Add(this.rdo_secret_gn);
             this.pal_secret.Controls.Add(this.rdo_secret_gk);
-            this.pal_secret.Location = new System.Drawing.Point(126, 332);
+            this.pal_secret.Location = new System.Drawing.Point(126, 310);
             this.pal_secret.Name = "pal_secret";
             this.pal_secret.Size = new System.Drawing.Size(311, 39);
             this.pal_secret.TabIndex = 63;
@@ -424,7 +429,7 @@
             // 
             this.pal_form.Controls.Add(this.rdo_form_fyj);
             this.pal_form.Controls.Add(this.rdo_form_yj);
-            this.pal_form.Location = new System.Drawing.Point(516, 401);
+            this.pal_form.Location = new System.Drawing.Point(516, 379);
             this.pal_form.Name = "pal_form";
             this.pal_form.Size = new System.Drawing.Size(153, 39);
             this.pal_form.TabIndex = 67;
@@ -459,7 +464,7 @@
             this.pal_type.Controls.Add(this.rdo_type_ps);
             this.pal_type.Controls.Add(this.rdo_type_cw);
             this.pal_type.Controls.Add(this.rdo_type_js);
-            this.pal_type.Location = new System.Drawing.Point(126, 261);
+            this.pal_type.Location = new System.Drawing.Point(126, 245);
             this.pal_type.Name = "pal_type";
             this.pal_type.Size = new System.Drawing.Size(263, 39);
             this.pal_type.TabIndex = 68;
@@ -525,7 +530,7 @@
             // 
             this.pal_carrier.Controls.Add(this.checkBox2);
             this.pal_carrier.Controls.Add(this.checkBox1);
-            this.pal_carrier.Location = new System.Drawing.Point(126, 401);
+            this.pal_carrier.Location = new System.Drawing.Point(126, 379);
             this.pal_carrier.Name = "pal_carrier";
             this.pal_carrier.Size = new System.Drawing.Size(135, 39);
             this.pal_carrier.TabIndex = 70;
@@ -556,7 +561,7 @@
             // txt_fileName
             // 
             this.txt_fileName.FormattingEnabled = true;
-            this.txt_fileName.Location = new System.Drawing.Point(126, 139);
+            this.txt_fileName.Location = new System.Drawing.Point(126, 131);
             this.txt_fileName.Name = "txt_fileName";
             this.txt_fileName.Size = new System.Drawing.Size(543, 28);
             this.txt_fileName.TabIndex = 71;
@@ -564,19 +569,19 @@
             // 
             // txt_Remark
             // 
-            this.txt_Remark.Location = new System.Drawing.Point(126, 592);
+            this.txt_Remark.Location = new System.Drawing.Point(126, 552);
             this.txt_Remark.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_Remark.Multiline = true;
             this.txt_Remark.Name = "txt_Remark";
             this.txt_Remark.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Remark.Size = new System.Drawing.Size(543, 52);
+            this.txt_Remark.Size = new System.Drawing.Size(543, 92);
             this.txt_Remark.TabIndex = 72;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(68, 594);
+            this.label8.Location = new System.Drawing.Point(68, 552);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(42, 22);
             this.label8.TabIndex = 73;
@@ -606,7 +611,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.ForeColor = System.Drawing.Color.Red;
-            this.label17.Location = new System.Drawing.Point(23, 144);
+            this.label17.Location = new System.Drawing.Point(23, 136);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(15, 20);
             this.label17.TabIndex = 76;
@@ -616,7 +621,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.ForeColor = System.Drawing.Color.Red;
-            this.label18.Location = new System.Drawing.Point(23, 270);
+            this.label18.Location = new System.Drawing.Point(23, 254);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(15, 20);
             this.label18.TabIndex = 77;
@@ -626,7 +631,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.ForeColor = System.Drawing.Color.Red;
-            this.label19.Location = new System.Drawing.Point(53, 341);
+            this.label19.Location = new System.Drawing.Point(53, 319);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(15, 20);
             this.label19.TabIndex = 78;
@@ -636,7 +641,7 @@
             // 
             this.label20.AutoSize = true;
             this.label20.ForeColor = System.Drawing.Color.Red;
-            this.label20.Location = new System.Drawing.Point(53, 410);
+            this.label20.Location = new System.Drawing.Point(53, 388);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(15, 20);
             this.label20.TabIndex = 79;
@@ -646,7 +651,7 @@
             // 
             this.label21.AutoSize = true;
             this.label21.ForeColor = System.Drawing.Color.Red;
-            this.label21.Location = new System.Drawing.Point(409, 410);
+            this.label21.Location = new System.Drawing.Point(409, 388);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(15, 20);
             this.label21.TabIndex = 80;
@@ -656,7 +661,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.Red;
-            this.label22.Location = new System.Drawing.Point(23, 480);
+            this.label22.Location = new System.Drawing.Point(23, 450);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(15, 20);
             this.label22.TabIndex = 81;
@@ -664,7 +669,7 @@
             // 
             // num_count
             // 
-            this.num_count.Location = new System.Drawing.Point(577, 200);
+            this.num_count.Location = new System.Drawing.Point(577, 185);
             this.num_count.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.num_count.Maximum = new decimal(new int[] {
             999999999,
@@ -679,7 +684,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label23.Location = new System.Drawing.Point(526, 202);
+            this.label23.Location = new System.Drawing.Point(526, 187);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(42, 22);
             this.label23.TabIndex = 83;
@@ -689,20 +694,20 @@
             // 
             this.label24.AutoSize = true;
             this.label24.ForeColor = System.Drawing.Color.Red;
-            this.label24.Location = new System.Drawing.Point(444, 270);
+            this.label24.Location = new System.Drawing.Point(444, 254);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(15, 20);
             this.label24.TabIndex = 86;
             this.label24.Text = "*";
             // 
-            // panel1
+            // pal_IsTransfer
             // 
-            this.panel1.Controls.Add(this.rdo_Transfer_N);
-            this.panel1.Controls.Add(this.rdo_Transfer_Y);
-            this.panel1.Location = new System.Drawing.Point(551, 261);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(118, 39);
-            this.panel1.TabIndex = 85;
+            this.pal_IsTransfer.Controls.Add(this.rdo_Transfer_N);
+            this.pal_IsTransfer.Controls.Add(this.rdo_Transfer_Y);
+            this.pal_IsTransfer.Location = new System.Drawing.Point(551, 245);
+            this.pal_IsTransfer.Name = "pal_IsTransfer";
+            this.pal_IsTransfer.Size = new System.Drawing.Size(118, 39);
+            this.pal_IsTransfer.TabIndex = 85;
             // 
             // rdo_Transfer_N
             // 
@@ -732,19 +737,51 @@
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("微软雅黑", 11.5F, System.Drawing.FontStyle.Bold);
-            this.label25.Location = new System.Drawing.Point(458, 269);
+            this.label25.Location = new System.Drawing.Point(458, 253);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(74, 22);
             this.label25.TabIndex = 84;
             this.label25.Text = "是否移交";
+            // 
+            // pal_Wait
+            // 
+            this.pal_Wait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_Wait.Controls.Add(this.label26);
+            this.pal_Wait.Controls.Add(this.pictureBox1);
+            this.pal_Wait.Location = new System.Drawing.Point(250, 318);
+            this.pal_Wait.Name = "pal_Wait";
+            this.pal_Wait.Size = new System.Drawing.Size(214, 75);
+            this.pal_Wait.TabIndex = 87;
+            this.pal_Wait.Visible = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::数据采集档案管理系统___课题版.Properties.Resources.wait;
+            this.pictureBox1.Location = new System.Drawing.Point(91, 8);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label26.Location = new System.Drawing.Point(6, 49);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(203, 19);
+            this.label26.TabIndex = 1;
+            this.label26.Text = "正在下载并解析文件，请稍后...";
             // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(706, 711);
+            this.Controls.Add(this.pal_Wait);
             this.Controls.Add(this.label24);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pal_IsTransfer);
             this.Controls.Add(this.label25);
             this.Controls.Add(this.num_count);
             this.Controls.Add(this.label23);
@@ -796,6 +833,7 @@
             this.Name = "Frm_AddFile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "新增文件";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_AddFile_FormClosing);
             this.Load += new System.EventHandler(this.Frm_AddFile_Load);
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
@@ -808,8 +846,11 @@
             this.pal_carrier.ResumeLayout(false);
             this.pal_carrier.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_count)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pal_IsTransfer.ResumeLayout(false);
+            this.pal_IsTransfer.PerformLayout();
+            this.pal_Wait.ResumeLayout(false);
+            this.pal_Wait.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -874,9 +915,12 @@
         private System.Windows.Forms.NumericUpDown num_count;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pal_IsTransfer;
         private System.Windows.Forms.RadioButton rdo_Transfer_N;
         private System.Windows.Forms.RadioButton rdo_Transfer_Y;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Panel pal_Wait;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

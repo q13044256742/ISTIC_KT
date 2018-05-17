@@ -17,7 +17,6 @@
         private string userName;
         private string realName;
         private string passWord;
-        private string userUnitId;
         private string userUnitName;
         private string userSpecialId;
         private string specialName;
@@ -30,13 +29,9 @@
         /// </summary>
         public string UserName { get => userName; set => userName = value; }
         /// <summary>
-        /// 用户所属单位ID
-        /// </summary>
-        public string UserUnitId { get => userUnitId; set => userUnitId = value; }
-        /// <summary>
         /// 用户所属专项ID
         /// </summary>
-        public string UserSpecialId { get => userSpecialId; set => userSpecialId = value; }
+        public string SpecialId { get => userSpecialId; set => userSpecialId = value; }
         /// <summary>
         /// 真实姓名
         /// </summary>

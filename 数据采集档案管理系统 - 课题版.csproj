@@ -338,6 +338,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\wait.gif" />
     <None Include="Resources\file2.jpg" />
     <None Include="Resources\file.jpg" />
     <None Include="Resources\lock.jpg" />

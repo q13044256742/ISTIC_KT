@@ -19,20 +19,30 @@ namespace 数据采集档案管理系统___课题版
 
         private void LoadTopicList()
         {
-            object specialId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pi_id FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().UserSpecialId}'");
-            if(specialId != null)
+            DataTable _table = new DataTable();
+            _table.Columns.AddRange(new DataColumn[]
             {
-                DataTable table = SQLiteHelper.ExecuteQuery($"SELECT ti_id, ti_name FROM topic_info WHERE ti_obj_id='{specialId}'");
-                cbo_TopicId.DataSource = table;
-                cbo_TopicId.DisplayMember = "ti_name";
-                cbo_TopicId.ValueMember = "ti_id";
-            }
+                new DataColumn("id"),
+                new DataColumn("code")
+            });
+            DataTable proTable = SQLiteHelper.ExecuteQuery($"SELECT pi_id id, pi_code code FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'");
+            foreach(DataRow row in proTable.Rows)
+                _table.ImportRow(row);
+
+            DataTable topTable = SQLiteHelper.ExecuteQuery($"SELECT ti_id id, ti_code code FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().SpecialId}'");
+            foreach(DataRow row in topTable.Rows)
+                _table.ImportRow(row);
+
+            cbo_TopicId.DataSource = _table;
+            cbo_TopicId.DisplayMember = "code";
+            cbo_TopicId.ValueMember = "id";
+
         }
 
         private void Frm_Export_Load(object sender, EventArgs e)
         {
-            LoadFileInfo(UserHelper.GetUser().UserSpecialId);
-            List<object[]> projectIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().UserSpecialId}'", 1);
+            LoadFileInfo(UserHelper.GetUser().SpecialId);
+            List<object[]> projectIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'", 1);
             for(int i = 0; i < projectIds.Count; i++)
             {
                 LoadFileInfo(projectIds[i][0]);
@@ -45,7 +55,7 @@ namespace 数据采集档案管理系统___课题版
                         LoadFileInfo(pro_top_sub_ids[k][0]);
                 }
             }
-            List<object[]> topicIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().UserSpecialId}'", 1);
+            List<object[]> topicIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().SpecialId}'", 1);
             for(int i = 0; i < topicIds.Count; i++)
             {
                 LoadFileInfo(topicIds[i][0]);
@@ -77,14 +87,14 @@ namespace 数据采集档案管理系统___课题版
             if(value != null)
             {
                 /* ----复制文件----*/
-                pro_Show.Maximum = GetTotalFileAmountBySpiId(UserHelper.GetUser().UserSpecialId);
+                pro_Show.Maximum = GetTotalFileAmountBySpiId(UserHelper.GetUser().SpecialId);
                 int count = pro_Show.Maximum, okcount = 0, nocount = 0;
                 string rootFolder = value + "\\" + UserHelper.GetUser().SpecialName;
                 if(!Directory.Exists(rootFolder))
                     Directory.CreateDirectory(rootFolder);
                
                 //专项下的项目
-                List<object[]> list2 = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id, pi_name FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().UserSpecialId}'", 2);
+                List<object[]> list2 = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id, pi_code FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'", 2);
                 for(int i = 0; i < list2.Count; i++)
                 {
                     string _rootFolder = rootFolder + "\\" + list2[i][1];
@@ -94,7 +104,7 @@ namespace 数据采集档案管理系统___课题版
                     CopyFile(ref okcount, ref nocount, _rootFolder, GetFileLinkByObjId(list2[i][0]), true);
 
                     //项目下的课题
-                    List<object[]> list5 = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_name FROM topic_info WHERE ti_obj_id='{list2[i][0]}'", 2);
+                    List<object[]> list5 = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_code FROM topic_info WHERE ti_obj_id='{list2[i][0]}'", 2);
                     for(int j = 0; j < list5.Count; j++)
                     {
                         string _rootFolder2 = _rootFolder + "\\" + list5[j][1];
@@ -104,7 +114,7 @@ namespace 数据采集档案管理系统___课题版
                         CopyFile(ref okcount, ref nocount, _rootFolder2, GetFileLinkByObjId(list5[j][0]), true);
 
                         //课题下的子课题
-                        List<object[]> list6 = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_name FROM subject_info WHERE si_obj_id='{list5[j][0]}'", 2);
+                        List<object[]> list6 = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_obj_id='{list5[j][0]}'", 2);
                         for(int k = 0; k < list6.Count; k++)
                         {
                             string _rootFolder3 = _rootFolder2 + "\\" + list6[k][1];
@@ -114,7 +124,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                     //项目下的子课题
-                    List<object[]> list7 = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_name FROM subject_info WHERE si_obj_id='{list2[i][0]}'", 2);
+                    List<object[]> list7 = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_obj_id='{list2[i][0]}'", 2);
                     for(int j = 0; j < list7.Count; j++)
                     {
                         string _rootFolder2 = _rootFolder + "\\" + list7[j][1];
@@ -124,7 +134,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
                 //专项下的课题
-                List<object[]> list4 = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_name FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().UserSpecialId}'", 2);
+                List<object[]> list4 = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_code FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().SpecialId}'", 2);
                 for(int i = 0; i < list4.Count; i++)
                 {
                     string _rootFolder = rootFolder + "\\" + list4[i][1];
@@ -134,7 +144,7 @@ namespace 数据采集档案管理系统___课题版
                     CopyFile(ref okcount, ref nocount, _rootFolder, GetFileLinkByObjId(list4[i][0]), true);
 
                     //课题下的子课题
-                    List<object[]> list6 = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_name FROM subject_info WHERE si_obj_id='{list4[i][0]}'", 2);
+                    List<object[]> list6 = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_obj_id='{list4[i][0]}'", 2);
                     for(int k = 0; k < list6.Count; k++)
                     {
                         string _rootFolder3 = _rootFolder + "\\" + list6[k][1];
@@ -144,25 +154,62 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
 
-                /* --------归档-------- */
+                /* ========== 移交 ========== */
                 int _oc = 0, _nc = 0;
                 string exportPath = txt_ExportPath.Text;
-                object topicId = cbo_TopicId.SelectedValue;
-                if(!string.IsNullOrEmpty(exportPath) && topicId != null)
+                object cboId = cbo_TopicId.SelectedValue;
+                if(!string.IsNullOrEmpty(exportPath) && cboId != null)
                 {
-                    object[] topic = SQLiteHelper.ExecuteRowsQuery($"SELECT ti_id, ti_name FROM topic_info WHERE ti_id='{topicId}'");
-                    string _tf = exportPath + "\\" + topic[1];
-                    if(!Directory.Exists(_tf)) Directory.CreateDirectory(_tf);
-                    CopyFile(ref _oc, ref _nc, _tf, GetFileLinkByObjId(topic[0]), false);
-
-                    //课题下的子课题
-                    List<object[]> _list = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_name FROM subject_info WHERE si_obj_id='{topic[0]}'", 2);
-                    for(int k = 0; k < _list.Count; k++)
+                    /* ------ 项目 ------ */
+                    object[] project = SQLiteHelper.ExecuteRowsQuery($"SELECT pi_id, pi_code FROM project_info WHERE pi_id='{cboId}'");
+                    if(project != null)
                     {
-                        string _tfs = _tf + "\\" + _list[k][1];
-                        if(!Directory.Exists(_tfs)) Directory.CreateDirectory(_tfs);
-                        CopyFile(ref _oc, ref _nc, _tfs, GetFileLinkByObjId(_list[k][0]), false);
+                        string _tf_Pro = exportPath + "\\" + project[1];
+                        if(!Directory.Exists(_tf_Pro)) Directory.CreateDirectory(_tf_Pro);
+                        CopyFile(ref _oc, ref _nc, _tf_Pro, GetFileLinkByObjId(project[0]), false);
+                        //项目-课题
+                        List<object[]> proTopic = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_code FROM topic_info WHERE ti_obj_id='{project[0]}'", 2);
+                        foreach(object[] item in proTopic)
+                        {
+                            string _tf_ProTopic = _tf_Pro + "\\" + item[1];
+                            if(!Directory.Exists(_tf_ProTopic)) Directory.CreateDirectory(_tf_ProTopic);
+                            CopyFile(ref _oc, ref _nc, _tf_ProTopic, GetFileLinkByObjId(item[0]), false);
+
+                            //项目-课题-子课题
+                            List<object[]> proTopicSubject = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_obj_id='{item[0]}'", 2);
+                            foreach(object[] _item in proTopicSubject)
+                            {
+                                string _tfs = _tf_ProTopic + "\\" + _item[1];
+                                if(!Directory.Exists(_tfs)) Directory.CreateDirectory(_tfs);
+                                CopyFile(ref _oc, ref _nc, _tfs, GetFileLinkByObjId(_item[0]), false);
+                            }
+                        }
+                        //项目-子课题
+                        List<object[]> proSubject = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_obj_id='{project[0]}'", 2);
+                        foreach(object[] item in proSubject)
+                        {
+                            string _tf_ProSubject = _tf_Pro + "\\" + item[1];
+                            if(!Directory.Exists(_tf_ProSubject)) Directory.CreateDirectory(_tf_ProSubject);
+                            CopyFile(ref _oc, ref _nc, _tf_ProSubject, GetFileLinkByObjId(item[0]), false);
+                        }
                     }
+                    /* ------ 课题 ------ */
+                    object[] topic = SQLiteHelper.ExecuteRowsQuery($"SELECT ti_id, ti_code FROM topic_info WHERE ti_id='{cboId}'");
+                    if(topic != null)
+                    {
+                        string _tf = exportPath + "\\" + topic[1];
+                        if(!Directory.Exists(_tf)) Directory.CreateDirectory(_tf);
+                        CopyFile(ref _oc, ref _nc, _tf, GetFileLinkByObjId(topic[0]), false);
+                        //课题-子课题
+                        List<object[]> _list = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_obj_id='{topic[0]}'", 2);
+                        for(int k = 0; k < _list.Count; k++)
+                        {
+                            string _tfs = _tf + "\\" + _list[k][1];
+                            if(!Directory.Exists(_tfs)) Directory.CreateDirectory(_tfs);
+                            CopyFile(ref _oc, ref _nc, _tfs, GetFileLinkByObjId(_list[k][0]), false);
+                        }
+                    }
+
                     string filePath = exportPath + "\\课题档案交接清单";
                     MicrosoftWordHelper.WriteDocument(ref filePath, list);
 
@@ -173,7 +220,7 @@ namespace 数据采集档案管理系统___课题版
                 Close();
             }
             else
-                MessageBox.Show("请先指定归档文件存放路径。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MessageBox.Show("请先设置归档文件存放路径(全文路径)。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private static List<object[]> GetFileLinkByObjId(object objId) => SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_link, fi_file_id FROM files_info WHERE fi_obj_id='{objId}'", 2);

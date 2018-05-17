@@ -18,7 +18,7 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="list">所需写入的内容</param>
         public static void WriteDocument(ref string filePath, List<DataRow> list)
         {
-            object[] objs = SQLiteHelper.ExecuteRowsQuery($"SELECT spi_code, spi_name FROM special_info WHERE spi_id='{UserHelper.GetUser().UserSpecialId}'");
+            object[] objs = SQLiteHelper.ExecuteRowsQuery($"SELECT spi_code, spi_name FROM special_info WHERE spi_id='{UserHelper.GetUser().SpecialId}'");
             if(objs != null) { SpeCode = objs[0]; SpeName = objs[1]; }
             Microsoft.Office.Interop.Word.Application app = null;
             Document doc = null;

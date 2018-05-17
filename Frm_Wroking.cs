@@ -43,11 +43,6 @@ namespace 数据采集档案管理系统___课题版
                 ShowTabPageByName("project", 0);
                 project.Tag = treeNode.Name;
             }
-            else if((ControlType)treeNode.Tag == ControlType.Topic)
-            {
-                ShowTabPageByName("topic", 0);
-                topic.Tag = treeNode.Name;
-            }
             else
                 LoadBasicInfo(treeNode);
         }
@@ -107,6 +102,20 @@ namespace 数据采集档案管理系统___课题版
                     tab_Menu.SelectedIndex = tab_Menu.TabCount - 1;
                 }
             }
+            else if(type == ControlType.Topic)
+            {
+                DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM topic_info WHERE ti_id='{treeNode.Name}'");
+                if(row != null)
+                {
+                    ShowTabPageByName("topic", 0);
+                    gro_Topic_Btns.Tag = 0;
+                    topic.Tag = row["ti_obj_id"];
+                    txt_Topic_Code.Tag = type;
+                    LoadBasicInfoInstince(ControlType.Plan_Topic, row["ti_id"], row);
+                }
+
+                tab_Menu.SelectedIndex = tab_Menu.TabCount - 1;
+            }
             else if(type == ControlType.Plan_Topic)
             {
                 //当前节点
@@ -123,13 +132,6 @@ namespace 数据采集档案管理系统___课题版
 
                         ShowTabPageByName("topic", 1);
                         gro_Topic_Btns.Tag = 1;
-                        topic.Tag = row["ti_obj_id"];
-                        LoadBasicInfoInstince(ControlType.Plan_Topic, row["ti_id"], row);
-                    }
-                    else
-                    {
-                        ShowTabPageByName("topic", 0);
-                        gro_Topic_Btns.Tag = 0;
                         topic.Tag = row["ti_obj_id"];
                         LoadBasicInfoInstince(ControlType.Plan_Topic, row["ti_id"], row);
                     }
@@ -505,7 +507,7 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Project_Info.Tag;
                 if(index == 0)
                 {
-                    if(CheckMustEnter(name))
+                    if(CheckMustEnter(name, true))
                     {
                         objId = tab_Project_Info.Tag = ModifyBasicInfo(ControlType.Plan_Project, objId, project.Tag);
                         if(CheckFileName(dgv_Project_FileList.Rows, key))
@@ -551,12 +553,12 @@ namespace 数据采集档案管理系统___课题版
                     else if(index == 2)
                     {
                         //保存案卷基本信息 
-                        string code = txt_Project_AJ_Code.Text;
+                        string code = cbo_Project_AJ_Code.Text;
                         if(string.IsNullOrEmpty(code))
                             code = GetAJCode(objId, txt_Project_Code.Text, 0, txt_Project_Year.Text);
                         if(!string.IsNullOrEmpty(code))
                         {
-                            object aid = txt_Project_AJ_Code.Tag;
+                            object aid = cbo_Project_AJ_Code.Tag;
                             string _name = txt_Project_AJ_Name.Text;
                             string secret = GetMaxSecretById(objId);
                             string user = UserHelper.GetUser().RealName;
@@ -565,16 +567,16 @@ namespace 数据采集档案管理系统___课题版
                             {
                                 aid = Guid.NewGuid().ToString();
                                 string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-                                    $"VALUES ('{aid}','{code}','{_name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().UserSpecialId}')";
+                                    $"VALUES ('{aid}','{code}','{_name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
                                 SQLiteHelper.ExecuteNonQuery(insertSql);
-                                txt_Topic_AJ_Code.Tag = aid;
+                                cbo_Project_AJ_Code.Tag = aid;
                             }
                             else
                             {
                                 string updateSql = $"UPDATE files_tag_info SET pt_code='{code}',pt_name='{_name}',pt_secret='{secret}',pt_user='{user}',pt_unit='{unit}' WHERE pt_id='{aid}'";
                                 SQLiteHelper.ExecuteNonQuery(updateSql);
                             }
-                            txt_Project_AJ_Code.Text = code;
+                            cbo_Project_AJ_Code.Text = code;
                         }
                         //保存盒信息
                         object boxId = cbo_Project_BoxId.SelectedValue;
@@ -611,7 +613,8 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Topic_Info.Tag;
                 if(index == 0)
                 {
-                    if(CheckMustEnter(name))
+                    bool flag = txt_Topic_Code.Tag == null ? false : (ControlType)txt_Topic_Code.Tag == ControlType.Topic;
+                    if(CheckMustEnter(name, flag))
                     {
                         objId = tab_Topic_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic, objId, topic.Tag);
                         if(CheckFileName(dgv_Topic_FileList.Rows, key))
@@ -671,7 +674,7 @@ namespace 数据采集档案管理系统___课题版
                             {
                                 aid = Guid.NewGuid().ToString();
                                 string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-                                    $"VALUES ('{aid}','{code}','{_name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().UserSpecialId}')";
+                                    $"VALUES ('{aid}','{code}','{_name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
                                 SQLiteHelper.ExecuteNonQuery(insertSql);
                                 txt_Topic_AJ_Code.Tag = aid;
                             }
@@ -716,7 +719,7 @@ namespace 数据采集档案管理系统___课题版
                 object objId = tab_Subject_Info.Tag;
                 if(index == 0)
                 {
-                    if(CheckMustEnter(name))
+                    if(CheckMustEnter(name, false))
                     {
                         objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
                         if(CheckFileName(dgv_Subject_FileList.Rows, key))
@@ -776,7 +779,7 @@ namespace 数据采集档案管理系统___课题版
                             {
                                 aid = Guid.NewGuid().ToString();
                                 string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-                                    $"VALUES ('{aid}','{code}','{_name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().UserSpecialId}')";
+                                    $"VALUES ('{aid}','{code}','{_name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
                                 SQLiteHelper.ExecuteNonQuery(insertSql);
                                 txt_Subject_AJ_Code.Tag = aid;
                             }
@@ -874,7 +877,11 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         void UpdateSecretById(object objId) => SQLiteHelper.ExecuteNonQuery($"UPDATE files_tag_info SET pt_secret='{GetMaxSecretById(objId)}' WHERE pt_obj_id='{objId}'");
 
-        private bool CheckMustEnter(string name)
+        /// <summary>
+        /// 检测基本信息必填项是否完整
+        /// </summary>
+        /// <param name="isParentLevel">是否是父级，是则不执行严格检测</param>
+        private bool CheckMustEnter(string name, bool isParentLevel)
         {
             bool result = true;
             if(name.Contains("Project"))
@@ -886,27 +893,6 @@ namespace 数据采集档案管理系统___课题版
                 }
                 else
                     errorProvider1.SetError(txt_Project_Code, null);
-                if(string.IsNullOrEmpty(txt_Project_Year.Text))
-                {
-                    errorProvider1.SetError(txt_Project_Year, "提示：立项年度不能为空");
-                    result = false;
-                }
-                else
-                    errorProvider1.SetError(txt_Project_Year, null);
-                if(string.IsNullOrEmpty(txt_Project_Unit.Text))
-                {
-                    errorProvider1.SetError(txt_Project_Unit, "提示：承担单位不能为空");
-                    result = false;
-                }
-                else
-                    errorProvider1.SetError(txt_Project_Unit, null);
-                if(string.IsNullOrEmpty(txt_Project_Proer.Text))
-                {
-                    errorProvider1.SetError(txt_Project_Proer, "提示：负责人不能为空");
-                    result = false;
-                }
-                else
-                    errorProvider1.SetError(txt_Project_Proer, null);
             }
             else if(name.Contains("Topic"))
             {
@@ -917,27 +903,30 @@ namespace 数据采集档案管理系统___课题版
                 }
                 else
                     errorProvider1.SetError(txt_Topic_Code, null);
-                if(string.IsNullOrEmpty(txt_Topic_Year.Text))
+                if(!isParentLevel)
                 {
-                    errorProvider1.SetError(txt_Topic_Year, "提示：立项年度不能为空");
-                    result = false;
+                    if(string.IsNullOrEmpty(txt_Topic_Year.Text))
+                    {
+                        errorProvider1.SetError(txt_Topic_Year, "提示：立项年度不能为空");
+                        result = false;
+                    }
+                    else
+                        errorProvider1.SetError(txt_Topic_Year, null);
+                    if(string.IsNullOrEmpty(txt_Topic_Unit.Text))
+                    {
+                        errorProvider1.SetError(txt_Topic_Unit, "提示：承担单位不能为空");
+                        result = false;
+                    }
+                    else
+                        errorProvider1.SetError(txt_Topic_Unit, null);
+                    if(string.IsNullOrEmpty(txt_Topic_Proer.Text))
+                    {
+                        errorProvider1.SetError(txt_Topic_Proer, "提示：负责人不能为空");
+                        result = false;
+                    }
+                    else
+                        errorProvider1.SetError(txt_Topic_Proer, null);
                 }
-                else
-                    errorProvider1.SetError(txt_Topic_Year, null);
-                if(string.IsNullOrEmpty(txt_Topic_Unit.Text))
-                {
-                    errorProvider1.SetError(txt_Topic_Unit, "提示：承担单位不能为空");
-                    result = false;
-                }
-                else
-                    errorProvider1.SetError(txt_Topic_Unit, null);
-                if(string.IsNullOrEmpty(txt_Topic_Proer.Text))
-                {
-                    errorProvider1.SetError(txt_Topic_Proer, "提示：负责人不能为空");
-                    result = false;
-                }
-                else
-                    errorProvider1.SetError(txt_Topic_Proer, null);
             }
             else if(name.Contains("Subject"))
             {
@@ -1211,7 +1200,7 @@ namespace 数据采集档案管理系统___课题版
             {
                 string newString = string.Empty;
                 //更新案卷编号中的年份
-                object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT cr_template FROM code_rule WHERE cr_type=0 AND cr_special_id='{UserHelper.GetUser().UserSpecialId}'");
+                object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT cr_template FROM code_rule WHERE cr_type=0 AND cr_special_id='{UserHelper.GetUser().SpecialId}'");
                 if(value != null)
                 {
                     string tempStr = GetValue(value);
@@ -1229,7 +1218,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
                 //更新案卷盒中的年份
-                object _value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT cr_template FROM code_rule WHERE cr_type=1 AND cr_special_id='{UserHelper.GetUser().UserSpecialId}'");
+                object _value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT cr_template FROM code_rule WHERE cr_type=1 AND cr_special_id='{UserHelper.GetUser().SpecialId}'");
                 if(_value != null)
                 {
                     string tempStr = GetValue(_value);
@@ -1541,6 +1530,7 @@ namespace 数据采集档案管理系统___课题版
             object type = row.Cells[key + "type"].Value;
             object secret = row.Cells[key + "secret"].Value;
             object pages = row.Cells[key + "pages"].Value;
+            object count = row.Cells[key + "count"].Value;
             object code = row.Cells[key + "code"].Value;
             DateTime date = DateTime.MinValue;
             string _date = GetValue(row.Cells[key + "date"].Value);
@@ -1559,6 +1549,7 @@ namespace 数据采集档案管理系统___课题版
             object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
             object fileId = row.Cells[key + "link"].Tag;
+            int transfer = "是".Equals(row.Cells[key + "transfer"].Value) ? 0 : 1;
             object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
             string updateSql = "UPDATE files_info SET " +
                 $"fi_stage = '{stage}', " +
@@ -1569,6 +1560,7 @@ namespace 数据采集档案管理系统___课题版
                 $"fi_type = '{type}', " +
                 $"fi_secret = '{secret}', " +
                 $"fi_pages = '{pages}', " +
+                $"fi_count = '{count}', " +
                 $"fi_code = '{code}', " +
                 $"fi_create_date = '{date.ToString("s")}', " +
                 $"fi_unit = '{unit}', " +
@@ -1576,6 +1568,7 @@ namespace 数据采集档案管理系统___课题版
                 $"fi_format = '{format}', " +
                 $"fi_form = '{form}', " +
                 $"fi_link = '{link}', " +
+                $"fi_transfer = '{transfer}', " +
                 $"fi_file_id = '{fileId}', " +
                 $"fi_sort = '{sort}' " +
                 $"WHERE fi_id = '{primaryKey}';";
@@ -1605,6 +1598,7 @@ namespace 数据采集档案管理系统___课题版
             object type = row.Cells[key + "type"].Value;
             object secret = row.Cells[key + "secret"].Value;
             object pages = row.Cells[key + "pages"].Value;
+            object count = row.Cells[key + "count"].Value;
             object code = row.Cells[key + "code"].Value;
             DateTime now = DateTime.MinValue;
             string _date = GetValue(row.Cells[key + "date"].Value);
@@ -1622,6 +1616,7 @@ namespace 数据采集档案管理系统___课题版
             object carrier = row.Cells[key + "carrier"].Value;
             object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
+            int transfer = "是".Equals(row.Cells[key + "transfer"].Value) ? 0 : 1;
             object fileId = row.Cells[key + "link"].Tag;
             object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
 
@@ -1638,8 +1633,8 @@ namespace 数据采集档案管理系统___课题版
             }
 
             string insertSql = "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
-            $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}');";
+            "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_transfer) " +
+            $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}', '{transfer}');";
             if(fileId != null)
             {
                 int value = link == null ? 0 : 1;
@@ -1678,7 +1673,7 @@ namespace 数据采集档案管理系统___课题版
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
                     frm.parentId = objId;
-                    frm.ShowDialog();
+                    frm.Show();
                 }
                 else
                     MessageBox.Show("请先保存基本信息。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1706,7 +1701,7 @@ namespace 数据采集档案管理系统___课题版
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
                     frm.parentId = objId;
-                    frm.ShowDialog();
+                    frm.Show();
                 }
                 else
                     MessageBox.Show("请先保存基本信息。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1734,7 +1729,7 @@ namespace 数据采集档案管理系统___课题版
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
                     frm.parentId = objId;
-                    frm.ShowDialog();
+                    frm.Show();
                 }
                 else
                     MessageBox.Show("请先保存基本信息。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1762,20 +1757,10 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 2)
                     {
-                        object[] obj = SQLiteHelper.ExecuteRowsQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_obj_id='{objid}'");
-                        if(obj != null)
-                        {
-                            txt_Project_AJ_Code.Tag = GetValue(obj[0]);
-                            txt_Project_AJ_Code.Text = GetValue(obj[1]);
-                            txt_Project_AJ_Name.Text = GetValue(obj[2]);
-                        }
-                        else
-                        {
-                            txt_Project_AJ_Code.Text = string.Empty;
-                            txt_Project_AJ_Name.Text = txt_Project_Name.Text;
-                        }
-                        LoadBoxList(objid, ControlType.Plan_Project);
-                        LoadFileBoxTable(cbo_Project_BoxId.SelectedValue, objid, ControlType.Plan_Project);
+                        LoadDocList(objid, ControlType.Plan_Project);
+
+                        //LoadBoxList(objid, ControlType.Plan_Project);
+                        //LoadFileBoxTable(cbo_Project_BoxId.SelectedValue, objid, ControlType.Plan_Project);
                     }
                 }
             }
@@ -1852,13 +1837,36 @@ namespace 数据采集档案管理系统___课题版
         }
 
         /// <summary>
+        /// 根据制定对象ID加载档号列表
+        /// </summary>
+        private void LoadDocList(object objid, ControlType type)
+        {
+            if(type == ControlType.Plan_Project)
+            {
+                cbo_Project_AJ_Code.Items.Clear();
+                cbo_Project_AJ_Code.ResetText();
+                txt_Project_AJ_Name.Text = txt_Project_Name.Text;
+                List<object[]> obj = SQLiteHelper.ExecuteColumnsQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_obj_id='{objid}'", 3);
+                for(int i = 0; i < obj.Count; i++)
+                    cbo_Project_AJ_Code.Items.Add(obj[i][1]);
+                if(obj.Count > 0)
+                {
+                    cbo_Project_AJ_Code.Tag = GetValue(obj[0][0]);
+                    cbo_Project_AJ_Code.Text = GetValue(obj[0][1]);
+                    txt_Project_AJ_Name.Text = GetValue(obj[0][2]);
+                    cbo_Project_AJ_Code_SelectionChangeCommitted(cbo_Project_AJ_Code, null);
+                }
+            }
+        }
+
+        /// <summary>
         /// 根据预设规则获取编码
         /// </summary>
         /// <param name="type">0：案卷 1：馆藏号</param>
         private string GetAJCode(object objId, object objCode, int type, string year)
         {
             string code = string.Empty;
-            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM code_rule WHERE cr_type='{type}' AND cr_special_id='{UserHelper.GetUser().UserSpecialId}'");
+            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM code_rule WHERE cr_type='{type}' AND cr_special_id='{UserHelper.GetUser().SpecialId}'");
             if(row != null)
             {
                 string fix = GetValue(row["cr_fixed"]);
@@ -1871,7 +1879,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if("AAAA".Equals(strs[i]))//专项编号
                     {
-                        string zxCode = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT spi_code FROM special_info WHERE spi_id='{UserHelper.GetUser().UserSpecialId}'"));
+                        string zxCode = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().SpecialId}'"));
                         if(!string.IsNullOrEmpty(zxCode))
                             code += zxCode;
                         else
@@ -1881,7 +1889,7 @@ namespace 数据采集档案管理系统___课题版
                         code += objCode;
                     else if("CCCC".Equals(strs[i]))//来源单位
                     {
-                        string unitCode = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().UserUnitId}'"));
+                        string unitCode = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT dd_code FROM data_dictionary WHERE dd_id='{UserHelper.GetUser().SpecialId}'"));
                         if(!string.IsNullOrEmpty(unitCode))
                             code += unitCode;
                         else
@@ -1894,9 +1902,9 @@ namespace 数据采集档案管理系统___课题版
                         int length = strs[i].Length;
                         int amount = 0;
                         if(type == 0)
-                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_special_id='{UserHelper.GetUser().UserSpecialId}'") + 1;
+                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_special_id='{UserHelper.GetUser().SpecialId}'") + 1;
                         else if(type == 1)
-                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().UserSpecialId}'") + 1;
+                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().SpecialId}'") + 1;
                         code += amount.ToString().PadLeft(length, '0');
                     }
                     code += symbol;
@@ -2397,7 +2405,7 @@ namespace 数据采集档案管理系统___课题版
             string name = (sender as Control).Name;
             if(name.Contains("Project"))
             {
-                object objId = tab_Project_Info.Tag;
+                object objId = cbo_Project_AJ_Code.Tag;
                 if(objId != null)
                 {
                     if(name.Contains("Add"))
@@ -2405,7 +2413,7 @@ namespace 数据采集档案管理系统___课题版
                         string gch = GetAJCode(objId, txt_Project_Code.Text, 1, txt_Project_Year.Text);
                         int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
                         string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
-                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
+                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().SpecialId}')";
                         SQLiteHelper.ExecuteNonQuery(insertSql);
                         MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
@@ -2443,6 +2451,8 @@ namespace 数据采集档案管理系统___课题版
                     LoadBoxList(objId, ControlType.Plan_Project);
                     LoadFileBoxTable(cbo_Project_BoxId.SelectedValue, objId, ControlType.Plan_Project);
                 }
+                else
+                    MessageBox.Show("尚未指定档号。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else if(name.Contains("Topic"))
             {
@@ -2454,7 +2464,7 @@ namespace 数据采集档案管理系统___课题版
                         string gch = GetAJCode(objId, txt_Topic_Code.Text, 1, txt_Topic_Year.Text);
                         int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
                         string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
-                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
+                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().SpecialId}')";
                         SQLiteHelper.ExecuteNonQuery(insertSql);
                         MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
@@ -2503,7 +2513,7 @@ namespace 数据采集档案管理系统___课题版
                         string gch = GetAJCode(objId, txt_Subject_Code.Text, 1, txt_Subject_Year.Text);
                         int amount = Convert.ToInt32(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT COUNT(pb_box_number) FROM files_box_info WHERE pb_obj_id='{objId}'"));
                         string insertSql = $"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
-                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().UserSpecialId}')";
+                            $"VALUES('{Guid.NewGuid().ToString()}','{amount + 1}','{gch}',null,'{objId}','{UserHelper.GetUser().SpecialId}')";
                         SQLiteHelper.ExecuteNonQuery(insertSql);
                         MessageBox.Show("添加案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
@@ -2695,10 +2705,17 @@ namespace 数据采集档案管理系统___课题版
             if(name.Contains("Topic"))
             {
                 ClearText(topic, true);
+
+                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{topic.Tag}'") + 1;
+                txt_Topic_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
+                Txt_Project_Code_Leave(txt_Topic_Code, null);
             }
             else if(name.Contains("Subject"))
             {
                 ClearText(Subject, true);
+                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{Subject.Tag}'") + 1;
+                txt_Subject_Code.Text = txt_Topic_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
+                Txt_Project_Code_Leave(txt_Subject_Code, null);
             }
         }
 
@@ -2761,7 +2778,8 @@ namespace 数据采集档案管理系统___课题版
                             txt_Project_Year.Text = year.ToString();
                             DateTime time = DateTime.MinValue;
                             if(DateTime.TryParse(year + "-01-01", out time))
-                                dtp_Project_StartDate.Value = time;
+                                if(time > dtp_Project_StartDate.MinDate && time < dtp_Project_StartDate.MaxDate)
+                                    dtp_Project_StartDate.Value = time;
                         }
                     }
                 }
@@ -2784,7 +2802,8 @@ namespace 数据采集档案管理系统___课题版
                             txt_Topic_Year.Text = year.ToString();
                             DateTime time = DateTime.MinValue;
                             if(DateTime.TryParse(year + "-01-01", out time))
-                                dtp_Topic_StartDate.Value = time;
+                                if(time > dtp_Topic_StartDate.MinDate && time < dtp_Topic_StartDate.MaxDate)
+                                    dtp_Topic_StartDate.Value = time;
                         }
                     }
                 }
@@ -2807,7 +2826,8 @@ namespace 数据采集档案管理系统___课题版
                             txt_Subject_Year.Text = year.ToString();
                             DateTime time = DateTime.MinValue;
                             if(DateTime.TryParse(year + "-01-01", out time))
-                                dtp_Subject_StartDate.Value = time;
+                                if(time > dtp_Subject_StartDate.MinDate && time < dtp_Subject_StartDate.MaxDate)
+                                    dtp_Subject_StartDate.Value = time;
                         }
                     }
                 }
@@ -2849,7 +2869,15 @@ namespace 数据采集档案管理系统___课题版
                     if(File.Exists(filePath))
                     {
                         if(MessageBox.Show("是否需要打开文件？", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            System.Diagnostics.Process.Start("Explorer.exe", filePath);
+                        {
+                            string savePath = Application.StartupPath + @"\TempBackupFolder\";
+                            if(!Directory.Exists(savePath))
+                                Directory.CreateDirectory(savePath);
+                            string _filePath = savePath + new FileInfo(filePath).Name;
+                            if(!File.Exists(_filePath))
+                                File.Copy(filePath, _filePath, true);
+                            System.Diagnostics.Process.Start("Explorer.exe", _filePath);
+                        }
                     }
                 }
             }
@@ -2902,6 +2930,104 @@ namespace 数据采集档案管理系统___课题版
             else
             {
                 MessageBox.Show("请先保存基本信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            }
+        }
+
+        private void cbo_Project_AJ_Code_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            ComboBox combo = sender as ComboBox;
+            string value = GetValue(combo.SelectedItem);
+            if(!string.IsNullOrEmpty(value))
+            {
+                if(combo.Name.Contains("Project"))
+                {
+                    object objId = tab_Project_Info.Tag;
+                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_code='{value}' AND pt_obj_id='{objId}'");
+                    if(row != null)
+                    {
+                        cbo_Project_AJ_Code.Tag = row["pt_id"];
+                        txt_Project_AJ_Name.Text = GetValue(row["pt_name"]);
+
+                        LoadBoxList(row["pt_id"], ControlType.Plan_Project);
+                    }
+
+                }
+            }
+        }
+
+        private void lbl_Project_Doc_Add_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Control con = sender as Control;
+            if(con.Name.Contains("Project"))
+            {
+                object objId = tab_Project_Info.Tag;
+                string code = cbo_Project_AJ_Code.Text;
+                if(!string.IsNullOrEmpty(code))
+                {
+                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_code) FROM files_tag_info WHERE pt_code='{code}' AND pt_obj_id='{objId}'");
+                    if(count == 0)
+                    {
+                        if(MessageBox.Show("确定要添加新的档号吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                        {
+                            string name = txt_Project_AJ_Name.Text;
+                            string secret = GetMaxSecretById(objId);
+                            string user = UserHelper.GetUser().RealName;
+                            string unit = UserHelper.GetUser().UserUnitName;
+                            string aid = Guid.NewGuid().ToString();
+
+                            string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
+                                $"VALUES ('{aid}','{code}','{name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
+                            SQLiteHelper.ExecuteNonQuery(insertSql);
+
+                            MessageBox.Show("操作成功。");
+                            LoadDocList(objId, ControlType.Plan_Project);
+                        }
+                    }
+                    else
+                        MessageBox.Show("此档号已存在，请重新输入。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                    MessageBox.Show("档号不能为空。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void lbl_Project_Doc_Delete_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Control con = sender as Control;
+            if(con.Name.Contains("Project"))
+            {
+                object docId = cbo_Project_AJ_Code.Tag;
+                if(docId != null)
+                {
+                    string queryString = "确定要删除当前档号吗，将同时删除档号下存在的所有数据，是否继续？";
+                    if(MessageBox.Show(queryString, "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        //删除当前档号下所有盒SQL
+                        string sqlString = $"DELETE FROM files_box_info WHERE pb_obj_id='{docId}';";
+                        object[] boxIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_obj_id='{docId}'");
+                        for(int j = 0; j < boxIds.Length; j++)
+                        {
+                            string fileId = GetValue(boxIds[j]);
+                            if(fileId.Contains(","))
+                            {
+                                string[] filesid = fileId.Split(',');
+                                //删除当前盒下所有文件SQL
+                                string fids = string.Empty;
+                                for(int i = 0; i < filesid.Length; i++)
+                                    fids += $"'{filesid[i]}',";
+                                if(!string.IsNullOrEmpty(fids))
+                                {
+                                    fids = fids.Substring(0, fids.Length - 1);
+                                    sqlString += $"UPDATE files_info SET fi_status=-1 WHERE fi_id IN ({fids});";
+                                }
+                            }
+                        }
+                        SQLiteHelper.ExecuteNonQuery(sqlString);
+                        MessageBox.Show("操作成功。");
+
+                        LoadDocList(tab_Project_Info.Tag, ControlType.Plan_Project);
+                    }
+                }
             }
         }
     }

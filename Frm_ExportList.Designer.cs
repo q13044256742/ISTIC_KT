@@ -35,6 +35,8 @@
             this.txt_Path = new System.Windows.Forms.TextBox();
             this.lbl_SelectPath = new System.Windows.Forms.LinkLabel();
             this.btn_Sure = new System.Windows.Forms.Button();
+            this.pic_Wait = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Wait)).BeginInit();
             this.SuspendLayout();
             // 
             // chk_DocumentList
@@ -109,11 +111,24 @@
             this.btn_Sure.UseVisualStyleBackColor = true;
             this.btn_Sure.Click += new System.EventHandler(this.btn_Sure_Click);
             // 
+            // pic_Wait
+            // 
+            this.pic_Wait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_Wait.Image = global::数据采集档案管理系统___课题版.Properties.Resources.wait;
+            this.pic_Wait.Location = new System.Drawing.Point(218, 93);
+            this.pic_Wait.Name = "pic_Wait";
+            this.pic_Wait.Size = new System.Drawing.Size(34, 34);
+            this.pic_Wait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pic_Wait.TabIndex = 7;
+            this.pic_Wait.TabStop = false;
+            this.pic_Wait.Visible = false;
+            // 
             // Frm_ExportList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 245);
+            this.Controls.Add(this.pic_Wait);
             this.Controls.Add(this.btn_Sure);
             this.Controls.Add(this.lbl_SelectPath);
             this.Controls.Add(this.txt_Path);
@@ -128,6 +143,8 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "档案导出";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_ExportList_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Wait)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +159,6 @@
         private System.Windows.Forms.LinkLabel lbl_SelectPath;
         private System.Windows.Forms.Button btn_Sure;
         private System.Windows.Forms.CheckBox chk_TotalTable;
+        private System.Windows.Forms.PictureBox pic_Wait;
     }
 }

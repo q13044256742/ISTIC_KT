@@ -43,7 +43,7 @@ namespace 数据采集档案管理系统___课题版
             txt_Mdi.Tag = txt_Mdi.Text;
             cbo_Type.Items.AddRange(new string[]
             {
-                "案卷号", "馆藏号"
+                "档号", "馆藏号"
             });
             cbo_Type.SelectedIndex = 0;
         }

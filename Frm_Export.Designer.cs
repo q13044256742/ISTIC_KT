@@ -95,9 +95,9 @@
             this.label4.Location = new System.Drawing.Point(23, 21);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 19);
+            this.label4.Size = new System.Drawing.Size(156, 19);
             this.label4.TabIndex = 9;
-            this.label4.Text = "选择待导出课题：";
+            this.label4.Text = "选择待导出项目/课题：";
             // 
             // cbo_TopicId
             // 

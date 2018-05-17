@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tab_UseList = new System.Windows.Forms.TabControl();
             this.tp_UserList = new System.Windows.Forms.TabPage();
             this.dgv_UserList = new System.Windows.Forms.DataGridView();
@@ -105,14 +105,14 @@
             this.dgv_UserList.AllowUserToAddRows = false;
             this.dgv_UserList.AllowUserToDeleteRows = false;
             this.dgv_UserList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgv_UserList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.realname,
@@ -179,11 +179,11 @@
             // btn_Refresh
             // 
             this.btn_Refresh.AutoSize = true;
-            this.btn_Refresh.Location = new System.Drawing.Point(495, 20);
+            this.btn_Refresh.Location = new System.Drawing.Point(488, 20);
             this.btn_Refresh.Name = "btn_Refresh";
-            this.btn_Refresh.Size = new System.Drawing.Size(87, 31);
+            this.btn_Refresh.Size = new System.Drawing.Size(79, 31);
             this.btn_Refresh.TabIndex = 10;
-            this.btn_Refresh.Text = "刷新(&R)";
+            this.btn_Refresh.Text = "刷新";
             this.btn_Refresh.UseVisualStyleBackColor = true;
             this.btn_Refresh.Click += new System.EventHandler(this.btn_Refresh_Click);
             // 
@@ -192,9 +192,9 @@
             this.btn_Search.AutoSize = true;
             this.btn_Search.Location = new System.Drawing.Point(402, 20);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(87, 31);
+            this.btn_Search.Size = new System.Drawing.Size(79, 31);
             this.btn_Search.TabIndex = 9;
-            this.btn_Search.Text = "查询(&F)";
+            this.btn_Search.Text = "查询";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -282,21 +282,21 @@
             // 
             // btn_Reset
             // 
-            this.btn_Reset.Location = new System.Drawing.Point(291, 442);
+            this.btn_Reset.Location = new System.Drawing.Point(336, 442);
             this.btn_Reset.Name = "btn_Reset";
-            this.btn_Reset.Size = new System.Drawing.Size(94, 33);
+            this.btn_Reset.Size = new System.Drawing.Size(74, 31);
             this.btn_Reset.TabIndex = 19;
-            this.btn_Reset.Text = "重置(&R)";
+            this.btn_Reset.Text = "重置";
             this.btn_Reset.UseVisualStyleBackColor = true;
             this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(415, 442);
+            this.btn_Save.Location = new System.Drawing.Point(416, 442);
             this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(94, 33);
+            this.btn_Save.Size = new System.Drawing.Size(74, 31);
             this.btn_Save.TabIndex = 18;
-            this.btn_Save.Text = "保存(&S)";
+            this.btn_Save.Text = "保存";
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 

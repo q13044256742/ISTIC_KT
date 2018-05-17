@@ -27,7 +27,7 @@ namespace 数据采集档案管理系统___课题版
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
         }
-      
+
         /// <summary>
         /// 路径选择
         /// </summary>
@@ -57,7 +57,7 @@ namespace 数据采集档案管理系统___课题版
                 SaveTargetPath(); //如果是首次添加目标路径，则保存
                 btn_Import.Enabled = false;
                 count = okCount = noCount = indexCount = 0;
-                int totalFileAmount = Directory.GetFiles(sPath, "*", SearchOption.AllDirectories).Length;
+                int totalFileAmount = Directory.GetFiles(sPath, "*", SearchOption.AllDirectories).Length - Directory.GetFiles(sPath, "ISTIC*.db", SearchOption.AllDirectories).Length;
                 pro_Show.Value = pro_Show.Minimum;
                 pro_Show.Maximum = totalFileAmount;
 
@@ -262,7 +262,7 @@ namespace 数据采集档案管理系统___课题版
             DirectoryInfo info = new DirectoryInfo(sPath);
             FileInfo[] file = info.GetFiles();
             //排除数据库文件和清单文件
-            if(file.Length != 2 || !(file[0].Name.Contains("ISTIC") && file[0].Extension.Contains("db")))
+            if(file.Length > 0 && !(file[0].Name.Contains("ISTIC") && file[0].Extension.Contains("db")))
             {
                 count += file.Length;
                 for(int i = 0; i < file.Length; i++)
@@ -311,6 +311,8 @@ namespace 数据采集档案管理系统___课题版
                 MessageBox.Show("请等待导入完毕,中途退出会导致数据错误。", "无法关闭", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 e.Cancel = true;
             }
+            else
+                DialogResult = DialogResult.OK;
         }
 
         private void btn_TarPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

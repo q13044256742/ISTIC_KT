@@ -23,11 +23,12 @@ namespace 数据采集档案管理系统___课题版
             txt_Sort.Value = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(*) FROM data_dictionary WHERE dd_pId='{key}'");
             if(id != null)
             {
-                object[] obj = SQLiteHelper.ExecuteRowsQuery($"SELECT dd_name, dd_note, dd_sort FROM data_dictionary WHERE dd_id='{id}'");
+                object[] obj = SQLiteHelper.ExecuteRowsQuery($"SELECT dd_name, dd_note, dd_sort, dd_code FROM data_dictionary WHERE dd_id='{id}'");
                 txt_name.Tag = id;
                 txt_name.Text = GetValue(obj[0]);
                 txt_Intro.Text = GetValue(obj[1]);
                 txt_Sort.Value = GetIntValue(obj[2]);
+                txt_code.Text = GetValue(obj[3]);
             }
         }
 
@@ -46,6 +47,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void btn_Save_Click(object sender, System.EventArgs e)
         {
+            object code = txt_code.Text;
             object name = txt_name.Text;
             object sort = txt_Sort.Value;
             object intro = txt_Intro.Text;
@@ -54,7 +56,7 @@ namespace 数据采集档案管理系统___课题版
             {
                 object pid = txt_Pname.Tag;
                 id = Guid.NewGuid().ToString();
-                SQLiteHelper.ExecuteNonQuery($"INSERT INTO data_dictionary(dd_id, dd_name, dd_sort, dd_note, dd_pId) VALUES('{id}', '{name}', '{sort}', '{intro}', '{pid}')");
+                SQLiteHelper.ExecuteNonQuery($"INSERT INTO data_dictionary(dd_id, dd_code, dd_name, dd_sort, dd_note, dd_pId) VALUES('{id}', '{code}', '{name}', '{sort}', '{intro}', '{pid}')");
                 MessageBox.Show("新增成功。");
                 txt_Sort.Value += 1;
                 txt_name.Clear();
@@ -62,7 +64,7 @@ namespace 数据采集档案管理系统___课题版
             }
             else
             {
-                SQLiteHelper.ExecuteNonQuery($"UPDATE data_dictionary SET dd_name='{name}', dd_sort='{sort}', dd_note='{intro}' WHERE dd_id='{id}'");
+                SQLiteHelper.ExecuteNonQuery($"UPDATE data_dictionary SET dd_name='{name}', dd_code='{code}', dd_sort='{sort}', dd_note='{intro}' WHERE dd_id='{id}'");
                 MessageBox.Show("更新成功。");
             }
             btn_Cancel_Click(sender, e);

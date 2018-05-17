@@ -77,7 +77,6 @@
             this.dgv_Project_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_Box = new System.Windows.Forms.TabPage();
             this.txt_Project_AJ_Name = new System.Windows.Forms.TextBox();
-            this.txt_Project_AJ_Code = new System.Windows.Forms.TextBox();
             this.txt_Project_GCID = new System.Windows.Forms.TextBox();
             this.label81 = new System.Windows.Forms.Label();
             this.label83 = new System.Windows.Forms.Label();
@@ -126,6 +125,7 @@
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.topic = new System.Windows.Forms.TabPage();
+            this.btn_Topic_Export = new System.Windows.Forms.Button();
             this.txt_Topic_Code = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
             this.txt_Topic_Unit = new System.Windows.Forms.TextBox();
@@ -213,6 +213,7 @@
             this.btn_Topic_Add = new System.Windows.Forms.Button();
             this.btn_Topic_Save = new System.Windows.Forms.Button();
             this.Subject = new System.Windows.Forms.TabPage();
+            this.btn_Subject_Export = new System.Windows.Forms.Button();
             this.txt_Subject_Code = new System.Windows.Forms.ComboBox();
             this.button3 = new System.Windows.Forms.Button();
             this.txt_Subject_Unit = new System.Windows.Forms.TextBox();
@@ -306,8 +307,9 @@
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.btn_Topic_Export = new System.Windows.Forms.Button();
-            this.btn_Subject_Export = new System.Windows.Forms.Button();
+            this.cbo_Project_AJ_Code = new System.Windows.Forms.ComboBox();
+            this.lbl_Project_Doc_Delete = new System.Windows.Forms.LinkLabel();
+            this.lbl_Project_Doc_Add = new System.Windows.Forms.LinkLabel();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -398,7 +400,8 @@
             // 
             // btn_Project_Export
             // 
-            this.btn_Project_Export.Location = new System.Drawing.Point(1105, 247);
+            this.btn_Project_Export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Project_Export.Location = new System.Drawing.Point(1105, 296);
             this.btn_Project_Export.Name = "btn_Project_Export";
             this.btn_Project_Export.Size = new System.Drawing.Size(73, 28);
             this.btn_Project_Export.TabIndex = 1;
@@ -412,13 +415,12 @@
             this.txt_Project_Code.Name = "txt_Project_Code";
             this.txt_Project_Code.Size = new System.Drawing.Size(210, 24);
             this.txt_Project_Code.TabIndex = 1;
-            this.txt_Project_Code.Leave += new System.EventHandler(this.Txt_Project_Code_Leave);
             // 
             // btn_ViewFileTree
             // 
             this.btn_ViewFileTree.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_ViewFileTree.Font = new System.Drawing.Font("宋体", 10F);
-            this.btn_ViewFileTree.Location = new System.Drawing.Point(1181, 247);
+            this.btn_ViewFileTree.Location = new System.Drawing.Point(1181, 296);
             this.btn_ViewFileTree.Name = "btn_ViewFileTree";
             this.btn_ViewFileTree.Size = new System.Drawing.Size(86, 28);
             this.btn_ViewFileTree.TabIndex = 117;
@@ -436,11 +438,11 @@
             // txt_Project_Intro
             // 
             this.txt_Project_Intro.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txt_Project_Intro.Location = new System.Drawing.Point(107, 170);
+            this.txt_Project_Intro.Location = new System.Drawing.Point(107, 174);
             this.txt_Project_Intro.Multiline = true;
             this.txt_Project_Intro.Name = "txt_Project_Intro";
             this.txt_Project_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Project_Intro.Size = new System.Drawing.Size(916, 48);
+            this.txt_Project_Intro.Size = new System.Drawing.Size(916, 90);
             this.txt_Project_Intro.TabIndex = 15;
             // 
             // cbo_Project_Field
@@ -468,10 +470,10 @@
             this.tab_Project_Info.Controls.Add(this.tab_Project_File);
             this.tab_Project_Info.Controls.Add(this.tab_Project_FileValid);
             this.tab_Project_Info.Controls.Add(this.tab_Project_Box);
-            this.tab_Project_Info.Location = new System.Drawing.Point(0, 250);
+            this.tab_Project_Info.Location = new System.Drawing.Point(0, 300);
             this.tab_Project_Info.Name = "tab_Project_Info";
             this.tab_Project_Info.SelectedIndex = 0;
-            this.tab_Project_Info.Size = new System.Drawing.Size(1270, 390);
+            this.tab_Project_Info.Size = new System.Drawing.Size(1270, 340);
             this.tab_Project_Info.TabIndex = 116;
             this.tab_Project_Info.SelectedIndexChanged += new System.EventHandler(this.Tab_Info_SelectedIndexChanged);
             // 
@@ -482,7 +484,7 @@
             this.tab_Project_File.Location = new System.Drawing.Point(4, 26);
             this.tab_Project_File.Name = "tab_Project_File";
             this.tab_Project_File.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Project_File.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Project_File.Size = new System.Drawing.Size(1262, 310);
             this.tab_Project_File.TabIndex = 0;
             this.tab_Project_File.Text = "文件列表";
             this.tab_Project_File.UseVisualStyleBackColor = true;
@@ -521,7 +523,7 @@
             this.dgv_Project_FileList.Location = new System.Drawing.Point(3, 3);
             this.dgv_Project_FileList.Name = "dgv_Project_FileList";
             this.dgv_Project_FileList.RowTemplate.Height = 23;
-            this.dgv_Project_FileList.Size = new System.Drawing.Size(1256, 354);
+            this.dgv_Project_FileList.Size = new System.Drawing.Size(1256, 304);
             this.dgv_Project_FileList.TabIndex = 0;
             this.dgv_Project_FileList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Subject_FileList_CellContentClick);
             this.dgv_Project_FileList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellEndEdit);
@@ -638,7 +640,7 @@
             this.tab_Project_FileValid.Location = new System.Drawing.Point(4, 26);
             this.tab_Project_FileValid.Name = "tab_Project_FileValid";
             this.tab_Project_FileValid.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Project_FileValid.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Project_FileValid.Size = new System.Drawing.Size(1262, 310);
             this.tab_Project_FileValid.TabIndex = 1;
             this.tab_Project_FileValid.Text = "文件核查";
             this.tab_Project_FileValid.UseVisualStyleBackColor = true;
@@ -670,7 +672,7 @@
             this.dgv_Project_FileValid.Location = new System.Drawing.Point(3, 3);
             this.dgv_Project_FileValid.Name = "dgv_Project_FileValid";
             this.dgv_Project_FileValid.RowTemplate.Height = 23;
-            this.dgv_Project_FileValid.Size = new System.Drawing.Size(1256, 354);
+            this.dgv_Project_FileValid.Size = new System.Drawing.Size(1256, 304);
             this.dgv_Project_FileValid.TabIndex = 0;
             // 
             // dgv_Project_FV_id
@@ -724,8 +726,10 @@
             // tab_Project_Box
             // 
             this.tab_Project_Box.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.tab_Project_Box.Controls.Add(this.lbl_Project_Doc_Delete);
+            this.tab_Project_Box.Controls.Add(this.lbl_Project_Doc_Add);
+            this.tab_Project_Box.Controls.Add(this.cbo_Project_AJ_Code);
             this.tab_Project_Box.Controls.Add(this.txt_Project_AJ_Name);
-            this.tab_Project_Box.Controls.Add(this.txt_Project_AJ_Code);
             this.tab_Project_Box.Controls.Add(this.txt_Project_GCID);
             this.tab_Project_Box.Controls.Add(this.label81);
             this.tab_Project_Box.Controls.Add(this.label83);
@@ -744,7 +748,7 @@
             this.tab_Project_Box.Controls.Add(this.label55);
             this.tab_Project_Box.Location = new System.Drawing.Point(4, 26);
             this.tab_Project_Box.Name = "tab_Project_Box";
-            this.tab_Project_Box.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Project_Box.Size = new System.Drawing.Size(1262, 310);
             this.tab_Project_Box.TabIndex = 3;
             this.tab_Project_Box.Text = "卷盒信息";
             // 
@@ -754,13 +758,6 @@
             this.txt_Project_AJ_Name.Name = "txt_Project_AJ_Name";
             this.txt_Project_AJ_Name.Size = new System.Drawing.Size(438, 26);
             this.txt_Project_AJ_Name.TabIndex = 52;
-            // 
-            // txt_Project_AJ_Code
-            // 
-            this.txt_Project_AJ_Code.Location = new System.Drawing.Point(89, 8);
-            this.txt_Project_AJ_Code.Name = "txt_Project_AJ_Code";
-            this.txt_Project_AJ_Code.Size = new System.Drawing.Size(438, 26);
-            this.txt_Project_AJ_Code.TabIndex = 51;
             // 
             // txt_Project_GCID
             // 
@@ -792,7 +789,7 @@
             // btn_Project_Bottom
             // 
             this.btn_Project_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 273);
+            this.btn_Project_Bottom.Location = new System.Drawing.Point(587, 258);
             this.btn_Project_Bottom.Name = "btn_Project_Bottom";
             this.btn_Project_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Bottom.TabIndex = 33;
@@ -804,7 +801,7 @@
             // btn_Project_Top
             // 
             this.btn_Project_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_Top.Location = new System.Drawing.Point(587, 242);
+            this.btn_Project_Top.Location = new System.Drawing.Point(587, 227);
             this.btn_Project_Top.Name = "btn_Project_Top";
             this.btn_Project_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_Top.TabIndex = 32;
@@ -816,7 +813,7 @@
             // btn_Project_LeftAllMove
             // 
             this.btn_Project_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 211);
+            this.btn_Project_LeftAllMove.Location = new System.Drawing.Point(587, 196);
             this.btn_Project_LeftAllMove.Name = "btn_Project_LeftAllMove";
             this.btn_Project_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftAllMove.TabIndex = 30;
@@ -828,7 +825,7 @@
             // btn_Project_LeftMove
             // 
             this.btn_Project_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 180);
+            this.btn_Project_LeftMove.Location = new System.Drawing.Point(587, 165);
             this.btn_Project_LeftMove.Name = "btn_Project_LeftMove";
             this.btn_Project_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_LeftMove.TabIndex = 29;
@@ -840,7 +837,7 @@
             // btn_Project_RightAllMove
             // 
             this.btn_Project_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 149);
+            this.btn_Project_RightAllMove.Location = new System.Drawing.Point(587, 134);
             this.btn_Project_RightAllMove.Name = "btn_Project_RightAllMove";
             this.btn_Project_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightAllMove.TabIndex = 28;
@@ -852,7 +849,7 @@
             // btn_Project_RightMove
             // 
             this.btn_Project_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 118);
+            this.btn_Project_RightMove.Location = new System.Drawing.Point(587, 103);
             this.btn_Project_RightMove.Name = "btn_Project_RightMove";
             this.btn_Project_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Project_RightMove.TabIndex = 27;
@@ -895,7 +892,7 @@
             this.lsv_Project_Right.LabelWrap = false;
             this.lsv_Project_Right.Location = new System.Drawing.Point(682, 81);
             this.lsv_Project_Right.Name = "lsv_Project_Right";
-            this.lsv_Project_Right.Size = new System.Drawing.Size(578, 285);
+            this.lsv_Project_Right.Size = new System.Drawing.Size(578, 255);
             this.lsv_Project_Right.TabIndex = 17;
             this.lsv_Project_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Right.View = System.Windows.Forms.View.Details;
@@ -910,7 +907,7 @@
             this.lsv_Project_Left.LabelWrap = false;
             this.lsv_Project_Left.Location = new System.Drawing.Point(3, 80);
             this.lsv_Project_Left.Name = "lsv_Project_Left";
-            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 285);
+            this.lsv_Project_Left.Size = new System.Drawing.Size(578, 255);
             this.lsv_Project_Left.TabIndex = 16;
             this.lsv_Project_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Project_Left.View = System.Windows.Forms.View.Details;
@@ -1066,7 +1063,7 @@
             "无",
             "课题",
             "子课题"});
-            this.cbo_Project_HasNext.Location = new System.Drawing.Point(107, 222);
+            this.cbo_Project_HasNext.Location = new System.Drawing.Point(107, 270);
             this.cbo_Project_HasNext.Name = "cbo_Project_HasNext";
             this.cbo_Project_HasNext.Size = new System.Drawing.Size(119, 24);
             this.cbo_Project_HasNext.TabIndex = 16;
@@ -1111,7 +1108,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(36, 225);
+            this.label4.Location = new System.Drawing.Point(36, 273);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 19);
             this.label4.TabIndex = 94;
@@ -1121,7 +1118,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(50, 184);
+            this.label5.Location = new System.Drawing.Point(50, 177);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 19);
             this.label5.TabIndex = 93;
@@ -1282,6 +1279,17 @@
             this.topic.Text = "课题";
             this.topic.UseVisualStyleBackColor = true;
             // 
+            // btn_Topic_Export
+            // 
+            this.btn_Topic_Export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Topic_Export.Location = new System.Drawing.Point(1105, 296);
+            this.btn_Topic_Export.Name = "btn_Topic_Export";
+            this.btn_Topic_Export.Size = new System.Drawing.Size(73, 28);
+            this.btn_Topic_Export.TabIndex = 119;
+            this.btn_Topic_Export.Text = "导出";
+            this.btn_Topic_Export.UseVisualStyleBackColor = true;
+            this.btn_Topic_Export.Click += new System.EventHandler(this.btn_Export_Click);
+            // 
             // txt_Topic_Code
             // 
             this.txt_Topic_Code.FormattingEnabled = true;
@@ -1295,7 +1303,7 @@
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Font = new System.Drawing.Font("宋体", 10F);
-            this.button2.Location = new System.Drawing.Point(1181, 247);
+            this.button2.Location = new System.Drawing.Point(1181, 296);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(86, 28);
             this.button2.TabIndex = 118;
@@ -1385,10 +1393,10 @@
             this.tab_Topic_Info.Controls.Add(this.tab_Topic_File);
             this.tab_Topic_Info.Controls.Add(this.tab_Topic_FileValid);
             this.tab_Topic_Info.Controls.Add(this.tab_Topic_Box);
-            this.tab_Topic_Info.Location = new System.Drawing.Point(0, 250);
+            this.tab_Topic_Info.Location = new System.Drawing.Point(0, 300);
             this.tab_Topic_Info.Name = "tab_Topic_Info";
             this.tab_Topic_Info.SelectedIndex = 0;
-            this.tab_Topic_Info.Size = new System.Drawing.Size(1270, 390);
+            this.tab_Topic_Info.Size = new System.Drawing.Size(1270, 340);
             this.tab_Topic_Info.TabIndex = 74;
             this.tab_Topic_Info.SelectedIndexChanged += new System.EventHandler(this.Tab_Info_SelectedIndexChanged);
             // 
@@ -1399,7 +1407,7 @@
             this.tab_Topic_File.Location = new System.Drawing.Point(4, 26);
             this.tab_Topic_File.Name = "tab_Topic_File";
             this.tab_Topic_File.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Topic_File.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Topic_File.Size = new System.Drawing.Size(1262, 310);
             this.tab_Topic_File.TabIndex = 0;
             this.tab_Topic_File.Text = "文件列表";
             this.tab_Topic_File.UseVisualStyleBackColor = true;
@@ -1438,7 +1446,7 @@
             this.dgv_Topic_FileList.Location = new System.Drawing.Point(3, 3);
             this.dgv_Topic_FileList.Name = "dgv_Topic_FileList";
             this.dgv_Topic_FileList.RowTemplate.Height = 23;
-            this.dgv_Topic_FileList.Size = new System.Drawing.Size(1256, 354);
+            this.dgv_Topic_FileList.Size = new System.Drawing.Size(1256, 304);
             this.dgv_Topic_FileList.TabIndex = 0;
             this.dgv_Topic_FileList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Subject_FileList_CellContentClick);
             this.dgv_Topic_FileList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellEndEdit);
@@ -1579,7 +1587,7 @@
             this.tab_Topic_FileValid.Location = new System.Drawing.Point(4, 26);
             this.tab_Topic_FileValid.Name = "tab_Topic_FileValid";
             this.tab_Topic_FileValid.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Topic_FileValid.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Topic_FileValid.Size = new System.Drawing.Size(1262, 310);
             this.tab_Topic_FileValid.TabIndex = 1;
             this.tab_Topic_FileValid.Text = "文件核查";
             this.tab_Topic_FileValid.UseVisualStyleBackColor = true;
@@ -1611,7 +1619,7 @@
             this.dgv_Topic_FileValid.Location = new System.Drawing.Point(3, 3);
             this.dgv_Topic_FileValid.Name = "dgv_Topic_FileValid";
             this.dgv_Topic_FileValid.RowTemplate.Height = 23;
-            this.dgv_Topic_FileValid.Size = new System.Drawing.Size(1256, 354);
+            this.dgv_Topic_FileValid.Size = new System.Drawing.Size(1256, 304);
             this.dgv_Topic_FileValid.TabIndex = 0;
             // 
             // dgv_Topic_FV_id
@@ -1685,9 +1693,9 @@
             this.tab_Topic_Box.Controls.Add(this.label70);
             this.tab_Topic_Box.Location = new System.Drawing.Point(4, 26);
             this.tab_Topic_Box.Name = "tab_Topic_Box";
-            this.tab_Topic_Box.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Topic_Box.Size = new System.Drawing.Size(1262, 310);
             this.tab_Topic_Box.TabIndex = 3;
-            this.tab_Topic_Box.Text = "盒信息";
+            this.tab_Topic_Box.Text = "卷盒信息";
             // 
             // txt_Topic_AJ_Code
             // 
@@ -1726,7 +1734,7 @@
             // btn_Topic_Bottom
             // 
             this.btn_Topic_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 280);
+            this.btn_Topic_Bottom.Location = new System.Drawing.Point(587, 265);
             this.btn_Topic_Bottom.Name = "btn_Topic_Bottom";
             this.btn_Topic_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Bottom.TabIndex = 47;
@@ -1738,7 +1746,7 @@
             // btn_Topic_Top
             // 
             this.btn_Topic_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 249);
+            this.btn_Topic_Top.Location = new System.Drawing.Point(587, 234);
             this.btn_Topic_Top.Name = "btn_Topic_Top";
             this.btn_Topic_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_Top.TabIndex = 46;
@@ -1757,7 +1765,7 @@
             // btn_Topic_LeftAllMove
             // 
             this.btn_Topic_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 218);
+            this.btn_Topic_LeftAllMove.Location = new System.Drawing.Point(587, 203);
             this.btn_Topic_LeftAllMove.Name = "btn_Topic_LeftAllMove";
             this.btn_Topic_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftAllMove.TabIndex = 44;
@@ -1769,7 +1777,7 @@
             // btn_Topic_LeftMove
             // 
             this.btn_Topic_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 187);
+            this.btn_Topic_LeftMove.Location = new System.Drawing.Point(587, 172);
             this.btn_Topic_LeftMove.Name = "btn_Topic_LeftMove";
             this.btn_Topic_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_LeftMove.TabIndex = 43;
@@ -1781,7 +1789,7 @@
             // btn_Topic_RightAllMove
             // 
             this.btn_Topic_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 156);
+            this.btn_Topic_RightAllMove.Location = new System.Drawing.Point(587, 141);
             this.btn_Topic_RightAllMove.Name = "btn_Topic_RightAllMove";
             this.btn_Topic_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightAllMove.TabIndex = 42;
@@ -1793,7 +1801,7 @@
             // btn_Topic_RightMove
             // 
             this.btn_Topic_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 125);
+            this.btn_Topic_RightMove.Location = new System.Drawing.Point(587, 110);
             this.btn_Topic_RightMove.Name = "btn_Topic_RightMove";
             this.btn_Topic_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Topic_RightMove.TabIndex = 41;
@@ -1836,7 +1844,7 @@
             this.lsv_Topic_Right.LabelWrap = false;
             this.lsv_Topic_Right.Location = new System.Drawing.Point(682, 83);
             this.lsv_Topic_Right.Name = "lsv_Topic_Right";
-            this.lsv_Topic_Right.Size = new System.Drawing.Size(577, 282);
+            this.lsv_Topic_Right.Size = new System.Drawing.Size(577, 252);
             this.lsv_Topic_Right.TabIndex = 38;
             this.lsv_Topic_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Right.View = System.Windows.Forms.View.Details;
@@ -1851,7 +1859,7 @@
             this.lsv_Topic_Left.LabelWrap = false;
             this.lsv_Topic_Left.Location = new System.Drawing.Point(4, 83);
             this.lsv_Topic_Left.Name = "lsv_Topic_Left";
-            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 282);
+            this.lsv_Topic_Left.Size = new System.Drawing.Size(577, 252);
             this.lsv_Topic_Left.TabIndex = 37;
             this.lsv_Topic_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Topic_Left.View = System.Windows.Forms.View.Details;
@@ -1909,7 +1917,7 @@
             this.cbo_Topic_HasNext.Items.AddRange(new object[] {
             "无",
             "有"});
-            this.cbo_Topic_HasNext.Location = new System.Drawing.Point(107, 224);
+            this.cbo_Topic_HasNext.Location = new System.Drawing.Point(107, 270);
             this.cbo_Topic_HasNext.Name = "cbo_Topic_HasNext";
             this.cbo_Topic_HasNext.Size = new System.Drawing.Size(119, 24);
             this.cbo_Topic_HasNext.TabIndex = 16;
@@ -1922,7 +1930,7 @@
             this.txt_Topic_Intro.Multiline = true;
             this.txt_Topic_Intro.Name = "txt_Topic_Intro";
             this.txt_Topic_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Topic_Intro.Size = new System.Drawing.Size(919, 48);
+            this.txt_Topic_Intro.Size = new System.Drawing.Size(919, 94);
             this.txt_Topic_Intro.TabIndex = 15;
             // 
             // txt_Topic_Uniter
@@ -1964,7 +1972,7 @@
             // 
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label56.Location = new System.Drawing.Point(8, 225);
+            this.label56.Location = new System.Drawing.Point(8, 271);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(93, 19);
             this.label56.TabIndex = 56;
@@ -1974,7 +1982,7 @@
             // 
             this.label57.AutoSize = true;
             this.label57.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label57.Location = new System.Drawing.Point(50, 185);
+            this.label57.Location = new System.Drawing.Point(50, 170);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(51, 19);
             this.label57.TabIndex = 55;
@@ -2191,6 +2199,17 @@
             this.Subject.Text = "子课题";
             this.Subject.UseVisualStyleBackColor = true;
             // 
+            // btn_Subject_Export
+            // 
+            this.btn_Subject_Export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Subject_Export.Location = new System.Drawing.Point(1106, 296);
+            this.btn_Subject_Export.Name = "btn_Subject_Export";
+            this.btn_Subject_Export.Size = new System.Drawing.Size(73, 28);
+            this.btn_Subject_Export.TabIndex = 120;
+            this.btn_Subject_Export.Text = "导出";
+            this.btn_Subject_Export.UseVisualStyleBackColor = true;
+            this.btn_Subject_Export.Click += new System.EventHandler(this.btn_Export_Click);
+            // 
             // txt_Subject_Code
             // 
             this.txt_Subject_Code.FormattingEnabled = true;
@@ -2204,7 +2223,7 @@
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button3.Font = new System.Drawing.Font("宋体", 10F);
-            this.button3.Location = new System.Drawing.Point(1181, 248);
+            this.button3.Location = new System.Drawing.Point(1181, 296);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(86, 28);
             this.button3.TabIndex = 119;
@@ -2294,10 +2313,10 @@
             this.tab_Subject_Info.Controls.Add(this.tab_Subject_File);
             this.tab_Subject_Info.Controls.Add(this.tab_Subject_FileValid);
             this.tab_Subject_Info.Controls.Add(this.tab_Subject_Box);
-            this.tab_Subject_Info.Location = new System.Drawing.Point(0, 250);
+            this.tab_Subject_Info.Location = new System.Drawing.Point(0, 300);
             this.tab_Subject_Info.Name = "tab_Subject_Info";
             this.tab_Subject_Info.SelectedIndex = 0;
-            this.tab_Subject_Info.Size = new System.Drawing.Size(1270, 390);
+            this.tab_Subject_Info.Size = new System.Drawing.Size(1270, 340);
             this.tab_Subject_Info.TabIndex = 74;
             this.tab_Subject_Info.SelectedIndexChanged += new System.EventHandler(this.Tab_Info_SelectedIndexChanged);
             // 
@@ -2308,7 +2327,7 @@
             this.tab_Subject_File.Location = new System.Drawing.Point(4, 26);
             this.tab_Subject_File.Name = "tab_Subject_File";
             this.tab_Subject_File.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Subject_File.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Subject_File.Size = new System.Drawing.Size(1262, 310);
             this.tab_Subject_File.TabIndex = 0;
             this.tab_Subject_File.Text = "文件列表";
             this.tab_Subject_File.UseVisualStyleBackColor = true;
@@ -2347,7 +2366,7 @@
             this.dgv_Subject_FileList.Location = new System.Drawing.Point(3, 3);
             this.dgv_Subject_FileList.Name = "dgv_Subject_FileList";
             this.dgv_Subject_FileList.RowTemplate.Height = 23;
-            this.dgv_Subject_FileList.Size = new System.Drawing.Size(1256, 354);
+            this.dgv_Subject_FileList.Size = new System.Drawing.Size(1256, 304);
             this.dgv_Subject_FileList.TabIndex = 0;
             this.dgv_Subject_FileList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Subject_FileList_CellContentClick);
             this.dgv_Subject_FileList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellEndEdit);
@@ -2487,7 +2506,7 @@
             this.tab_Subject_FileValid.Location = new System.Drawing.Point(4, 26);
             this.tab_Subject_FileValid.Name = "tab_Subject_FileValid";
             this.tab_Subject_FileValid.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_Subject_FileValid.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Subject_FileValid.Size = new System.Drawing.Size(1262, 310);
             this.tab_Subject_FileValid.TabIndex = 1;
             this.tab_Subject_FileValid.Text = "文件核查";
             this.tab_Subject_FileValid.UseVisualStyleBackColor = true;
@@ -2519,7 +2538,7 @@
             this.dgv_Subject_FileValid.Location = new System.Drawing.Point(3, 3);
             this.dgv_Subject_FileValid.Name = "dgv_Subject_FileValid";
             this.dgv_Subject_FileValid.RowTemplate.Height = 23;
-            this.dgv_Subject_FileValid.Size = new System.Drawing.Size(1256, 354);
+            this.dgv_Subject_FileValid.Size = new System.Drawing.Size(1256, 304);
             this.dgv_Subject_FileValid.TabIndex = 0;
             // 
             // dgv_Subject_FV_id
@@ -2593,9 +2612,9 @@
             this.tab_Subject_Box.Controls.Add(this.label74);
             this.tab_Subject_Box.Location = new System.Drawing.Point(4, 26);
             this.tab_Subject_Box.Name = "tab_Subject_Box";
-            this.tab_Subject_Box.Size = new System.Drawing.Size(1262, 360);
+            this.tab_Subject_Box.Size = new System.Drawing.Size(1262, 310);
             this.tab_Subject_Box.TabIndex = 3;
-            this.tab_Subject_Box.Text = "盒信息";
+            this.tab_Subject_Box.Text = "卷盒信息";
             // 
             // txt_Subject_AJ_Name
             // 
@@ -2634,7 +2653,7 @@
             // btn_Subject_Bottom
             // 
             this.btn_Subject_Bottom.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 282);
+            this.btn_Subject_Bottom.Location = new System.Drawing.Point(587, 267);
             this.btn_Subject_Bottom.Name = "btn_Subject_Bottom";
             this.btn_Subject_Bottom.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Bottom.TabIndex = 61;
@@ -2646,7 +2665,7 @@
             // btn_Subject_Top
             // 
             this.btn_Subject_Top.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 251);
+            this.btn_Subject_Top.Location = new System.Drawing.Point(587, 236);
             this.btn_Subject_Top.Name = "btn_Subject_Top";
             this.btn_Subject_Top.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_Top.TabIndex = 60;
@@ -2665,7 +2684,7 @@
             // btn_Subject_LeftAllMove
             // 
             this.btn_Subject_LeftAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 220);
+            this.btn_Subject_LeftAllMove.Location = new System.Drawing.Point(587, 205);
             this.btn_Subject_LeftAllMove.Name = "btn_Subject_LeftAllMove";
             this.btn_Subject_LeftAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftAllMove.TabIndex = 58;
@@ -2677,7 +2696,7 @@
             // btn_Subject_LeftMove
             // 
             this.btn_Subject_LeftMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 189);
+            this.btn_Subject_LeftMove.Location = new System.Drawing.Point(587, 174);
             this.btn_Subject_LeftMove.Name = "btn_Subject_LeftMove";
             this.btn_Subject_LeftMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_LeftMove.TabIndex = 57;
@@ -2689,7 +2708,7 @@
             // btn_Subject_RightAllMove
             // 
             this.btn_Subject_RightAllMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 158);
+            this.btn_Subject_RightAllMove.Location = new System.Drawing.Point(587, 143);
             this.btn_Subject_RightAllMove.Name = "btn_Subject_RightAllMove";
             this.btn_Subject_RightAllMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightAllMove.TabIndex = 56;
@@ -2701,7 +2720,7 @@
             // btn_Subject_RightMove
             // 
             this.btn_Subject_RightMove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 127);
+            this.btn_Subject_RightMove.Location = new System.Drawing.Point(587, 112);
             this.btn_Subject_RightMove.Name = "btn_Subject_RightMove";
             this.btn_Subject_RightMove.Size = new System.Drawing.Size(89, 25);
             this.btn_Subject_RightMove.TabIndex = 55;
@@ -2744,7 +2763,7 @@
             this.lsv_Subject_Right.LabelWrap = false;
             this.lsv_Subject_Right.Location = new System.Drawing.Point(682, 81);
             this.lsv_Subject_Right.Name = "lsv_Subject_Right";
-            this.lsv_Subject_Right.Size = new System.Drawing.Size(577, 284);
+            this.lsv_Subject_Right.Size = new System.Drawing.Size(577, 254);
             this.lsv_Subject_Right.TabIndex = 52;
             this.lsv_Subject_Right.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Right.View = System.Windows.Forms.View.Details;
@@ -2759,7 +2778,7 @@
             this.lsv_Subject_Left.LabelWrap = false;
             this.lsv_Subject_Left.Location = new System.Drawing.Point(4, 81);
             this.lsv_Subject_Left.Name = "lsv_Subject_Left";
-            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 284);
+            this.lsv_Subject_Left.Size = new System.Drawing.Size(577, 254);
             this.lsv_Subject_Left.TabIndex = 51;
             this.lsv_Subject_Left.UseCompatibleStateImageBehavior = false;
             this.lsv_Subject_Left.View = System.Windows.Forms.View.Details;
@@ -2817,7 +2836,7 @@
             this.txt_Subject_Intro.Multiline = true;
             this.txt_Subject_Intro.Name = "txt_Subject_Intro";
             this.txt_Subject_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Subject_Intro.Size = new System.Drawing.Size(929, 55);
+            this.txt_Subject_Intro.Size = new System.Drawing.Size(929, 109);
             this.txt_Subject_Intro.TabIndex = 15;
             // 
             // txt_Subject_Uniter
@@ -2859,7 +2878,7 @@
             // 
             this.label90.AutoSize = true;
             this.label90.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label90.Location = new System.Drawing.Point(50, 195);
+            this.label90.Location = new System.Drawing.Point(50, 177);
             this.label90.Name = "label90";
             this.label90.Size = new System.Drawing.Size(51, 19);
             this.label90.TabIndex = 55;
@@ -3106,25 +3125,38 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // btn_Topic_Export
+            // cbo_Project_AJ_Code
             // 
-            this.btn_Topic_Export.Location = new System.Drawing.Point(1105, 247);
-            this.btn_Topic_Export.Name = "btn_Topic_Export";
-            this.btn_Topic_Export.Size = new System.Drawing.Size(73, 28);
-            this.btn_Topic_Export.TabIndex = 119;
-            this.btn_Topic_Export.Text = "导出";
-            this.btn_Topic_Export.UseVisualStyleBackColor = true;
-            this.btn_Topic_Export.Click += new System.EventHandler(this.btn_Export_Click);
+            this.cbo_Project_AJ_Code.FormattingEnabled = true;
+            this.cbo_Project_AJ_Code.Location = new System.Drawing.Point(89, 9);
+            this.cbo_Project_AJ_Code.Name = "cbo_Project_AJ_Code";
+            this.cbo_Project_AJ_Code.Size = new System.Drawing.Size(438, 24);
+            this.cbo_Project_AJ_Code.TabIndex = 53;
+            this.cbo_Project_AJ_Code.SelectionChangeCommitted += new System.EventHandler(this.cbo_Project_AJ_Code_SelectionChangeCommitted);
             // 
-            // btn_Subject_Export
+            // lbl_Project_Doc_Delete
             // 
-            this.btn_Subject_Export.Location = new System.Drawing.Point(1106, 248);
-            this.btn_Subject_Export.Name = "btn_Subject_Export";
-            this.btn_Subject_Export.Size = new System.Drawing.Size(73, 28);
-            this.btn_Subject_Export.TabIndex = 120;
-            this.btn_Subject_Export.Text = "导出";
-            this.btn_Subject_Export.UseVisualStyleBackColor = true;
-            this.btn_Subject_Export.Click += new System.EventHandler(this.btn_Export_Click);
+            this.lbl_Project_Doc_Delete.AutoSize = true;
+            this.lbl_Project_Doc_Delete.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_Project_Doc_Delete.Location = new System.Drawing.Point(570, 17);
+            this.lbl_Project_Doc_Delete.Name = "lbl_Project_Doc_Delete";
+            this.lbl_Project_Doc_Delete.Size = new System.Drawing.Size(29, 12);
+            this.lbl_Project_Doc_Delete.TabIndex = 55;
+            this.lbl_Project_Doc_Delete.TabStop = true;
+            this.lbl_Project_Doc_Delete.Text = "删除";
+            this.lbl_Project_Doc_Delete.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_Project_Doc_Delete_LinkClicked);
+            // 
+            // lbl_Project_Doc_Add
+            // 
+            this.lbl_Project_Doc_Add.AutoSize = true;
+            this.lbl_Project_Doc_Add.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_Project_Doc_Add.Location = new System.Drawing.Point(540, 17);
+            this.lbl_Project_Doc_Add.Name = "lbl_Project_Doc_Add";
+            this.lbl_Project_Doc_Add.Size = new System.Drawing.Size(29, 12);
+            this.lbl_Project_Doc_Add.TabIndex = 54;
+            this.lbl_Project_Doc_Add.TabStop = true;
+            this.lbl_Project_Doc_Add.Text = "添加";
+            this.lbl_Project_Doc_Add.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_Project_Doc_Add_LinkClicked);
             // 
             // Frm_Wroking
             // 
@@ -3427,7 +3459,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_remark;
         private System.Windows.Forms.TabPage tab_Project_Box;
         private System.Windows.Forms.TextBox txt_Project_AJ_Name;
-        private System.Windows.Forms.TextBox txt_Project_AJ_Code;
         private System.Windows.Forms.TextBox txt_Project_GCID;
         private System.Windows.Forms.Label label81;
         private System.Windows.Forms.Label label83;
@@ -3451,5 +3482,8 @@
         private System.Windows.Forms.Button btn_Project_Export;
         private System.Windows.Forms.Button btn_Topic_Export;
         private System.Windows.Forms.Button btn_Subject_Export;
+        private System.Windows.Forms.ComboBox cbo_Project_AJ_Code;
+        private System.Windows.Forms.LinkLabel lbl_Project_Doc_Delete;
+        private System.Windows.Forms.LinkLabel lbl_Project_Doc_Add;
     }
 }

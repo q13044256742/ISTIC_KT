@@ -22,15 +22,15 @@ namespace 数据采集档案管理系统___课题版
 
         private void Btn_Start_Click(object sender, EventArgs e)
         {
-            progressBar1.Maximum = GetTotalFileAmountBySpiId(UserHelper.GetUser().UserSpecialId);
+            progressBar1.Maximum = GetTotalFileAmountBySpiId(UserHelper.GetUser().SpecialId);
             int count = progressBar1.Maximum, okcount = 0, nocount = 0;
-            string rootFolder = txt_FilePath.Text + "\\" + SQLiteHelper.ExecuteOnlyOneQuery($"SELECT spi_name FROM special_info WHERE spi_id='{UserHelper.GetUser().UserSpecialId}'");
+            string rootFolder = txt_FilePath.Text + "\\" + SQLiteHelper.ExecuteOnlyOneQuery($"SELECT spi_name FROM special_info WHERE spi_id='{UserHelper.GetUser().SpecialId}'");
             if(!Directory.Exists(rootFolder))
                 Directory.CreateDirectory(rootFolder);
             //专项下的文件
-            CopyFile(ref okcount, ref nocount, rootFolder, GetFileLinkByObjId(UserHelper.GetUser().UserSpecialId));
+            CopyFile(ref okcount, ref nocount, rootFolder, GetFileLinkByObjId(UserHelper.GetUser().SpecialId));
             //专项下的项目
-            List<object[]> list2 = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id, pi_name FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().UserSpecialId}'", 2);
+            List<object[]> list2 = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id, pi_name FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'", 2);
             for(int i = 0; i < list2.Count; i++)
             {
                 string _rootFolder = rootFolder + "\\" + list2[i][1];
@@ -70,7 +70,7 @@ namespace 数据采集档案管理系统___课题版
                 }
             }
             //专项下的课题
-            List<object[]> list4 = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_name FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().UserSpecialId}'", 2);
+            List<object[]> list4 = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id, ti_name FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().SpecialId}'", 2);
             for(int i = 0; i < list4.Count; i++)
             {
                 string _rootFolder = rootFolder + "\\" + list4[i][1];

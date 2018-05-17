@@ -21,17 +21,10 @@ namespace 数据采集档案管理系统___课题版
                 if(!string.IsNullOrEmpty(GetValue(uid)))
                 {
                     DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT * FROM user_info WHERE ui_id='{uid}'");
-                    User user = UserHelper.GetUser();
-                    user.UserId = uid;
-                    user.UserName = username;
-                    user.RealName = GetValue(row["ui_realname"]);
-                    user.UserSpecialId = GetValue(row["ui_special_id"]);
-                    user.UserUnitId = GetValue(row["ui_unit"]);
-                    user.UserUnitName = GetValue(row["ui_department"]);
-                    user.PassWord = password;
-                    DataRow spRow = SQLiteHelper.ExecuteSingleRowQuery($"SELECT spi_name FROM special_info WHERE spi_id='{user.UserSpecialId}'");
-                    if(spRow != null)
-                        user.SpecialName = GetValue(spRow["spi_name"]);
+                    UserHelper.GetUser().UserId = uid;
+                    UserHelper.GetUser().UserName = username;
+                    UserHelper.GetUser().PassWord = password;
+                    UserHelper.GetUser().RealName = GetValue(row["ui_realname"]);
                     Frm_MainFrame frm = new Frm_MainFrame();
                     frm.Show();
                     Hide();

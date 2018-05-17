@@ -16,8 +16,7 @@ namespace 数据采集档案管理系统___课题版
             WindowState = FormWindowState.Maximized;
             cbo_Search_Type.SelectedIndex = 0;
             LoadUserList(string.Empty);
-
-            string key = "00f09cef-59be-4607-93bf-3b70b2db1e2b";
+            string key = "AD534039-A38F-412E-974E-B18BD9B8A2C0";
             DataTable table = SQLiteHelper.ExecuteQuery($"SELECT * FROM data_dictionary WHERE dd_pId='{key}' ORDER BY dd_sort");
             cbo_Unit.DataSource = table;
             cbo_Unit.DisplayMember = "dd_name";
@@ -82,8 +81,13 @@ namespace 数据采集档案管理系统___课题版
         private void btn_Reset_Click(object sender, EventArgs e)
         {
             foreach(Control item in tab_UserAdd.Controls)
+            {
+                item.Tag = null;
                 if(item is TextBox)
+                {
                     (item as TextBox).Clear();
+                }
+            }
         }
 
         private void txt_PassWordAagin_Leave(object sender, EventArgs e)

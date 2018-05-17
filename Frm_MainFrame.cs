@@ -8,7 +8,6 @@ namespace 数据采集档案管理系统___课题版
 
     public partial class Frm_MainFrame : Form
     {
-        private string rootId;
         public Frm_MainFrame()
         {
             InitializeComponent();
@@ -31,26 +30,34 @@ namespace 数据采集档案管理系统___课题版
 
         private void Pic_Add_Click(object sender, EventArgs e)
         {
-            TreeNode node = new TreeNode() { Name = rootId, Tag = ControlType.Plan };
+            TreeNode node = new TreeNode() { Name = UserHelper.GetUser().SpecialId, Tag = ControlType.Plan };
             Frm_Wroking frm_Wroking = new Frm_Wroking(node, LoadTreeList);
             frm_Wroking.Show();
         }
 
         private void Btn_Delete_Click(object sender, EventArgs e)
         {
-            if (dgv_DataList.SelectedRows.Count > 0)
+            if(dgv_DataList.SelectedRows.Count > 0)
             {
-                if(MessageBox.Show("确认要删除当前选中行的数据吗?","确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                string ids = string.Empty;
+                int count = 0;
+                foreach(DataGridViewRow row in dgv_DataList.SelectedRows)
                 {
-                    string ids = string.Empty;
-                    foreach (DataGridViewRow row in dgv_DataList.SelectedRows)
-                    {
-                        object id = row.Cells["id"].Tag;
-                        ids += $"'{id}',";
-                    }
+                    object id = row.Cells["id"].Tag;
+                    bool hasChild = HasChild((ControlType)row.Tag, id);
+                    if(hasChild)
+                        if(MessageBox.Show("编号【" + row.Cells["code"].Value + "】下存在子数据，确认将其全部删除?", "删除确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.Cancel)
+                            continue;
+                    ids += $"'{id}',";
+                    count++;
+                }
+                if(count > 0 && MessageBox.Show($"确认删除指定共{count}条数据?", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                {
                     ids = ids.Substring(0, ids.Length - 1);
-
-                    SQLiteHelper.ExecuteNonQuery($"DELETE FROM project_info WHERE pi_id IN({ids});" +
+                    SQLiteHelper.ExecuteNonQuery(
+                        $"DELETE FROM project_info WHERE pi_id IN({ids});" +
+                        $"DELETE FROM topic_info WHERE ti_obj_id IN({ids});" +
+                        $"DELETE FROM subject_info WHERE si_obj_id IN({ids});" +
                         $"DELETE FROM topic_info WHERE ti_id IN({ids});" +
                         $"DELETE FROM subject_info WHERE si_id IN({ids});");
 
@@ -58,6 +65,22 @@ namespace 数据采集档案管理系统___课题版
                     btn_Refresh_Click(sender, e);
                 }
             }
+        }
+
+        private bool HasChild(ControlType type, object id)
+        {
+            int index = 0;
+            if(type == ControlType.Plan_Project)
+            {
+                index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{id}'");
+                if(index == 0)
+                    index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'");
+            }
+            else if(type == ControlType.Plan_Topic || type == ControlType.Topic)
+            {
+                index = index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'");
+            }
+            return index == 0 ? false : true;
         }
 
         private void Btn_Query_Click(object sender, EventArgs e)
@@ -85,31 +108,41 @@ namespace 数据采集档案管理系统___课题版
 
         private void Pic_Import_Click(object sender, EventArgs e)
         {
-            new Frm_Import().ShowDialog();
+            if(new Frm_Import().ShowDialog() == DialogResult.OK)
+            {
+                btn_Refresh_Click(null, null);
+            }
         }
 
         private void Frm_MainFrame_Shown(object sender, EventArgs e)
         {
-            string querySql = $"SELECT spi_id, spi_name FROM special_info WHERE spi_id=(SELECT ui_special_id FROM user_info WHERE ui_id='{UserHelper.GetUser().UserId}')";
-            object[] obj = SQLiteHelper.ExecuteRowsQuery(querySql);
+            string querySql = $"SELECT ui_special_id FROM user_info WHERE ui_id='{UserHelper.GetUser().UserId}'";
+            object obj = SQLiteHelper.ExecuteOnlyOneQuery(querySql);
             if(obj == null)
             {
                 Frm_IdentityChoose frm_Identity = new Frm_IdentityChoose();
                 if(frm_Identity.ShowDialog() == DialogResult.OK)
                 {
-                    obj = SQLiteHelper.ExecuteRowsQuery(querySql);
+                    obj = SQLiteHelper.ExecuteOnlyOneQuery(querySql);
                     new Frm_Explain().ShowDialog();
                 }
             }
             if(obj != null)
             {
-                rootId = GetValue(obj[0]);
-                UserHelper.GetUser().UserSpecialId = rootId;
-                UserHelper.GetUser().SpecialName = GetValue(obj[1]);
-                LoadTreeList(rootId);
+
+                UserHelper.GetUser().SpecialId = GetValue(obj);
+                UserHelper.GetUser().SpecialName = SQLiteHelper.GetValueByKey(obj);
+
+                object unitName = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT ui_department FROM user_info WHERE ui_id='{UserHelper.GetUser().UserId}'");
+                UserHelper.GetUser().UserUnitName = GetValue(unitName);
+
+                LoadTreeList(UserHelper.GetUser().SpecialId);
 
                 NodeMouseClick(sender, new TreeNodeMouseClickEventArgs(tv_DataTree.Nodes[0], MouseButtons.Left, 1, 0, 0));
                 LoadStateTip();
+
+                lbl_UserName.Text = UserHelper.GetUser().RealName;
+                lbl_UserUnit.Text = UserHelper.GetUser().UserUnitName;
             }
         }
         
@@ -122,13 +155,13 @@ namespace 数据采集档案管理系统___课题版
             tv_DataTree.Nodes.Clear();
             TreeNode rootNode = null;
             //【计划】
-            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT spi_id, spi_code, spi_name FROM special_info WHERE spi_id='{specialId ?? rootId}'");
+            DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT dd_id, dd_code, dd_name FROM data_dictionary WHERE dd_id='{specialId ?? UserHelper.GetUser().SpecialId}'");
             if(row != null)
             {
                 rootNode = new TreeNode()
                 {
-                    Name = GetValue(row["spi_id"]),
-                    Text = GetValue(row["spi_name"]) + "    ",
+                    Name = GetValue(row["dd_id"]),
+                    Text = GetValue(row["dd_name"]) + "    ",
                     Tag = ControlType.Plan,
                     NodeFont = new System.Drawing.Font("微软雅黑", 10f)
                 };
@@ -186,7 +219,7 @@ namespace 数据采集档案管理系统___课题版
                     {
                         Name = GetValue(topicTable.Rows[j]["ti_id"]),
                         Text = GetValue(topicTable.Rows[j]["ti_code"]),
-                        Tag = ControlType.Plan_Topic
+                        Tag = ControlType.Topic
                     };
                     rootNode.Nodes.Add(treeNode);
                     //【子课题】
@@ -210,7 +243,10 @@ namespace 数据采集档案管理系统___课题版
 
         private void Frm_MainFrame_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Environment.Exit(0);
+            if(MessageBox.Show("确定要退出吗？", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                Environment.Exit(0);
+            else
+                e.Cancel = true;
         }
 
         private void Dgv_DataList_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -223,7 +259,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void pic_Manager_Click(object sender, EventArgs e)
         {
-            string specialId = UserHelper.GetUser().UserSpecialId;
+            string specialId = UserHelper.GetUser().SpecialId;
             if(!string.IsNullOrEmpty(specialId))
             {
                 Frm_Manager manager = new Frm_Manager(specialId);
@@ -319,7 +355,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void pic_Query_Click(object sender, EventArgs e)
         {
-            new Frm_Query(rootId).ShowDialog();
+            new Frm_Query(UserHelper.GetUser().SpecialId).ShowDialog();
         }
 
         private void pic_Exit_Click(object sender, EventArgs e)
@@ -496,7 +532,7 @@ namespace 数据采集档案管理系统___课题版
             }
             else
             {
-                TreeNode _node = new TreeNode() { Name = rootId, Tag = ControlType.Topic };
+                TreeNode _node = new TreeNode() { Name = UserHelper.GetUser().SpecialId, Tag = ControlType.Topic };
                 Frm_Wroking frm_Wroking = new Frm_Wroking(_node, LoadTreeList);
                 frm_Wroking.Show();
             }
@@ -555,6 +591,11 @@ namespace 数据采集档案管理系统___课题版
                 Name = GetValue(dgv_DataList.Rows[e.RowIndex].Cells["id"].Tag),
                 Tag = dgv_DataList.Rows[e.RowIndex].Tag
             }, LoadTreeList).Show();
+        }
+
+        private void lbl_Help_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new Frm_Explain().ShowDialog();
         }
     }
 }

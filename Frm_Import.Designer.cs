@@ -53,9 +53,9 @@
             this.label1.Location = new System.Drawing.Point(20, 86);
             this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 19);
+            this.label1.Size = new System.Drawing.Size(69, 19);
             this.label1.TabIndex = 0;
-            this.label1.Text = "源数据路径:";
+            this.label1.Text = "来源路径:";
             // 
             // txt_FilePath
             // 
@@ -151,16 +151,16 @@
             this.label3.Location = new System.Drawing.Point(20, 162);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 19);
+            this.label3.Size = new System.Drawing.Size(69, 19);
             this.label3.TabIndex = 8;
-            this.label3.Text = "数据存放路径:";
+            this.label3.Text = "备份路径:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label4.ForeColor = System.Drawing.Color.Red;
-            this.label4.Location = new System.Drawing.Point(112, 163);
+            this.label4.Location = new System.Drawing.Point(97, 163);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(152, 17);
             this.label4.TabIndex = 11;
@@ -173,9 +173,9 @@
             this.label5.Location = new System.Drawing.Point(20, 18);
             this.label5.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(97, 19);
+            this.label5.Size = new System.Drawing.Size(69, 19);
             this.label5.TabIndex = 12;
-            this.label5.Text = "导入批次名称:";
+            this.label5.Text = "批次名称:";
             // 
             // txt_BatchName
             // 

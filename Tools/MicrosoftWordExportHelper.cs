@@ -142,7 +142,7 @@ namespace 数据采集档案管理系统___课题版
                     if(app != null)
                         app.Quit();//退出应用程序
                 }
-                catch(Exception) { }
+                catch(Exception exo) { MessageBox.Show(exo.Message); }
             }
         }
 

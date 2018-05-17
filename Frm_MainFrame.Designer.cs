@@ -44,22 +44,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pic_Export = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.pic_Exit = new System.Windows.Forms.PictureBox();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.pic_Query = new System.Windows.Forms.PictureBox();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.pic_BackUp = new System.Windows.Forms.PictureBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.pic_Manager = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_Refresh = new System.Windows.Forms.Button();
             this.btn_Edit = new System.Windows.Forms.Button();
@@ -87,6 +80,10 @@
             this.项目toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.课题TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.子课题SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbl_UserUnit = new System.Windows.Forms.Label();
+            this.lbl_Exit = new System.Windows.Forms.LinkLabel();
+            this.lbl_Help = new System.Windows.Forms.LinkLabel();
+            this.lbl_UserName = new System.Windows.Forms.LinkLabel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Add)).BeginInit();
             this.panel2.SuspendLayout();
@@ -94,17 +91,12 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).BeginInit();
             this.groupBox1.SuspendLayout();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Exit)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Query)).BeginInit();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_BackUp)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Manager)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).BeginInit();
@@ -217,12 +209,13 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.panel8);
+            this.groupBox1.Controls.Add(this.lbl_UserName);
+            this.groupBox1.Controls.Add(this.lbl_Help);
+            this.groupBox1.Controls.Add(this.lbl_Exit);
+            this.groupBox1.Controls.Add(this.lbl_UserUnit);
             this.groupBox1.Controls.Add(this.panel7);
-            this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.panel5);
-            this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.panel2);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.panel3);
@@ -231,41 +224,6 @@
             this.groupBox1.Size = new System.Drawing.Size(1342, 96);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            // 
-            // panel8
-            // 
-            this.panel8.Controls.Add(this.label10);
-            this.panel8.Controls.Add(this.pic_Exit);
-            this.panel8.Location = new System.Drawing.Point(743, 10);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(91, 82);
-            this.panel8.TabIndex = 10;
-            // 
-            // label10
-            // 
-            this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(31, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 12);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "注销";
-            // 
-            // pic_Exit
-            // 
-            this.pic_Exit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pic_Exit.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0098;
-            this.pic_Exit.Location = new System.Drawing.Point(18, 7);
-            this.pic_Exit.Name = "pic_Exit";
-            this.pic_Exit.Size = new System.Drawing.Size(55, 48);
-            this.pic_Exit.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pic_Exit.TabIndex = 0;
-            this.pic_Exit.TabStop = false;
-            this.pic_Exit.Click += new System.EventHandler(this.pic_Exit_Click);
-            this.pic_Exit.MouseEnter += new System.EventHandler(this.Pic_MouseEnter);
-            this.pic_Exit.MouseLeave += new System.EventHandler(this.Pic_MouseLeave);
             // 
             // panel7
             // 
@@ -299,41 +257,6 @@
             this.pic_Query.Click += new System.EventHandler(this.pic_Query_Click);
             this.pic_Query.MouseEnter += new System.EventHandler(this.Pic_MouseEnter);
             this.pic_Query.MouseLeave += new System.EventHandler(this.Pic_MouseLeave);
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.label8);
-            this.panel6.Controls.Add(this.pictureBox3);
-            this.panel6.Location = new System.Drawing.Point(636, 10);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(91, 82);
-            this.panel6.TabIndex = 8;
-            // 
-            // label8
-            // 
-            this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(19, 64);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 12);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "修改密码";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox3.Image = global::数据采集档案管理系统___课题版.Properties.Resources.png_0285;
-            this.pictureBox3.Location = new System.Drawing.Point(18, 7);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(55, 48);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 0;
-            this.pictureBox3.TabStop = false;
-            this.pictureBox3.Click += new System.EventHandler(this.pic_Editpassword);
-            this.pictureBox3.MouseEnter += new System.EventHandler(this.Pic_MouseEnter);
-            this.pictureBox3.MouseLeave += new System.EventHandler(this.Pic_MouseLeave);
             // 
             // panel4
             // 
@@ -400,16 +323,6 @@
             this.pic_Manager.Click += new System.EventHandler(this.pic_Manager_Click);
             this.pic_Manager.MouseEnter += new System.EventHandler(this.Pic_MouseEnter);
             this.pic_Manager.MouseLeave += new System.EventHandler(this.Pic_MouseLeave);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::数据采集档案管理系统___课题版.Properties.Resources.login_1;
-            this.pictureBox1.Location = new System.Drawing.Point(858, 16);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(484, 67);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
             // 
             // groupBox2
             // 
@@ -674,6 +587,49 @@
             this.子课题SToolStripMenuItem.Text = "子课题(&S)";
             this.子课题SToolStripMenuItem.Click += new System.EventHandler(this.子课题SToolStripMenuItem_Click);
             // 
+            // lbl_UserUnit
+            // 
+            this.lbl_UserUnit.AutoSize = true;
+            this.lbl_UserUnit.Location = new System.Drawing.Point(1165, 62);
+            this.lbl_UserUnit.Name = "lbl_UserUnit";
+            this.lbl_UserUnit.Size = new System.Drawing.Size(29, 12);
+            this.lbl_UserUnit.TabIndex = 12;
+            this.lbl_UserUnit.Text = "null";
+            // 
+            // lbl_Exit
+            // 
+            this.lbl_Exit.AutoSize = true;
+            this.lbl_Exit.Location = new System.Drawing.Point(1283, 15);
+            this.lbl_Exit.Name = "lbl_Exit";
+            this.lbl_Exit.Size = new System.Drawing.Size(53, 12);
+            this.lbl_Exit.TabIndex = 13;
+            this.lbl_Exit.TabStop = true;
+            this.lbl_Exit.Text = "【注销】";
+            this.lbl_Exit.Click += new System.EventHandler(this.pic_Exit_Click);
+            // 
+            // lbl_Help
+            // 
+            this.lbl_Help.AutoSize = true;
+            this.lbl_Help.Location = new System.Drawing.Point(1224, 15);
+            this.lbl_Help.Name = "lbl_Help";
+            this.lbl_Help.Size = new System.Drawing.Size(53, 12);
+            this.lbl_Help.TabIndex = 14;
+            this.lbl_Help.TabStop = true;
+            this.lbl_Help.Text = "【帮助】";
+            this.lbl_Help.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_Help_LinkClicked);
+            // 
+            // lbl_UserName
+            // 
+            this.lbl_UserName.AutoSize = true;
+            this.lbl_UserName.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lbl_UserName.Location = new System.Drawing.Point(1165, 35);
+            this.lbl_UserName.Name = "lbl_UserName";
+            this.lbl_UserName.Size = new System.Drawing.Size(29, 12);
+            this.lbl_UserName.TabIndex = 15;
+            this.lbl_UserName.TabStop = true;
+            this.lbl_UserName.Text = "null";
+            this.lbl_UserName.Click += new System.EventHandler(this.pic_Editpassword);
+            // 
             // Frm_MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -687,7 +643,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Frm_MainFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "科技计划项目档案数据采集系统[课题组版]";
+            this.Text = "科技计划项目档案数据采集系统【课题组用】";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_MainFrame_FormClosing);
             this.Shown += new System.EventHandler(this.Frm_MainFrame_Shown);
             this.panel1.ResumeLayout(false);
@@ -700,22 +656,16 @@
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).EndInit();
             this.groupBox1.ResumeLayout(false);
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Exit)).EndInit();
+            this.groupBox1.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Query)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_BackUp)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Manager)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
@@ -750,16 +700,12 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgv_DataList;
         private System.Windows.Forms.TreeView tv_DataTree;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pic_Manager;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pic_BackUp;
-        private System.Windows.Forms.Panel panel6;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btn_Edit;
         private System.Windows.Forms.Button btn_Refresh;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
@@ -773,9 +719,6 @@
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.PictureBox pic_Query;
-        private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.PictureBox pic_Exit;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel stateTip;
         private System.Windows.Forms.ContextMenuStrip cms_TreeView;
@@ -783,5 +726,9 @@
         private System.Windows.Forms.ToolStripMenuItem 课题TToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 子课题SToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 项目toolStripMenuItem1;
+        private System.Windows.Forms.Label lbl_UserUnit;
+        private System.Windows.Forms.LinkLabel lbl_Exit;
+        private System.Windows.Forms.LinkLabel lbl_Help;
+        private System.Windows.Forms.LinkLabel lbl_UserName;
     }
 }

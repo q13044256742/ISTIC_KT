@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace 数据采集档案管理系统___课题版
@@ -13,6 +14,7 @@ namespace 数据采集档案管理系统___课题版
         public object parentId;
         public Frm_AddFile(DataGridView view, object key, object fileId)
         {
+            CheckForIllegalCrossThreadCalls = false;
             InitializeComponent();
             this.view = view;
             this.key = key;
@@ -215,7 +217,10 @@ namespace 数据采集档案管理系统___课题版
                 {
                     cbo_categor.Tag = cbo_categor.SelectedValue;
                     cbo_categor.DropDownStyle = ComboBoxStyle.DropDown;
-                    cbo_categor.Text = null;
+
+                    string value = txt_fileCode.Text.Split('-')[0] + "-";
+                    cbo_categor.Text = value;
+                    cbo_categor.SelectionStart = value.Length;
                 }
                 else
                 {
@@ -240,36 +245,45 @@ namespace 数据采集档案管理系统___课题版
                     string fullPath = frm.SelectedFileName;
                     if(File.Exists(fullPath))
                     {
-                        string savePath = Application.StartupPath + @"\TempBackupFolder\";
-                        if(!Directory.Exists(savePath))
-                            Directory.CreateDirectory(savePath);
-                        string filePath = savePath + new FileInfo(fullPath).Name;
-                        File.Copy(fullPath, filePath, true);
-                        txt_link.Text = fullPath;
-                        txt_link.Tag = frm.SelectedFileId;
-                        
-                        //尝试获取页数
-                        try
+                        pal_Wait.Visible = true;
+                        btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = false;
+                        new Thread(delegate ()
                         {
-                            string format = Path.GetExtension(fullPath).ToLower();
-                            if(format.Contains("doc") || format.Contains("docx"))
-                                num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetWordPageCount(fullPath);
-                            else if(format.Contains("pdf"))
-                                num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetPDFPageCount(fullPath);
-                        } catch(Exception) { }
+                            string savePath = Application.StartupPath + @"\Temp\";
+                            if(!Directory.Exists(savePath))
+                                Directory.CreateDirectory(savePath);
+                            string filePath = savePath + new FileInfo(fullPath).Name;
+                            File.Copy(fullPath, filePath, true);
+                            txt_link.Text = fullPath;
+                            txt_link.Tag = frm.SelectedFileId;
 
-                        if(MessageBox.Show("已从服务器拷贝文件到本地，是否现在打开？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        {
-                            System.Diagnostics.Process.Start("Explorer.exe", filePath);
-                            //if(form != null)
-                            //    form.Stop();
-                            //WindowState = FormWindowState.Maximized;
-                            //pal_ShowData.Visible = true;
-                            //pal_ShowData.Controls.Clear();
+                            //尝试获取页数
+                            try
+                            {
+                                string format = Path.GetExtension(fullPath).ToLower();
+                                if(format.Contains("doc") || format.Contains("docx"))
+                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetWordPageCount(fullPath);
+                                else if(format.Contains("pdf"))
+                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetPDFPageCount(fullPath);
+                            }
+                            catch(Exception) { }
 
-                            //form = new ExeToWinForm(pal_ShowData, string.Empty);
-                            //form.Start(fullPath);
-                        }
+                            pal_Wait.Visible = false;
+                            btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = true;
+
+                            if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                System.Diagnostics.Process.Start("Explorer.exe", filePath);
+                                //if(form != null)
+                                //    form.Stop();
+                                //WindowState = FormWindowState.Maximized;
+                                //pal_ShowData.Visible = true;
+                                //pal_ShowData.Controls.Clear();
+
+                                //form = new ExeToWinForm(pal_ShowData, string.Empty);
+                                //form.Start(fullPath);
+                            }
+                        }).Start();
                     }
                     else
                         MessageBox.Show("服务器不存在此文件。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -285,12 +299,13 @@ namespace 数据采集档案管理系统___课题版
         private object SaveFileInfo(DataGridViewRow row, bool isAdd)
         {
             bool isOtherType = cbo_categor.SelectedIndex == -1;
+
             object primaryKey = Guid.NewGuid().ToString();
             row.Cells[key + "id"].Value = row.Index + 1;
             row.Cells[key + "stage"].Value = cbo_stage.SelectedValue;
             SetCategorByStage(cbo_stage.SelectedValue, row, key);
             row.Cells[key + "categor"].Value = cbo_categor.SelectedValue ?? cbo_categor.Tag;
-            object categorName = isOtherType ? cbo_categor.Text : null;
+            object categorName = isOtherType ? cbo_categor.Text.Split('-')[1].Trim() : null;
             row.Cells[key + "categor_name"].Value = categorName;
             row.Cells[key + "name"].Value = txt_fileName.Text;
             row.Cells[key + "code"].Value = txt_fileCode.Text;
@@ -438,7 +453,7 @@ namespace 数据采集档案管理系统___课题版
                 }
                 else if(Text.Contains("编辑"))
                     UpdateFileInfo();
-                WindowState = FormWindowState.Normal;
+                //WindowState = FormWindowState.Normal;
                 //if(form != null)
                 //{
                 //    form.Stop();
@@ -453,9 +468,10 @@ namespace 数据采集档案管理系统___课题版
         {
             bool result = true;
             //文件类别
-            if(cbo_categor.SelectedIndex == -1)
+            if(cbo_categor.SelectedIndex == -1 || cbo_categor.SelectedIndex == cbo_categor.Items.Count - 1)
             {
-                if(string.IsNullOrEmpty(cbo_categor.Text))
+                string value = cbo_categor.Text.Trim();
+                if(string.IsNullOrEmpty(value) || value.StartsWith("-") || value.EndsWith("-") || !value.Contains("-"))
                 {
                     errorProvider1.SetError(cbo_categor, "提示：请输入文件类别名称。");
                     result = false;
@@ -555,6 +571,18 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 errorProvider1.SetError(txt_unit, null);
+            //是否移交
+            count = 0;
+            foreach(RadioButton item in pal_IsTransfer.Controls)
+                if(item.Checked)
+                { count++; break; }
+            if(count == 0)
+            {
+                errorProvider1.SetError(pal_IsTransfer, "提示：移交状态不能为空。");
+                result = false;
+            }
+            else
+                errorProvider1.SetError(pal_IsTransfer, null);
             return result;
         }
 
@@ -600,11 +628,29 @@ namespace 数据采集档案管理系统___课题版
                         item.ResetText();
                     else if(item is NumericUpDown)
                         (item as NumericUpDown).Value = 0;
+                    else if(item is DateTimePicker)
+                        (item as DateTimePicker).Value = DateTime.Now;
                     else if(item is ComboBox)
                     {
-                        if(!item.Name.Equals("cbo_stage") && !item.Name.Equals("txt_fileName"))
+                        if(item.Name.Equals("txt_fileName"))
+                        {
+                            ComboBox cbo = item as ComboBox;
+                            cbo.Items.Clear();
+                            cbo.Text = null;
+                        }
+                        else if(!item.Name.Equals("cbo_stage"))
                         {
                             (item as ComboBox).SelectedIndex = 0;
+                        }
+                    }
+                    else if(item is Panel)
+                    {
+                        foreach(Control con in item.Controls)
+                        {
+                            if(con is RadioButton)
+                                (con as RadioButton).Checked = false;
+                            else if(con is CheckBox)
+                                (con as CheckBox).Checked = false;
                         }
                     }
                 }
@@ -647,6 +693,13 @@ namespace 数据采集档案管理系统___课题版
                 DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_id FROM files_info WHERE fi_name='{fileName}'");
                 new Frm_AddFile(view, key, row["fi_id"]).ShowDialog();
             }
+        }
+
+        private void Frm_AddFile_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(!btn_Save.Enabled)
+                if(MessageBox.Show("确定要强制退出吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.Cancel)
+                    e.Cancel = true;
         }
     }
 }
