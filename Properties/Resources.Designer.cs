@@ -144,6 +144,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap help {
+            get {
+                object obj = ResourceManager.GetObject("help", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap login_1 {
             get {
                 object obj = ResourceManager.GetObject("login_1", resourceCulture);
@@ -167,6 +177,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap Mbg {
             get {
                 object obj = ResourceManager.GetObject("Mbg", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap message {
+            get {
+                object obj = ResourceManager.GetObject("message", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -317,6 +337,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap wait {
             get {
                 object obj = ResourceManager.GetObject("wait", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap zhuxiao {
+            get {
+                object obj = ResourceManager.GetObject("zhuxiao", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

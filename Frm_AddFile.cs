@@ -191,7 +191,7 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 阶段下拉切换事件
         /// </summary>
-        private void Cbo_stage_SelectionChangeCommitted(object sender, System.EventArgs e)
+        private void Cbo_stage_SelectionChangeCommitted(object sender, EventArgs e)
         {
             LoadCategorByStage(cbo_stage.SelectedValue);
             Cbo_categor_SelectedIndexChanged(sender, e);

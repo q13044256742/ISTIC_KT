@@ -41,7 +41,6 @@ namespace 数据采集档案管理系统___课题版
                 new DataGridViewLinkColumn(){Name = "pro_lostFileAmount", HeaderText = "缺失文件数", FillWeight = 5 },
                 new DataGridViewLinkColumn(){Name = "pro_topicAmount", HeaderText = "课题/子课题数", FillWeight = 4 },
             });
-
             DataTable projectTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM project_info WHERE pi_obj_id='{spid}'");
             for(int i = 0; i < projectTable.Rows.Count; i++)
             {
@@ -56,6 +55,22 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["pro_totalFileAmount"].Value = GetFileAmount(projectTable.Rows[i]["pi_id"]);
                 dgv_ShowData.Rows[index].Cells["pro_lostFileAmount"].Value = GetLostFileAmount(projectTable.Rows[i]["pi_id"]);
                 dgv_ShowData.Rows[index].Cells["pro_topicAmount"].Value = GetTopicAmount(projectTable.Rows[i]["pi_id"]);
+            }
+
+            DataTable topicTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM topic_info WHERE ti_obj_id='{spid}'");
+            for(int i = 0; i < topicTable.Rows.Count; i++)
+            {
+                int index = dgv_ShowData.Rows.Add();
+                dgv_ShowData.Rows[index].Tag = topicTable.Rows[i]["ti_id"];
+                dgv_ShowData.Rows[index].Cells["pro_id"].Value = i + 1;
+                dgv_ShowData.Rows[index].Cells["pro_code"].Value = topicTable.Rows[i]["ti_code"];
+                dgv_ShowData.Rows[index].Cells["pro_name"].Value = topicTable.Rows[i]["ti_name"];
+                dgv_ShowData.Rows[index].Cells["pro_unit"].Value = topicTable.Rows[i]["ti_unit"];
+                dgv_ShowData.Rows[index].Cells["pro_user"].Value = topicTable.Rows[i]["ti_contacts"];
+                dgv_ShowData.Rows[index].Cells["pro_phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
+                dgv_ShowData.Rows[index].Cells["pro_totalFileAmount"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"]);
+                dgv_ShowData.Rows[index].Cells["pro_lostFileAmount"].Value = GetLostFileAmount(topicTable.Rows[i]["ti_id"]);
+                dgv_ShowData.Rows[index].Cells["pro_topicAmount"].Value = GetSubjectAmount(topicTable.Rows[i]["ti_id"]);
             }
 
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;

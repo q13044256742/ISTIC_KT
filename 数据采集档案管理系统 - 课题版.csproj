@@ -338,6 +338,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\zhuxiao.png" />
+    <None Include="Resources\help.png" />
+    <None Include="Resources\message.png" />
     <None Include="Resources\wait.gif" />
     <None Include="Resources\file2.jpg" />
     <None Include="Resources\file.jpg" />

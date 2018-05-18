@@ -30,7 +30,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void Pic_Add_Click(object sender, EventArgs e)
         {
-            TreeNode node = new TreeNode() { Name = UserHelper.GetUser().SpecialId, Tag = ControlType.Plan };
+            TreeNode node = new TreeNode() { Name = UserHelper.GetUser().SpecialId, Tag = ControlType.Plan_Project };
             Frm_Wroking frm_Wroking = new Frm_Wroking(node, LoadTreeList);
             frm_Wroking.Show();
         }
@@ -593,7 +593,7 @@ namespace 数据采集档案管理系统___课题版
             }, LoadTreeList).Show();
         }
 
-        private void lbl_Help_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void pic_Help_Click(object sender, EventArgs e)
         {
             new Frm_Explain().ShowDialog();
         }

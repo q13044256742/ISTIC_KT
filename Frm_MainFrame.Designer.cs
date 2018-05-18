@@ -44,6 +44,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pic_Export = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.pic_Help = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbl_UserName = new System.Windows.Forms.LinkLabel();
+            this.lbl_UserUnit = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.label9 = new System.Windows.Forms.Label();
             this.pic_Query = new System.Windows.Forms.PictureBox();
@@ -80,10 +85,7 @@
             this.项目toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.课题TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.子课题SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbl_UserUnit = new System.Windows.Forms.Label();
-            this.lbl_Exit = new System.Windows.Forms.LinkLabel();
-            this.lbl_Help = new System.Windows.Forms.LinkLabel();
-            this.lbl_UserName = new System.Windows.Forms.LinkLabel();
+            this.pic_Logout = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Add)).BeginInit();
             this.panel2.SuspendLayout();
@@ -91,6 +93,8 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Help)).BeginInit();
             this.panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Query)).BeginInit();
             this.panel4.SuspendLayout();
@@ -102,6 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.cms_TreeView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Logout)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -209,10 +214,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.lbl_UserName);
-            this.groupBox1.Controls.Add(this.lbl_Help);
-            this.groupBox1.Controls.Add(this.lbl_Exit);
-            this.groupBox1.Controls.Add(this.lbl_UserUnit);
+            this.groupBox1.Controls.Add(this.pic_Logout);
+            this.groupBox1.Controls.Add(this.panel6);
             this.groupBox1.Controls.Add(this.panel7);
             this.groupBox1.Controls.Add(this.panel4);
             this.groupBox1.Controls.Add(this.panel5);
@@ -224,6 +227,67 @@
             this.groupBox1.Size = new System.Drawing.Size(1342, 96);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // panel6
+            // 
+            this.panel6.BackgroundImage = global::数据采集档案管理系统___课题版.Properties.Resources.message;
+            this.panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panel6.Controls.Add(this.pic_Help);
+            this.panel6.Controls.Add(this.label8);
+            this.panel6.Controls.Add(this.lbl_UserName);
+            this.panel6.Controls.Add(this.lbl_UserUnit);
+            this.panel6.Location = new System.Drawing.Point(991, 23);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(279, 50);
+            this.panel6.TabIndex = 16;
+            // 
+            // pic_Help
+            // 
+            this.pic_Help.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pic_Help.Image = global::数据采集档案管理系统___课题版.Properties.Resources.help;
+            this.pic_Help.Location = new System.Drawing.Point(232, 4);
+            this.pic_Help.Name = "pic_Help";
+            this.pic_Help.Size = new System.Drawing.Size(42, 42);
+            this.pic_Help.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pic_Help.TabIndex = 16;
+            this.pic_Help.TabStop = false;
+            this.pic_Help.Click += new System.EventHandler(this.pic_Help_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("宋体", 9.5F);
+            this.label8.Location = new System.Drawing.Point(16, 12);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(59, 13);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "欢迎你：";
+            // 
+            // lbl_UserName
+            // 
+            this.lbl_UserName.AutoSize = true;
+            this.lbl_UserName.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_UserName.Font = new System.Drawing.Font("宋体", 9.5F);
+            this.lbl_UserName.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.lbl_UserName.Location = new System.Drawing.Point(81, 12);
+            this.lbl_UserName.Name = "lbl_UserName";
+            this.lbl_UserName.Size = new System.Drawing.Size(35, 13);
+            this.lbl_UserName.TabIndex = 15;
+            this.lbl_UserName.TabStop = true;
+            this.lbl_UserName.Text = "null";
+            this.lbl_UserName.Click += new System.EventHandler(this.pic_Editpassword);
+            // 
+            // lbl_UserUnit
+            // 
+            this.lbl_UserUnit.AutoSize = true;
+            this.lbl_UserUnit.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_UserUnit.Font = new System.Drawing.Font("宋体", 9.5F);
+            this.lbl_UserUnit.Location = new System.Drawing.Point(16, 31);
+            this.lbl_UserUnit.Name = "lbl_UserUnit";
+            this.lbl_UserUnit.Size = new System.Drawing.Size(35, 13);
+            this.lbl_UserUnit.TabIndex = 12;
+            this.lbl_UserUnit.Text = "null";
             // 
             // panel7
             // 
@@ -262,7 +326,7 @@
             // 
             this.panel4.Controls.Add(this.label4);
             this.panel4.Controls.Add(this.pic_BackUp);
-            this.panel4.Location = new System.Drawing.Point(530, 10);
+            this.panel4.Location = new System.Drawing.Point(426, 10);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(91, 82);
             this.panel4.TabIndex = 7;
@@ -295,7 +359,7 @@
             // 
             this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.pic_Manager);
-            this.panel5.Location = new System.Drawing.Point(424, 10);
+            this.panel5.Location = new System.Drawing.Point(533, 10);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(91, 82);
             this.panel5.TabIndex = 6;
@@ -587,48 +651,16 @@
             this.子课题SToolStripMenuItem.Text = "子课题(&S)";
             this.子课题SToolStripMenuItem.Click += new System.EventHandler(this.子课题SToolStripMenuItem_Click);
             // 
-            // lbl_UserUnit
+            // pic_Logout
             // 
-            this.lbl_UserUnit.AutoSize = true;
-            this.lbl_UserUnit.Location = new System.Drawing.Point(1165, 62);
-            this.lbl_UserUnit.Name = "lbl_UserUnit";
-            this.lbl_UserUnit.Size = new System.Drawing.Size(29, 12);
-            this.lbl_UserUnit.TabIndex = 12;
-            this.lbl_UserUnit.Text = "null";
-            // 
-            // lbl_Exit
-            // 
-            this.lbl_Exit.AutoSize = true;
-            this.lbl_Exit.Location = new System.Drawing.Point(1283, 15);
-            this.lbl_Exit.Name = "lbl_Exit";
-            this.lbl_Exit.Size = new System.Drawing.Size(53, 12);
-            this.lbl_Exit.TabIndex = 13;
-            this.lbl_Exit.TabStop = true;
-            this.lbl_Exit.Text = "【注销】";
-            this.lbl_Exit.Click += new System.EventHandler(this.pic_Exit_Click);
-            // 
-            // lbl_Help
-            // 
-            this.lbl_Help.AutoSize = true;
-            this.lbl_Help.Location = new System.Drawing.Point(1224, 15);
-            this.lbl_Help.Name = "lbl_Help";
-            this.lbl_Help.Size = new System.Drawing.Size(53, 12);
-            this.lbl_Help.TabIndex = 14;
-            this.lbl_Help.TabStop = true;
-            this.lbl_Help.Text = "【帮助】";
-            this.lbl_Help.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_Help_LinkClicked);
-            // 
-            // lbl_UserName
-            // 
-            this.lbl_UserName.AutoSize = true;
-            this.lbl_UserName.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.lbl_UserName.Location = new System.Drawing.Point(1165, 35);
-            this.lbl_UserName.Name = "lbl_UserName";
-            this.lbl_UserName.Size = new System.Drawing.Size(29, 12);
-            this.lbl_UserName.TabIndex = 15;
-            this.lbl_UserName.TabStop = true;
-            this.lbl_UserName.Text = "null";
-            this.lbl_UserName.Click += new System.EventHandler(this.pic_Editpassword);
+            this.pic_Logout.Image = global::数据采集档案管理系统___课题版.Properties.Resources.zhuxiao;
+            this.pic_Logout.Location = new System.Drawing.Point(1276, 23);
+            this.pic_Logout.Name = "pic_Logout";
+            this.pic_Logout.Size = new System.Drawing.Size(50, 50);
+            this.pic_Logout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pic_Logout.TabIndex = 17;
+            this.pic_Logout.TabStop = false;
+            this.pic_Logout.Click += new System.EventHandler(this.pic_Exit_Click);
             // 
             // Frm_MainFrame
             // 
@@ -657,6 +689,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Help)).EndInit();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Query)).EndInit();
@@ -673,6 +708,7 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.cms_TreeView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Logout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -727,8 +763,10 @@
         private System.Windows.Forms.ToolStripMenuItem 子课题SToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 项目toolStripMenuItem1;
         private System.Windows.Forms.Label lbl_UserUnit;
-        private System.Windows.Forms.LinkLabel lbl_Exit;
-        private System.Windows.Forms.LinkLabel lbl_Help;
         private System.Windows.Forms.LinkLabel lbl_UserName;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox pic_Help;
+        private System.Windows.Forms.PictureBox pic_Logout;
     }
 }
