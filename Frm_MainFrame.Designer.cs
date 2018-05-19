@@ -244,6 +244,7 @@
             // pic_Help
             // 
             this.pic_Help.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pic_Help.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pic_Help.Image = global::数据采集档案管理系统___课题版.Properties.Resources.help;
             this.pic_Help.Location = new System.Drawing.Point(232, 4);
             this.pic_Help.Name = "pic_Help";
@@ -653,6 +654,7 @@
             // 
             // pic_Logout
             // 
+            this.pic_Logout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pic_Logout.Image = global::数据采集档案管理系统___课题版.Properties.Resources.zhuxiao;
             this.pic_Logout.Location = new System.Drawing.Point(1276, 23);
             this.pic_Logout.Name = "pic_Logout";

@@ -174,23 +174,28 @@ namespace 数据采集档案管理系统___课题版
             {
                 SetTip($"正在导入数据库[files_info({i}\\{length})]");
                 DataRow row = fileTable.Rows[i];
-                //转换为当前服务器链接
                 string link = GetValue(row["fi_link"]);
-                if(!string.IsNullOrEmpty(link))
+                if(Directory.Exists(rootFolder))//尝试转换文件的link路径-转换为当前服务器链接
                 {
-                    string fileName = Path.GetFileName(link);
-                    string[] files = Directory.GetFiles(rootFolder, "*" + fileName, SearchOption.AllDirectories);
-                    for(int j = 0; j < files.Length; j++)
+                    if(!string.IsNullOrEmpty(link))
                     {
-                        string parent = Directory.GetParent(files[j]).Name;
-                        string real = GetRealParentName(row["fi_obj_id"]);
-                        if(string.IsNullOrEmpty(real))
-                            link = real;
-                        else if(parent.Equals(real))
-                        {
-                            link = files[j];
-                            break;
-                        }
+                        string fileName = Path.GetFileName(link);
+                        string[] files = Directory.GetFiles(rootFolder, "*" + fileName, SearchOption.AllDirectories);
+                        if(files.Length == 1)
+                            link = files[0];
+                        else
+                            for(int j = 0; j < files.Length; j++)
+                            {
+                                string parent = Directory.GetParent(files[j]).Name;
+                                string real = GetRealParentName(row["fi_obj_id"]);
+                                if(string.IsNullOrEmpty(real))
+                                    link = real;
+                                else if(parent.Equals(real))
+                                {
+                                    link = files[j];
+                                    break;
+                                }
+                            }
                     }
                 }
                 string insertSql = "INSERT INTO files_info(fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort, fi_remark) VALUES(" +
