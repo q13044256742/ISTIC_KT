@@ -58,18 +58,10 @@ namespace 数据采集档案管理系统___课题版
             InitialTypeList(dgv_Project_FileList, "dgv_Project_FL_");
             InitialTypeList(dgv_Topic_FileList, "dgv_Topic_FL_");
             InitialTypeList(dgv_Subject_FileList, "dgv_Subject_FL_");
-            //【密级】
-            InitialSecretList(dgv_Project_FileList, "dgv_Project_FL_");
-            InitialSecretList(dgv_Topic_FileList, "dgv_Topic_FL_");
-            InitialSecretList(dgv_Subject_FileList, "dgv_Subject_FL_");
             //【载体】
             InitialCarrierList(dgv_Project_FileList, "dgv_Project_FL_");
             InitialCarrierList(dgv_Topic_FileList, "dgv_Topic_FL_");
             InitialCarrierList(dgv_Subject_FileList, "dgv_Subject_FL_");
-            //文件形态
-            InitialFormList(dgv_Project_FileList, "dgv_Project_FL_");
-            InitialFormList(dgv_Topic_FileList, "dgv_Topic_FL_");
-            InitialFormList(dgv_Subject_FileList, "dgv_Subject_FL_");
             //文件核查原因列表
             InitialLostReasonList(dgv_Project_FileValid, "dgv_Project_FV_");
             InitialLostReasonList(dgv_Topic_FileValid, "dgv_Topic_FV_");
@@ -338,17 +330,10 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[index].Cells[key + "stage"].Value = dataTable.Rows[i]["fi_stage"];
                 SetCategorByStage(dataTable.Rows[i]["fi_stage"], dataGridView.Rows[index], key);
                 dataGridView.Rows[index].Cells[key + "categor"].Value = dataTable.Rows[i]["fi_categor"]; 
-                object categorName = dataTable.Rows[i]["fi_categor_name"];
-                if(!string.IsNullOrEmpty(GetValue(categorName)))
-                {
-                    dataGridView.Columns[key + "categor_name"].Visible = true;
-                    dataGridView.Rows[index].Cells[$"{key}categor_name"].Value = categorName;
-                }
                 dataGridView.Rows[index].Cells[key + "code"].Value = dataTable.Rows[i]["fi_code"];
                 dataGridView.Rows[index].Cells[key + "name"].Value = dataTable.Rows[i]["fi_name"];
                 dataGridView.Rows[index].Cells[key + "user"].Value = dataTable.Rows[i]["fi_user"];
                 dataGridView.Rows[index].Cells[key + "type"].Value = dataTable.Rows[i]["fi_type"];
-                dataGridView.Rows[index].Cells[key + "secret"].Value = dataTable.Rows[i]["fi_secret"];
                 dataGridView.Rows[index].Cells[key + "pages"].Value = dataTable.Rows[i]["fi_pages"];
                 dataGridView.Rows[index].Cells[key + "count"].Value = dataTable.Rows[i]["fi_count"];
                 dataGridView.Rows[index].Cells[key + "code"].Value = dataTable.Rows[i]["fi_code"];
@@ -361,13 +346,10 @@ namespace 数据采集档案管理系统___课题版
                 }
                 dataGridView.Rows[index].Cells[key + "unit"].Value = dataTable.Rows[i]["fi_unit"];
                 dataGridView.Rows[index].Cells[key + "carrier"].Value = dataTable.Rows[i]["fi_carrier"];
-                dataGridView.Rows[index].Cells[key + "form"].Value = dataTable.Rows[i]["fi_form"];
                 dataGridView.Rows[index].Cells[key + "link"].Value = dataTable.Rows[i]["fi_link"];
-                string _transfer = GetValue(dataTable.Rows[i]["fi_transfer"]);
-                if(!string.IsNullOrEmpty(_transfer))
-                    dataGridView.Rows[index].Cells[key + "transfer"].Value = Convert.ToInt32(_transfer) == 0 ? "是" : "否";
                 dataGridView.Rows[index].Cells[key + "link"].Tag = dataTable.Rows[i]["fi_file_id"];
             }
+            dataGridView.Columns[key + "categor_name"].Visible = false;
         }
 
         /// <summary>
@@ -517,19 +499,9 @@ namespace 数据采集档案管理系统___课题版
                             int maxLength = dgv_Project_FileList.Rows.Count - 1;
                             for(int i = 0; i < maxLength; i++)
                             {
-                                object fileName = dgv_Project_FileList.Rows[i].Cells[$"{key}name"].Value;
-                                if(fileName != null)
-                                {
-                                    DataGridViewRow row = dgv_Project_FileList.Rows[i];
-                                    object id = row.Cells[$"{key}id"].Tag;
-                                    if(id == null)
-                                    {
-                                        object fileId = AddFileInfo(key, row, objId, row.Index);
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row, row.Index);
-                                }
+                                DataGridViewRow row = dgv_Project_FileList.Rows[i];
+                                object fileId = AddFileInfo(key, row, objId, row.Index);
+                                row.Cells[$"{key}id"].Tag = fileId;
                             }
                             RemoveFileList();
                             UpdateSecretById(objId);
@@ -601,7 +573,6 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
                             LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                            MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -628,14 +599,8 @@ namespace 数据采集档案管理系统___课题版
                                 if(fileName != null)
                                 {
                                     DataGridViewRow row = dgv_Topic_FileList.Rows[i];
-                                    object id = row.Cells[$"{key}id"].Tag;
-                                    if(id == null)
-                                    {
-                                        object fileId = AddFileInfo(key, row, objId, row.Index);
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row, row.Index);
+                                    object fileId = AddFileInfo(key, row, objId, row.Index);
+                                    row.Cells[$"{key}id"].Tag = fileId;
                                 }
                             }
                             RemoveFileList();
@@ -707,7 +672,6 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
                             LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                            MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -733,14 +697,8 @@ namespace 数据采集档案管理系统___课题版
                                 if(fileName != null)
                                 {
                                     DataGridViewRow row = dgv_Subject_FileList.Rows[i];
-                                    object id = row.Cells[$"{key}id"].Tag;
-                                    if(id == null)
-                                    {
-                                        object fileId = AddFileInfo(key, row, objId, row.Index);
-                                        row.Cells[$"{key}id"].Tag = fileId;
-                                    }
-                                    else
-                                        UpdateFileInfo(key, row, row.Index);
+                                    object fileId = AddFileInfo(key, row, objId, row.Index);
+                                    row.Cells[$"{key}id"].Tag = fileId;
                                 }
                             }
                             RemoveFileList();
@@ -812,7 +770,6 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
                             LoadFileBoxTable(boxId, objId, ControlType.Plan);
-                            MessageBox.Show("保存案卷盒成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1418,18 +1375,6 @@ namespace 数据采集档案管理系统___课题版
         }
 
         /// <summary>
-        /// 密级
-        /// </summary>
-        private void InitialSecretList(DataGridView dataGridView, string key)
-        {
-            DataGridViewComboBoxColumn secretColumn = dataGridView.Columns[key + "secret"] as DataGridViewComboBoxColumn;
-            secretColumn.DataSource = DictionaryHelper.GetTableByCode("dic_file_mj");
-            secretColumn.DisplayMember = "dd_name";
-            secretColumn.ValueMember = "dd_id";
-            secretColumn.DefaultCellStyle = new DataGridViewCellStyle() { Font = new System.Drawing.Font("宋体", 10.5f) };
-        }
-
-        /// <summary>
         /// 载体
         /// </summary>
         private void InitialCarrierList(DataGridView dataGridView, string key)
@@ -1439,18 +1384,6 @@ namespace 数据采集档案管理系统___课题版
             carrierColumn.DisplayMember = "dd_name";
             carrierColumn.ValueMember = "dd_id";
             carrierColumn.DefaultCellStyle = new DataGridViewCellStyle() { Font = new System.Drawing.Font("宋体", 10.5f) };
-        }
-
-        /// <summary>
-        /// 形态
-        /// </summary>
-        private void InitialFormList(DataGridView dataGridView, string key)
-        {
-            DataGridViewComboBoxColumn formColumn = dataGridView.Columns[key + "form"] as DataGridViewComboBoxColumn;
-            formColumn.DataSource = DictionaryHelper.GetTableByCode("dic_file_state");
-            formColumn.DisplayMember = "dd_name";
-            formColumn.ValueMember = "dd_id";
-            formColumn.DefaultCellStyle = new DataGridViewCellStyle() { Font = new System.Drawing.Font("宋体", 10.5f) };
         }
 
         /// <summary>
@@ -1519,70 +1452,6 @@ namespace 数据采集档案管理系统___课题版
         }
 
         /// <summary>
-        /// 更新文件信息
-        /// </summary>
-        private void UpdateFileInfo(string key, DataGridViewRow row, int sort)
-        {
-            object primaryKey = row.Cells[key + "id"].Tag;
-            object stage = row.Cells[key + "stage"].Value;
-            object categor = row.Cells[key + "categor"].Value;
-            object categorName = row.Cells[key + "categor_name"] != null ? row.Cells[key + "categor_name"].Value : null;
-            object name = row.Cells[key + "name"].Value;
-            object user = row.Cells[key + "user"].Value;
-            object type = row.Cells[key + "type"].Value;
-            object secret = row.Cells[key + "secret"].Value;
-            object pages = row.Cells[key + "pages"].Value;
-            object count = row.Cells[key + "count"].Value;
-            object code = row.Cells[key + "code"].Value;
-            DateTime date = DateTime.MinValue;
-            string _date = GetValue(row.Cells[key + "date"].Value);
-            if(!string.IsNullOrEmpty(_date))
-            {
-                if(_date.Length == 4)
-                    _date = _date + "-" + date.Month + "-" + date.Day;
-                else if(_date.Length == 6)
-                    _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + date.Day;
-                else if(_date.Length == 8)
-                    _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + _date.Substring(6, 2);
-                DateTime.TryParse(_date, out date);
-            }
-            object unit = row.Cells[key + "unit"].Value;
-            object carrier = row.Cells[key + "carrier"].Value;
-            object form = row.Cells[key + "form"].Value;
-            object link = row.Cells[key + "link"].Value;
-            object fileId = row.Cells[key + "link"].Tag;
-            int transfer = "是".Equals(row.Cells[key + "transfer"].Value) ? 0 : 1;
-            object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
-            string updateSql = "UPDATE files_info SET " +
-                $"fi_stage = '{stage}', " +
-                $"fi_categor = '{categor}', " +
-                $"fi_categor_name = '{categorName}', " +
-                $"fi_name = '{name}', " +
-                $"fi_user = '{user}', " +
-                $"fi_type = '{type}', " +
-                $"fi_secret = '{secret}', " +
-                $"fi_pages = '{pages}', " +
-                $"fi_count = '{count}', " +
-                $"fi_code = '{code}', " +
-                $"fi_create_date = '{date.ToString("s")}', " +
-                $"fi_unit = '{unit}', " +
-                $"fi_carrier = '{carrier}', " +
-                $"fi_format = '{format}', " +
-                $"fi_form = '{form}', " +
-                $"fi_link = '{link}', " +
-                $"fi_transfer = '{transfer}', " +
-                $"fi_file_id = '{fileId}', " +
-                $"fi_sort = '{sort}' " +
-                $"WHERE fi_id = '{primaryKey}';";
-            if(fileId != null)
-            {
-                int value = link == null ? 0 : 1;
-                updateSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
-            }
-            SQLiteHelper.ExecuteNonQuery(updateSql);
-        }
-
-        /// <summary>
         /// 新增文件信息
         /// </summary>
         /// <param name="key">当前表格列名前缀</param>
@@ -1591,14 +1460,18 @@ namespace 数据采集档案管理系统___课题版
         /// <returns>新增信息主键</returns>
         private object AddFileInfo(string key, DataGridViewRow row, object parentId, int sort)
         {
-            object primaryKey = Guid.NewGuid().ToString();
+            string sqlString = string.Empty;
+            object _fileId = row.Cells[key + "id"].Tag;
+            if(_fileId != null)
+                sqlString += $"DELETE FROM files_info WHERE fi_id='{_fileId}';";
+            else
+                _fileId = Guid.NewGuid().ToString();
             object stage = row.Cells[key + "stage"].Value;
             object categor = row.Cells[key + "categor"].Value;
-            object categorName = row.Cells[key + "categor_name"] != null ? row.Cells[key + "categor_name"].Value : null;
+            object categorName = row.Cells[key + "categor_name"].Value;
             object name = row.Cells[key + "name"].Value;
             object user = row.Cells[key + "user"].Value;
             object type = row.Cells[key + "type"].Value;
-            object secret = row.Cells[key + "secret"].Value;
             object pages = row.Cells[key + "pages"].Value;
             object count = row.Cells[key + "count"].Value;
             object code = row.Cells[key + "code"].Value;
@@ -1616,9 +1489,7 @@ namespace 数据采集档案管理系统___课题版
             }
             object unit = row.Cells[key + "unit"].Value;
             object carrier = row.Cells[key + "carrier"].Value;
-            object form = row.Cells[key + "form"].Value;
             object link = row.Cells[key + "link"].Value;
-            int transfer = "是".Equals(row.Cells[key + "transfer"].Value) ? 0 : 1;
             object fileId = row.Cells[key + "link"].Tag;
             object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
 
@@ -1629,21 +1500,20 @@ namespace 数据采集档案管理系统___课题版
                 string value = GetValue(code).Split('-')[0];
                 int _sort = ((DataGridViewComboBoxCell)row.Cells[key + "categor"]).Items.Count - 1;
 
-                string _insertSql = "INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_sort, extend_3, extend_4) " +
-                    $"VALUES('{categor}', '{value}', '{stage}', '{_sort}', ' ', '{1}');";
-                SQLiteHelper.ExecuteNonQuery(_insertSql);
+                sqlString += "INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_sort, extend_3, extend_4) " +
+                    $"VALUES('{categor}', '{value}', '{stage}', '{_sort}', '{categorName}', '{1}');";
             }
 
-            string insertSql = "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_transfer) " +
-            $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{sort}', '{transfer}');";
+            sqlString += "INSERT INTO files_info (" +
+            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
+            $"VALUES( '{_fileId}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{link}', '{fileId}', '{parentId}', '{sort}');";
             if(fileId != null)
             {
                 int value = link == null ? 0 : 1;
-                insertSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
+                sqlString += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
             }
-            SQLiteHelper.ExecuteNonQuery(insertSql);
-            return primaryKey;
+            SQLiteHelper.ExecuteNonQuery(sqlString);
+            return _fileId;
         }
 
         /// <summary>
@@ -1754,7 +1624,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 1)
                     {
-                        LoadFileValidList(dgv_Project_FileValid, objid, "dgv_Project_FV_", txt_Project_Code.Text, txt_Project_Name.Text);
+                        LoadFileValidList(dgv_Project_FileValid, objid, "dgv_Project_FV_");
                         dgv_Project_FileValid.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 10.5f, System.Drawing.FontStyle.Regular);
                     }
                     else if(index == 2)
@@ -1774,7 +1644,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 1)
                     {
-                        LoadFileValidList(dgv_Topic_FileValid, objid, "dgv_Topic_FV_", txt_Topic_Code.Text, txt_Topic_Name.Text);
+                        LoadFileValidList(dgv_Topic_FileValid, objid, "dgv_Topic_FV_");
                         dgv_Topic_FileValid.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 10.5f, System.Drawing.FontStyle.Regular);
                     }
                     else if(index == 2)
@@ -1794,7 +1664,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     else if(index == 1)
                     {
-                        LoadFileValidList(dgv_Subject_FileValid, objId, "dgv_Subject_FV_", txt_Subject_Code.Text, txt_Subject_Name.Text);
+                        LoadFileValidList(dgv_Subject_FileValid, objId, "dgv_Subject_FV_");
                         dgv_Subject_FileValid.DefaultCellStyle.Font = new System.Drawing.Font("微软雅黑", 10.5f, System.Drawing.FontStyle.Regular);
                     }
                     else if(index == 2)
@@ -1810,55 +1680,20 @@ namespace 数据采集档案管理系统___课题版
         {
             if(type == ControlType.Plan_Project)
             {
-                cbo_Project_AJ_Code.ResetText();
-                cbo_Project_AJ_Code.Tag = null;
-                cbo_Project_AJ_Code.Items.Clear();
+                txt_Project_AJ_Code.Text = txt_Project_Code.Text;
                 txt_Project_AJ_Name.Text = txt_Project_Name.Text;
-                List<object[]> obj = SQLiteHelper.ExecuteColumnsQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_obj_id='{objid}'", 3);
-                for(int i = 0; i < obj.Count; i++)
-                    cbo_Project_AJ_Code.Items.Add(obj[i][1]);
-                if(obj.Count > 0)
-                {
-                    cbo_Project_AJ_Code.Tag = GetValue(obj[0][0]);
-                    cbo_Project_AJ_Code.Text = GetValue(obj[0][1]);
-                    txt_Project_AJ_Name.Text = GetValue(obj[0][2]);
-                }
-                AJ_Code_SelectionChangeCommitted(cbo_Project_AJ_Code, null);
             }
             else if(type == ControlType.Plan_Topic)
             {
-                cbo_Topic_AJ_Code.ResetText();
-                cbo_Topic_AJ_Code.Tag = null;
-                cbo_Topic_AJ_Code.Items.Clear();
+                txt_Topic_AJ_Code.Text = txt_Topic_Code.Text;
                 txt_Topic_AJ_Name.Text = txt_Topic_Name.Text;
-                List<object[]> obj = SQLiteHelper.ExecuteColumnsQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_obj_id='{objid}'", 3);
-                for(int i = 0; i < obj.Count; i++)
-                    cbo_Topic_AJ_Code.Items.Add(obj[i][1]);
-                if(obj.Count > 0)
-                {
-                    cbo_Topic_AJ_Code.Tag = GetValue(obj[0][0]);
-                    cbo_Topic_AJ_Code.Text = GetValue(obj[0][1]);
-                    txt_Topic_AJ_Name.Text = GetValue(obj[0][2]);
-                }
-                AJ_Code_SelectionChangeCommitted(cbo_Topic_AJ_Code, null);
             }
             else if(type == ControlType.Plan_Topic_Subject)
             {
-                cbo_Subject_AJ_Code.ResetText();
-                cbo_Subject_AJ_Code.Tag = null;
-                cbo_Subject_AJ_Code.Items.Clear();
+                txt_Subject_AJ_Code.Text = txt_Subject_Code.Text;
                 txt_Subject_AJ_Name.Text = txt_Subject_Name.Text;
-                List<object[]> obj = SQLiteHelper.ExecuteColumnsQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_obj_id='{objid}'", 3);
-                for(int i = 0; i < obj.Count; i++)
-                    cbo_Subject_AJ_Code.Items.Add(obj[i][1]);
-                if(obj.Count > 0)
-                {
-                    cbo_Subject_AJ_Code.Tag = GetValue(obj[0][0]);
-                    cbo_Subject_AJ_Code.Text = GetValue(obj[0][1]);
-                    txt_Subject_AJ_Name.Text = GetValue(obj[0][2]);
-                }
-                AJ_Code_SelectionChangeCommitted(cbo_Subject_AJ_Code, null);
             }
+            LoadBoxList(objid, type);
         }
 
         /// <summary>
@@ -2073,28 +1908,26 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         /// <param name="dataGridView">待校验表格</param>
         /// <param name="objid">主键</param>
-        private void LoadFileValidList(DataGridView dataGridView, object objid, string key, string code, string name)
+        private void LoadFileValidList(DataGridView dataGridView, object objid, string key)
         {
             dataGridView.Rows.Clear();
 
-            string querySql = "SELECT dd_name, dd_note, extend_2 FROM data_dictionary WHERE dd_pId in(" +
-                "SELECT dd_id FROM data_dictionary WHERE dd_pId = (" +
-                "SELECT dd_id FROM data_dictionary  WHERE dd_code = 'dic_file_jd')) AND dd_name NOT IN(" +
-                $"SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id where fi.fi_obj_id='{objid}')" +
+            string querySql = "SELECT dd_name name, dd_name||' '||extend_3 dd_name, dd_note, extend_2 FROM data_dictionary WHERE dd_pId in(" +
+                "SELECT dd_id FROM data_dictionary WHERE dd_pId = (SELECT dd_id FROM data_dictionary  WHERE dd_code = 'dic_file_jd')) " +
+                $"AND name NOT IN(SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id where fi.fi_obj_id='{objid}')" +
                 $" ORDER BY dd_name";
             DataTable table = SQLiteHelper.ExecuteQuery(querySql);
             for(int i = 0; i < table.Rows.Count; i++)
             {
-                if(!"其他".Equals(table.Rows[i]["dd_name"]))
+                string typeName = GetValue(table.Rows[i]["name"]).Trim();
+                if(!"其他".Equals(typeName))
                 {
                     string _name = GetValue(table.Rows[i]["dd_note"]);
                     int indexRow = dataGridView.Rows.Add();
                     dataGridView.Rows[indexRow].Cells[key + "id"].Value = i + 1;
-                    dataGridView.Rows[indexRow].Cells[key + "categor"].Value = table.Rows[i]["dd_name"];
+                    dataGridView.Rows[indexRow].Cells[key + "categor"].Value = GetValue(table.Rows[i]["dd_name"]);
                     dataGridView.Rows[indexRow].Cells[key + "name"].Value = _name;
-                    dataGridView.Rows[indexRow].Cells[key + "pcode"].Value = code;
-                    dataGridView.Rows[indexRow].Cells[key + "pname"].Value = name;
-                    string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{table.Rows[i]["dd_name"]}'";
+                    string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{typeName}'";
                     object[] _obj = SQLiteHelper.ExecuteRowsQuery(queryReasonSql);
                     if(_obj != null)
                     {
@@ -2162,255 +1995,246 @@ namespace 数据采集档案管理系统___课题版
             string name = (sender as Control).Name;
             if(name.Contains("Project"))
             {
-                object objId = tab_Project_Info.Tag;
                 object boxId = cbo_Project_BoxId.SelectedValue;
-                if(objId != null)
+                if(boxId != null)
                 {
-                    if(boxId != null)
+                    if(name.Contains("RightMove"))
                     {
-                        if(name.Contains("RightMove"))
+                        foreach(ListViewItem item in lsv_Project_Left.SelectedItems)
                         {
-                            foreach(ListViewItem item in lsv_Project_Left.SelectedItems)
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            string number = (lsv_Project_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                            _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                            lsv_Project_Right.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("LeftMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Project_Right.SelectedItems)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            _item.SubItems.RemoveAt(1);
+                            lsv_Project_Left.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("RightAllMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Project_Left.Items)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            string number = (lsv_Project_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                            _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                            lsv_Project_Right.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("LeftAllMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Project_Right.Items)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            _item.SubItems.RemoveAt(1);
+                            lsv_Project_Left.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("Top"))
+                    {
+                        foreach(ListViewItem item in lsv_Project_Right.SelectedItems)
+                        {
+                            int index = item.Index;
+                            if(index > 0)
                             {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                string number = (lsv_Project_Right.Items.Count + 1).ToString().PadLeft(2, '0');
-                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
-                                lsv_Project_Right.Items.Add(_item);
-                                item.Remove();
+                                lsv_Project_Right.Items.RemoveAt(index);
+                                lsv_Project_Right.Items.Insert(index - 1, item);
                             }
                         }
-                        else if(name.Contains("LeftMove"))
+                    }
+                    else if(name.Contains("Bottom"))
+                    {
+                        int size = lsv_Project_Right.Items.Count - 1;
+                        for(int i = size; i >= 0; i--)
                         {
-                            foreach(ListViewItem item in lsv_Project_Right.SelectedItems)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                _item.SubItems.RemoveAt(1);
-                                lsv_Project_Left.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("RightAllMove"))
-                        {
-                            foreach(ListViewItem item in lsv_Project_Left.Items)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                string number = (lsv_Project_Right.Items.Count + 1).ToString().PadLeft(2, '0');
-                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
-                                lsv_Project_Right.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("LeftAllMove"))
-                        {
-                            foreach(ListViewItem item in lsv_Project_Right.Items)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                _item.SubItems.RemoveAt(1);
-                                lsv_Project_Left.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("Top"))
-                        {
-                            foreach(ListViewItem item in lsv_Project_Right.SelectedItems)
+                            ListViewItem item = lsv_Project_Right.Items[i];
+                            if(item.Selected)
                             {
                                 int index = item.Index;
-                                if(index > 0)
+                                if(index < size)
                                 {
                                     lsv_Project_Right.Items.RemoveAt(index);
-                                    lsv_Project_Right.Items.Insert(index - 1, item);
-                                }
-                            }
-                        }
-                        else if(name.Contains("Bottom"))
-                        {
-                            int size = lsv_Project_Right.Items.Count - 1;
-                            for(int i = size; i >= 0; i--)
-                            {
-                                ListViewItem item = lsv_Project_Right.Items[i];
-                                if(item.Selected)
-                                {
-                                    int index = item.Index;
-                                    if(index < size)
-                                    {
-                                        lsv_Project_Right.Items.RemoveAt(index);
-                                        lsv_Project_Right.Items.Insert(index + 1, item);
-                                    }
+                                    lsv_Project_Right.Items.Insert(index + 1, item);
                                 }
                             }
                         }
                     }
-                    else
-                        MessageBox.Show("请先添加案卷盒！", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    Btn_Save_Click(btn_Project_Save, null);
                 }
+                else
+                    MessageBox.Show("请先添加案卷盒！", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else if(name.Contains("Topic"))
             {
-                object objId = tab_Topic_Info.Tag;
                 object boxId = cbo_Topic_BoxId.SelectedValue;
-                if(objId != null)
+                if(boxId != null)
                 {
-                    if(boxId != null)
+                    if(name.Contains("RightMove"))
                     {
-                        if(name.Contains("RightMove"))
+                        foreach(ListViewItem item in lsv_Topic_Left.SelectedItems)
                         {
-                            foreach(ListViewItem item in lsv_Topic_Left.SelectedItems)
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            string number = (lsv_Topic_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                            _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                            lsv_Topic_Right.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("LeftMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Topic_Right.SelectedItems)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            _item.SubItems.RemoveAt(1);
+                            lsv_Topic_Left.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("RightAllMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Topic_Left.Items)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            string number = (lsv_Topic_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                            _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                            lsv_Topic_Right.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("LeftAllMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Topic_Right.Items)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            _item.SubItems.RemoveAt(1);
+                            lsv_Topic_Left.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("btn_Topic_Top"))
+                    {
+                        foreach(ListViewItem item in lsv_Topic_Right.SelectedItems)
+                        {
+                            int index = item.Index;
+                            if(index > 0)
                             {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                string number = (lsv_Topic_Right.Items.Count + 1).ToString().PadLeft(2, '0');
-                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
-                                lsv_Topic_Right.Items.Add(_item);
-                                item.Remove();
+                                lsv_Topic_Right.Items.RemoveAt(index);
+                                lsv_Topic_Right.Items.Insert(index - 1, item);
                             }
                         }
-                        else if(name.Contains("LeftMove"))
+                    }
+                    else if(name.Contains("btn_Topic_Bottom"))
+                    {
+                        int size = lsv_Topic_Right.Items.Count - 1;
+                        for(int i = size; i >= 0; i--)
                         {
-                            foreach(ListViewItem item in lsv_Topic_Right.SelectedItems)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                _item.SubItems.RemoveAt(1);
-                                lsv_Topic_Left.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("RightAllMove"))
-                        {
-                            foreach(ListViewItem item in lsv_Topic_Left.Items)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                string number = (lsv_Topic_Right.Items.Count + 1).ToString().PadLeft(2, '0');
-                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
-                                lsv_Topic_Right.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("LeftAllMove"))
-                        {
-                            foreach(ListViewItem item in lsv_Topic_Right.Items)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                _item.SubItems.RemoveAt(1);
-                                lsv_Topic_Left.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("btn_Topic_Top"))
-                        {
-                            foreach(ListViewItem item in lsv_Topic_Right.SelectedItems)
+                            ListViewItem item = lsv_Topic_Right.Items[i];
+                            if(item.Selected)
                             {
                                 int index = item.Index;
-                                if(index > 0)
+                                if(index < size)
                                 {
                                     lsv_Topic_Right.Items.RemoveAt(index);
-                                    lsv_Topic_Right.Items.Insert(index - 1, item);
-                                }
-                            }
-                        }
-                        else if(name.Contains("btn_Topic_Bottom"))
-                        {
-                            int size = lsv_Topic_Right.Items.Count - 1;
-                            for(int i = size; i >= 0; i--)
-                            {
-                                ListViewItem item = lsv_Topic_Right.Items[i];
-                                if(item.Selected)
-                                {
-                                    int index = item.Index;
-                                    if(index < size)
-                                    {
-                                        lsv_Topic_Right.Items.RemoveAt(index);
-                                        lsv_Topic_Right.Items.Insert(index + 1, item);
-                                    }
+                                    lsv_Topic_Right.Items.Insert(index + 1, item);
                                 }
                             }
                         }
                     }
-                    else
-                        MessageBox.Show("请先添加案卷盒！", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    Btn_Save_Click(btn_Topic_Save, null);
                 }
+                else
+                    MessageBox.Show("请先添加案卷盒！", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             else if(name.Contains("Subject"))
             {
-                object objId = tab_Subject_Info.Tag;
                 object boxId = cbo_Subject_BoxId.SelectedValue;
-                if(objId != null)
+                if(boxId != null)
                 {
-                    if(boxId != null)
+                    if(name.Contains("RightMove"))
                     {
-                        if(name.Contains("RightMove"))
+                        foreach(ListViewItem item in lsv_Subject_Left.SelectedItems)
                         {
-                            foreach(ListViewItem item in lsv_Subject_Left.SelectedItems)
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            string number = (lsv_Subject_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                            _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                            lsv_Subject_Right.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("LeftMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Subject_Right.SelectedItems)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            _item.SubItems.RemoveAt(1);
+                            lsv_Subject_Left.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("RightAllMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Subject_Left.Items)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            string number = (lsv_Subject_Right.Items.Count + 1).ToString().PadLeft(2, '0');
+                            _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
+                            lsv_Subject_Right.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("LeftAllMove"))
+                    {
+                        foreach(ListViewItem item in lsv_Subject_Right.Items)
+                        {
+                            ListViewItem _item = (ListViewItem)item.Clone();
+                            _item.SubItems.RemoveAt(1);
+                            lsv_Subject_Left.Items.Add(_item);
+                            item.Remove();
+                        }
+                    }
+                    else if(name.Contains("Top"))
+                    {
+                        foreach(ListViewItem item in lsv_Subject_Right.SelectedItems)
+                        {
+                            int index = item.Index;
+                            if(index > 0)
                             {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                string number = (lsv_Subject_Right.Items.Count + 1).ToString().PadLeft(2, '0');
-                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
-                                lsv_Subject_Right.Items.Add(_item);
-                                item.Remove();
+                                lsv_Subject_Right.Items.RemoveAt(index);
+                                lsv_Subject_Right.Items.Insert(index - 1, item);
                             }
                         }
-                        else if(name.Contains("LeftMove"))
+                    }
+                    else if(name.Contains("Bottom"))
+                    {
+                        int size = lsv_Subject_Right.Items.Count - 1;
+                        for(int i = size; i >= 0; i--)
                         {
-                            foreach(ListViewItem item in lsv_Subject_Right.SelectedItems)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                _item.SubItems.RemoveAt(1);
-                                lsv_Subject_Left.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("RightAllMove"))
-                        {
-                            foreach(ListViewItem item in lsv_Subject_Left.Items)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                string number = (lsv_Subject_Right.Items.Count + 1).ToString().PadLeft(2, '0');
-                                _item.SubItems.Insert(1, new ListViewItem.ListViewSubItem() { Text = number });
-                                lsv_Subject_Right.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("LeftAllMove"))
-                        {
-                            foreach(ListViewItem item in lsv_Subject_Right.Items)
-                            {
-                                ListViewItem _item = (ListViewItem)item.Clone();
-                                _item.SubItems.RemoveAt(1);
-                                lsv_Subject_Left.Items.Add(_item);
-                                item.Remove();
-                            }
-                        }
-                        else if(name.Contains("Top"))
-                        {
-                            foreach(ListViewItem item in lsv_Subject_Right.SelectedItems)
+                            ListViewItem item = lsv_Subject_Right.Items[i];
+                            if(item.Selected)
                             {
                                 int index = item.Index;
-                                if(index > 0)
+                                if(index < size)
                                 {
                                     lsv_Subject_Right.Items.RemoveAt(index);
-                                    lsv_Subject_Right.Items.Insert(index - 1, item);
-                                }
-                            }
-                        }
-                        else if(name.Contains("Bottom"))
-                        {
-                            int size = lsv_Subject_Right.Items.Count - 1;
-                            for(int i = size; i >= 0; i--)
-                            {
-                                ListViewItem item = lsv_Subject_Right.Items[i];
-                                if(item.Selected)
-                                {
-                                    int index = item.Index;
-                                    if(index < size)
-                                    {
-                                        lsv_Subject_Right.Items.RemoveAt(index);
-                                        lsv_Subject_Right.Items.Insert(index + 1, item);
-                                    }
+                                    lsv_Subject_Right.Items.Insert(index + 1, item);
                                 }
                             }
                         }
                     }
-                    else
-                        MessageBox.Show("请先添加案卷盒！", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    Btn_Save_Click(btn_Subject_Save, null);
                 }
+                else
+                    MessageBox.Show("请先添加案卷盒！", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -2422,7 +2246,7 @@ namespace 数据采集档案管理系统___课题版
             string name = (sender as Control).Name;
             if(name.Contains("Project"))
             {
-                object objId = cbo_Project_AJ_Code.Tag;
+                object objId = tab_Project_Info.Tag;
                 if(objId != null)
                 {
                     if(name.Contains("Add"))
@@ -2473,7 +2297,7 @@ namespace 数据采集档案管理系统___课题版
             }
             else if(name.Contains("Topic"))
             {
-                object objId = cbo_Topic_AJ_Code.Tag;
+                object objId = tab_Topic_Info.Tag;
                 if(objId != null)
                 {
                     if(name.Contains("Add"))
@@ -2524,7 +2348,7 @@ namespace 数据采集档案管理系统___课题版
             }
             else if(name.Contains("Subject"))
             {
-                object objId = cbo_Subject_AJ_Code.Tag;
+                object objId = tab_Subject_Info.Tag;
                 if(objId != null)
                 {
                     if(name.Contains("Add"))
@@ -2953,291 +2777,6 @@ namespace 数据采集档案管理系统___课题版
                 MessageBox.Show("请先保存基本信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
-
-        private void AJ_Code_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-            ComboBox combo = sender as ComboBox;
-            if(combo.Name.Contains("Project"))
-            {
-                string value = GetValue(combo.SelectedItem);
-                if(!string.IsNullOrEmpty(value))
-                {
-                    object objId = tab_Project_Info.Tag;
-                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_code='{value}' AND pt_obj_id='{objId}'");
-                    if(row != null)
-                    {
-                        cbo_Project_AJ_Code.Tag = row["pt_id"];
-                        txt_Project_AJ_Name.Text = GetValue(row["pt_name"]);
-
-                        LoadBoxList(row["pt_id"], ControlType.Plan_Project);
-                    }
-                    else
-                        LoadBoxList(string.Empty, ControlType.Plan_Project);
-                }
-            }
-            else if(combo.Name.Contains("Topic"))
-            {
-                string value = GetValue(combo.SelectedItem);
-                if(!string.IsNullOrEmpty(value))
-                {
-                    object objId = tab_Topic_Info.Tag;
-                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_code='{value}' AND pt_obj_id='{objId}'");
-                    if(row != null)
-                    {
-                        cbo_Topic_AJ_Code.Tag = row["pt_id"];
-                        txt_Topic_AJ_Name.Text = GetValue(row["pt_name"]);
-
-                        LoadBoxList(row["pt_id"], ControlType.Plan_Topic);
-                    }
-                }
-                else
-                    LoadBoxList(string.Empty, ControlType.Plan_Topic);
-            }
-            else if(combo.Name.Contains("Subject"))
-            {
-                string value = GetValue(combo.SelectedItem);
-                if(!string.IsNullOrEmpty(value))
-                {
-                    object objId = tab_Subject_Info.Tag;
-                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT pt_id, pt_code, pt_name FROM files_tag_info WHERE pt_code='{value}' AND pt_obj_id='{objId}'");
-                    if(row != null)
-                    {
-                        cbo_Subject_AJ_Code.Tag = row["pt_id"];
-                        txt_Subject_AJ_Name.Text = GetValue(row["pt_name"]);
-
-                        LoadBoxList(row["pt_id"], ControlType.Plan_Topic_Subject);
-                    }
-                }
-                else
-                    LoadBoxList(string.Empty, ControlType.Plan_Topic_Subject);
-            }
-        }
-
-        private void Doc_Add_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Control con = sender as Control;
-            if(con.Name.Contains("Project"))
-            {
-                object objId = tab_Project_Info.Tag;
-                if(objId != null)
-                {
-                    string code = cbo_Project_AJ_Code.Text.Trim();
-                    if(!string.IsNullOrEmpty(code))
-                    {
-                        int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_code) FROM files_tag_info WHERE pt_code='{code}' AND pt_obj_id='{objId}'");
-                        if(count == 0)
-                        {
-                            if(MessageBox.Show("确定要添加新的档号吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
-                            {
-                                string name = txt_Project_AJ_Name.Text;
-                                string secret = GetMaxSecretById(objId);
-                                string user = UserHelper.GetUser().RealName;
-                                string unit = UserHelper.GetUser().UserUnitName;
-                                string aid = Guid.NewGuid().ToString();
-
-                                string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-                                    $"VALUES ('{aid}','{code}','{name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
-                                SQLiteHelper.ExecuteNonQuery(insertSql);
-
-                                MessageBox.Show("操作成功。");
-                                LoadDocList(objId, ControlType.Plan_Project);
-                            }
-                        }
-                        else
-                            MessageBox.Show("此档号已存在，请重新输入。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                        MessageBox.Show("档号不能为空。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    MessageBox.Show("请先保存基本信息。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if(con.Name.Contains("Topic"))
-            {
-                object objId = tab_Topic_Info.Tag;
-                if(objId != null)
-                {
-                    string code = cbo_Topic_AJ_Code.Text.Trim();
-                    if(!string.IsNullOrEmpty(code))
-                    {
-                        int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_code) FROM files_tag_info WHERE pt_code='{code}' AND pt_obj_id='{objId}'");
-                        if(count == 0)
-                        {
-                            if(MessageBox.Show("确定要添加新的档号吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
-                            {
-                                string name = txt_Topic_AJ_Name.Text;
-                                string secret = GetMaxSecretById(objId);
-                                string user = UserHelper.GetUser().RealName;
-                                string unit = UserHelper.GetUser().UserUnitName;
-                                string aid = Guid.NewGuid().ToString();
-
-                                string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-                                    $"VALUES ('{aid}','{code}','{name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
-                                SQLiteHelper.ExecuteNonQuery(insertSql);
-
-                                MessageBox.Show("操作成功。");
-                                LoadDocList(objId, ControlType.Plan_Topic);
-                            }
-                        }
-                        else
-                            MessageBox.Show("此档号已存在，请重新输入。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                        MessageBox.Show("档号不能为空。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    MessageBox.Show("请先保存基本信息。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else if(con.Name.Contains("Subject"))
-            {
-                object objId = tab_Subject_Info.Tag;
-                if(objId != null)
-                {
-                    string code = cbo_Subject_AJ_Code.Text.Trim();
-                    if(!string.IsNullOrEmpty(code))
-                    {
-                        int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_code) FROM files_tag_info WHERE pt_code='{code}' AND pt_obj_id='{objId}'");
-                        if(count == 0)
-                        {
-                            if(MessageBox.Show("确定要添加新的档号吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.OK)
-                            {
-                                string name = txt_Subject_AJ_Name.Text;
-                                string secret = GetMaxSecretById(objId);
-                                string user = UserHelper.GetUser().RealName;
-                                string unit = UserHelper.GetUser().UserUnitName;
-                                string aid = Guid.NewGuid().ToString();
-
-                                string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-                                    $"VALUES ('{aid}','{code}','{name}','{secret}','{user}','{unit}','{objId}', '{UserHelper.GetUser().SpecialId}')";
-                                SQLiteHelper.ExecuteNonQuery(insertSql);
-
-                                MessageBox.Show("操作成功。");
-                                LoadDocList(objId, ControlType.Plan_Topic_Subject);
-                            }
-                        }
-                        else
-                            MessageBox.Show("此档号已存在，请重新输入。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                        MessageBox.Show("档号不能为空。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                    MessageBox.Show("请先保存基本信息。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Doc_Delete_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Control con = sender as Control;
-            if(con.Name.Contains("Project"))
-            {
-                object docId = cbo_Project_AJ_Code.Tag;
-                if(docId != null)
-                {
-                    string queryString = "确定要删除当前档号吗，将同时删除档号下存在的所有数据，是否继续？";
-                    if(MessageBox.Show(queryString, "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        //删除当前档号下所有盒SQL
-                        string sqlString = $"DELETE FROM files_box_info WHERE pb_obj_id='{docId}';";
-                        object[] boxIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_obj_id='{docId}'");
-                        for(int j = 0; j < boxIds.Length; j++)
-                        {
-                            string fileId = GetValue(boxIds[j]);
-                            if(fileId.Contains(","))
-                            {
-                                string[] filesid = fileId.Split(',');
-                                //删除当前盒下所有文件SQL
-                                string fids = string.Empty;
-                                for(int i = 0; i < filesid.Length; i++)
-                                    fids += $"'{filesid[i]}',";
-                                if(!string.IsNullOrEmpty(fids))
-                                {
-                                    fids = fids.Substring(0, fids.Length - 1);
-                                    sqlString += $"UPDATE files_info SET fi_status=-1 WHERE fi_id IN ({fids});";
-                                }
-                            }
-                        }
-                        //删除当前档号记录SQL
-                        sqlString += $"DELETE FROM files_tag_info WHERE pt_id='{docId}';";
-                        SQLiteHelper.ExecuteNonQuery(sqlString);
-                        MessageBox.Show("操作成功。");
-
-                        LoadDocList(tab_Project_Info.Tag, ControlType.Plan_Project);
-                    }
-                }
-            }
-            else if(con.Name.Contains("Topic"))
-            {
-                object docId = cbo_Topic_AJ_Code.Tag;
-                if(docId != null)
-                {
-                    string queryString = "确定要删除当前档号吗，将同时删除档号下存在的所有数据，是否继续？";
-                    if(MessageBox.Show(queryString, "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        //删除当前档号下所有盒SQL
-                        string sqlString = $"DELETE FROM files_box_info WHERE pb_obj_id='{docId}';";
-                        object[] boxIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_obj_id='{docId}'");
-                        for(int j = 0; j < boxIds.Length; j++)
-                        {
-                            string fileId = GetValue(boxIds[j]);
-                            string[] filesid = fileId.Split(',');
-                            //删除当前盒下所有文件SQL
-                            string fids = string.Empty;
-                            for(int i = 0; i < filesid.Length; i++)
-                                if(!string.IsNullOrEmpty(filesid[i]))
-                                    fids += $"'{filesid[i]}',";
-                            if(!string.IsNullOrEmpty(fids))
-                            {
-                                fids = fids.Substring(0, fids.Length - 1);
-                                sqlString += $"UPDATE files_info SET fi_status=-1 WHERE fi_id IN ({fids});";
-                            }
-                        }
-                        //删除当前档号记录SQL
-                        sqlString += $"DELETE FROM files_tag_info WHERE pt_id='{docId}';";
-                        SQLiteHelper.ExecuteNonQuery(sqlString);
-                        MessageBox.Show("操作成功。");
-
-                        LoadDocList(tab_Topic_Info.Tag, ControlType.Plan_Topic);
-                    }
-                }
-            }
-            else if(con.Name.Contains("Subject"))
-            {
-                object docId = cbo_Subject_AJ_Code.Tag;
-                if(docId != null)
-                {
-                    string queryString = "确定要删除当前档号吗，将同时删除档号下存在的所有数据，是否继续？";
-                    if(MessageBox.Show(queryString, "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        //删除当前档号下所有盒SQL
-                        string sqlString = $"DELETE FROM files_box_info WHERE pb_obj_id='{docId}';";
-                        object[] boxIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_obj_id='{docId}'");
-                        for(int j = 0; j < boxIds.Length; j++)
-                        {
-                            string fileId = GetValue(boxIds[j]);
-                            if(fileId.Contains(","))
-                            {
-                                string[] filesid = fileId.Split(',');
-                                //删除当前盒下所有文件SQL
-                                string fids = string.Empty;
-                                for(int i = 0; i < filesid.Length; i++)
-                                    fids += $"'{filesid[i]}',";
-                                if(!string.IsNullOrEmpty(fids))
-                                {
-                                    fids = fids.Substring(0, fids.Length - 1);
-                                    sqlString += $"UPDATE files_info SET fi_status=-1 WHERE fi_id IN ({fids});";
-                                }
-                            }
-                        }
-                        //删除当前档号记录SQL
-                        sqlString += $"DELETE FROM files_tag_info WHERE pt_id='{docId}';";
-                        SQLiteHelper.ExecuteNonQuery(sqlString);
-                        MessageBox.Show("操作成功。");
-
-                        LoadDocList(tab_Subject_Info.Tag, ControlType.Plan_Topic_Subject);
-                    }
-                }
-            }
-        }
+        
     }
 }

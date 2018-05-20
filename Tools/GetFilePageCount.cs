@@ -4,7 +4,7 @@ using System.Text;
 
 namespace 数据采集档案管理系统___课题版
 {
-    class GetFilePageCount
+    public class GetFilePageCount
     {
         private static GetFilePageCount _getFilePageCount;
 

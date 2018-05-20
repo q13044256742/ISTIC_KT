@@ -13,7 +13,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         /// <param name="filePath">Word 所在路径</param>
         /// <param name="table">所需写入的内容</param>
-        public static bool WriteDocumentList(string filePath, System.Data.DataTable tableList, object SpeName, object SpeCode)
+        public static bool WriteDocumentList(string filePath, System.Data.DataTable tableList, object SpeName, object SpeCode, object parentId)
         {
             Microsoft.Office.Interop.Word.Application app = null;
             Document doc = null;
@@ -65,9 +65,9 @@ namespace 数据采集档案管理系统___课题版
                 table.Cell(rowIndex, 2).Range.Text = "档号";
                 table.Cell(rowIndex, 3).Range.Text = "重大专项项目（课题）档案材料名称";
                 table.Cell(rowIndex, 4).Range.Text = "对应文件号";
-                table.Cell(rowIndex, 5).Range.Text = "载体类型";
-                table.Cell(rowIndex, 6).Range.Text = "页数";
-                table.Cell(rowIndex, 7).Range.Text = "是否移交";
+                table.Cell(rowIndex, 5).Range.Text = "盒号";
+                table.Cell(rowIndex, 6).Range.Text = "载体类型";
+                table.Cell(rowIndex, 7).Range.Text = "页数";
                 table.Cell(rowIndex, 8).Range.Text = "备注";
 
                 table.Columns[1].Width = 45f;
@@ -78,7 +78,6 @@ namespace 数据采集档案管理系统___课题版
                 table.Columns[6].Width = 45f;
                 table.Columns[7].Width = 45f;
 
-                int transfer = 0;
                 int rowCount = tableList.Rows.Count;
                 int totalPage = 0;
                 //循环数据创建数据行
@@ -90,13 +89,13 @@ namespace 数据采集档案管理系统___课题版
                     table.Cell(rowIndex, 2).Range.Text = GetValue(row["code"]);
                     table.Cell(rowIndex, 3).Range.Text = GetValue(row["name"]);
                     table.Cell(rowIndex, 4).Range.Text = GetValue(row["categor"]);
-                    table.Cell(rowIndex, 5).Range.Text = GetValue(row["carrier"]);
-                    table.Cell(rowIndex, 7).Range.Text = GetIntValue(row["transfer"], ref transfer);
+                    table.Cell(rowIndex, 5).Range.Text = GetBoxNumber(row["fi_id"], parentId);
+                    table.Cell(rowIndex, 6).Range.Text = GetValue(row["carrier"]);
                     table.Cell(rowIndex, 8).Range.Text = GetValue(row["remark"]);
                     string _page = GetValue(row["pages"]);
                     if(!string.IsNullOrEmpty(_page))
                     {
-                        table.Cell(rowIndex, 6).Range.Text = _page;
+                        table.Cell(rowIndex, 7).Range.Text = _page;
                         totalPage += Convert.ToInt32(_page);
                     }
                 }
@@ -107,7 +106,7 @@ namespace 数据采集档案管理系统___课题版
                 table.Rows[rowIndex].Cells[2].VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
                 table.Cell(rowIndex, 1).Range.Text = "合计";
                 table.Cell(rowIndex, 2).Merge(table.Cell(rowIndex, 5));
-                table.Cell(rowIndex, 2).Range.Text = $"共 {rowCount} 份文件 ，其中，移交 {transfer} 份文件，未移交 {rowCount - transfer} 文件";
+                table.Cell(rowIndex, 2).Range.Text = $"共 {rowCount} 份文件。";
                 table.Cell(rowIndex, 3).Range.Text = $"{totalPage}";
 
                 app.Selection.EndKey(WdUnits.wdStory, oMissing); //将光标移动到文档末尾
@@ -144,6 +143,27 @@ namespace 数据采集档案管理系统___课题版
                 }
                 catch(Exception exo) { MessageBox.Show(exo.Message); }
             }
+        }
+
+        /// <summary>
+        /// 根据文件ID获取其所在盒号
+        /// </summary>
+        private static string GetBoxNumber(object id, object pid)
+        {
+            System.Collections.Generic.List<object[]> boxIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT pb_box_number, pb_files_id FROM files_box_info WHERE pb_obj_id='{pid}'", 2);
+            foreach(object[] item in boxIds)
+            {
+                string value = GetValue(item[1]).Trim();
+                if(!string.IsNullOrEmpty(value))
+                {
+                    string[] files = value.Split(',');
+                    foreach(string file in files)
+                        if(!string.IsNullOrEmpty(file) && id.Equals(files))
+                            return GetValue(item[0]);
+
+                }
+            }
+            return string.Empty;
         }
 
         /// <summary>
@@ -260,22 +280,6 @@ namespace 数据采集档案管理系统___课题版
                 }
                 catch(Exception) { }
             }
-        }
-
-        private static string GetIntValue(object value, ref int count)
-        {
-            if(value != null && !string.IsNullOrEmpty(GetValue(value)))
-            {
-                int i = Convert.ToInt32(value);
-                if(i == 0)
-                {
-                    count++;
-                    return "是";
-                }
-                else if(i == 1)
-                    return "否";
-            }
-            return string.Empty;
         }
 
         private static string GetValue(object v) => v == null ? string.Empty : v.ToString();

@@ -51,7 +51,6 @@ namespace 数据采集档案管理系统___课题版
                 txt_fileName.Text = GetValue(row["fi_name"]);
                 txt_user.Text = GetValue(row["fi_user"]);
                 SetFileRadio(pal_type, row["fi_type"]);
-                SetFileRadio(pal_secret, row["fi_secret"]);
                 string _page = GetValue(row["fi_pages"]);
                 if(!string.IsNullOrEmpty(_page))
                     num_page.Value = Convert.ToInt32(_page);
@@ -63,11 +62,6 @@ namespace 数据采集档案管理系统___课题版
                     dtp_date.Value = dateTime;
                 txt_unit.Text = GetValue(row["fi_unit"]);
                 SetFileCheckBox(pal_carrier, row["fi_carrier"]);
-                SetFileRadio(pal_form, row["fi_form"]);
-                if(((long)0).Equals(row["fi_transfer"]))
-                    rdo_Transfer_Y.Checked = true;
-                else if(((long)1).Equals(row["fi_transfer"]))
-                    rdo_Transfer_N.Checked = true;
                 txt_link.Text = GetValue(row["fi_link"]);
                 txt_Remark.Text = GetValue(row["fi_remark"]);
             }
@@ -306,19 +300,15 @@ namespace 数据采集档案管理系统___课题版
             SetCategorByStage(cbo_stage.SelectedValue, row, key);
             row.Cells[key + "categor"].Value = cbo_categor.SelectedValue ?? cbo_categor.Tag;
             object categorName = isOtherType ? cbo_categor.Text.Split('-')[1].Trim() : null;
-            row.Cells[key + "categor_name"].Value = categorName;
             row.Cells[key + "name"].Value = txt_fileName.Text;
             row.Cells[key + "code"].Value = txt_fileCode.Text;
             row.Cells[key + "user"].Value = txt_user.Text;
             row.Cells[key + "type"].Value = GetFileRadio(pal_type);
-            row.Cells[key + "secret"].Value = GetFileRadio(pal_secret);
             row.Cells[key + "pages"].Value = num_page.Value;
             row.Cells[key + "count"].Value = num_count.Value;
             row.Cells[key + "date"].Value = dtp_date.Value.ToString("yyyyMMdd");
             row.Cells[key + "unit"].Value = txt_unit.Text;
             row.Cells[key + "carrier"].Value = GetFileCheckBox(pal_carrier);
-            row.Cells[key + "form"].Value = GetFileRadio(pal_form);
-            row.Cells[key + "transfer"].Value = rdo_Transfer_Y.Checked ? "是" : "否";
             object format = Path.GetExtension(txt_link.Text).Replace(".", string.Empty);
             row.Cells[key + "link"].Value = txt_link.Text;
             if(isAdd)
@@ -329,7 +319,6 @@ namespace 数据采集档案管理系统___课题版
                 object name = row.Cells[key + "name"].Value;
                 object user = row.Cells[key + "user"].Value;
                 object type = row.Cells[key + "type"].Value;
-                object secret = row.Cells[key + "secret"].Value;
                 object pages = row.Cells[key + "pages"].Value;
                 object count = row.Cells[key + "count"].Value;
                 DateTime date = DateTime.Now;
@@ -346,10 +335,8 @@ namespace 数据采集档案管理系统___课题版
                 }
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
-                object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 object fileId = txt_link.Tag;
-                object transfer = rdo_Transfer_Y.Checked ? 0 : 1;
                 object remark = txt_Remark.Text;
 
                 if(isOtherType)
@@ -360,13 +347,13 @@ namespace 数据采集档案管理系统___课题版
                     int sort = cbo_categor.Items.Count - 1;
 
                     string _insertSql = "INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_sort, extend_3, extend_4) " +
-                        $"VALUES('{categor}', '{value}', '{pid}', '{sort}', ' ', '{1}');";
+                        $"VALUES('{categor}', '{value}', '{pid}', '{sort}', '{categorName}', '{1}');";
                     SQLiteHelper.ExecuteNonQuery(_insertSql);
                 }
 
                 string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_code, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_transfer, fi_remark) " +
-                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{categorName}', '{code}', '{name}', '{user}', '{type}', '{secret}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{form}', '{link}', '{fileId}', '{parentId}', '{row.Index}', '{transfer}', '{remark}');";
+                "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
+                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{link}', '{fileId}', '{parentId}', '{row.Index}', '{remark}');";
                 if(fileId != null)
                 {
                     int value = link == null ? 0 : 1;
@@ -385,7 +372,6 @@ namespace 数据采集档案管理系统___课题版
                 object name = row.Cells[key + "name"].Value;
                 object user = row.Cells[key + "user"].Value;
                 object type = row.Cells[key + "type"].Value;
-                object secret = row.Cells[key + "secret"].Value;
                 object pages = row.Cells[key + "pages"].Value;
                 object count = row.Cells[key + "count"].Value;
                 DateTime date = DateTime.Now;
@@ -402,29 +388,23 @@ namespace 数据采集档案管理系统___课题版
                 }
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
-                object form = row.Cells[key + "form"].Value;
                 object link = row.Cells[key + "link"].Value;
                 object fileId = txt_link.Tag;
-                object transfer = rdo_Transfer_Y.Checked ? 0 : 1;
                 object remark = txt_Remark.Text;
                 string updateSql = "UPDATE files_info SET " +
                     $"fi_stage = '{stage}', " +
                     $"fi_categor = '{categor}', " +
-                    $"fi_categor_name = '{categorName}', " +
                     $"fi_code = '{code}', " +
                     $"fi_name = '{name}', " +
                     $"fi_user = '{user}', " +
                     $"fi_type = '{type}', " +
-                    $"fi_secret = '{secret}', " +
                     $"fi_pages = '{pages}', " +
                     $"fi_count = '{count}', " +
                     $"fi_create_date = '{date.ToString("s")}', " +
                     $"fi_unit = '{unit}', " +
                     $"fi_carrier = '{carrier}', " +
                     $"fi_format = '{format}', " +
-                    $"fi_form = '{form}', " +
                     $"fi_link = '{link}', " +
-                    $"fi_transfer = '{transfer}', " +
                     $"fi_remark = '{remark}', " +
                     $"fi_file_id = '{fileId}' " +
                     $"WHERE fi_id = '{primaryKey}';";
@@ -526,18 +506,6 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 errorProvider1.SetError(pal_type, null);
-            //密级
-            count = 0;
-            foreach(RadioButton item in pal_secret.Controls)
-                if(item.Checked)
-                { count++; break; }
-            if(count == 0)
-            {
-                errorProvider1.SetError(pal_secret, "提示：密级不能为空。");
-                result = false;
-            }
-            else
-                errorProvider1.SetError(pal_secret, null);
             //载体
             count = 0;
             foreach(CheckBox item in pal_carrier.Controls)
@@ -550,18 +518,6 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 errorProvider1.SetError(pal_carrier, null);
-            //形态
-            count = 0;
-            foreach(RadioButton item in pal_form.Controls)
-                if(item.Checked)
-                { count++; break; }
-            if(count == 0)
-            {
-                errorProvider1.SetError(pal_form, "提示：文件形态不能为空。");
-                result = false;
-            }
-            else
-                errorProvider1.SetError(pal_form, null);
 
             //存放单位
             if(string.IsNullOrEmpty(txt_unit.Text.Trim()))
@@ -571,18 +527,6 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 errorProvider1.SetError(txt_unit, null);
-            //是否移交
-            count = 0;
-            foreach(RadioButton item in pal_IsTransfer.Controls)
-                if(item.Checked)
-                { count++; break; }
-            if(count == 0)
-            {
-                errorProvider1.SetError(pal_IsTransfer, "提示：移交状态不能为空。");
-                result = false;
-            }
-            else
-                errorProvider1.SetError(pal_IsTransfer, null);
             return result;
         }
 
@@ -700,6 +644,16 @@ namespace 数据采集档案管理系统___课题版
             if(!btn_Save.Enabled)
                 if(MessageBox.Show("确定要强制退出吗?", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Asterisk) == DialogResult.Cancel)
                     e.Cancel = true;
+        }
+
+        private void chk_carrier_DZ_CheckedChanged(object sender, EventArgs e)
+        {
+            txt_link.Enabled = lbl_OpenFile.Enabled = chk_carrier_DZ.Checked;
+        }
+
+        private void chk_carrier_ZZ_CheckedChanged(object sender, EventArgs e)
+        {
+            num_count.Enabled = chk_carrier_ZZ.Checked;
         }
     }
 }
