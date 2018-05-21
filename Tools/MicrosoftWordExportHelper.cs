@@ -64,7 +64,7 @@ namespace 数据采集档案管理系统___课题版
                 table.Cell(rowIndex, 1).Range.Text = "序号";
                 table.Cell(rowIndex, 2).Range.Text = "档号";
                 table.Cell(rowIndex, 3).Range.Text = "重大专项项目（课题）档案材料名称";
-                table.Cell(rowIndex, 4).Range.Text = "对应文件号";
+                table.Cell(rowIndex, 4).Range.Text = "文件号";
                 table.Cell(rowIndex, 5).Range.Text = "盒号";
                 table.Cell(rowIndex, 6).Range.Text = "载体类型";
                 table.Cell(rowIndex, 7).Range.Text = "页数";
@@ -74,8 +74,8 @@ namespace 数据采集档案管理系统___课题版
                 table.Columns[2].Width = 150f;
                 table.Columns[3].Width = 240f;
                 table.Columns[4].Width = 50f;
-                table.Columns[5].Width = 70f;
-                table.Columns[6].Width = 45f;
+                table.Columns[5].Width = 50f;
+                table.Columns[6].Width = 50f;
                 table.Columns[7].Width = 45f;
 
                 int rowCount = tableList.Rows.Count;
@@ -105,7 +105,7 @@ namespace 数据采集档案管理系统___课题版
                 table.Rows[rowIndex].Cells[1].VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
                 table.Rows[rowIndex].Cells[2].VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
                 table.Cell(rowIndex, 1).Range.Text = "合计";
-                table.Cell(rowIndex, 2).Merge(table.Cell(rowIndex, 5));
+                table.Cell(rowIndex, 2).Merge(table.Cell(rowIndex, 6));
                 table.Cell(rowIndex, 2).Range.Text = $"共 {rowCount} 份文件。";
                 table.Cell(rowIndex, 3).Range.Text = $"{totalPage}";
 
@@ -158,9 +158,8 @@ namespace 数据采集档案管理系统___课题版
                 {
                     string[] files = value.Split(',');
                     foreach(string file in files)
-                        if(!string.IsNullOrEmpty(file) && id.Equals(files))
+                        if(id.Equals(file))
                             return GetValue(item[0]);
-
                 }
             }
             return string.Empty;

@@ -108,6 +108,7 @@ namespace 数据采集档案管理系统___课题版
                     topic.Tag = treeNode.Name;
                     txt_Topic_Code.Tag = type;
                 }
+                btn_Topic_Add.Visible = false;
                 tab_Menu.SelectedIndex = tab_Menu.TabCount - 1;
             }
             else if(type == ControlType.Plan_Topic)
@@ -165,6 +166,7 @@ namespace 数据采集档案管理系统___课题版
                             gro_Topic_Btns.Tag = 0;
                             topic.Tag = topicRow["ti_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic, topicRow["ti_id"], topicRow);
+                            btn_Topic_Add.Visible = false;
 
                             ShowTabPageByName("Subject", 1);
                             Subject.Tag = subjectRow["si_obj_id"];
@@ -812,22 +814,49 @@ namespace 数据采集档案管理系统___课题版
                 object[] code = SQLiteHelper.ExecuteRowsQuery($"SELECT fi_code, fi_obj_id FROM files_info WHERE fi_id='{removeIdList[i]}'");
                 string key = GetValue(code[0]).Split('-')[0], value = GetValue(code[0]).Split('-')[1];
                 List<object[]> idsString = SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_id, fi_code FROM files_info WHERE fi_code LIKE '%{key}%' AND fi_code>'{code[0]}' AND fi_obj_id='{code[1]}'", 2);
+                string updateSql = string.Empty;
                 for(int j = 0; j < idsString.Count; j++)
                 {
                     string oldValue = GetValue(idsString[j][1]).Split('-')[1];
                     string newCode = key + "-" + (Convert.ToInt32(oldValue) - 1).ToString().PadLeft(2, '0');
-                    SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_code='{newCode}' WHERE fi_id='{idsString[j][0]}'");
+                    updateSql += $"UPDATE files_info SET fi_code='{newCode}' WHERE fi_id='{idsString[j][0]}';";
                 }
-                string fileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';"));
-                if(!string.IsNullOrEmpty(fileId))
+                if(!string.IsNullOrEmpty(updateSql))
+                    SQLiteHelper.ExecuteNonQuery(updateSql);
+                
+                //收集文件号（供重新选取）
+                object fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';");
+                if(fileId != null)
                     fileString += $"'{fileId}',";
+                
+                //如果文件已装盒，则删除之
+                string queryString = $"SELECT pb_id, pb_files_id FROM files_box_info WHERE pb_obj_id='{code[1]}'";
+                List<object[]> list = SQLiteHelper.ExecuteColumnsQuery(queryString, 2);
+                updateSql = string.Empty;
+                for(int j = 0; j < list.Count; j++)
+                {
+                    string fileIds = GetValue(list[j][1]).Trim();
+                    string targetId = GetValue(removeIdList[i]).Trim();
+                    if(!string.IsNullOrEmpty(fileIds) && fileIds.Contains(targetId))
+                    {
+                        string newFileIds = fileIds.Replace(targetId + ",", string.Empty).Replace(targetId, string.Empty);
+                        updateSql += $"UPDATE files_box_info SET pb_files_id='{newFileIds}' WHERE pb_id='{list[j][0]}';";
+                        break;
+                    }
+                }
+                if(!string.IsNullOrEmpty(updateSql))
+                    SQLiteHelper.ExecuteNonQuery(updateSql);
+
                 //删除当前文件
                 SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_info WHERE fi_id='{removeIdList[i]}';");
             }
+
             //重置文件备份表中的状态为0
             if(!string.IsNullOrEmpty(fileString))
+            {
                 fileString = fileString.Substring(0, fileString.Length - 1);
-            SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({fileString});");
+                SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({fileString});");
+            }
             removeIdList.Clear();
         }
 
@@ -845,20 +874,48 @@ namespace 数据采集档案管理系统___课题版
             bool result = true;
             if(name.Contains("Project"))
             {
-                if(string.IsNullOrEmpty(txt_Project_Code.Text))
+                string proCode = txt_Project_Code.Text.Trim();
+                if(string.IsNullOrEmpty(proCode))
                 {
-                    errorProvider1.SetError(txt_Project_Code, "提示：课题编号不能为空");
+                    errorProvider1.SetError(txt_Project_Code, "提示：项目编号不能为空");
                     result = false;
+                }
+                else if(tab_Project_Info.Tag == null)
+                {
+                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pi_id) FROM project_info WHERE pi_code='{proCode}';");
+                    if(count == 0)
+                        count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_code='{proCode}';");
+                    if(count > 0)
+                    {
+                        errorProvider1.SetError(txt_Project_Code, "提示：此项目编号已存在");
+                        result = false;
+                    }
+                    else
+                        errorProvider1.SetError(txt_Project_Code, null);
                 }
                 else
                     errorProvider1.SetError(txt_Project_Code, null);
             }
             else if(name.Contains("Topic"))
             {
-                if(string.IsNullOrEmpty(txt_Topic_Code.Text))
+                string topCode = txt_Topic_Code.Text;
+                if(string.IsNullOrEmpty(topCode))
                 {
                     errorProvider1.SetError(txt_Topic_Code, "提示：课题编号不能为空");
                     result = false;
+                }
+                else if(tab_Topic_Info.Tag == null)
+                {
+                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pi_id) FROM project_info WHERE pi_code='{topCode}';");
+                    if(count == 0)
+                        count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_code='{topCode}';");
+                    if(count > 0)
+                    {
+                        errorProvider1.SetError(txt_Topic_Code, "提示：此课题编号已存在");
+                        result = false;
+                    }
+                    else
+                        errorProvider1.SetError(txt_Topic_Code, null);
                 }
                 else
                     errorProvider1.SetError(txt_Topic_Code, null);

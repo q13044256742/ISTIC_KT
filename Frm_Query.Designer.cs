@@ -34,11 +34,12 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_Query = new System.Windows.Forms.Button();
             this.txt_Key = new System.Windows.Forms.TextBox();
-            this.cbo_Type = new System.Windows.Forms.ComboBox();
             this.lbl_FirstPage = new System.Windows.Forms.LinkLabel();
             this.lbl_Back = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgv_ShowData = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_position = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ShowData)).BeginInit();
@@ -46,21 +47,22 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lbl_position);
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btn_Query);
             this.panel1.Controls.Add(this.txt_Key);
-            this.panel1.Controls.Add(this.cbo_Type);
             this.panel1.Controls.Add(this.lbl_FirstPage);
             this.panel1.Controls.Add(this.lbl_Back);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(991, 65);
+            this.panel1.Size = new System.Drawing.Size(1113, 100);
             this.panel1.TabIndex = 0;
             // 
             // btn_Query
             // 
-            this.btn_Query.Location = new System.Drawing.Point(367, 16);
+            this.btn_Query.Location = new System.Drawing.Point(319, 16);
             this.btn_Query.Name = "btn_Query";
             this.btn_Query.Size = new System.Drawing.Size(80, 31);
             this.btn_Query.TabIndex = 4;
@@ -71,26 +73,17 @@
             // txt_Key
             // 
             this.txt_Key.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.txt_Key.Location = new System.Drawing.Point(139, 17);
+            this.txt_Key.Location = new System.Drawing.Point(12, 17);
             this.txt_Key.Name = "txt_Key";
-            this.txt_Key.Size = new System.Drawing.Size(222, 29);
+            this.txt_Key.Size = new System.Drawing.Size(301, 29);
             this.txt_Key.TabIndex = 3;
-            // 
-            // cbo_Type
-            // 
-            this.cbo_Type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Type.FormattingEnabled = true;
-            this.cbo_Type.Location = new System.Drawing.Point(12, 17);
-            this.cbo_Type.Name = "cbo_Type";
-            this.cbo_Type.Size = new System.Drawing.Size(121, 28);
-            this.cbo_Type.TabIndex = 2;
             // 
             // lbl_FirstPage
             // 
             this.lbl_FirstPage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_FirstPage.AutoSize = true;
-            this.lbl_FirstPage.Location = new System.Drawing.Point(861, 22);
+            this.lbl_FirstPage.Location = new System.Drawing.Point(983, 22);
             this.lbl_FirstPage.Name = "lbl_FirstPage";
             this.lbl_FirstPage.Size = new System.Drawing.Size(37, 20);
             this.lbl_FirstPage.TabIndex = 1;
@@ -104,7 +97,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Back.AutoSize = true;
             this.lbl_Back.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lbl_Back.Location = new System.Drawing.Point(904, 22);
+            this.lbl_Back.Location = new System.Drawing.Point(1026, 22);
             this.lbl_Back.Name = "lbl_Back";
             this.lbl_Back.Size = new System.Drawing.Size(79, 20);
             this.lbl_Back.TabIndex = 0;
@@ -116,9 +109,9 @@
             // 
             this.panel2.Controls.Add(this.dgv_ShowData);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 65);
+            this.panel2.Location = new System.Drawing.Point(0, 100);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(991, 540);
+            this.panel2.Size = new System.Drawing.Size(1113, 505);
             this.panel2.TabIndex = 1;
             // 
             // dgv_ShowData
@@ -149,15 +142,33 @@
             this.dgv_ShowData.Name = "dgv_ShowData";
             this.dgv_ShowData.ReadOnly = true;
             this.dgv_ShowData.RowTemplate.Height = 23;
-            this.dgv_ShowData.Size = new System.Drawing.Size(991, 540);
+            this.dgv_ShowData.Size = new System.Drawing.Size(1113, 505);
             this.dgv_ShowData.TabIndex = 0;
             this.dgv_ShowData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ShowData_CellContentClick);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "当前位置：";
+            // 
+            // lbl_position
+            // 
+            this.lbl_position.AutoSize = true;
+            this.lbl_position.Location = new System.Drawing.Point(96, 65);
+            this.lbl_position.Name = "lbl_position";
+            this.lbl_position.Size = new System.Drawing.Size(35, 20);
+            this.lbl_position.TabIndex = 6;
+            this.lbl_position.Text = "null";
             // 
             // Frm_Query
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 605);
+            this.ClientSize = new System.Drawing.Size(1113, 605);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -183,6 +194,7 @@
         private System.Windows.Forms.LinkLabel lbl_FirstPage;
         private System.Windows.Forms.Button btn_Query;
         private System.Windows.Forms.TextBox txt_Key;
-        private System.Windows.Forms.ComboBox cbo_Type;
+        private System.Windows.Forms.Label lbl_position;
+        private System.Windows.Forms.Label label1;
     }
 }

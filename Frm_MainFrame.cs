@@ -499,7 +499,7 @@ namespace 数据采集档案管理系统___课题版
                         子课题SToolStripMenuItem.Visible = true;
                         添加子节点AToolStripMenuItem.Visible = true;
                     }
-                    else if(type == ControlType.Plan_Topic)
+                    else if(type == ControlType.Plan_Topic || type == ControlType.Topic)
                     {
                         项目toolStripMenuItem1.Visible = false;
                         课题TToolStripMenuItem.Visible = false;
@@ -551,7 +551,7 @@ namespace 数据采集档案管理系统___课题版
                     frm.Cbo_Project_HasNext_SelectionChangeCommitted(sender, e);
                     frm.tab_Menu.SelectedIndex = frm.tab_Menu.TabCount - 1;
                 }
-                else if(node.Tag.Equals(ControlType.Plan_Topic))
+                else if(node.Tag.Equals(ControlType.Plan_Topic) || node.Tag.Equals(ControlType.Topic))
                 {
                     Frm_Wroking frm = new Frm_Wroking(node, LoadTreeList);
                     frm.Show();
