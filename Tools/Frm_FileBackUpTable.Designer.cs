@@ -28,8 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_FileBackUpTable));
             this.pal_Bkb = new System.Windows.Forms.Panel();
-            this.pal_Table = new System.Windows.Forms.Panel();
+            this.pal_Show = new System.Windows.Forms.Panel();
+            this.lbl_Intro = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_DocNumber = new System.Windows.Forms.Label();
             this.lbl_Count = new System.Windows.Forms.Label();
             this.lbl_Amount = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -44,12 +48,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.lbl_DocNumber = new System.Windows.Forms.Label();
-            this.lbl_Intro = new System.Windows.Forms.Label();
+            this.btn_Print = new System.Windows.Forms.Button();
+            this.btn_PrintSetup = new System.Windows.Forms.Button();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.pageSetupDialog1 = new System.Windows.Forms.PageSetupDialog();
+            this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.pal_Bkb.SuspendLayout();
-            this.pal_Table.SuspendLayout();
+            this.pal_Show.SuspendLayout();
             this.SuspendLayout();
             // 
             // pal_Bkb
@@ -60,37 +65,65 @@
             this.pal_Bkb.AutoScroll = true;
             this.pal_Bkb.BackColor = System.Drawing.Color.White;
             this.pal_Bkb.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pal_Bkb.Controls.Add(this.pal_Table);
+            this.pal_Bkb.Controls.Add(this.pal_Show);
             this.pal_Bkb.Location = new System.Drawing.Point(0, 0);
             this.pal_Bkb.Name = "pal_Bkb";
             this.pal_Bkb.Size = new System.Drawing.Size(778, 657);
             this.pal_Bkb.TabIndex = 0;
             // 
-            // pal_Table
+            // pal_Show
             // 
-            this.pal_Table.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pal_Table.Controls.Add(this.lbl_Intro);
-            this.pal_Table.Controls.Add(this.label1);
-            this.pal_Table.Controls.Add(this.lbl_DocNumber);
-            this.pal_Table.Controls.Add(this.lbl_Count);
-            this.pal_Table.Controls.Add(this.lbl_Amount);
-            this.pal_Table.Controls.Add(this.label11);
-            this.pal_Table.Controls.Add(this.label10);
-            this.pal_Table.Controls.Add(this.label9);
-            this.pal_Table.Controls.Add(this.lbl_User);
-            this.pal_Table.Controls.Add(this.label7);
-            this.pal_Table.Controls.Add(this.label6);
-            this.pal_Table.Controls.Add(this.label5);
-            this.pal_Table.Controls.Add(this.linkLabel2);
-            this.pal_Table.Controls.Add(this.linkLabel1);
-            this.pal_Table.Controls.Add(this.label4);
-            this.pal_Table.Controls.Add(this.label3);
-            this.pal_Table.Controls.Add(this.label2);
-            this.pal_Table.Font = new System.Drawing.Font("宋体", 10.5F);
-            this.pal_Table.Location = new System.Drawing.Point(12, 10);
-            this.pal_Table.Name = "pal_Table";
-            this.pal_Table.Size = new System.Drawing.Size(752, 636);
-            this.pal_Table.TabIndex = 1;
+            this.pal_Show.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_Show.Controls.Add(this.lbl_Intro);
+            this.pal_Show.Controls.Add(this.label1);
+            this.pal_Show.Controls.Add(this.lbl_DocNumber);
+            this.pal_Show.Controls.Add(this.lbl_Count);
+            this.pal_Show.Controls.Add(this.lbl_Amount);
+            this.pal_Show.Controls.Add(this.label11);
+            this.pal_Show.Controls.Add(this.label10);
+            this.pal_Show.Controls.Add(this.label9);
+            this.pal_Show.Controls.Add(this.lbl_User);
+            this.pal_Show.Controls.Add(this.label7);
+            this.pal_Show.Controls.Add(this.label6);
+            this.pal_Show.Controls.Add(this.label5);
+            this.pal_Show.Controls.Add(this.linkLabel2);
+            this.pal_Show.Controls.Add(this.linkLabel1);
+            this.pal_Show.Controls.Add(this.label4);
+            this.pal_Show.Controls.Add(this.label3);
+            this.pal_Show.Controls.Add(this.label2);
+            this.pal_Show.Font = new System.Drawing.Font("宋体", 10.5F);
+            this.pal_Show.Location = new System.Drawing.Point(12, 10);
+            this.pal_Show.Name = "pal_Show";
+            this.pal_Show.Size = new System.Drawing.Size(752, 636);
+            this.pal_Show.TabIndex = 1;
+            // 
+            // lbl_Intro
+            // 
+            this.lbl_Intro.AutoSize = true;
+            this.lbl_Intro.Location = new System.Drawing.Point(135, 250);
+            this.lbl_Intro.Name = "lbl_Intro";
+            this.lbl_Intro.Size = new System.Drawing.Size(0, 14);
+            this.lbl_Intro.TabIndex = 15;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 18F);
+            this.label1.Location = new System.Drawing.Point(308, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(134, 31);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "卷内备考表";
+            // 
+            // lbl_DocNumber
+            // 
+            this.lbl_DocNumber.AutoSize = true;
+            this.lbl_DocNumber.Location = new System.Drawing.Point(135, 212);
+            this.lbl_DocNumber.Name = "lbl_DocNumber";
+            this.lbl_DocNumber.Size = new System.Drawing.Size(0, 14);
+            this.lbl_DocNumber.TabIndex = 14;
             // 
             // lbl_Count
             // 
@@ -234,50 +267,54 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "1、本卷文件共";
             // 
-            // label1
+            // btn_Print
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 18F);
-            this.label1.Location = new System.Drawing.Point(308, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(134, 31);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "卷内备考表";
+            this.btn_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Print.Location = new System.Drawing.Point(392, 666);
+            this.btn_Print.Name = "btn_Print";
+            this.btn_Print.Size = new System.Drawing.Size(75, 30);
+            this.btn_Print.TabIndex = 1;
+            this.btn_Print.Text = "打印";
+            this.btn_Print.UseVisualStyleBackColor = true;
+            this.btn_Print.Click += new System.EventHandler(this.btn_Print_Click);
             // 
-            // button1
+            // btn_PrintSetup
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(688, 664);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 30);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "打印";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_PrintSetup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_PrintSetup.Location = new System.Drawing.Point(311, 666);
+            this.btn_PrintSetup.Name = "btn_PrintSetup";
+            this.btn_PrintSetup.Size = new System.Drawing.Size(75, 30);
+            this.btn_PrintSetup.TabIndex = 2;
+            this.btn_PrintSetup.Text = "打印设置";
+            this.btn_PrintSetup.UseVisualStyleBackColor = true;
+            this.btn_PrintSetup.Click += new System.EventHandler(this.btn_PrintSetup_Click);
             // 
-            // lbl_DocNumber
+            // printDocument1
             // 
-            this.lbl_DocNumber.AutoSize = true;
-            this.lbl_DocNumber.Location = new System.Drawing.Point(135, 212);
-            this.lbl_DocNumber.Name = "lbl_DocNumber";
-            this.lbl_DocNumber.Size = new System.Drawing.Size(0, 14);
-            this.lbl_DocNumber.TabIndex = 14;
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // lbl_Intro
+            // pageSetupDialog1
             // 
-            this.lbl_Intro.AutoSize = true;
-            this.lbl_Intro.Location = new System.Drawing.Point(135, 250);
-            this.lbl_Intro.Name = "lbl_Intro";
-            this.lbl_Intro.Size = new System.Drawing.Size(0, 14);
-            this.lbl_Intro.TabIndex = 15;
+            this.pageSetupDialog1.Document = this.printDocument1;
+            // 
+            // printPreviewDialog1
+            // 
+            this.printPreviewDialog1.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewDialog1.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewDialog1.Document = this.printDocument1;
+            this.printPreviewDialog1.Enabled = true;
+            this.printPreviewDialog1.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewDialog1.Icon")));
+            this.printPreviewDialog1.Name = "printPreviewDialog1";
+            this.printPreviewDialog1.Visible = false;
             // 
             // Frm_FileBackUpTable
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.ClientSize = new System.Drawing.Size(778, 702);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_PrintSetup);
+            this.Controls.Add(this.btn_Print);
             this.Controls.Add(this.pal_Bkb);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -286,8 +323,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Load += new System.EventHandler(this.Frm_FileBackUpTable_Load);
             this.pal_Bkb.ResumeLayout(false);
-            this.pal_Table.ResumeLayout(false);
-            this.pal_Table.PerformLayout();
+            this.pal_Show.ResumeLayout(false);
+            this.pal_Show.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -295,7 +332,7 @@
         #endregion
 
         private System.Windows.Forms.Panel pal_Bkb;
-        private System.Windows.Forms.Panel pal_Table;
+        private System.Windows.Forms.Panel pal_Show;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label4;
@@ -311,8 +348,12 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lbl_Count;
         private System.Windows.Forms.Label lbl_Amount;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Print;
         private System.Windows.Forms.Label lbl_Intro;
         private System.Windows.Forms.Label lbl_DocNumber;
+        private System.Windows.Forms.Button btn_PrintSetup;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
     }
 }
