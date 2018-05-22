@@ -2834,6 +2834,22 @@ namespace 数据采集档案管理系统___课题版
                 MessageBox.Show("请先保存基本信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
-        
+
+        private void btn_Project_Print_Click(object sender, EventArgs e)
+        {
+            string controlName = (sender as Control).Name;
+            object objId = null, boxId = null, docNumber = null;
+            string objName = null, gcCode = null;
+            if(controlName.Contains("Project"))
+            {
+                objId = tab_Project_Info.Tag;
+                boxId = cbo_Project_BoxId.SelectedValue;
+                docNumber = txt_Project_AJ_Code.Text;
+                objName = txt_Project_AJ_Name.Text;
+                gcCode = txt_Project_GCID.Text;
+            }
+            Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);
+            frm.ShowDialog();
+        }
     }
 }

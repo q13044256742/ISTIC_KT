@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace 数据采集档案管理系统___课题版
@@ -279,6 +280,14 @@ namespace 数据采集档案管理系统___课题版
                 }
                 catch(Exception) { }
             }
+        }
+
+        private static string GetBlank(int num)
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < num; i++)
+                sb.Append(" ");
+            return sb.ToString();
         }
 
         private static string GetValue(object v) => v == null ? string.Empty : v.ToString();
