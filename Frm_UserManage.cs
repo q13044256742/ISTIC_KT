@@ -18,9 +18,9 @@ namespace 数据采集档案管理系统___课题版
             LoadUserList(string.Empty);
             string key = "AD534039-A38F-412E-974E-B18BD9B8A2C0";
             DataTable table = SQLiteHelper.ExecuteQuery($"SELECT * FROM data_dictionary WHERE dd_pId='{key}' ORDER BY dd_sort");
-            cbo_Unit.DataSource = table;
-            cbo_Unit.DisplayMember = "dd_name";
-            cbo_Unit.ValueMember = "dd_id";
+            cbo_Special.DataSource = table;
+            cbo_Special.DisplayMember = "dd_name";
+            cbo_Special.ValueMember = "dd_id";
         }
 
         private void LoadUserList(object queryCondition)
@@ -45,7 +45,7 @@ namespace 数据采集档案管理系统___课题版
             object username = txt_UserName.Text;
             object password = txt_PassWord.Text;
             object passwordAgain = txt_PassWordAagin.Text;
-            object unit = cbo_Unit.SelectedValue;
+            object special = cbo_Special.SelectedValue;
             object department = txt_Department.Text;
             object realname = txt_RealName.Text;
             object email = txt_Email.Text;
@@ -54,8 +54,8 @@ namespace 数据采集档案管理系统___课题版
             if(id == null)
             {
                 id = Guid.NewGuid().ToString();
-                string insertSql = "INSERT INTO user_info (ui_id, ui_username, ui_password, ui_unit, ui_department, ui_realname, ui_email, ui_phone, ui_remark) VALUES( " +
-                    $"'{id}', '{username}', '{password}', '{unit}', '{department}', '{realname}', '{email}', '{phone}', '{remark}')";
+                string insertSql = "INSERT INTO user_info (ui_id, ui_username, ui_password, ui_special_id, ui_department, ui_realname, ui_email, ui_phone, ui_remark) VALUES( " +
+                    $"'{id}', '{username}', '{password}', '{special}', '{department}', '{realname}', '{email}', '{phone}', '{remark}')";
 
                 SQLiteHelper.ExecuteNonQuery(insertSql);
                 MessageBox.Show("保存成功。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -66,7 +66,7 @@ namespace 数据采集档案管理系统___课题版
                 string updateSql = "UPDATE user_info SET " +
                     $"ui_username = '{username}', " +
                     $"ui_password = '{password}', " +
-                    $"ui_unit = '{unit}', " +
+                    $"ui_special_id = '{special}', " +
                     $"ui_department = '{department}', " +
                     $"ui_realname = '{realname}', " +
                     $"ui_email = '{email}', " +
@@ -149,7 +149,7 @@ namespace 数据采集档案管理系统___课题版
                 txt_UserName.Text = GetValue(row["ui_username"]);
                 txt_PassWord.Text = GetValue(row["ui_password"]);
                 txt_PassWordAagin.Text = txt_PassWord.Text;
-                cbo_Unit.SelectedValue = row["ui_unit"];
+                cbo_Special.SelectedValue = row["ui_special_id"];
                 txt_Department.Text = GetValue(row["ui_department"]);
                 txt_RealName.Text = GetValue(row["ui_realname"]);
                 txt_Email.Text = GetValue(row["ui_email"]);

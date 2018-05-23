@@ -38,7 +38,7 @@ namespace 数据采集档案管理系统___课题版
                 new DataGridViewTextBoxColumn(){Name = "pro_user", HeaderText = "负责人", FillWeight = 5 },
                 new DataGridViewTextBoxColumn(){Name = "pro_phone", HeaderText = "手机", FillWeight = 4 },
                 new DataGridViewLinkColumn(){Name = "pro_totalFileAmount", HeaderText = "总文件数", FillWeight = 3 },
-                new DataGridViewLinkColumn(){Name = "pro_lostFileAmount", HeaderText = "缺失文件数", FillWeight = 5 },
+                new DataGridViewLinkColumn(){Name = "pro_lostFileAmount", HeaderText = "必备文件缺失数", FillWeight = 5 },
                 new DataGridViewLinkColumn(){Name = "pro_topicAmount", HeaderText = "课题/子课题数", FillWeight = 4 },
             });
             DataTable projectTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM project_info WHERE pi_obj_id='{spid}'");
@@ -85,7 +85,19 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 获取指定ID下缺失文件数
         /// </summary>
-        private int GetLostFileAmount(object id) => SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pfo_id) FROM files_lost_info WHERE pfo_obj_id='{id}'");
+        private string GetLostFileAmount(object id)
+        {
+            int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pfo_id) FROM files_lost_info WHERE pfo_obj_id='{id}'");
+            if(count == 0)
+                return string.Empty;
+            else
+                count = SQLiteHelper.ExecuteCountQuery("SELECT COUNT(dd_name) FROM data_dictionary WHERE dd_pId IN(" +
+                   "SELECT dd_id FROM data_dictionary WHERE dd_pId =( " +
+                   "SELECT dd_id FROM data_dictionary WHERE dd_code = 'dic_file_jd')) " +
+                   "AND dd_name NOT IN (SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id " +
+                   $"WHERE fi.fi_obj_id = '{id}') AND extend_2 IS NOT NULL");
+            return count.ToString();
+        }
 
         /// <summary>
         /// 获取指定课题下的子课题数
@@ -194,7 +206,7 @@ namespace 数据采集档案管理系统___课题版
             string querySql = "SELECT pfo_categor||' '||dd2.extend_3 pfo_categor, fli.pfo_name, dd.dd_name, fli.pfo_remark FROM files_lost_info fli " +
                 "LEFT JOIN data_dictionary dd ON dd.dd_id = fli.pfo_reason " +
                 "LEFT JOIN data_dictionary dd2 ON dd2.dd_name = fli.pfo_categor " +
-                $"WHERE fli.pfo_obj_id = '{id}';";
+                $"WHERE fli.pfo_obj_id = '{id}' AND dd2.extend_2 IS NOT NULL;";
             DataTable table = SQLiteHelper.ExecuteQuery(querySql);
             for(int i = 0; i < table.Rows.Count; i++)
             {
@@ -209,7 +221,7 @@ namespace 数据采集档案管理系统___课题版
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            lbl_position.Text += $" >> {parentObjName} >> 缺失文件列表";
+            lbl_position.Text += $" >> {parentObjName} >> 必备文件缺失列表";
         }
 
         /// <summary>
@@ -230,7 +242,7 @@ namespace 数据采集档案管理系统___课题版
                 new DataGridViewTextBoxColumn(){Name = "sub_user", HeaderText = "负责人", FillWeight = 5 },
                 new DataGridViewTextBoxColumn(){Name = "sub_phone", HeaderText = "手机", FillWeight = 4 },
                 new DataGridViewLinkColumn(){Name = "sub_totalFileAmount", HeaderText = "总文件数", FillWeight = 3 },
-                new DataGridViewLinkColumn(){Name = "sub_lostFileAmount", HeaderText = "缺失文件数", FillWeight = 5 },
+                new DataGridViewLinkColumn(){Name = "sub_lostFileAmount", HeaderText = "必备文件缺失数", FillWeight = 5 },
             });
 
             DataTable topicTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM subject_info WHERE si_obj_id='{tid}'");
@@ -273,7 +285,7 @@ namespace 数据采集档案管理系统___课题版
                 new DataGridViewTextBoxColumn(){Name = "top_user", HeaderText = "负责人", FillWeight = 5 },
                 new DataGridViewTextBoxColumn(){Name = "top_phone", HeaderText = "手机", FillWeight = 4 },
                 new DataGridViewLinkColumn(){Name = "top_totalFileAmount", HeaderText = "总文件数", FillWeight = 3 },
-                new DataGridViewLinkColumn(){Name = "top_lostFileAmount", HeaderText = "缺失文件数", FillWeight = 5 },
+                new DataGridViewLinkColumn(){Name = "top_lostFileAmount", HeaderText = "必备文件缺失数", FillWeight = 5 },
                 new DataGridViewLinkColumn(){Name = "top_subjectAmount", HeaderText = "子课题数", FillWeight = 4 },
             });
 

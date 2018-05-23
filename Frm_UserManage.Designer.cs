@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tab_UseList = new System.Windows.Forms.TabControl();
             this.tp_UserList = new System.Windows.Forms.TabPage();
             this.dgv_UserList = new System.Windows.Forms.DataGridView();
@@ -46,7 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_Search_KeyWord = new System.Windows.Forms.TextBox();
             this.tab_UserAdd = new System.Windows.Forms.TabPage();
-            this.cbo_Unit = new System.Windows.Forms.ComboBox();
+            this.cbo_Special = new System.Windows.Forms.ComboBox();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.txt_Remark = new System.Windows.Forms.TextBox();
@@ -105,14 +105,15 @@
             this.dgv_UserList.AllowUserToAddRows = false;
             this.dgv_UserList.AllowUserToDeleteRows = false;
             this.dgv_UserList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dgv_UserList.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_UserList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_UserList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.realname,
@@ -243,7 +244,7 @@
             // 
             this.tab_UserAdd.AutoScroll = true;
             this.tab_UserAdd.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.tab_UserAdd.Controls.Add(this.cbo_Unit);
+            this.tab_UserAdd.Controls.Add(this.cbo_Special);
             this.tab_UserAdd.Controls.Add(this.btn_Reset);
             this.tab_UserAdd.Controls.Add(this.btn_Save);
             this.tab_UserAdd.Controls.Add(this.txt_Remark);
@@ -271,14 +272,14 @@
             this.tab_UserAdd.TabIndex = 1;
             this.tab_UserAdd.Text = "用户添加";
             // 
-            // cbo_Unit
+            // cbo_Special
             // 
-            this.cbo_Unit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_Unit.FormattingEnabled = true;
-            this.cbo_Unit.Location = new System.Drawing.Point(247, 140);
-            this.cbo_Unit.Name = "cbo_Unit";
-            this.cbo_Unit.Size = new System.Drawing.Size(379, 28);
-            this.cbo_Unit.TabIndex = 20;
+            this.cbo_Special.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbo_Special.FormattingEnabled = true;
+            this.cbo_Special.Location = new System.Drawing.Point(247, 140);
+            this.cbo_Special.Name = "cbo_Special";
+            this.cbo_Special.Size = new System.Drawing.Size(379, 28);
+            this.cbo_Special.TabIndex = 20;
             // 
             // btn_Reset
             // 
@@ -524,6 +525,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn phone;
         private System.Windows.Forms.DataGridViewTextBoxColumn unit;
         private System.Windows.Forms.Button btn_Refresh;
-        private System.Windows.Forms.ComboBox cbo_Unit;
+        private System.Windows.Forms.ComboBox cbo_Special;
     }
 }

@@ -1984,7 +1984,7 @@ namespace 数据采集档案管理系统___课题版
                     dataGridView.Rows[indexRow].Cells[key + "id"].Value = i + 1;
                     dataGridView.Rows[indexRow].Cells[key + "categor"].Value = GetValue(table.Rows[i]["dd_name"]);
                     dataGridView.Rows[indexRow].Cells[key + "name"].Value = _name;
-                    string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor='{typeName}'";
+                    string queryReasonSql = $"SELECT pfo_id, pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{objid}' AND pfo_categor LIKE '{typeName}%'";
                     object[] _obj = SQLiteHelper.ExecuteRowsQuery(queryReasonSql);
                     if(_obj != null)
                     {
@@ -2011,6 +2011,7 @@ namespace 数据采集档案管理系统___课题版
         private void ModifyFileValid(DataGridView dataGridView, object objid, string key)
         {
             int rowCount = dataGridView.Rows.Count;
+            StringBuilder sqlString = new StringBuilder();
             for(int i = 0; i < rowCount; i++)
             {
                 DataGridViewRow row = dataGridView.Rows[i];
@@ -2019,29 +2020,23 @@ namespace 数据采集档案管理系统___课题版
                 {
                     object reason = row.Cells[key + "reason"].Value;
                     object remark = row.Cells[key + "remark"].Value;
-                    object rid = dataGridView.Rows[i].Cells[key + "id"].Tag;
-                    object pcode = row.Cells[key + "pcode"].Value;
-                    object pname = row.Cells[key + "pname"].Value;
                     object categor = row.Cells[key + "categor"].Value;
-                    if(rid == null)
+                    string _categor = GetValue(categor);
+                    if(!string.IsNullOrEmpty(_categor))
                     {
-                        rid = Guid.NewGuid().ToString();
-                        string insertSql = $"INSERT INTO files_lost_info VALUES('{rid}','{categor}','{name}','{reason}','{remark}','{objid}')";
-                        SQLiteHelper.ExecuteNonQuery(insertSql);
-                        dataGridView.Rows[i].Cells[key + "id"].Tag = rid;
+                        string[] _temp = _categor.Split(' ');
+                        if(_temp.Length > 0 && !string.IsNullOrEmpty(_temp[0].Trim()))
+                            _categor = _temp[0];
                     }
-                    else
-                    {
-                        string updateSql = $"UPDATE files_lost_info SET " +
-                            $"pfo_categor='{categor}'," +
-                            $"pfo_name='{name}'," +
-                            $"pfo_reason='{reason}'," +
-                            $"pfo_remark='{remark}'" +
-                            $" WHERE pfo_id='{rid}'";
-                        SQLiteHelper.ExecuteNonQuery(updateSql);
-                    }
+                    object rid = dataGridView.Rows[i].Cells[key + "id"].Tag;
+                    if(rid != null)
+                        sqlString.Append($"DELETE FROM files_lost_info WHERE pfo_id='{rid}'");
+                    rid = Guid.NewGuid().ToString();
+                    sqlString.Append($"INSERT INTO files_lost_info VALUES('{rid}','{_categor}','{name}','{reason}','{remark}','{objid}');");
+                    dataGridView.Rows[i].Cells[key + "id"].Tag = rid;
                 }
             }
+            SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
         }
 
         /// <summary>

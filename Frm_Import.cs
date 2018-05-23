@@ -267,22 +267,23 @@ namespace 数据采集档案管理系统___课题版
             DirectoryInfo info = new DirectoryInfo(sPath);
             FileInfo[] file = info.GetFiles();
             //排除数据库文件和清单文件
-            if(file.Length > 0 && !(file[0].Name.Contains("ISTIC") && file[0].Extension.Contains("db")))
+            for(int i = 0; i < file.Length; i++)
             {
-                count += file.Length;
-                for(int i = 0; i < file.Length; i++)
+                string fileName = file[i].Name;
+                if(!(fileName.Contains("ISTIC") && file[i].Extension.Contains("db")))
                 {
+                    count++;
                     string primaryKey = Guid.NewGuid().ToString();
                     try
                     {
-                        SetTip($"正在备份文件[{file[i].Name}]");
-                        object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{file[i].Name}' AND bfi_path='{rootFolder}'");
+                        SetTip($"正在备份文件[{fileName}]");
+                        object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{fileName}' AND bfi_path='{rootFolder}'");
                         if(string.IsNullOrEmpty(GetValue(value)))
                             SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid, bfi_type) VALUES " +
-                                $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{file[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}', '{0}')");
+                                $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{fileName}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}', '{0}')");
                         else
                             SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
-                        ServerHelper.UploadFile(file[i].FullName, rootFolder, file[i].Name);
+                        ServerHelper.UploadFile(file[i].FullName, rootFolder, fileName);
                         okCount++;
                     }
                     catch(Exception)
