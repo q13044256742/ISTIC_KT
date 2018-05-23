@@ -2848,6 +2848,22 @@ namespace 数据采集档案管理系统___课题版
                 objName = txt_Project_AJ_Name.Text;
                 gcCode = txt_Project_GCID.Text;
             }
+            else if(controlName.Contains("Topic"))
+            {
+                objId = tab_Topic_Info.Tag;
+                boxId = cbo_Topic_BoxId.SelectedValue;
+                docNumber = txt_Topic_AJ_Code.Text;
+                objName = txt_Topic_AJ_Name.Text;
+                gcCode = txt_Topic_GCID.Text;
+            }
+            else if(controlName.Contains("Subject"))
+            {
+                objId = tab_Subject_Info.Tag;
+                boxId = cbo_Subject_BoxId.SelectedValue;
+                docNumber = txt_Subject_AJ_Code.Text;
+                objName = txt_Subject_AJ_Name.Text;
+                gcCode = txt_Subject_GCID.Text;
+            }
             Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);
             frm.ShowDialog();
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.IO;
 using System.Windows.Forms;
 
@@ -86,6 +87,39 @@ namespace 数据采集档案管理系统___课题版
                 gcCode = gcCode
             };
             cover.ShowDialog();
+        }
+
+        private void lbl_WJ_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            string files = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'"));
+            string[] fids = files.Split(',');
+            DataTable table = new DataTable();
+            table.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("fi_code"),
+                new DataColumn("fi_name"),
+                new DataColumn("fi_pages"),
+                new DataColumn("fi_count"),
+                new DataColumn("fi_remark"),
+            });
+            for(int i = 0; i < fids.Length; i++)
+            {
+                if(!string.IsNullOrEmpty(fids[i]))
+                {
+                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_code, fi_name, fi_pages, fi_count, fi_remark FROM files_info WHERE fi_id='{fids[i]}'");
+                    if(row != null)
+                        table.ImportRow(row);
+                }
+            }
+            Frm_BoxList boxList = new Frm_BoxList()
+            {
+                proCode = GetValue(docNumber),
+                code = GetValue(docNumber),
+                name = objName,
+                gcCode = gcCode,
+                dataTable = table
+            };
+            boxList.ShowDialog();
         }
     }
 }

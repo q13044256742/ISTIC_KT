@@ -67,6 +67,7 @@
             this.lbl_WJ.TabIndex = 8;
             this.lbl_WJ.TabStop = true;
             this.lbl_WJ.Text = "3、卷内文件目录";
+            this.lbl_WJ.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_WJ_LinkClicked);
             // 
             // Frm_Print
             // 

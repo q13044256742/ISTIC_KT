@@ -269,18 +269,19 @@
             // 
             // btn_Print
             // 
-            this.btn_Print.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_Print.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btn_Print.BackColor = System.Drawing.SystemColors.ControlDark;
             this.btn_Print.Location = new System.Drawing.Point(392, 666);
             this.btn_Print.Name = "btn_Print";
             this.btn_Print.Size = new System.Drawing.Size(75, 30);
             this.btn_Print.TabIndex = 1;
             this.btn_Print.Text = "打印";
-            this.btn_Print.UseVisualStyleBackColor = true;
+            this.btn_Print.UseVisualStyleBackColor = false;
             this.btn_Print.Click += new System.EventHandler(this.btn_Print_Click);
             // 
             // btn_PrintSetup
             // 
-            this.btn_PrintSetup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn_PrintSetup.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btn_PrintSetup.Location = new System.Drawing.Point(311, 666);
             this.btn_PrintSetup.Name = "btn_PrintSetup";
             this.btn_PrintSetup.Size = new System.Drawing.Size(75, 30);
