@@ -87,7 +87,7 @@ namespace 数据采集档案管理系统___课题版
                     rowIndex++;
                     DataRow row = tableList.Rows[i];
                     table.Cell(rowIndex, 1).Range.Text = GetValue(i + 1).PadLeft(2, '0');
-                    table.Cell(rowIndex, 2).Range.Text = GetValue(row["code"]);
+                    table.Cell(rowIndex, 2).Range.Text = GetValue(SpeCode);
                     table.Cell(rowIndex, 3).Range.Text = GetValue(row["name"]);
                     table.Cell(rowIndex, 4).Range.Text = GetValue(row["categor"]);
                     table.Cell(rowIndex, 5).Range.Text = GetBoxNumber(row["fi_id"], parentId);

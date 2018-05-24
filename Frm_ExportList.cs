@@ -50,8 +50,7 @@ namespace 数据采集档案管理系统___课题版
                         string filePath = path + "\\重大专项项目（课题）档案清单.doc";
                         if(!File.Exists(filePath))
                             File.Create(filePath).Close();
-                        DataTable table = SQLiteHelper.ExecuteQuery($"SELECT fi.fi_id, fti.pt_code code, fi.fi_name name, dd.dd_name categor, dd2.dd_name carrier, fi.fi_pages pages, fi.fi_remark remark FROM files_info fi " +
-                            "LEFT JOIN files_tag_info fti ON fi.fi_obj_id = fti.pt_obj_id " +
+                        DataTable table = SQLiteHelper.ExecuteQuery($"SELECT fi.fi_id, fi.fi_name name, dd.dd_name categor, dd2.dd_name carrier, fi.fi_pages pages, fi.fi_remark remark FROM files_info fi " +
                             "LEFT JOIN data_dictionary dd ON dd.dd_id = fi.fi_categor  " +
                             "LEFT JOIN data_dictionary dd2 ON dd2.dd_id = fi.fi_carrier " +
                             $"WHERE fi.fi_obj_id='{objId}';");

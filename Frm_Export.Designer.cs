@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label2 = new System.Windows.Forms.Label();
-            this.pro_Show = new System.Windows.Forms.ProgressBar();
             this.btn_Export = new System.Windows.Forms.Button();
             this.txt_ExportPath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,34 +35,17 @@
             this.cbo_TopicId = new System.Windows.Forms.ComboBox();
             this.lbl_ExportPath = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
+            this.pic_Wait = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Wait)).BeginInit();
             this.SuspendLayout();
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(23, 188);
-            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 19);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "当前进度：";
-            // 
-            // pro_Show
-            // 
-            this.pro_Show.Location = new System.Drawing.Point(23, 219);
-            this.pro_Show.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.pro_Show.Name = "pro_Show";
-            this.pro_Show.Size = new System.Drawing.Size(439, 24);
-            this.pro_Show.TabIndex = 4;
             // 
             // btn_Export
             // 
             this.btn_Export.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btn_Export.Location = new System.Drawing.Point(204, 272);
+            this.btn_Export.Location = new System.Drawing.Point(202, 218);
             this.btn_Export.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btn_Export.Name = "btn_Export";
-            this.btn_Export.Size = new System.Drawing.Size(76, 31);
+            this.btn_Export.Size = new System.Drawing.Size(81, 32);
             this.btn_Export.TabIndex = 5;
             this.btn_Export.Text = "开始";
             this.btn_Export.UseVisualStyleBackColor = true;
@@ -132,11 +113,24 @@
             this.label3.TabIndex = 12;
             this.label3.Text = "(此路径为空时则只归档)";
             // 
+            // pic_Wait
+            // 
+            this.pic_Wait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pic_Wait.Image = global::数据采集档案管理系统___课题版.Properties.Resources.wait;
+            this.pic_Wait.Location = new System.Drawing.Point(225, 101);
+            this.pic_Wait.Name = "pic_Wait";
+            this.pic_Wait.Size = new System.Drawing.Size(34, 34);
+            this.pic_Wait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pic_Wait.TabIndex = 13;
+            this.pic_Wait.TabStop = false;
+            this.pic_Wait.Visible = false;
+            // 
             // Frm_Export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 321);
+            this.ClientSize = new System.Drawing.Size(484, 286);
+            this.Controls.Add(this.pic_Wait);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_ExportPath);
             this.Controls.Add(this.cbo_TopicId);
@@ -144,8 +138,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txt_ExportPath);
             this.Controls.Add(this.btn_Export);
-            this.Controls.Add(this.pro_Show);
-            this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("微软雅黑", 13F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
@@ -155,15 +147,14 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "归档移交";
-            this.Load += new System.EventHandler(this.Frm_Export_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Export_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Wait)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ProgressBar pro_Show;
         private System.Windows.Forms.Button btn_Export;
         private System.Windows.Forms.TextBox txt_ExportPath;
         private System.Windows.Forms.Label label1;
@@ -171,5 +162,6 @@
         private System.Windows.Forms.ComboBox cbo_TopicId;
         private System.Windows.Forms.LinkLabel lbl_ExportPath;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.PictureBox pic_Wait;
     }
 }
