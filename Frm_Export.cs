@@ -25,13 +25,43 @@ namespace 数据采集档案管理系统___课题版
                 new DataColumn("id"),
                 new DataColumn("code")
             });
-            DataTable proTable = SQLiteHelper.ExecuteQuery($"SELECT pi_id id, pi_code code FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'");
-            foreach(DataRow row in proTable.Rows)
-                _table.ImportRow(row);
 
+            //项目
+            DataTable proTable = SQLiteHelper.ExecuteQuery($"SELECT pi_id id, pi_code code FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'");
+            for(int i = 0; i < proTable.Rows.Count; i++)
+            {
+                DataRow _proRow = proTable.Rows[i];
+                _table.ImportRow(_proRow);
+                //项目-课题
+                DataTable proTopTable = SQLiteHelper.ExecuteQuery($"SELECT ti_id id, ti_code code FROM topic_info WHERE ti_obj_id='{_proRow[0]}'");
+                for(int j = 0; j < proTopTable.Rows.Count; j++)
+                {
+                    DataRow _proTopRow = proTopTable.Rows[j];
+                    _table.ImportRow(_proTopRow);
+                    //项目-课题-子课题
+                    DataTable proTopSubTable = SQLiteHelper.ExecuteQuery($"SELECT si_id id, si_code code FROM subject_info WHERE si_obj_id='{_proTopRow[0]}'");
+                    for(int k = 0; k < proTopSubTable.Rows.Count; k++)
+                    {
+                        DataRow _proTopSubRow = proTopSubTable.Rows[k];
+                        _table.ImportRow(_proTopSubRow);
+                    }
+                }
+            }
+
+            //课题
             DataTable topTable = SQLiteHelper.ExecuteQuery($"SELECT ti_id id, ti_code code FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().SpecialId}'");
-            foreach(DataRow row in topTable.Rows)
-                _table.ImportRow(row);
+            for(int j = 0; j < topTable.Rows.Count; j++)
+            {
+                DataRow _topRow = topTable.Rows[j];
+                _table.ImportRow(_topRow);
+                //课题-子课题
+                DataTable topSubTable = SQLiteHelper.ExecuteQuery($"SELECT si_id id, si_code code FROM subject_info WHERE si_obj_id='{_topRow[0]}'");
+                for(int k = 0; k < topSubTable.Rows.Count; k++)
+                {
+                    DataRow _topSubRow = topSubTable.Rows[k];
+                    _table.ImportRow(_topSubRow);
+                }
+            }
 
             cbo_TopicId.DataSource = _table;
             cbo_TopicId.DisplayMember = "code";
@@ -42,26 +72,35 @@ namespace 数据采集档案管理系统___课题版
         private void Frm_Export_Load(object sender, EventArgs e)
         {
             LoadFileInfo(UserHelper.GetUser().SpecialId);
+            //项目
             List<object[]> projectIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'", 1);
             for(int i = 0; i < projectIds.Count; i++)
             {
                 LoadFileInfo(projectIds[i][0]);
+                //项目-课题
                 List<object[]> pro_top_ids = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id FROM topic_info WHERE ti_obj_id='{projectIds[i][0]}'", 1);
                 for(int j = 0; j < pro_top_ids.Count; j++)
                 {
                     LoadFileInfo(pro_top_ids[j][0]);
+                    //项目-课题-子课题
                     List<object[]> pro_top_sub_ids = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id FROM subject_info WHERE si_obj_id='{pro_top_ids[j][0]}'", 1);
                     for(int k = 0; k < pro_top_sub_ids.Count; k++)
+                    {
                         LoadFileInfo(pro_top_sub_ids[k][0]);
+                    }
                 }
             }
+            //课题
             List<object[]> topicIds = SQLiteHelper.ExecuteColumnsQuery($"SELECT ti_id FROM topic_info WHERE ti_obj_id='{UserHelper.GetUser().SpecialId}'", 1);
             for(int i = 0; i < topicIds.Count; i++)
             {
                 LoadFileInfo(topicIds[i][0]);
+                //课题 - 子课题
                 List<object[]> pro_top_sub_ids = SQLiteHelper.ExecuteColumnsQuery($"SELECT si_id FROM subject_info WHERE si_obj_id='{topicIds[i][0]}'", 1);
                 for(int k = 0; k < pro_top_sub_ids.Count; k++)
+                {
                     LoadFileInfo(pro_top_sub_ids[k][0]);
+                }
             }
 
             pro_Show.Maximum = list.Count;
@@ -209,13 +248,18 @@ namespace 数据采集档案管理系统___课题版
                             CopyFile(ref _oc, ref _nc, _tfs, GetFileLinkByObjId(_list[k][0]), false);
                         }
                     }
-
+                    /* ------ 子课题 ------ */
+                    object[] subject = SQLiteHelper.ExecuteRowsQuery($"SELECT si_id, si_code FROM subject_info WHERE si_id='{cboId}'");
+                    if(subject != null)
+                    {
+                        string _tf_Pro = exportPath + "\\" + subject[1];
+                        if(!Directory.Exists(_tf_Pro)) Directory.CreateDirectory(_tf_Pro);
+                        CopyFile(ref _oc, ref _nc, _tf_Pro, GetFileLinkByObjId(subject[0]), false);
+                    }
                     string filePath = exportPath + "\\课题档案交接清单";
                     MicrosoftWordHelper.WriteDocument(ref filePath, list);
 
                 }
-                else
-                    MessageBox.Show("尚未指定导出课题或导出路径。", "导出失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 MessageBox.Show($"数据归档情况：成功{okcount}，失败{nocount}。\r\n数据移交情况：成功{_oc}，失败{_nc}。", "操作完成", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 Close();
             }
@@ -237,7 +281,6 @@ namespace 数据采集档案管理系统___课题版
                 string filePath = GetValue(list[i][0]);
                 if(!string.IsNullOrEmpty(filePath))
                 {
-
                     if(File.Exists(filePath))
                     {
                         //进行归档操作【文件复制】
@@ -290,27 +333,6 @@ namespace 数据采集档案管理系统___课题版
                     count += GetCount(list4[j][0]);
             }
             return count;
-        }
-
-        private static void LoadDocumnet(string filePath)
-        {
-            Microsoft.Office.Interop.Word.Application _app = new Microsoft.Office.Interop.Word.Application();
-            Microsoft.Office.Interop.Word.Document _doc = null;
-            try
-            {
-                object unknow = Type.Missing;
-                _app.Visible = true;
-                object file = filePath;
-                _doc = _app.Documents.Open(ref file,
-                    ref unknow, ref unknow, ref unknow, ref unknow,
-                    ref unknow, ref unknow, ref unknow, ref unknow,
-                    ref unknow, ref unknow, ref unknow, ref unknow,
-                    ref unknow, ref unknow, ref unknow);
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         private void lbl_ExportPath_Click(object sender, EventArgs e)

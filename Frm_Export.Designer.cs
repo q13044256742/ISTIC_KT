@@ -36,6 +36,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cbo_TopicId = new System.Windows.Forms.ComboBox();
             this.lbl_ExportPath = new System.Windows.Forms.LinkLabel();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label2
@@ -60,10 +61,10 @@
             // btn_Export
             // 
             this.btn_Export.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btn_Export.Location = new System.Drawing.Point(195, 271);
+            this.btn_Export.Location = new System.Drawing.Point(204, 272);
             this.btn_Export.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btn_Export.Name = "btn_Export";
-            this.btn_Export.Size = new System.Drawing.Size(95, 33);
+            this.btn_Export.Size = new System.Drawing.Size(76, 31);
             this.btn_Export.TabIndex = 5;
             this.btn_Export.Text = "开始";
             this.btn_Export.UseVisualStyleBackColor = true;
@@ -120,11 +121,23 @@
             this.lbl_ExportPath.Text = "...";
             this.lbl_ExportPath.Click += new System.EventHandler(this.lbl_ExportPath_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 9F);
+            this.label3.ForeColor = System.Drawing.Color.Red;
+            this.label3.Location = new System.Drawing.Point(96, 106);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(136, 17);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "(此路径为空时则只归档)";
+            // 
             // Frm_Export
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 321);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_ExportPath);
             this.Controls.Add(this.cbo_TopicId);
             this.Controls.Add(this.label4);
@@ -157,5 +170,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbo_TopicId;
         private System.Windows.Forms.LinkLabel lbl_ExportPath;
+        private System.Windows.Forms.Label label3;
     }
 }
