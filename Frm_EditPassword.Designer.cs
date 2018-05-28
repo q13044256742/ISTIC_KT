@@ -80,7 +80,7 @@
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(84, 32);
             this.btn_Save.TabIndex = 8;
-            this.btn_Save.Text = "确定(&S)";
+            this.btn_Save.Text = "确定";
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 

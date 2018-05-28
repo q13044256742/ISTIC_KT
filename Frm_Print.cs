@@ -46,12 +46,6 @@ namespace 数据采集档案管理系统___课题版
 
         private void lbl_BKB_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //string _filePath = Application.StartupPath + "\\PRINT_FOLDER_TEMP\\";
-            //if(!Directory.Exists(_filePath))
-            //    Directory.CreateDirectory(_filePath);
-            //string filePath = _filePath + "卷内备考表.doc";
-            //if(!File.Exists(filePath))
-            //    File.Create(filePath).Close();
             object _fileAmount = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
             string[] _files = GetValue(_fileAmount).Split(',');
             int fileAmount = 0;
@@ -73,7 +67,7 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = docNumber,
                 user = UserHelper.GetUser().RealName
             };
-            table.ShowDialog();
+            table.Show();
         }
 
         private void lbl_FM_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -86,7 +80,7 @@ namespace 数据采集档案管理系统___课题版
                 bgDate = DateTime.Now.ToString("yyyy-MM-dd"),
                 gcCode = gcCode
             };
-            cover.ShowDialog();
+            cover.Show();
         }
 
         private void lbl_WJ_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -119,7 +113,7 @@ namespace 数据采集档案管理系统___课题版
                 gcCode = gcCode,
                 dataTable = table
             };
-            boxList.ShowDialog();
+            boxList.Show();
         }
     }
 }

@@ -1479,13 +1479,14 @@ namespace 数据采集档案管理系统___课题版
                 object id = tab_Project_Info.Tag;
                 if(id != null)
                 {
+                    int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{id}'");
+                    _index += SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'") + 1;
                     if(index == 2)//课题
                     {
                         ShowTabPageByName("topic", sort + 1);
                         gro_Topic_Btns.Tag = sort + 1;
                         topic.Tag = id;
 
-                        int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{id}'") + 1;
                         txt_Topic_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
                         Txt_Project_Code_Leave(txt_Topic_Code, null);
                     }
@@ -1495,7 +1496,6 @@ namespace 数据采集档案管理系统___课题版
                         gro_Subject_Btns.Tag = sort + 1;
                         Subject.Tag = id;
 
-                        int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'") + 1;
                         txt_Subject_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
                         Txt_Project_Code_Leave(txt_Subject_Code, null);
                     }

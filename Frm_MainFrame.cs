@@ -525,10 +525,10 @@ namespace 数据采集档案管理系统___课题版
             if(!node.Tag.Equals(ControlType.Plan))
             {
                 Frm_Wroking frm = new Frm_Wroking(node, LoadTreeList);
-                frm.Show();
                 frm.cbo_Project_HasNext.SelectedIndex = 2;
                 frm.Cbo_Project_HasNext_SelectionChangeCommitted(sender, e);
                 frm.tab_Menu.SelectedIndex = frm.tab_Menu.TabCount - 1;
+                frm.Show();
             }
             else
             {
@@ -546,18 +546,18 @@ namespace 数据采集档案管理系统___课题版
                 if(node.Tag.Equals(ControlType.Plan_Project))
                 {
                     Frm_Wroking frm = new Frm_Wroking(node, LoadTreeList);
-                    frm.Show();
                     frm.cbo_Project_HasNext.SelectedIndex = 3;
                     frm.Cbo_Project_HasNext_SelectionChangeCommitted(sender, e);
                     frm.tab_Menu.SelectedIndex = frm.tab_Menu.TabCount - 1;
+                    frm.Show();
                 }
                 else if(node.Tag.Equals(ControlType.Plan_Topic) || node.Tag.Equals(ControlType.Topic))
                 {
                     Frm_Wroking frm = new Frm_Wroking(node, LoadTreeList);
-                    frm.Show();
                     frm.cbo_Topic_HasNext.SelectedIndex = 1;
                     frm.Cbo_Topic_HasNext_SelectionChangeCommitted(sender, e);
                     frm.tab_Menu.SelectedIndex = frm.tab_Menu.TabCount - 1;
+                    frm.Show();
                 }
             }
         }
