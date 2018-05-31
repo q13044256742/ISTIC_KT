@@ -120,7 +120,7 @@ namespace 数据采集档案管理系统___课题版
                     {
                         if(MessageBox.Show("合成完毕，是否现在打开所在文件夹？", "确认提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                         {
-                            System.Diagnostics.Process.Start(path);
+                            WinFormOpenHelper.OpenWinForm(0, "open", path, null, null, ShowWindowCommands.SW_NORMAL);
                         }
                         Close();
                     }

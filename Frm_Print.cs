@@ -27,6 +27,7 @@ namespace 数据采集档案管理系统___课题版
         /// 馆藏号
         /// </summary>
         private string gcCode;
+
         public Frm_Print(object objId, object boxId, object docNumber, string objName, string gcCode)
         {
             InitializeComponent();
@@ -36,11 +37,6 @@ namespace 数据采集档案管理系统___课题版
             this.objName = objName;
             this.gcCode = gcCode;
         }
-
-        private void Frm_Print_Load(object sender, EventArgs e)
-        {
-        }
-
 
         private string GetValue(object value) => value == null ? string.Empty : value.ToString();
 

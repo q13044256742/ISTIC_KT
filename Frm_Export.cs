@@ -138,9 +138,11 @@ namespace 数据采集档案管理系统___课题版
                 {
                     /* ----复制文件----*/
                     string rootFolder = value + "\\" + UserHelper.GetUser().SpecialName;
-                    if(Directory.Exists(rootFolder))
-                        Directory.CreateDirectory(rootFolder);
-
+                    if(!Directory.Exists(rootFolder))
+                    {
+                        try { Directory.CreateDirectory(rootFolder); }
+                        catch(Exception ex) { MessageBox.Show(ex.Message); return; }
+                    }
                     //专项下的项目
                     List<object[]> list2 = SQLiteHelper.ExecuteColumnsQuery($"SELECT pi_id, pi_code FROM project_info WHERE pi_obj_id='{UserHelper.GetUser().SpecialId}'", 2);
                     for(int i = 0; i < list2.Count; i++)
@@ -272,8 +274,8 @@ namespace 数据采集档案管理系统___课题版
                         string filePath = exportPath + "\\课题档案交接清单";
                         MicrosoftWordHelper.WriteDocument(ref filePath, InitialList(cboId), name, code);
 
-                        if(MessageBox.Show($"操作成功，是否打开交接清单?", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) == DialogResult.OK)
-                            Process.Start(filePath);
+                        if(MessageBox.Show($"操作成功，是否打开移交文件夹？", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) == DialogResult.OK)
+                            WinFormOpenHelper.OpenWinForm(0, "open", Path.GetDirectoryName(filePath), null, null, ShowWindowCommands.SW_NORMAL);
                     }
 
                     pic_Wait.Visible = false;

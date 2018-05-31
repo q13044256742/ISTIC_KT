@@ -267,7 +267,7 @@ namespace 数据采集档案管理系统___课题版
 
                             if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
-                                System.Diagnostics.Process.Start("Explorer.exe", filePath);
+                                WinFormOpenHelper.OpenWinForm(0, "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
                                 //if(form != null)
                                 //    form.Stop();
                                 //WindowState = FormWindowState.Maximized;
@@ -634,7 +634,7 @@ namespace 数据采集档案管理系统___课题版
             if(fileName != null)
             {
                 Hide();
-                DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_id FROM files_info WHERE fi_name='{fileName}'");
+                DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_id FROM files_info WHERE fi_name='{fileName}' AND fi_obj_id='{parentId}'");
                 new Frm_AddFile(view, key, row["fi_id"]).ShowDialog();
             }
         }

@@ -178,9 +178,10 @@ namespace 数据采集档案管理系统___课题版
             length = fileTable.Rows.Count;
             for(int i = 0; i < length; i++)
             {
-                SetTip($"正在导入文件数据({i + 1}\\{length})");
+                SetTip($"正在导入文件基础数据({i + 1}\\{length})");
                 DataRow row = fileTable.Rows[i];
                 string link = GetValue(row["fi_link"]).Trim();
+                object fileId = row["fi_file_id"];
                 //尝试转换文件的link路径-转换为当前服务器链接
                 if(!string.IsNullOrEmpty(link) && Directory.Exists(rootFolder))
                 {
@@ -201,15 +202,20 @@ namespace 数据采集档案管理系统___课题版
                                 break;
                             }
                         }
-                    //更新文件备份表状态
                     string filePath = Path.GetDirectoryName(link);
                     string _fileName = Path.GetFileName(link);
                     sqlString.Append($"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_path='{filePath}\\' AND bfi_name='{_fileName}';");
                 }
+                
+                //更新文件备份表状态
+                string _filePath = Path.GetDirectoryName(link);
+                string __fileName = Path.GetFileName(link);
+                fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}\\' AND bfi_name='{__fileName}';") ?? fileId;
+
                 sqlString.Append($"DELETE FROM files_info WHERE fi_id='{row["fi_id"]}';");
                 sqlString.Append("INSERT INTO files_info(fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort, fi_remark) VALUES(" +
                     $"'{row["fi_id"]}', '{row["fi_code"]}', '{row["fi_stage"]}', '{row["fi_categor"]}', '{row["fi_categor_name"]}', '{row["fi_name"]}', '{row["fi_user"]}', '{row["fi_type"]}', '{row["fi_secret"]}', '{row["fi_pages"]}', '{row["fi_count"]}', " +
-                    $"'{GetFormatDate(row["fi_create_date"])}', '{row["fi_unit"]}', '{row["fi_carrier"]}', '{row["fi_format"]}', '{row["fi_form"]}', '{link}', '{row["fi_file_id"]}', '{row["fi_status"]}', '{row["fi_obj_id"]}', '{row["fi_sort"]}', '{row["fi_remark"]}');");
+                    $"'{GetFormatDate(row["fi_create_date"])}', '{row["fi_unit"]}', '{row["fi_carrier"]}', '{row["fi_format"]}', '{row["fi_form"]}', '{link}', '{fileId}', '{row["fi_status"]}', '{row["fi_obj_id"]}', '{row["fi_sort"]}', '{row["fi_remark"]}');");
             }
             SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
 

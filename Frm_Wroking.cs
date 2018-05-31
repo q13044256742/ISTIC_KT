@@ -155,8 +155,8 @@ namespace 数据采集档案管理系统___课题版
                             topic.Tag = topicRow["ti_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic, topicRow["ti_id"], topicRow);
 
-                            ShowTabPageByName("Subject", 2);
-                            Subject.Tag = subjectRow["si_obj_id"];
+                            ShowTabPageByName("subject", 2);
+                            subject.Tag = subjectRow["si_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic_Subject, subjectRow["si_id"], subjectRow);
                         }
                         else
@@ -168,8 +168,8 @@ namespace 数据采集档案管理系统___课题版
                             LoadBasicInfoInstince(ControlType.Plan_Topic, topicRow["ti_id"], topicRow);
                             btn_Topic_Add.Visible = false;
 
-                            ShowTabPageByName("Subject", 1);
-                            Subject.Tag = subjectRow["si_obj_id"];
+                            ShowTabPageByName("subject", 1);
+                            subject.Tag = subjectRow["si_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic_Subject, subjectRow["si_id"], subjectRow);
                         }
                     }
@@ -184,8 +184,8 @@ namespace 数据采集档案管理系统___课题版
                             project.Tag = projectRow["pi_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Project, projectRow["pi_id"], projectRow);
 
-                            ShowTabPageByName("Subject", 1);
-                            Subject.Tag = subjectRow["si_obj_id"];
+                            ShowTabPageByName("subject", 1);
+                            subject.Tag = subjectRow["si_obj_id"];
                             LoadBasicInfoInstince(ControlType.Plan_Topic_Subject, subjectRow["si_id"], subjectRow);
                         }
                     }
@@ -449,13 +449,22 @@ namespace 数据采集档案管理系统___课题版
                 object id = tab_Topic_Info.Tag;
                 if(id != null)
                 {
-                    ShowTabPageByName("Subject", sort + 1);
+                    ShowTabPageByName("subject", sort + 1);
                     gro_Subject_Btns.Tag = sort + 1;
-                    Subject.Tag = id;
+                    subject.Tag = id;
 
                     int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}'") + 1;
-                    txt_Subject_Code.Text = txt_Topic_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
-                    Txt_Project_Code_Leave(txt_Subject_Code, null);
+                    for(int i = 1; i <= _index; i++)
+                    {
+                        string tempCode = txt_Topic_Code.Text + "-" + i.ToString().PadLeft(3, '0');
+                        int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{id}' AND si_code='{tempCode}'");
+                        if(count == 0)
+                        {
+                            txt_Subject_Code.Text = tempCode;
+                            Txt_Code_Leave(txt_Subject_Code, null);
+                            break;
+                        }
+                    }
                 }
                 else
                 {
@@ -505,8 +514,8 @@ namespace 数据采集档案管理系统___课题版
                                 object fileId = AddFileInfo(key, row, objId, row.Index);
                                 row.Cells[$"{key}id"].Tag = fileId;
                             }
-                            RemoveFileList();
-                            UpdateSecretById(objId);
+                            RemoveFileList(objId);
+                            
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Project_FileList, key, objId);
                         }
@@ -574,7 +583,7 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
-                            LoadFileBoxTable(boxId, objId, ControlType.Plan);
+                            LoadFileBoxTable(objId, ControlType.Plan);
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -605,7 +614,7 @@ namespace 数据采集档案管理系统___课题版
                                     row.Cells[$"{key}id"].Tag = fileId;
                                 }
                             }
-                            RemoveFileList();
+                            RemoveFileList(objId);
                             UpdateSecretById(objId);
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Topic_FileList, key, objId);
@@ -673,7 +682,7 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
-                            LoadFileBoxTable(boxId, objId, ControlType.Plan);
+                            LoadFileBoxTable(objId, ControlType.Plan);
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -689,7 +698,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(CheckMustEnter(name, false))
                     {
-                        objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, Subject.Tag);
+                        objId = tab_Subject_Info.Tag = ModifyBasicInfo(ControlType.Plan_Topic_Subject, objId, subject.Tag);
                         if(CheckFileName(dgv_Subject_FileList.Rows, key))
                         {
                             int maxLength = dgv_Subject_FileList.Rows.Count - 1;
@@ -703,7 +712,7 @@ namespace 数据采集档案管理系统___课题版
                                     row.Cells[$"{key}id"].Tag = fileId;
                                 }
                             }
-                            RemoveFileList();
+                            RemoveFileList(objId);
                             UpdateSecretById(objId);
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Subject_FileList, key, objId);
@@ -771,7 +780,7 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
-                            LoadFileBoxTable(boxId, objId, ControlType.Plan);
+                            LoadFileBoxTable(objId, ControlType.Plan);
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -805,24 +814,24 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 移除文件列表中的文件
         /// </summary>
-        void RemoveFileList()
+        void RemoveFileList(object objId)
         {
             string fileString = string.Empty;
             for(int i = 0; i < removeIdList.Count; i++)
             {
                 //将删除后的编号的后续文件编号减1
-                object[] code = SQLiteHelper.ExecuteRowsQuery($"SELECT fi_code, fi_obj_id FROM files_info WHERE fi_id='{removeIdList[i]}'");
-                string key = GetValue(code[0]).Split('-')[0], value = GetValue(code[0]).Split('-')[1];
-                List<object[]> idsString = SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_id, fi_code FROM files_info WHERE fi_code LIKE '%{key}%' AND fi_code>'{code[0]}' AND fi_obj_id='{code[1]}'", 2);
-                string updateSql = string.Empty;
-                for(int j = 0; j < idsString.Count; j++)
-                {
-                    string oldValue = GetValue(idsString[j][1]).Split('-')[1];
-                    string newCode = key + "-" + (Convert.ToInt32(oldValue) - 1).ToString().PadLeft(2, '0');
-                    updateSql += $"UPDATE files_info SET fi_code='{newCode}' WHERE fi_id='{idsString[j][0]}';";
-                }
-                if(!string.IsNullOrEmpty(updateSql))
-                    SQLiteHelper.ExecuteNonQuery(updateSql);
+                //object[] code = SQLiteHelper.ExecuteRowsQuery($"SELECT fi_code, fi_obj_id FROM files_info WHERE fi_id='{removeIdList[i]}'");
+                //string key = GetValue(code[0]).Split('-')[0], value = GetValue(code[0]).Split('-')[1];
+                //List<object[]> idsString = SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_id, fi_code FROM files_info WHERE fi_code LIKE '%{key}%' AND fi_code>'{code[0]}' AND fi_obj_id='{code[1]}'", 2);
+                //string updateSql = string.Empty;
+                //for(int j = 0; j < idsString.Count; j++)
+                //{
+                //    string oldValue = GetValue(idsString[j][1]).Split('-')[1];
+                //    string newCode = key + "-" + (Convert.ToInt32(oldValue) - 1).ToString().PadLeft(2, '0');
+                //    updateSql += $"UPDATE files_info SET fi_code='{newCode}' WHERE fi_id='{idsString[j][0]}';";
+                //}
+                //if(!string.IsNullOrEmpty(updateSql))
+                //    SQLiteHelper.ExecuteNonQuery(updateSql);
                 
                 //收集文件号（供重新选取）
                 object fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';");
@@ -830,9 +839,9 @@ namespace 数据采集档案管理系统___课题版
                     fileString += $"'{fileId}',";
                 
                 //如果文件已装盒，则删除之
-                string queryString = $"SELECT pb_id, pb_files_id FROM files_box_info WHERE pb_obj_id='{code[1]}'";
+                string queryString = $"SELECT pb_id, pb_files_id FROM files_box_info WHERE pb_obj_id='{objId}'";
                 List<object[]> list = SQLiteHelper.ExecuteColumnsQuery(queryString, 2);
-                updateSql = string.Empty;
+                string updateSql = string.Empty;
                 for(int j = 0; j < list.Count; j++)
                 {
                     string fileIds = GetValue(list[j][1]).Trim();
@@ -1488,16 +1497,16 @@ namespace 数据采集档案管理系统___课题版
                         topic.Tag = id;
 
                         txt_Topic_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
-                        Txt_Project_Code_Leave(txt_Topic_Code, null);
+                        Txt_Code_Leave(txt_Topic_Code, null);
                     }
                     else if(index == 3)//子课题
                     {
-                        ShowTabPageByName("Subject", sort + 1);
+                        ShowTabPageByName("subject", sort + 1);
                         gro_Subject_Btns.Tag = sort + 1;
-                        Subject.Tag = id;
+                        subject.Tag = id;
 
                         txt_Subject_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
-                        Txt_Project_Code_Leave(txt_Subject_Code, null);
+                        Txt_Code_Leave(txt_Subject_Code, null);
                     }
                 }
                 else
@@ -1519,8 +1528,12 @@ namespace 数据采集档案管理系统___课题版
         {
             string sqlString = string.Empty;
             object _fileId = row.Cells[key + "id"].Tag;
+            object status = null;
             if(_fileId != null)
+            {
+                status = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_status FROM files_info WHERE fi_id='{_fileId}'");
                 sqlString += $"DELETE FROM files_info WHERE fi_id='{_fileId}';";
+            }
             else
                 _fileId = Guid.NewGuid().ToString();
             object stage = row.Cells[key + "stage"].Value;
@@ -1562,8 +1575,8 @@ namespace 数据采集档案管理系统___课题版
             }
 
             sqlString += "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_link, fi_file_id, fi_obj_id, fi_sort) " +
-            $"VALUES( '{_fileId}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{link}', '{fileId}', '{parentId}', '{sort}');";
+            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort) " +
+            $"VALUES( '{_fileId}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{link}', '{fileId}', '{status}', '{parentId}', '{sort}');";
             if(fileId != null)
             {
                 int value = link == null ? 0 : 1;
@@ -1813,18 +1826,21 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="pbId">案卷盒ID</param>
         /// <param name="objId">所属对象ID</param>
         /// <param name="type">对象类型</param>
-        private void LoadFileBoxTable(object pbId, object objId, ControlType type)
+        private void LoadFileBoxTable(object objId, ControlType type)
         {
             if(type == ControlType.Plan_Project)
             {
+                object pbId = cbo_Project_BoxId.SelectedValue;
                 LoadFileBoxTableInstance(lsv_Project_Left, lsv_Project_Right, "project_", pbId, objId);
             }
             else if(type == ControlType.Plan_Topic)
             {
+                object pbId = cbo_Topic_BoxId.SelectedValue;
                 LoadFileBoxTableInstance(lsv_Topic_Left, lsv_Topic_Right, "topic_", pbId, objId);
             }
             else if(type == ControlType.Plan_Topic_Subject)
             {
+                object pbId = cbo_Subject_BoxId.SelectedValue;
                 LoadFileBoxTableInstance(lsv_Subject_Left, lsv_Subject_Right, "subject_", pbId, objId);
             }
         }
@@ -2012,6 +2028,7 @@ namespace 数据采集档案管理系统___课题版
         {
             int rowCount = dataGridView.Rows.Count;
             StringBuilder sqlString = new StringBuilder();
+            sqlString.Append($"DELETE FROM files_lost_info WHERE pfo_obj_id='{objid}';");
             for(int i = 0; i < rowCount; i++)
             {
                 DataGridViewRow row = dataGridView.Rows[i];
@@ -2030,7 +2047,7 @@ namespace 数据采集档案管理系统___课题版
                     }
                     object rid = dataGridView.Rows[i].Cells[key + "id"].Tag;
                     if(rid != null)
-                        sqlString.Append($"DELETE FROM files_lost_info WHERE pfo_id='{rid}'");
+                        sqlString.Append($"DELETE FROM files_lost_info WHERE pfo_id='{rid}';");
                     rid = Guid.NewGuid().ToString();
                     sqlString.Append($"INSERT INTO files_lost_info VALUES('{rid}','{_categor}','{name}','{reason}','{remark}','{objid}');");
                     dataGridView.Rows[i].Cells[key + "id"].Tag = rid;
@@ -2342,7 +2359,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                     LoadBoxList(objId, ControlType.Plan_Project);
-                    LoadFileBoxTable(cbo_Project_BoxId.SelectedValue, tab_Project_Info.Tag, ControlType.Plan_Project);
+                    LoadFileBoxTable(objId, ControlType.Plan_Project);
                 }
                 else
                     MessageBox.Show("尚未指定档号。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -2393,7 +2410,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                     LoadBoxList(objId, ControlType.Plan_Topic);
-                    LoadFileBoxTable(cbo_Topic_BoxId.SelectedValue, tab_Topic_Info.Tag, ControlType.Plan_Topic);
+                    LoadFileBoxTable(objId, ControlType.Plan_Topic);
                 }
                 else
                     MessageBox.Show("尚未指定档号。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -2444,7 +2461,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                     LoadBoxList(objId, ControlType.Plan_Topic_Subject);
-                    LoadFileBoxTable(cbo_Subject_BoxId.SelectedValue, tab_Subject_Info.Tag, ControlType.Plan_Topic_Subject);
+                    LoadFileBoxTable(objId, ControlType.Plan_Topic_Subject);
                 }
                 else
                     MessageBox.Show("尚未指定档号。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -2460,7 +2477,7 @@ namespace 数据采集档案管理系统___课题版
             if("cbo_Project_BoxId".Equals(comboBox.Name))
             {
                 object pbId = comboBox.SelectedValue;
-                LoadFileBoxTable(pbId, tab_Project_Info.Tag, ControlType.Plan_Project);
+                LoadFileBoxTable(tab_Project_Info.Tag, ControlType.Plan_Project);
                 object gcid = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_gc_id FROM files_box_info WHERE pb_id='{pbId}'");
                 if(gcid != null)
                     txt_Project_GCID.Text = GetValue(gcid);
@@ -2470,7 +2487,7 @@ namespace 数据采集档案管理系统___课题版
             else if("cbo_Topic_BoxId".Equals(comboBox.Name))
             {
                 object pbId = comboBox.SelectedValue;
-                LoadFileBoxTable(pbId, tab_Topic_Info.Tag, ControlType.Plan_Topic);
+                LoadFileBoxTable(tab_Topic_Info.Tag, ControlType.Plan_Topic);
                 object gcid = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_gc_id FROM files_box_info WHERE pb_id='{pbId}'");
                 if(gcid != null)
                     txt_Topic_GCID.Text = GetValue(gcid);
@@ -2480,7 +2497,7 @@ namespace 数据采集档案管理系统___课题版
             else if("cbo_Subject_BoxId".Equals(comboBox.Name))
             {
                 object pbId = comboBox.SelectedValue;
-                LoadFileBoxTable(pbId, tab_Subject_Info.Tag, ControlType.Plan_Topic_Subject);
+                LoadFileBoxTable(tab_Subject_Info.Tag, ControlType.Plan_Topic_Subject);
                 object gcid = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_gc_id FROM files_box_info WHERE pb_id='{pbId}'");
                 if(gcid != null)
                     txt_Subject_GCID.Text = GetValue(gcid);
@@ -2509,26 +2526,13 @@ namespace 数据采集档案管理系统___课题版
                 DataGridView dataGridView = sender as DataGridView;
                 if(dataGridView.Columns[e.ColumnIndex].Name.Contains("link"))
                 {
-                    string path = GetValue(dataGridView.CurrentCell.Value);
-                    if(!string.IsNullOrEmpty(path))
+                    string filePath = GetValue(dataGridView.CurrentCell.Value);
+                    if(!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
                     {
                         if(MessageBox.Show("是否打开文件?", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
-                        {
-                            if(File.Exists(path))
-                            {
-                                try
-                                {
-                                    System.Diagnostics.Process.Start("Explorer.exe", path);
-                                }
-                                catch(Exception ex)
-                                {
-                                    MessageBox.Show(ex.Message, "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }
-                            else
-                                MessageBox.Show("文件不存在。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            
-                        }
+                            WinFormOpenHelper.OpenWinForm(0, "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
+                        else
+                            MessageBox.Show("文件不存在。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -2553,8 +2557,8 @@ namespace 数据采集档案管理系统___课题版
                         File.Copy(fullPath, filePath, true);
                         view.CurrentCell.Value = fullPath;
                         view.CurrentCell.Tag = frm.SelectedFileId;
-                        if(MessageBox.Show("已从服务器拷贝文件到本地，是否现在打开？", "操作确认", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                            System.Diagnostics.Process.Start("Explorer.exe", filePath);
+                        if(MessageBox.Show("添加成功，是否需要打开文件？", "操作提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            WinFormOpenHelper.OpenWinForm(0, "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
                     }
                     else
                         MessageBox.Show("服务器不存在此文件。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -2603,16 +2607,34 @@ namespace 数据采集档案管理系统___课题版
             {
                 ClearText(topic, true);
 
-                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{topic.Tag}'") + 1;
-                txt_Topic_Code.Text = txt_Project_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
-                Txt_Project_Code_Leave(txt_Topic_Code, null);
+                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{topic.Tag}'");
+                for(int i = 1; i <= _index; i++)
+                {
+                    string tempCode = txt_Topic_Code.Text + "-" + i.ToString().PadLeft(3, '0');
+                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{subject.Tag}' AND ti_code='{tempCode}'");
+                    if(count == 0)
+                    {
+                        txt_Topic_Code.Text = tempCode;
+                        Txt_Code_Leave(txt_Topic_Code, null);
+                        break;
+                    }
+                }
             }
             else if(name.Contains("Subject"))
             {
-                ClearText(Subject, true);
-                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{Subject.Tag}'") + 1;
-                txt_Subject_Code.Text = txt_Topic_Code.Text + "-" + _index.ToString().PadLeft(3, '0');
-                Txt_Project_Code_Leave(txt_Subject_Code, null);
+                ClearText(subject, true);
+                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{subject.Tag}'");
+                for(int i = 1; i <= _index; i++)
+                {
+                    string tempCode = txt_Topic_Code.Text + "-" + i.ToString().PadLeft(3, '0');
+                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{subject.Tag}' AND si_code='{tempCode}'");
+                    if(count == 0)
+                    {
+                        txt_Subject_Code.Text = tempCode;
+                        Txt_Code_Leave(txt_Subject_Code, null);
+                        break;
+                    }
+                }
             }
         }
 
@@ -2650,7 +2672,7 @@ namespace 数据采集档案管理系统___课题版
             removeIdList.Clear();
         }
 
-        private void Txt_Project_Code_Leave(object sender, EventArgs e)
+        private void Txt_Code_Leave(object sender, EventArgs e)
         {
             ComboBox textBox = sender as ComboBox;
             string value = textBox.Text;
@@ -2771,9 +2793,8 @@ namespace 数据采集档案管理系统___课题版
                             if(!Directory.Exists(savePath))
                                 Directory.CreateDirectory(savePath);
                             string _filePath = savePath + new FileInfo(filePath).Name;
-                            if(!File.Exists(_filePath))
-                                File.Copy(filePath, _filePath, true);
-                            System.Diagnostics.Process.Start("Explorer.exe", _filePath);
+                            File.Copy(filePath, _filePath, true);
+                            WinFormOpenHelper.OpenWinForm(0, "open", _filePath, null, null, ShowWindowCommands.SW_NORMAL);
                         }
                     }
                 }

@@ -177,7 +177,7 @@ namespace 数据采集档案管理系统___课题版
                     };
                     rootNode.Nodes.Add(treeNode);
                     //【课题】
-                    DataTable table2 = SQLiteHelper.ExecuteQuery($"SELECT ti_id, ti_code, ti_name FROM topic_info WHERE ti_obj_id='{treeNode.Name}'");
+                    DataTable table2 = SQLiteHelper.ExecuteQuery($"SELECT ti_id, ti_code, ti_name FROM topic_info WHERE ti_obj_id='{treeNode.Name}' ORDER BY ti_code");
                     for(int j = 0; j < table2.Rows.Count; j++)
                     {
                         TreeNode treeNode2 = new TreeNode()
@@ -188,7 +188,7 @@ namespace 数据采集档案管理系统___课题版
                         };
                         treeNode.Nodes.Add(treeNode2);
                         //【子课题】
-                        DataTable table3 = SQLiteHelper.ExecuteQuery($"SELECT si_id, si_code, si_name FROM subject_info WHERE si_obj_id='{treeNode2.Name}'");
+                        DataTable table3 = SQLiteHelper.ExecuteQuery($"SELECT si_id, si_code, si_name FROM subject_info WHERE si_obj_id='{treeNode2.Name}' ORDER BY si_code");
                         for(int k = 0; k < table3.Rows.Count; k++)
                         {
                             treeNode2.Nodes.Add(new TreeNode()
@@ -200,7 +200,7 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                     //【子课题】
-                    DataTable table4 = SQLiteHelper.ExecuteQuery($"SELECT si_id, si_code, si_name FROM subject_info WHERE si_obj_id='{treeNode.Name}'");
+                    DataTable table4 = SQLiteHelper.ExecuteQuery($"SELECT si_id, si_code, si_name FROM subject_info WHERE si_obj_id='{treeNode.Name}' ORDER BY si_code");
                     for(int k = 0; k < table4.Rows.Count; k++)
                     {
                         treeNode.Nodes.Add(new TreeNode()
@@ -223,7 +223,7 @@ namespace 数据采集档案管理系统___课题版
                     };
                     rootNode.Nodes.Add(treeNode);
                     //【子课题】
-                    DataTable table3 = SQLiteHelper.ExecuteQuery($"SELECT si_id, si_code, si_name FROM subject_info WHERE si_obj_id='{treeNode.Name}'");
+                    DataTable table3 = SQLiteHelper.ExecuteQuery($"SELECT si_id, si_code, si_name FROM subject_info WHERE si_obj_id='{treeNode.Name}' ORDER BY si_code");
                     for(int k = 0; k < table3.Rows.Count; k++)
                     {
                         treeNode.Nodes.Add(new TreeNode()
@@ -456,7 +456,7 @@ namespace 数据采集档案管理系统___课题版
                             dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], false);
                         }
                     }
-                    else if(type == ControlType.Plan_Topic)
+                    else if(type == ControlType.Plan_Topic || type == ControlType.Topic)
                     {
                         DataTable subjectTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM subject_info WHERE si_obj_id='{e.Node.Name}'");
                         for(int i = 0; i < subjectTable.Rows.Count; i++)

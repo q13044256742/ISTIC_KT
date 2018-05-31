@@ -272,6 +272,7 @@
     <Compile Include="Tools\SQLiteBackupHelper.cs" />
     <Compile Include="Tools\SQLiteHelper.cs" />
     <Compile Include="Tools\UserHelpler.cs" />
+    <Compile Include="Tools\WinFormOpenHelper.cs" />
     <EmbeddedResource Include="Frm_AddFile.resx">
       <DependentUpon>Frm_AddFile.cs</DependentUpon>
     </EmbeddedResource>

@@ -83,7 +83,6 @@
             this.Name = "Frm_Print";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "打印类型";
-            this.Load += new System.EventHandler(this.Frm_Print_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
