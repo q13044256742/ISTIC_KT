@@ -615,7 +615,7 @@ namespace 数据采集档案管理系统___课题版
                                 }
                             }
                             RemoveFileList(objId);
-                            UpdateSecretById(objId);
+
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Topic_FileList, key, objId);
                         }
@@ -713,7 +713,6 @@ namespace 数据采集档案管理系统___课题版
                                 }
                             }
                             RemoveFileList(objId);
-                            UpdateSecretById(objId);
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Subject_FileList, key, objId);
                         }

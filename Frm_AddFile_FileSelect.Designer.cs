@@ -41,6 +41,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tv_file.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.tv_file.Indent = 15;
             this.tv_file.LineColor = System.Drawing.Color.DimGray;
             this.tv_file.Location = new System.Drawing.Point(2, 47);
             this.tv_file.Name = "tv_file";

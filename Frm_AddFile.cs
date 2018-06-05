@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -62,8 +63,24 @@ namespace 数据采集档案管理系统___课题版
                     dtp_date.Value = dateTime;
                 txt_unit.Text = GetValue(row["fi_unit"]);
                 SetFileCheckBox(pal_carrier, row["fi_carrier"]);
-                txt_link.Text = GetValue(row["fi_link"]);
+                LoadFileLinkList(GetValue(row["fi_file_id"]));
                 txt_Remark.Text = GetValue(row["fi_remark"]);
+            }
+        }
+
+        private void LoadFileLinkList(string ids)
+        {
+            if(!string.IsNullOrEmpty(ids))
+            {
+                string[] _ids = ids.Split(',');
+                for(int i = 0; i < _ids.Length; i++)
+                {
+                    if(!string.IsNullOrEmpty(_ids[i]))
+                    {
+                        object filePath = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_path||'\'||bfi_name FROM backup_files_info WHERE bfi_id='{_ids[i]}'");
+                        AddFileToList(GetValue(filePath), _ids[i]);
+                    }
+                }
             }
         }
 
@@ -248,9 +265,6 @@ namespace 数据采集档案管理系统___课题版
                                 Directory.CreateDirectory(savePath);
                             string filePath = savePath + new FileInfo(fullPath).Name;
                             File.Copy(fullPath, filePath, true);
-                            txt_link.Text = fullPath;
-                            txt_link.Tag = frm.SelectedFileId;
-
                             //尝试获取页数
                             try
                             {
@@ -264,6 +278,8 @@ namespace 数据采集档案管理系统___课题版
 
                             pal_Wait.Visible = false;
                             btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = true;
+
+                            AddFileToList(fullPath, frm.SelectedFileId);
 
                             if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
@@ -286,7 +302,21 @@ namespace 数据采集档案管理系统___课题版
             else
                 MessageBox.Show("当前专项尚未导入数据。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
-        
+
+        private void AddFileToList(string fullPath, string fid)
+        {
+            FileInfo info = new FileInfo(fullPath);
+            string id = (lsv_LinkList.Items.Count + 1).ToString();
+            ListViewItem item = lsv_LinkList.Items.Add(id);
+            item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
+            {
+                new ListViewItem.ListViewSubItem(){ Text = info.Name },
+                new ListViewItem.ListViewSubItem(){ Text = info.CreationTime.ToString("yyyyMMdd") },
+                new ListViewItem.ListViewSubItem(){ Text = info.FullName },
+            });
+            item.Tag = fid;
+        }
+
         /// <summary>
         /// 添加信息到指定表格
         /// </summary>
@@ -309,8 +339,8 @@ namespace 数据采集档案管理系统___课题版
             row.Cells[key + "date"].Value = dtp_date.Value.ToString("yyyyMMdd");
             row.Cells[key + "unit"].Value = txt_unit.Text;
             row.Cells[key + "carrier"].Value = GetFileCheckBox(pal_carrier);
-            object format = Path.GetExtension(txt_link.Text).Replace(".", string.Empty);
-            row.Cells[key + "link"].Value = txt_link.Text;
+            row.Cells[key + "link"].Value = GetFullStringBySplit(GetLinkList(2), "；", string.Empty);
+            row.Cells[key + "link"].Tag = GetFullStringBySplit(GetLinkList(1), ";", "'");
             if(isAdd)
             {
                 object stage = row.Cells[key + "stage"].Value;
@@ -336,7 +366,7 @@ namespace 数据采集档案管理系统___课题版
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
                 object link = row.Cells[key + "link"].Value;
-                object fileId = txt_link.Tag;
+                string fileId = GetFullStringBySplit(GetLinkList(1), ",", "'");
                 object remark = txt_Remark.Text;
 
                 if(isOtherType)
@@ -352,13 +382,10 @@ namespace 数据采集档案管理系统___课题版
                 }
 
                 string insertSql = "INSERT INTO files_info (" +
-                "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
-                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{format}', '{link}', '{fileId}', '{parentId}', '{row.Index}', '{remark}');";
-                if(fileId != null)
-                {
-                    int value = link == null ? 0 : 1;
-                    insertSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
-                }
+                "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
+                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{link}', '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}', '{parentId}', '{row.Index}', '{remark}');";
+                //将备份表中的文件标记为已选取
+                insertSql += $"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_id IN ({fileId});";
                 SQLiteHelper.ExecuteNonQuery(insertSql);
 
                 row.Cells[key + "id"].Tag = primaryKey;
@@ -381,7 +408,7 @@ namespace 数据采集档案管理系统___课题版
                     if(_date.Length == 4)
                         _date = _date + "-" + date.Month + "-" + date.Day;
                     else if(_date.Length == 6)
-                        _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-"+ date.Day;
+                        _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + date.Day;
                     else if(_date.Length == 8)
                         _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + _date.Substring(6, 2);
                     DateTime.TryParse(_date, out date);
@@ -389,8 +416,9 @@ namespace 数据采集档案管理系统___课题版
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
                 object link = row.Cells[key + "link"].Value;
-                object fileId = txt_link.Tag;
+                object fileId = GetFullStringBySplit(GetLinkList(1), ",", "'");
                 object remark = txt_Remark.Text;
+
                 string updateSql = "UPDATE files_info SET " +
                     $"fi_stage = '{stage}', " +
                     $"fi_categor = '{categor}', " +
@@ -403,10 +431,9 @@ namespace 数据采集档案管理系统___课题版
                     $"fi_create_date = '{date.ToString("s")}', " +
                     $"fi_unit = '{unit}', " +
                     $"fi_carrier = '{carrier}', " +
-                    $"fi_format = '{format}', " +
                     $"fi_link = '{link}', " +
                     $"fi_remark = '{remark}', " +
-                    $"fi_file_id = '{fileId}' " +
+                    $"fi_file_id = '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}' " +
                     $"WHERE fi_id = '{primaryKey}';";
                 if(fileId != null)
                 {
@@ -418,7 +445,38 @@ namespace 数据采集档案管理系统___课题版
             }
             return primaryKey;
         }
-        
+
+        /// <summary>
+        /// 将字符串数组转换成指定分隔符组合成的字符串
+        /// </summary>
+        /// <param name="_str">字符串数组</param>
+        /// <param name="flag">分隔符</param>
+        /// <param name="param">引号类型</param>
+        private string GetFullStringBySplit(string[] _str, string flag, string param)
+        {
+            string str = string.Empty;
+            for(int i = 0; i < _str.Length; i++)
+                str += $"{param}{_str[i]}{param}{flag}";
+            return string.IsNullOrEmpty(str) ? string.Empty : str.Substring(0, str.Length - 1);
+        }
+
+        /// <summary>
+        /// 获取文件链接主键
+        /// </summary>
+        /// <param name="type"><para>1：ID</para><para>2：链接地址</para></param>
+        private string[] GetLinkList(int type)
+        {
+            string[] result = new string[lsv_LinkList.Items.Count];
+            for(int i = 0; i < result.Length; i++)
+            {
+                if(type == 1)
+                    result[i] = GetValue(lsv_LinkList.Items[0].Tag);
+                else if(type == 2)
+                    result[i] = GetValue(lsv_LinkList.Items[i].SubItems[3].Text);
+            }
+            return result;
+        }
+
         /// <summary>
         /// 保存(更新)
         /// </summary>
@@ -646,14 +704,31 @@ namespace 数据采集档案管理系统___课题版
                     e.Cancel = true;
         }
 
-        private void chk_carrier_DZ_CheckedChanged(object sender, EventArgs e)
-        {
-            txt_link.Enabled = lbl_OpenFile.Enabled = chk_carrier_DZ.Checked;
-        }
-
         private void chk_carrier_ZZ_CheckedChanged(object sender, EventArgs e)
         {
             num_count.Enabled = chk_carrier_ZZ.Checked;
+        }
+
+        private void lsv_LinkList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            {
+                int count = lsv_LinkList.SelectedItems.Count;
+                if(count > 0)
+                {
+                    string ids = string.Empty;
+                    for(int i = 0; i < count; i++)
+                    {
+                        ids += $"'{lsv_LinkList.SelectedItems[i].Tag}',";
+                        lsv_LinkList.SelectedItems[i].Remove();
+                    }
+                    if(!string.IsNullOrEmpty(ids))
+                    {
+                        ids = ids.Substring(0, ids.Length - 1);
+                        SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({ids})");
+                    }
+                }
+            }
         }
     }
 }
