@@ -2689,7 +2689,7 @@ namespace 数据采集档案管理系统___课题版
 
         private void Txt_Code_Leave(object sender, EventArgs e)
         {
-            ComboBox textBox = sender as ComboBox;
+            Control textBox = sender as Control;
             string value = textBox.Text;
             if(!string.IsNullOrEmpty(value))
             {
