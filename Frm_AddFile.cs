@@ -256,7 +256,6 @@ namespace 数据采集档案管理系统___课题版
                     string fullPath = frm.SelectedFileName;
                     if(File.Exists(fullPath))
                     {
-                        pal_Wait.Visible = true;
                         btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = false;
                         new Thread(delegate ()
                         {
@@ -276,23 +275,27 @@ namespace 数据采集档案管理系统___课题版
                             }
                             catch(Exception) { }
 
-                            pal_Wait.Visible = false;
                             btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = true;
 
-                            AddFileToList(fullPath, frm.SelectedFileId);
-
-                            if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            if(NotExist(fullPath))
                             {
-                                WinFormOpenHelper.OpenWinForm(0, "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
-                                //if(form != null)
-                                //    form.Stop();
-                                //WindowState = FormWindowState.Maximized;
-                                //pal_ShowData.Visible = true;
-                                //pal_ShowData.Controls.Clear();
+                                AddFileToList(fullPath, frm.SelectedFileId);
 
-                                //form = new ExeToWinForm(pal_ShowData, string.Empty);
-                                //form.Start(fullPath);
+                                if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
+                                    //if(form != null)
+                                    //    form.Stop();
+                                    //WindowState = FormWindowState.Maximized;
+                                    //pal_ShowData.Visible = true;
+                                    //pal_ShowData.Controls.Clear();
+
+                                    //form = new ExeToWinForm(pal_ShowData, string.Empty);
+                                    //form.Start(fullPath);
+                                }
                             }
+                            else
+                                MessageBox.Show("此文件已存在，不可重复添加。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         }).Start();
                     }
                     else
@@ -301,6 +304,15 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 MessageBox.Show("当前专项尚未导入数据。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private bool NotExist(string fullPath)
+        {
+            FileInfo info = new FileInfo(fullPath);
+            foreach(ListViewItem item in lsv_LinkList.Items)
+                if(info.FullName.Equals(item.SubItems[3].Text))
+                    return false;
+            return true;
         }
 
         private void AddFileToList(string fullPath, string fid)
@@ -419,31 +431,44 @@ namespace 数据采集档案管理系统___课题版
                 object fileId = GetFullStringBySplit(GetLinkList(1), ",", "'");
                 object remark = txt_Remark.Text;
 
-                string updateSql = "UPDATE files_info SET " +
-                    $"fi_stage = '{stage}', " +
-                    $"fi_categor = '{categor}', " +
-                    $"fi_code = '{code}', " +
-                    $"fi_name = '{name}', " +
-                    $"fi_user = '{user}', " +
-                    $"fi_type = '{type}', " +
-                    $"fi_pages = '{pages}', " +
-                    $"fi_count = '{count}', " +
-                    $"fi_create_date = '{date.ToString("s")}', " +
-                    $"fi_unit = '{unit}', " +
-                    $"fi_carrier = '{carrier}', " +
-                    $"fi_link = '{link}', " +
-                    $"fi_remark = '{remark}', " +
-                    $"fi_file_id = '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}' " +
-                    $"WHERE fi_id = '{primaryKey}';";
+                string oldFileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{primaryKey}';"));
+                string updateSql = $"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({GetFullStringBySplit(oldFileId, ",", "'")});";
+                updateSql = "UPDATE files_info SET " +
+                   $"fi_stage = '{stage}', " +
+                   $"fi_categor = '{categor}', " +
+                   $"fi_code = '{code}', " +
+                   $"fi_name = '{name}', " +
+                   $"fi_user = '{user}', " +
+                   $"fi_type = '{type}', " +
+                   $"fi_pages = '{pages}', " +
+                   $"fi_count = '{count}', " +
+                   $"fi_create_date = '{date.ToString("s")}', " +
+                   $"fi_unit = '{unit}', " +
+                   $"fi_carrier = '{carrier}', " +
+                   $"fi_link = '{link}', " +
+                   $"fi_remark = '{remark}', " +
+                   $"fi_file_id = '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}' " +
+                   $"WHERE fi_id = '{primaryKey}';";
                 if(fileId != null)
-                {
-                    int value = link == null ? 0 : 1;
-                    updateSql += $"UPDATE backup_files_info SET bfi_state={value} WHERE bfi_id='{fileId}';";
-                }
+                    updateSql += $"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_id IN ({fileId});";
                 SQLiteHelper.ExecuteNonQuery(updateSql);
                 MessageBox.Show("数据已保存。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
             return primaryKey;
+        }
+
+        /// <summary>
+        /// 将用,切割后的字符串用指定间隔符和引号重新组合
+        /// </summary>
+        public string GetFullStringBySplit(string _str, string flag, string param)
+        {
+            string result = string.Empty;
+            string[] strs = _str.Split(',');
+            for(int i = 0; i < strs.Length; i++)
+            {
+                result += $"{param}{strs[i]}{param}{flag}";
+            }
+            return result.Length > 0 ? result.Substring(0, result.Length - 1) : string.Empty;
         }
 
         /// <summary>
@@ -470,7 +495,7 @@ namespace 数据采集档案管理系统___课题版
             for(int i = 0; i < result.Length; i++)
             {
                 if(type == 1)
-                    result[i] = GetValue(lsv_LinkList.Items[0].Tag);
+                    result[i] = GetValue(lsv_LinkList.Items[i].Tag);
                 else if(type == 2)
                     result[i] = GetValue(lsv_LinkList.Items[i].SubItems[3].Text);
             }
@@ -709,6 +734,9 @@ namespace 数据采集档案管理系统___课题版
             num_count.Enabled = chk_carrier_ZZ.Checked;
         }
 
+        /// <summary>
+        /// 移除指定挂接文件
+        /// </summary>
         private void lsv_LinkList_KeyDown(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.Delete)
@@ -716,16 +744,9 @@ namespace 数据采集档案管理系统___课题版
                 int count = lsv_LinkList.SelectedItems.Count;
                 if(count > 0)
                 {
-                    string ids = string.Empty;
                     for(int i = 0; i < count; i++)
                     {
-                        ids += $"'{lsv_LinkList.SelectedItems[i].Tag}',";
                         lsv_LinkList.SelectedItems[i].Remove();
-                    }
-                    if(!string.IsNullOrEmpty(ids))
-                    {
-                        ids = ids.Substring(0, ids.Length - 1);
-                        SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({ids})");
                     }
                 }
             }

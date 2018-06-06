@@ -1517,6 +1517,20 @@ namespace 数据采集档案管理系统___课题版
         }
 
         /// <summary>
+        /// 将用,切割后的字符串用指定间隔符和引号重新组合
+        /// </summary>
+        public string GetFullStringBySplit(string _str, string flag, string param)
+        {
+            string result = string.Empty;
+            string[] strs = _str.Split(',');
+            for(int i = 0; i < strs.Length; i++)
+            {
+                result += $"{param}{strs[i]}{param}{flag}";
+            }
+            return result.Length > 0 ? result.Substring(0, result.Length - 1) : string.Empty;
+        }
+
+        /// <summary>
         /// 新增文件信息
         /// </summary>
         /// <param name="key">当前表格列名前缀</param>
@@ -1530,6 +1544,9 @@ namespace 数据采集档案管理系统___课题版
             object status = null;
             if(_fileId != null)
             {
+                string oldFileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{_fileId}';"));
+                sqlString += $"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({GetFullStringBySplit(oldFileId, ",", "'")});";
+
                 status = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_status FROM files_info WHERE fi_id='{_fileId}'");
                 sqlString += $"DELETE FROM files_info WHERE fi_id='{_fileId}';";
             }
@@ -1560,7 +1577,6 @@ namespace 数据采集档案管理系统___课题版
             object carrier = row.Cells[key + "carrier"].Value;
             object link = row.Cells[key + "link"].Value;
             object fileId = row.Cells[key + "link"].Tag;
-            object format = link == null ? string.Empty : Path.GetExtension(GetValue(link)).Replace(".", string.Empty);
 
             bool isOtherType = "其他".Equals(GetValue(row.Cells[key + "categor"].FormattedValue).Trim());
             if(isOtherType)
@@ -1574,8 +1590,8 @@ namespace 数据采集档案管理系统___课题版
             }
 
             sqlString += "INSERT INTO files_info (" +
-            "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_format, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort) " +
-            $"VALUES( '{_fileId}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{format}', '{link}', '{fileId}', '{status}', '{parentId}', '{sort}');";
+                "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_code, fi_create_date, fi_unit, fi_carrier, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort) " +
+                $"VALUES( '{_fileId}', '{code}', '{stage}', '{categor}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{code}', '{now.ToString("s")}', '{unit}', '{carrier}', '{link}', '{fileId}', '{status}', '{parentId}', '{sort}');";
             if(fileId != null)
             {
                 int value = link == null ? 0 : 1;
