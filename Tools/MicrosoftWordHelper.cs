@@ -30,7 +30,7 @@ namespace 数据采集档案管理系统___课题版
                     string user = GetValue(list[i]["fi_user"]);
                     string carrier = SQLiteHelper.GetValueByKey(list[i]["fi_carrier"]);
                     int pages = Convert.ToInt32(list[i]["fi_pages"]);
-                    DateTime date = Convert.ToDateTime(list[i]["fi_create_date"]);
+                    string date = GetDateTime(list[i]["fi_create_date"], "yyyy-MM-dd");
                     datas.Add(new EntityObject { Code = code, Name = name, User = user, Type = carrier, PageSize = pages, Date = date });
                 }
 
@@ -93,7 +93,7 @@ namespace 数据采集档案管理系统___课题版
                     table.Cell(rowIndex, 2).Range.Text = eo.User;
                     table.Cell(rowIndex, 3).Range.Text = eo.Type;
                     table.Cell(rowIndex, 4).Range.Text = eo.PageSize.ToString();
-                    table.Cell(rowIndex, 6).Range.Text = eo.Date.ToString("yyyy-MM-dd");
+                    table.Cell(rowIndex, 6).Range.Text = eo.Date;
                     table.Cell(rowIndex, 7).Range.Text = eo.Remark;
                 }
                 app.Selection.EndKey(WdUnits.wdStory, oMissing); //将光标移动到文档末尾
@@ -124,6 +124,19 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
+        private static string GetDateTime(object date, string format)
+        {
+            DateTime _date = DateTime.MinValue;
+            if(DateTime.TryParse(GetValue(date), out _date))
+            {
+                if(_date == DateTime.MinValue)
+                    return null;
+                else
+                    return _date.ToString(format);
+            }
+            return null;
+        }
+
         private static string GetValue(object v) => v == null ? string.Empty : v.ToString();
     }
     class EntityObject
@@ -133,7 +146,7 @@ namespace 数据采集档案管理系统___课题版
         private string user;
         private string type;
         private int pageSize;
-        private DateTime date;
+        private string date;
         private string remark;
 
         public string Code { get => code; set => code = value; }
@@ -141,7 +154,7 @@ namespace 数据采集档案管理系统___课题版
         public string User { get => user; set => user = value; }
         public string Type { get => type; set => type = value; }
         public int PageSize { get => pageSize; set => pageSize = value; }
-        public DateTime Date { get => date; set => date = value; }
+        public string Date { get => date; set => date = value; }
         public string Remark { get => remark; set => remark = value; }
     }
 }

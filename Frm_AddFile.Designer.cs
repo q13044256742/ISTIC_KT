@@ -89,7 +89,7 @@
             this.btn_Reset.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Reset.Name = "btn_Reset";
             this.btn_Reset.Size = new System.Drawing.Size(71, 33);
-            this.btn_Reset.TabIndex = 62;
+            this.btn_Reset.TabIndex = 17;
             this.btn_Reset.Text = "重置";
             this.btn_Reset.UseVisualStyleBackColor = true;
             this.btn_Reset.Click += new System.EventHandler(this.btn_Reset_Click);
@@ -102,7 +102,7 @@
             this.lbl_OpenFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_OpenFile.Name = "lbl_OpenFile";
             this.lbl_OpenFile.Size = new System.Drawing.Size(35, 14);
-            this.lbl_OpenFile.TabIndex = 61;
+            this.lbl_OpenFile.TabIndex = 15;
             this.lbl_OpenFile.TabStop = true;
             this.lbl_OpenFile.Text = "添加";
             this.lbl_OpenFile.Click += new System.EventHandler(this.Btn_OpenFile_Click);
@@ -113,7 +113,7 @@
             this.btn_Quit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Quit.Name = "btn_Quit";
             this.btn_Quit.Size = new System.Drawing.Size(71, 33);
-            this.btn_Quit.TabIndex = 55;
+            this.btn_Quit.TabIndex = 19;
             this.btn_Quit.Text = "退出";
             this.btn_Quit.UseVisualStyleBackColor = true;
             this.btn_Quit.Click += new System.EventHandler(this.btn_Quit_Click);
@@ -124,7 +124,7 @@
             this.btn_Save.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(71, 33);
-            this.btn_Save.TabIndex = 53;
+            this.btn_Save.TabIndex = 18;
             this.btn_Save.Text = "保存";
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.Btn_Save_Add_Click);
@@ -155,7 +155,7 @@
             this.txt_unit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_unit.Name = "txt_unit";
             this.txt_unit.Size = new System.Drawing.Size(605, 26);
-            this.txt_unit.TabIndex = 45;
+            this.txt_unit.TabIndex = 14;
             // 
             // label10
             // 
@@ -173,7 +173,7 @@
             this.dtp_date.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dtp_date.Name = "dtp_date";
             this.dtp_date.Size = new System.Drawing.Size(145, 26);
-            this.dtp_date.TabIndex = 44;
+            this.dtp_date.TabIndex = 5;
             // 
             // label9
             // 
@@ -196,7 +196,7 @@
             0});
             this.num_page.Name = "num_page";
             this.num_page.Size = new System.Drawing.Size(127, 26);
-            this.num_page.TabIndex = 40;
+            this.num_page.TabIndex = 6;
             // 
             // label7
             // 
@@ -214,7 +214,7 @@
             this.txt_user.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_user.Name = "txt_user";
             this.txt_user.Size = new System.Drawing.Size(225, 26);
-            this.txt_user.TabIndex = 36;
+            this.txt_user.TabIndex = 3;
             // 
             // label5
             // 
@@ -254,7 +254,7 @@
             this.cbo_categor.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cbo_categor.Name = "cbo_categor";
             this.cbo_categor.Size = new System.Drawing.Size(225, 28);
-            this.cbo_categor.TabIndex = 33;
+            this.cbo_categor.TabIndex = 1;
             this.cbo_categor.SelectionChangeCommitted += new System.EventHandler(this.Cbo_categor_SelectedIndexChanged);
             // 
             // label2
@@ -275,7 +275,7 @@
             this.cbo_stage.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cbo_stage.Name = "cbo_stage";
             this.cbo_stage.Size = new System.Drawing.Size(225, 28);
-            this.cbo_stage.TabIndex = 32;
+            this.cbo_stage.TabIndex = 0;
             this.cbo_stage.SelectionChangeCommitted += new System.EventHandler(this.Cbo_stage_SelectionChangeCommitted);
             // 
             // label1
@@ -310,7 +310,7 @@
             this.pal_type.Controls.Add(this.rdo_type_js);
             this.pal_type.Location = new System.Drawing.Point(126, 171);
             this.pal_type.Name = "pal_type";
-            this.pal_type.Size = new System.Drawing.Size(263, 39);
+            this.pal_type.Size = new System.Drawing.Size(260, 39);
             this.pal_type.TabIndex = 68;
             // 
             // radioButton1
@@ -319,7 +319,7 @@
             this.radioButton1.Location = new System.Drawing.Point(67, 7);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(55, 24);
-            this.radioButton1.TabIndex = 3;
+            this.radioButton1.TabIndex = 8;
             this.radioButton1.TabStop = true;
             this.radioButton1.Tag = "ef8d18ad-18a7-433d-8875-aac496f844e9";
             this.radioButton1.Text = "财务";
@@ -331,7 +331,7 @@
             this.rdo_type_ps.Location = new System.Drawing.Point(189, 7);
             this.rdo_type_ps.Name = "rdo_type_ps";
             this.rdo_type_ps.Size = new System.Drawing.Size(55, 24);
-            this.rdo_type_ps.TabIndex = 2;
+            this.rdo_type_ps.TabIndex = 10;
             this.rdo_type_ps.TabStop = true;
             this.rdo_type_ps.Tag = "1731a1cf-781d-438b-bbde-ac48d4d07914";
             this.rdo_type_ps.Text = "文书";
@@ -343,7 +343,7 @@
             this.rdo_type_cw.Location = new System.Drawing.Point(128, 7);
             this.rdo_type_cw.Name = "rdo_type_cw";
             this.rdo_type_cw.Size = new System.Drawing.Size(55, 24);
-            this.rdo_type_cw.TabIndex = 1;
+            this.rdo_type_cw.TabIndex = 9;
             this.rdo_type_cw.TabStop = true;
             this.rdo_type_cw.Tag = "6996e983-384d-4cc3-a801-33cc08a2d9ee";
             this.rdo_type_cw.Text = "管理";
@@ -355,7 +355,7 @@
             this.rdo_type_js.Location = new System.Drawing.Point(6, 7);
             this.rdo_type_js.Name = "rdo_type_js";
             this.rdo_type_js.Size = new System.Drawing.Size(55, 24);
-            this.rdo_type_js.TabIndex = 0;
+            this.rdo_type_js.TabIndex = 7;
             this.rdo_type_js.TabStop = true;
             this.rdo_type_js.Tag = "ef8d18ad-18a7-433d-8875-aac496f844e7";
             this.rdo_type_js.Text = "技术";
@@ -368,7 +368,7 @@
             this.txt_fileCode.Name = "txt_fileCode";
             this.txt_fileCode.ReadOnly = true;
             this.txt_fileCode.Size = new System.Drawing.Size(225, 26);
-            this.txt_fileCode.TabIndex = 64;
+            this.txt_fileCode.TabIndex = 2;
             // 
             // pal_carrier
             // 
@@ -386,7 +386,7 @@
             this.chk_carrier_DZ.Location = new System.Drawing.Point(67, 7);
             this.chk_carrier_DZ.Name = "chk_carrier_DZ";
             this.chk_carrier_DZ.Size = new System.Drawing.Size(56, 24);
-            this.chk_carrier_DZ.TabIndex = 1;
+            this.chk_carrier_DZ.TabIndex = 12;
             this.chk_carrier_DZ.Tag = "6ffdf849-31fa-4401-a640-c371cd994daf";
             this.chk_carrier_DZ.Text = "电子";
             this.chk_carrier_DZ.UseVisualStyleBackColor = true;
@@ -397,7 +397,7 @@
             this.chk_carrier_ZZ.Location = new System.Drawing.Point(6, 7);
             this.chk_carrier_ZZ.Name = "chk_carrier_ZZ";
             this.chk_carrier_ZZ.Size = new System.Drawing.Size(56, 24);
-            this.chk_carrier_ZZ.TabIndex = 0;
+            this.chk_carrier_ZZ.TabIndex = 11;
             this.chk_carrier_ZZ.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aaba";
             this.chk_carrier_ZZ.Text = "纸质";
             this.chk_carrier_ZZ.UseVisualStyleBackColor = true;
@@ -409,7 +409,7 @@
             this.txt_fileName.Location = new System.Drawing.Point(126, 94);
             this.txt_fileName.Name = "txt_fileName";
             this.txt_fileName.Size = new System.Drawing.Size(605, 28);
-            this.txt_fileName.TabIndex = 71;
+            this.txt_fileName.TabIndex = 4;
             this.txt_fileName.SelectionChangeCommitted += new System.EventHandler(this.txt_fileName_SelectionChangeCommitted);
             // 
             // txt_Remark
@@ -420,7 +420,7 @@
             this.txt_Remark.Name = "txt_Remark";
             this.txt_Remark.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt_Remark.Size = new System.Drawing.Size(614, 107);
-            this.txt_Remark.TabIndex = 72;
+            this.txt_Remark.TabIndex = 16;
             // 
             // label8
             // 
@@ -504,7 +504,7 @@
             0});
             this.num_count.Name = "num_count";
             this.num_count.Size = new System.Drawing.Size(127, 26);
-            this.num_count.TabIndex = 82;
+            this.num_count.TabIndex = 13;
             // 
             // label23
             // 

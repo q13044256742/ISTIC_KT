@@ -583,7 +583,9 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
-                            LoadFileBoxTable(objId, ControlType.Plan);
+                            LoadFileBoxTable(objId, ControlType.Plan_Project);
+
+                            MessageBox.Show("操作成功.");
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -682,7 +684,8 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
-                            LoadFileBoxTable(objId, ControlType.Plan);
+                            LoadFileBoxTable(objId, ControlType.Plan_Topic);
+                            MessageBox.Show("操作成功.");
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -779,7 +782,8 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_info SET fi_status=1 WHERE fi_id IN({ids})");
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
-                            LoadFileBoxTable(objId, ControlType.Plan);
+                            LoadFileBoxTable(objId, ControlType.Plan_Topic_Subject);
+                            MessageBox.Show("操作成功.");
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -1541,7 +1545,7 @@ namespace 数据采集档案管理系统___课题版
         {
             string sqlString = string.Empty;
             object _fileId = row.Cells[key + "id"].Tag;
-            object status = null;
+            object status = -1;
             if(_fileId != null)
             {
                 string oldFileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{_fileId}';"));

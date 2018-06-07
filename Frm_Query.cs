@@ -355,7 +355,7 @@ namespace 数据采集档案管理系统___课题版
                 dgv_ShowData.Rows[index].Cells["type"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_type"]);
                 dgv_ShowData.Rows[index].Cells["secret"].Value = SQLiteHelper.GetValueByKey(table.Rows[i]["fi_secret"]);
                 dgv_ShowData.Rows[index].Cells["pages"].Value = table.Rows[i]["fi_pages"];
-                dgv_ShowData.Rows[index].Cells["date"].Value = Convert.ToDateTime(table.Rows[i]["fi_create_date"]).ToString("yyyy-MM-dd");
+                dgv_ShowData.Rows[index].Cells["date"].Value = GetDateTime(table.Rows[i]["fi_create_date"], "yyyy-MM-dd");
                 dgv_ShowData.Rows[index].Cells["unit"].Value = table.Rows[i]["fi_unit"];
             }
 
@@ -365,6 +365,19 @@ namespace 数据采集档案管理系统___课题版
 
             btn_Query.Tag = "FILE";
             lbl_position.Text += $" >> {parentObjName} >> 文件列表";
+        }
+
+        private string GetDateTime(object date, string format)
+        {
+            DateTime _date = DateTime.MinValue;
+            if(DateTime.TryParse(GetValue(date), out _date))
+            {
+                if(_date == DateTime.MinValue)
+                    return null;
+                else
+                    return _date.ToString(format);
+            }
+            return null;
         }
 
         /// <summary>
