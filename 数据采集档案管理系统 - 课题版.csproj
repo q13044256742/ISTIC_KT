@@ -366,6 +366,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\xsl.png" />
+    <None Include="Resources\rar.png" />
+    <None Include="Resources\pdf.png" />
+    <None Include="Resources\word.png" />
     <None Include="Resources\zhuxiao.png" />
     <None Include="Resources\help.png" />
     <None Include="Resources\message.png" />
@@ -385,6 +389,9 @@
     <None Include="Resources\3.png" />
     <None Include="Resources\1.png" />
     <None Include="Resources\2.png" />
+    <None Include="Resources\default.png" />
+    <None Include="Resources\excel.png" />
+    <None Include="Resources\doc.png" />
     <Content Include="Resources\explain.txt" />
     <None Include="Resources\ooopic_1522400624.ico" />
     <None Include="Resources\login_1.png" />

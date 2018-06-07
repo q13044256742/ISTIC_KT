@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using 数据采集档案管理系统___课题版.Properties;
 
@@ -9,7 +10,16 @@ namespace 数据采集档案管理系统___课题版
     {
         public string SelectedFileName;
         public string SelectedFileId;
+        /// <summary>
+        /// <para>0：默认文件夹</para>
+        /// <para>1：小锁</para>
+        /// <para>2：默认文件</para>
+        /// <para>3：WORD</para>
+        /// <para>4：EXCEL</para>
+        /// <para>5：PDF</para>
+        /// </summary>
         private ImageList imageList;
+
         private object[] rootId;
         public Frm_AddFile_FileSelect(object[] rootId)
         {
@@ -99,28 +109,41 @@ namespace 数据采集档案管理系统___课题版
                         Name = GetValue(list[i][0]),
                         Text = GetValue(list[i][1]),
                         Tag = GetValue(list[i][2]),
-                        ImageIndex = (state == 1) ? 3 : -1,
+                        ImageIndex = GetFileIconIndex(state, GetValue(list[i][1])),
+                        SelectedImageIndex = GetFileIconIndex(state, GetValue(list[i][1])),
                         ToolTipText = GetValue(list[i][4]),
                     };
                     parentNode.Nodes.Add(treeNode);
                     InitialTree(treeNode.Name, treeNode, isShowAll);
                 }
             }
-            if(list.Count == 0)
+        }
+
+        private int GetFileIconIndex(int state, string fileName)
+        {
+            //小锁
+            if(state == 1)
+                return 1;
+            else
             {
-                if(parentNode.ImageIndex != 3)
-                    parentNode.ImageIndex = parentNode.SelectedImageIndex = 2;
-                else if(parentNode.ImageIndex == 3)
-                    parentNode.SelectedImageIndex = 3;
+                string format = Path.GetExtension(fileName).ToUpper();
+                if(".DOC".Equals(format) || ".DOCX".Equals(format))
+                    return 3;
+                else if(".XLS".Equals(format) || ".XLSX".Equals(format))
+                    return 4;
+                else if(".PDF".Equals(format))
+                    return 5;
+                else if(".RAR".Equals(format))
+                    return 6;
             }
+            return 2;
         }
 
         private void Frm_AddFile_FileSelect_Load(object sender, EventArgs e)
         {
             imageList = new ImageList();
-            //0：文件夹关闭 1：文件夹打开 2：文件 3：已加工
             imageList.Images.AddRange(new System.Drawing.Image[] {
-                Resources.file2, Resources.file, Resources.file, Resources._lock
+                Resources.file2, Resources._lock, Resources.file, Resources.doc, Resources.xsl, Resources.pdf, Resources.rar
             });
             tv_file.ImageList = imageList;
         }

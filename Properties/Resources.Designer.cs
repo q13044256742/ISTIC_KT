@@ -101,6 +101,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap doc {
+            get {
+                object obj = ResourceManager.GetObject("doc", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 					课题档案填报系统填写说明
         ///一、系统功能简介
         ///	课题档案填报系统是面向承担重大专项的项目（课题）组，用以收集项目（课题）及其档案信息，以项目（课题）组为单位进行填报。一个账户只能对应一个项目（课题）。
@@ -187,6 +197,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap message {
             get {
                 object obj = ResourceManager.GetObject("message", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap pdf {
+            get {
+                object obj = ResourceManager.GetObject("pdf", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -312,6 +332,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap rar {
+            get {
+                object obj = ResourceManager.GetObject("rar", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (Icon) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon search {
@@ -337,6 +367,16 @@ namespace 数据采集档案管理系统___课题版.Properties {
         internal static System.Drawing.Bitmap wait {
             get {
                 object obj = ResourceManager.GetObject("wait", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap xsl {
+            get {
+                object obj = ResourceManager.GetObject("xsl", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
