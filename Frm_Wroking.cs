@@ -1830,7 +1830,7 @@ namespace 数据采集档案管理系统___课题版
                         if(type == 0)
                             amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_special_id='{UserHelper.GetUser().SpecialId}'") + 1;
                         else if(type == 1)
-                            amount = GetGCId();
+                            amount = GetGCId(length);
                         code += amount.ToString().PadLeft(length, '0');
                     }
                     code += symbol;
@@ -1843,13 +1843,14 @@ namespace 数据采集档案管理系统___课题版
         /// 获取馆藏号流水号
         /// （优先获取已删除的）
         /// </summary>
-        private int GetGCId()
+        private int GetGCId(int length)
         {
             string querySql = $"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().SpecialId}'";
             int max = SQLiteHelper.ExecuteCountQuery(querySql);
             for(int i = 1; i <= max; i++)
             {
-                int temp = SQLiteHelper.ExecuteCountQuery(querySql + $" AND pb_gc_id LIKE '%{i}'");
+                string _str = i.ToString().PadLeft(length, '0');
+                int temp = SQLiteHelper.ExecuteCountQuery(querySql + $" AND pb_gc_id LIKE '%_{_str}'");
                 if(temp == 0)
                     return i;
             }
