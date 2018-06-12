@@ -1830,13 +1830,30 @@ namespace 数据采集档案管理系统___课题版
                         if(type == 0)
                             amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pt_id) FROM files_tag_info WHERE pt_special_id='{UserHelper.GetUser().SpecialId}'") + 1;
                         else if(type == 1)
-                            amount = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().SpecialId}'") + 1;
+                            amount = GetGCId();
                         code += amount.ToString().PadLeft(length, '0');
                     }
                     code += symbol;
                 }
             }
             return code.Length == 0 ? code : code.Substring(0, code.Length - 1);
+        }
+
+        /// <summary>
+        /// 获取馆藏号流水号
+        /// （优先获取已删除的）
+        /// </summary>
+        private int GetGCId()
+        {
+            string querySql = $"SELECT COUNT(pb_id) FROM files_box_info WHERE pb_special_id='{UserHelper.GetUser().SpecialId}'";
+            int max = SQLiteHelper.ExecuteCountQuery(querySql);
+            for(int i = 1; i <= max; i++)
+            {
+                int temp = SQLiteHelper.ExecuteCountQuery(querySql + $" AND pb_gc_id LIKE '%{i}'");
+                if(temp == 0)
+                    return i;
+            }
+            return max + 1;
         }
 
         /// <summary>
