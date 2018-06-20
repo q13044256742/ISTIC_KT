@@ -884,6 +884,7 @@ namespace 数据采集档案管理系统___课题版
         private bool CheckMustEnter(string name, bool isParentLevel)
         {
             bool result = true;
+            errorProvider1.Clear();
             if(name.Contains("Project"))
             {
                 string proCode = txt_Project_Code.Text.Trim();
@@ -902,11 +903,7 @@ namespace 数据采集档案管理系统___课题版
                         errorProvider1.SetError(txt_Project_Code, "提示：此项目编号已存在");
                         result = false;
                     }
-                    else
-                        errorProvider1.SetError(txt_Project_Code, null);
                 }
-                else
-                    errorProvider1.SetError(txt_Project_Code, null);
             }
             else if(name.Contains("Topic"))
             {
@@ -926,11 +923,7 @@ namespace 数据采集档案管理系统___课题版
                         errorProvider1.SetError(txt_Topic_Code, "提示：此课题编号已存在");
                         result = false;
                     }
-                    else
-                        errorProvider1.SetError(txt_Topic_Code, null);
                 }
-                else
-                    errorProvider1.SetError(txt_Topic_Code, null);
                 if(!isParentLevel)
                 {
                     if(string.IsNullOrEmpty(txt_Topic_Year.Text))
@@ -938,22 +931,16 @@ namespace 数据采集档案管理系统___课题版
                         errorProvider1.SetError(txt_Topic_Year, "提示：立项年度不能为空");
                         result = false;
                     }
-                    else
-                        errorProvider1.SetError(txt_Topic_Year, null);
                     if(string.IsNullOrEmpty(txt_Topic_Unit.Text))
                     {
                         errorProvider1.SetError(txt_Topic_Unit, "提示：承担单位不能为空");
                         result = false;
                     }
-                    else
-                        errorProvider1.SetError(txt_Topic_Unit, null);
                     if(string.IsNullOrEmpty(txt_Topic_Proer.Text))
                     {
                         errorProvider1.SetError(txt_Topic_Proer, "提示：负责人不能为空");
                         result = false;
                     }
-                    else
-                        errorProvider1.SetError(txt_Topic_Proer, null);
                 }
             }
             else if(name.Contains("Subject"))
@@ -963,29 +950,21 @@ namespace 数据采集档案管理系统___课题版
                     errorProvider1.SetError(txt_Subject_Code, "提示：课题编号不能为空");
                     result = false;
                 }
-                else
-                    errorProvider1.SetError(txt_Subject_Code, null);
                 if(string.IsNullOrEmpty(txt_Subject_Year.Text))
                 {
                     errorProvider1.SetError(txt_Subject_Year, "提示：立项年度不能为空");
                     result = false;
                 }
-                else
-                    errorProvider1.SetError(txt_Subject_Year, null);
                 if(string.IsNullOrEmpty(txt_Subject_Unit.Text))
                 {
                     errorProvider1.SetError(txt_Subject_Unit, "提示：承担单位不能为空");
                     result = false;
                 }
-                else
-                    errorProvider1.SetError(txt_Subject_Unit, null);
                 if(string.IsNullOrEmpty(txt_Subject_Proer.Text))
                 {
                     errorProvider1.SetError(txt_Subject_Proer, "提示：负责人不能为空");
                     result = false;
                 }
-                else
-                    errorProvider1.SetError(txt_Subject_Proer, null);
             }
             return result;
         }
@@ -1025,13 +1004,34 @@ namespace 数据采集档案管理系统___课题版
                         DataGridViewCell cell2 = rows[j].Cells[key + "name"];
                         if(cellName.Value.Equals(cell2.Value))
                         {
-                            cellName.ErrorText = $"温馨提示：与{j + 1}行的文件名重复。";
+                            cellName.ErrorText = $"温馨提示：与行{j + 1}的文件名重复。";
                             result = false;
                         }
                         else
-                        {
                             cellName.ErrorText = null;
+                    }
+                }
+
+                //检测文件编号重复
+                DataGridViewCell cellCode = rows[i].Cells[key + "code"];
+                if(cellCode.Value == null || string.IsNullOrEmpty(GetValue(cellCode.Value).Trim()))
+                {
+                    cellCode.ErrorText = "温馨提示：文件编号不能为空。";
+                    result = false;
+                }
+                else
+                {
+                    cellCode.ErrorText = null;
+                    for(int j = i + 1; j < rows.Count - 1; j++)
+                    {
+                        DataGridViewCell cell2 = rows[j].Cells[key + "code"];
+                        if(cellCode.Value.Equals(cell2.Value))
+                        {
+                            cellCode.ErrorText = $"温馨提示：与行{j + 1}的文件编号重复。";
+                            result = false;
                         }
+                        else
+                            cellCode.ErrorText = null;
                     }
                 }
 
@@ -1045,19 +1045,19 @@ namespace 数据采集档案管理系统___课题版
                     pagesCell.ErrorText = null;
 
                 bool isOtherType = "其他".Equals(GetValue(rows[i].Cells[key + "categor"].FormattedValue).Trim());
-                DataGridViewCell cellCode = rows[i].Cells[key + "categor_name"];
+                DataGridViewCell cellCategor = rows[i].Cells[key + "categor_name"];
                 if(isOtherType)
                 {
-                    if(cellCode.Value == null || string.IsNullOrEmpty(GetValue(cellCode.Value).Trim()))
+                    if(cellCategor.Value == null || string.IsNullOrEmpty(GetValue(cellCategor.Value).Trim()))
                     {
-                        cellCode.ErrorText = "温馨提示：类型名称不能为空。";
+                        cellCategor.ErrorText = "温馨提示：类型名称不能为空。";
                         result = false;
                     }
                     else
-                        cellCode.ErrorText = null;
+                        cellCategor.ErrorText = null;
                 }
                 else
-                    cellCode.ErrorText = null;
+                    cellCategor.ErrorText = null;
             }
             return result;
         }

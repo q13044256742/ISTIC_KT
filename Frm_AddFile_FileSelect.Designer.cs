@@ -48,6 +48,7 @@
             this.tv_file.Size = new System.Drawing.Size(753, 464);
             this.tv_file.TabIndex = 0;
             this.tv_file.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_file_AfterSelect);
+            this.tv_file.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tv_file_NodeMouseDoubleClick);
             // 
             // btn_sure
             // 
@@ -58,7 +59,7 @@
             this.btn_sure.TabIndex = 1;
             this.btn_sure.Text = "确定";
             this.btn_sure.UseVisualStyleBackColor = true;
-            this.btn_sure.Click += new System.EventHandler(this.btn_sure_Click);
+            this.btn_sure.Click += new System.EventHandler(this.Btn_sure_Click);
             // 
             // label1
             // 

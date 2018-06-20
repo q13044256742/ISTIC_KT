@@ -10,19 +10,6 @@ namespace 数据采集档案管理系统___课题版
 {
     public partial class Frm_Import : Form
     {
-        /// <summary>
-        /// 共计文件数
-        /// </summary>
-        private int count = 0;
-        /// <summary>
-        /// 导入成功数
-        /// </summary>
-        private int okCount = 0;
-        /// <summary>
-        /// 导入失败输
-        /// </summary>
-        private int noCount = 0;
-        int indexCount = 0;
         public Frm_Import()
         {
             InitializeComponent();
@@ -32,7 +19,7 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 路径选择
         /// </summary>
-        private void btn_Import_Click(object sender, EventArgs e)
+        private void Btn_Import_Click(object sender, EventArgs e)
         {
             if(fbd_Data.ShowDialog() == DialogResult.OK)
             {
@@ -57,7 +44,6 @@ namespace 数据采集档案管理系统___课题版
                         return;
                 SaveTargetPath(); //如果是首次添加目标路径，则保存
                 btn_Import.Enabled = false;
-                count = okCount = noCount = indexCount = 0;
                 int totalFileAmount = Directory.GetFiles(sPath, "*", SearchOption.AllDirectories).Length - Directory.GetFiles(sPath, "ISTIC*.db", SearchOption.AllDirectories).Length;
                 pro_Show.Value = pro_Show.Minimum;
                 pro_Show.Maximum = totalFileAmount;
@@ -79,7 +65,7 @@ namespace 数据采集档案管理系统___课题版
 
                     CopyDataTable(sPath, rootFolder + "\\" + bName);
 
-                    MessageBox.Show($"导入完毕,共计{count}个文件。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    MessageBox.Show($"数据导入完毕。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     btn_Import.Enabled = true;
                     DialogResult = DialogResult.OK;
                     Close();
@@ -206,12 +192,14 @@ namespace 数据采集档案管理系统___课题版
                     string _fileName = Path.GetFileName(link);
                     sqlString.Append($"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_path='{filePath}\\' AND bfi_name='{_fileName}';");
                 }
-                
-                //更新文件备份表状态
-                string _filePath = Path.GetDirectoryName(link);
-                string __fileName = Path.GetFileName(link);
-                fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}\\' AND bfi_name='{__fileName}';") ?? fileId;
 
+                //更新文件备份表状态
+                if(!string.IsNullOrEmpty(link))
+                {
+                    string _filePath = Path.GetDirectoryName(link);
+                    string __fileName = Path.GetFileName(link);
+                    fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}\\' AND bfi_name='{__fileName}';") ?? fileId;
+                }
                 sqlString.Append($"DELETE FROM files_info WHERE fi_id='{row["fi_id"]}';");
                 sqlString.Append("INSERT INTO files_info(fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort, fi_remark) VALUES(" +
                     $"'{row["fi_id"]}', '{row["fi_code"]}', '{row["fi_stage"]}', '{row["fi_categor"]}', '{row["fi_categor_name"]}', '{row["fi_name"]}', '{row["fi_user"]}', '{row["fi_type"]}', '{row["fi_secret"]}', '{row["fi_pages"]}', '{row["fi_count"]}', " +
@@ -274,6 +262,8 @@ namespace 数据采集档案管理系统___课题版
 
         private object GetFormatDate(object v) => v == null ? DateTime.Now.ToString("s") : Convert.ToDateTime(v).ToString("s");
 
+        int indexCount = 0;
+
         /// <summary>
         /// 拷贝文件到备份服务器
         /// </summary>
@@ -289,7 +279,6 @@ namespace 数据采集档案管理系统___课题版
                 string fileName = file[i].Name;
                 if(!(fileName.Contains("ISTIC") && file[i].Extension.Contains("db")))
                 {
-                    count++;
                     string primaryKey = Guid.NewGuid().ToString();
                     try
                     {
@@ -301,12 +290,8 @@ namespace 数据采集档案管理系统___课题版
                         else
                             SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
                         ServerHelper.UploadFile(file[i].FullName, rootFolder, fileName);
-                        okCount++;
                     }
-                    catch(Exception)
-                    {
-                        noCount++;
-                    }
+                    catch(Exception){ }
                     pro_Show.Value += 1;
                 }
             }
@@ -362,5 +347,6 @@ namespace 数据采集档案管理系统___课题版
                 btn_TarPath.Enabled = false;
             }
         }
+
     }
 }

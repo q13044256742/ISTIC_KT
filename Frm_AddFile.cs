@@ -247,63 +247,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void Btn_OpenFile_Click(object sender, EventArgs e)
         {
-            object[] rootId = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
-            if(rootId.Length > 0)
-            {
-                Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootId);
-                if(frm.ShowDialog() == DialogResult.OK)
-                {
-                    string fullPath = frm.SelectedFileName;
-                    if(File.Exists(fullPath))
-                    {
-                        btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = false;
-                        new Thread(delegate ()
-                        {
-                            string savePath = Application.StartupPath + @"\Temp\";
-                            if(!Directory.Exists(savePath))
-                                Directory.CreateDirectory(savePath);
-                            string filePath = savePath + new FileInfo(fullPath).Name;
-                            File.Copy(fullPath, filePath, true);
-                            //尝试获取页数
-                            try
-                            {
-                                string format = Path.GetExtension(fullPath).ToLower();
-                                if(format.Contains("doc") || format.Contains("docx"))
-                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetWordPageCount(fullPath);
-                                else if(format.Contains("pdf"))
-                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetPDFPageCount(fullPath);
-                            }
-                            catch(Exception) { }
-
-                            btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = true;
-
-                            if(NotExist(fullPath))
-                            {
-                                AddFileToList(fullPath, frm.SelectedFileId);
-
-                                if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                                {
-                                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
-                                    //if(form != null)
-                                    //    form.Stop();
-                                    //WindowState = FormWindowState.Maximized;
-                                    //pal_ShowData.Visible = true;
-                                    //pal_ShowData.Controls.Clear();
-
-                                    //form = new ExeToWinForm(pal_ShowData, string.Empty);
-                                    //form.Start(fullPath);
-                                }
-                            }
-                            else
-                                MessageBox.Show("此文件已存在，不可重复添加。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        }).Start();
-                    }
-                    else
-                        MessageBox.Show("服务器不存在此文件。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
-            }
-            else
-                MessageBox.Show("当前专项尚未导入数据。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+           
         }
 
         private bool NotExist(string fullPath)
@@ -323,7 +267,7 @@ namespace 数据采集档案管理系统___课题版
             item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
             {
                 new ListViewItem.ListViewSubItem(){ Text = info.Name },
-                new ListViewItem.ListViewSubItem(){ Text = info.CreationTime.ToString("yyyyMMdd") },
+                new ListViewItem.ListViewSubItem(){ Text = info.CreationTime.ToString("yyyy-MM-dd") },
                 new ListViewItem.ListViewSubItem(){ Text = info.FullName },
             });
             item.Tag = fid;
@@ -680,6 +624,10 @@ namespace 数据采集档案管理系统___课题版
                                 (con as CheckBox).Checked = false;
                         }
                     }
+                    else if(item is ListView)
+                    {
+                        (item as ListView).Items.Clear();
+                    }
                 }
             }
             txt_unit.Text = UserHelper.GetUser().UserUnitName;
@@ -750,6 +698,59 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
             }
+        }
+
+        private void lbl_OpenFile_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            object[] rootId = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
+            if(rootId.Length > 0)
+            {
+                Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootId);
+                if(frm.ShowDialog() == DialogResult.OK)
+                {
+                    string fullPath = frm.SelectedFileName;
+                    if(File.Exists(fullPath))
+                    {
+                        btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = false;
+                        new Thread(delegate ()
+                        {
+                            string savePath = Application.StartupPath + @"\Temp\";
+                            if(!Directory.Exists(savePath))
+                                Directory.CreateDirectory(savePath);
+                            string filePath = savePath + new FileInfo(fullPath).Name;
+                            File.Copy(fullPath, filePath, true);
+                            //尝试获取页数
+                            try
+                            {
+                                string format = Path.GetExtension(fullPath).ToLower();
+                                if(format.Contains("doc") || format.Contains("docx"))
+                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetWordPageCount(fullPath);
+                                else if(format.Contains("pdf"))
+                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetPDFPageCount(fullPath);
+                            }
+                            catch(Exception) { }
+
+                            btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = true;
+
+                            if(NotExist(fullPath))
+                            {
+                                AddFileToList(fullPath, frm.SelectedFileId);
+
+                                if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                                {
+                                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
+                                }
+                            }
+                            else
+                                MessageBox.Show("此文件已存在，不可重复添加。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }).Start();
+                    }
+                    else
+                        MessageBox.Show("服务器不存在此文件。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                }
+            }
+            else
+                MessageBox.Show("当前专项尚未导入数据。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

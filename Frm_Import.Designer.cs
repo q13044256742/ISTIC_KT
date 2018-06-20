@@ -106,7 +106,7 @@
             this.btn_SouPath.TabIndex = 6;
             this.btn_SouPath.TabStop = true;
             this.btn_SouPath.Text = "...";
-            this.btn_SouPath.Click += new System.EventHandler(this.btn_Import_Click);
+            this.btn_SouPath.Click += new System.EventHandler(this.Btn_Import_Click);
             // 
             // statusStrip1
             // 

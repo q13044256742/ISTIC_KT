@@ -104,14 +104,16 @@ namespace 数据采集档案管理系统___课题版
                 int state = Convert.ToInt32(list[i][3]);
                 if(state != 1 || isShowAll)
                 {
+                    int imageIndex = GetFileIconIndex(state, GetValue(list[i][1]));
                     TreeNode treeNode = new TreeNode()
                     {
                         Name = GetValue(list[i][0]),
                         Text = GetValue(list[i][1]),
                         Tag = GetValue(list[i][2]),
-                        ImageIndex = GetFileIconIndex(state, GetValue(list[i][1])),
-                        SelectedImageIndex = GetFileIconIndex(state, GetValue(list[i][1])),
+                        ImageIndex = imageIndex,
+                        SelectedImageIndex = imageIndex,
                         ToolTipText = GetValue(list[i][4]),
+                        StateImageKey = state.ToString(),
                     };
                     parentNode.Nodes.Add(treeNode);
                     InitialTree(treeNode.Name, treeNode, isShowAll);
@@ -153,8 +155,8 @@ namespace 数据采集档案管理系统___课题版
         {
             TreeNode node = e.Node;
             int type = Convert.ToInt32(node.ToolTipText);//0:文件 1:文件夹
-            int state = node.ImageIndex;//3:已加工
-            if(type == 0 && state != 3)
+            string state = node.StateImageKey;//1:已加工
+            if(type == 0 && !"1".Equals(state))
             {
                 SelectedFileId = node.Name;
                 lbl_filename.Text = node.Text;
@@ -168,7 +170,7 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void btn_sure_Click(object sender, EventArgs e)
+        private void Btn_sure_Click(object sender, EventArgs e)
         {
             if(!string.IsNullOrEmpty(SelectedFileName))
                 DialogResult = DialogResult.OK;
@@ -178,6 +180,13 @@ namespace 数据采集档案管理系统___课题版
         private void rdo_ShowAll_CheckedChanged(object sender, EventArgs e)
         {
             LoadRootTree(rdo_ShowAll.Checked);
+        }
+
+        private void Tv_file_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+                if(!string.IsNullOrEmpty(SelectedFileName))
+                    Btn_sure_Click(null, null);
         }
     }
 }
