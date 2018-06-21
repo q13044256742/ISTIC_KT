@@ -47,7 +47,7 @@
             this.tv_file.Name = "tv_file";
             this.tv_file.Size = new System.Drawing.Size(753, 464);
             this.tv_file.TabIndex = 0;
-            this.tv_file.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tv_file_AfterSelect);
+            this.tv_file.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Tv_file_AfterSelect);
             this.tv_file.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tv_file_NodeMouseDoubleClick);
             // 
             // btn_sure

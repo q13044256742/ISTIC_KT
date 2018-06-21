@@ -151,7 +151,7 @@ namespace 数据采集档案管理系统___课题版
         }
 
 
-        private void tv_file_AfterSelect(object sender, TreeViewEventArgs e)
+        private void Tv_file_AfterSelect(object sender, TreeViewEventArgs e)
         {
             TreeNode node = e.Node;
             int type = Convert.ToInt32(node.ToolTipText);//0:文件 1:文件夹
