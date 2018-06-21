@@ -275,7 +275,7 @@ namespace 数据采集档案管理系统___课题版
                         MicrosoftWordHelper.WriteDocument(ref filePath, InitialList(cboId), name, code);
 
                         if(MessageBox.Show($"操作成功，是否打开移交文件夹？", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk) == DialogResult.OK)
-                            WinFormOpenHelper.OpenWinForm(0, "open", Path.GetDirectoryName(filePath), null, null, ShowWindowCommands.SW_NORMAL);
+                            WinFormOpenHelper.OpenWinForm(0, "open", exportPath, null, null, ShowWindowCommands.SW_NORMAL);
                     }
 
                     pic_Wait.Visible = false;

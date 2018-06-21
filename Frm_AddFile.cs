@@ -332,8 +332,8 @@ namespace 数据采集档案管理系统___课题版
                     string value = txt_fileCode.Text.Split('-')[0];
                     int sort = cbo_categor.Items.Count - 1;
 
-                    string _insertSql = "INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_sort, extend_3, extend_4) " +
-                        $"VALUES('{categor}', '{value}', '{pid}', '{sort}', '{categorName}', '{1}');";
+                    string _insertSql = "INSERT INTO data_dictionary (dd_id, dd_name, dd_note, dd_pId, dd_sort, extend_3, extend_4) " +
+                        $"VALUES('{categor}', '{value}', '{name}', '{pid}', '{sort}', '{categorName}', '{1}');";
                     SQLiteHelper.ExecuteNonQuery(_insertSql);
                 }
 
@@ -377,7 +377,7 @@ namespace 数据采集档案管理系统___课题版
 
                 string oldFileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{primaryKey}';"));
                 string updateSql = $"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({GetFullStringBySplit(oldFileId, ",", "'")});";
-                updateSql = "UPDATE files_info SET " +
+                updateSql += "UPDATE files_info SET " +
                    $"fi_stage = '{stage}', " +
                    $"fi_categor = '{categor}', " +
                    $"fi_code = '{code}', " +
@@ -692,10 +692,9 @@ namespace 数据采集档案管理系统___课题版
                 int count = lsv_LinkList.SelectedItems.Count;
                 if(count > 0)
                 {
-                    for(int i = 0; i < count; i++)
-                    {
-                        lsv_LinkList.SelectedItems[i].Remove();
-                    }
+                    if(MessageBox.Show("是否删除选中项？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        for(int i = 0; i < count; i++)
+                            lsv_LinkList.SelectedItems[i].Remove();
                 }
             }
         }
@@ -751,6 +750,20 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 MessageBox.Show("当前专项尚未导入数据。", "操作失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void lsv_LinkList_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int index = lsv_LinkList.SelectedItems.Count;
+            if(index > 0 && MessageBox.Show("是否打开文件？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                ListViewItem item = lsv_LinkList.SelectedItems[0];
+                string filePath = item.SubItems[3].Text;
+                if(!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
+                {
+                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
+                }
+            }
         }
     }
 }

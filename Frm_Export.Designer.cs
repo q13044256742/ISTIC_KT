@@ -42,7 +42,7 @@
             // btn_Export
             // 
             this.btn_Export.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.btn_Export.Location = new System.Drawing.Point(202, 218);
+            this.btn_Export.Location = new System.Drawing.Point(202, 195);
             this.btn_Export.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.btn_Export.Name = "btn_Export";
             this.btn_Export.Size = new System.Drawing.Size(81, 32);
@@ -129,7 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(484, 286);
+            this.ClientSize = new System.Drawing.Size(484, 251);
             this.Controls.Add(this.pic_Wait);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lbl_ExportPath);

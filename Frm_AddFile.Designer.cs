@@ -107,9 +107,11 @@
             this.lbl_OpenFile.Text = "添加";
             this.lbl_OpenFile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lbl_OpenFile_LinkClicked);
             this.lbl_OpenFile.Click += new System.EventHandler(this.Btn_OpenFile_Click);
+            this.lbl_OpenFile.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsv_LinkList_MouseDoubleClick);
             // 
             // btn_Quit
             // 
+            this.btn_Quit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_Quit.Location = new System.Drawing.Point(428, 591);
             this.btn_Quit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Quit.Name = "btn_Quit";
@@ -536,6 +538,7 @@
             this.lsv_LinkList.UseCompatibleStateImageBehavior = false;
             this.lsv_LinkList.View = System.Windows.Forms.View.Details;
             this.lsv_LinkList.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lsv_LinkList_KeyDown);
+            this.lsv_LinkList.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lsv_LinkList_MouseDoubleClick);
             // 
             // fid
             // 
