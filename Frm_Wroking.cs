@@ -839,8 +839,8 @@ namespace 数据采集档案管理系统___课题版
                 //收集文件号（供重新选取）
                 object fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{removeIdList[i]}';");
                 if(fileId != null)
-                    fileString += $"'{fileId}',";
-                
+                    fileString += GetFullStringBySplit(GetValue(fileId), ",", "'");
+
                 //如果文件已装盒，则删除之
                 string queryString = $"SELECT pb_id, pb_files_id FROM files_box_info WHERE pb_obj_id='{objId}'";
                 List<object[]> list = SQLiteHelper.ExecuteColumnsQuery(queryString, 2);
@@ -865,10 +865,7 @@ namespace 数据采集档案管理系统___课题版
 
             //重置文件备份表中的状态为0
             if(!string.IsNullOrEmpty(fileString))
-            {
-                fileString = fileString.Substring(0, fileString.Length - 1);
                 SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state=0 WHERE bfi_id IN ({fileString});");
-            }
             removeIdList.Clear();
         }
 
