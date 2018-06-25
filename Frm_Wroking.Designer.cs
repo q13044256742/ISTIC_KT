@@ -64,11 +64,6 @@
             this.dgv_Project_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Project_FileValid = new System.Windows.Forms.DataGridView();
-            this.dgv_Project_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_Box = new System.Windows.Forms.TabPage();
             this.btn_Project_Print = new System.Windows.Forms.Button();
             this.txt_Project_AJ_Code = new System.Windows.Forms.TextBox();
@@ -152,11 +147,6 @@
             this.dgv_Topic_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Topic_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Topic_FileValid = new System.Windows.Forms.DataGridView();
-            this.dgv_Topic_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Topic_Box = new System.Windows.Forms.TabPage();
             this.btn_Topic_Print = new System.Windows.Forms.Button();
             this.txt_Topic_AJ_Code = new System.Windows.Forms.TextBox();
@@ -236,11 +226,6 @@
             this.dgv_Subject_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Subject_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Subject_FileValid = new System.Windows.Forms.DataGridView();
-            this.dgv_Subject_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Subject_Box = new System.Windows.Forms.TabPage();
             this.btn_Subject_Print = new System.Windows.Forms.Button();
             this.txt_Subject_AJ_Code = new System.Windows.Forms.TextBox();
@@ -291,6 +276,21 @@
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgv_Project_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -631,41 +631,6 @@
             this.dgv_Project_FileValid.RowTemplate.Height = 23;
             this.dgv_Project_FileValid.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Project_FileValid.TabIndex = 0;
-            // 
-            // dgv_Project_FV_id
-            // 
-            this.dgv_Project_FV_id.FillWeight = 50F;
-            this.dgv_Project_FV_id.HeaderText = "序号";
-            this.dgv_Project_FV_id.Name = "dgv_Project_FV_id";
-            this.dgv_Project_FV_id.ReadOnly = true;
-            // 
-            // dgv_Project_FV_categor
-            // 
-            this.dgv_Project_FV_categor.HeaderText = "文件类别";
-            this.dgv_Project_FV_categor.Name = "dgv_Project_FV_categor";
-            this.dgv_Project_FV_categor.ReadOnly = true;
-            // 
-            // dgv_Project_FV_name
-            // 
-            this.dgv_Project_FV_name.FillWeight = 150F;
-            this.dgv_Project_FV_name.HeaderText = "文件名称";
-            this.dgv_Project_FV_name.Name = "dgv_Project_FV_name";
-            this.dgv_Project_FV_name.ReadOnly = true;
-            // 
-            // dgv_Project_FV_reason
-            // 
-            this.dgv_Project_FV_reason.HeaderText = "缺少原因";
-            this.dgv_Project_FV_reason.Items.AddRange(new object[] {
-            "文件缺失",
-            "汇编包含"});
-            this.dgv_Project_FV_reason.Name = "dgv_Project_FV_reason";
-            this.dgv_Project_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Project_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dgv_Project_FV_remark
-            // 
-            this.dgv_Project_FV_remark.HeaderText = "备注";
-            this.dgv_Project_FV_remark.Name = "dgv_Project_FV_remark";
             // 
             // tab_Project_Box
             // 
@@ -1017,8 +982,7 @@
             this.cbo_Project_HasNext.Items.AddRange(new object[] {
             "请选择",
             "无",
-            "课题",
-            "子课题"});
+            "课题"});
             this.cbo_Project_HasNext.Location = new System.Drawing.Point(107, 270);
             this.cbo_Project_HasNext.Name = "cbo_Project_HasNext";
             this.cbo_Project_HasNext.Size = new System.Drawing.Size(119, 28);
@@ -1544,41 +1508,6 @@
             this.dgv_Topic_FileValid.RowTemplate.Height = 23;
             this.dgv_Topic_FileValid.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Topic_FileValid.TabIndex = 0;
-            // 
-            // dgv_Topic_FV_id
-            // 
-            this.dgv_Topic_FV_id.FillWeight = 50F;
-            this.dgv_Topic_FV_id.HeaderText = "序号";
-            this.dgv_Topic_FV_id.Name = "dgv_Topic_FV_id";
-            this.dgv_Topic_FV_id.ReadOnly = true;
-            // 
-            // dgv_Topic_FV_categor
-            // 
-            this.dgv_Topic_FV_categor.HeaderText = "文件类别";
-            this.dgv_Topic_FV_categor.Name = "dgv_Topic_FV_categor";
-            this.dgv_Topic_FV_categor.ReadOnly = true;
-            // 
-            // dgv_Topic_FV_name
-            // 
-            this.dgv_Topic_FV_name.FillWeight = 150F;
-            this.dgv_Topic_FV_name.HeaderText = "文件名称";
-            this.dgv_Topic_FV_name.Name = "dgv_Topic_FV_name";
-            this.dgv_Topic_FV_name.ReadOnly = true;
-            // 
-            // dgv_Topic_FV_reason
-            // 
-            this.dgv_Topic_FV_reason.HeaderText = "缺少原因";
-            this.dgv_Topic_FV_reason.Items.AddRange(new object[] {
-            "文件缺失",
-            "汇编包含"});
-            this.dgv_Topic_FV_reason.Name = "dgv_Topic_FV_reason";
-            this.dgv_Topic_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Topic_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dgv_Topic_FV_remark
-            // 
-            this.dgv_Topic_FV_remark.HeaderText = "备注";
-            this.dgv_Topic_FV_remark.Name = "dgv_Topic_FV_remark";
             // 
             // tab_Topic_Box
             // 
@@ -2425,41 +2354,6 @@
             this.dgv_Subject_FileValid.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Subject_FileValid.TabIndex = 0;
             // 
-            // dgv_Subject_FV_id
-            // 
-            this.dgv_Subject_FV_id.FillWeight = 50F;
-            this.dgv_Subject_FV_id.HeaderText = "序号";
-            this.dgv_Subject_FV_id.Name = "dgv_Subject_FV_id";
-            this.dgv_Subject_FV_id.ReadOnly = true;
-            // 
-            // dgv_Subject_FV_categor
-            // 
-            this.dgv_Subject_FV_categor.HeaderText = "文件类别";
-            this.dgv_Subject_FV_categor.Name = "dgv_Subject_FV_categor";
-            this.dgv_Subject_FV_categor.ReadOnly = true;
-            // 
-            // dgv_Subject_FV_name
-            // 
-            this.dgv_Subject_FV_name.FillWeight = 150F;
-            this.dgv_Subject_FV_name.HeaderText = "文件名称";
-            this.dgv_Subject_FV_name.Name = "dgv_Subject_FV_name";
-            this.dgv_Subject_FV_name.ReadOnly = true;
-            // 
-            // dgv_Subject_FV_reason
-            // 
-            this.dgv_Subject_FV_reason.HeaderText = "缺少原因";
-            this.dgv_Subject_FV_reason.Items.AddRange(new object[] {
-            "文件缺失",
-            "汇编包含"});
-            this.dgv_Subject_FV_reason.Name = "dgv_Subject_FV_reason";
-            this.dgv_Subject_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Subject_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // dgv_Subject_FV_remark
-            // 
-            this.dgv_Subject_FV_remark.HeaderText = "备注";
-            this.dgv_Subject_FV_remark.Name = "dgv_Subject_FV_remark";
-            // 
             // tab_Subject_Box
             // 
             this.tab_Subject_Box.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -2937,13 +2831,13 @@
             this.删除行DToolStripMenuItem,
             this.刷新RToolStripMenuItem});
             this.contextMenuStrip2.Name = "contextMenuStrip2";
-            this.contextMenuStrip2.Size = new System.Drawing.Size(181, 92);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(130, 70);
             // 
             // 插入行IToolStripMenuItem
             // 
             this.插入行IToolStripMenuItem.Image = global::数据采集档案管理系统___课题版.Properties.Resources._1;
             this.插入行IToolStripMenuItem.Name = "插入行IToolStripMenuItem";
-            this.插入行IToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.插入行IToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.插入行IToolStripMenuItem.Text = "插入行(&I)";
             this.插入行IToolStripMenuItem.Click += new System.EventHandler(this.插入行IToolStripMenuItem_Click);
             // 
@@ -2951,7 +2845,7 @@
             // 
             this.删除行DToolStripMenuItem.Image = global::数据采集档案管理系统___课题版.Properties.Resources._2;
             this.删除行DToolStripMenuItem.Name = "删除行DToolStripMenuItem";
-            this.删除行DToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.删除行DToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.删除行DToolStripMenuItem.Text = "删除行(&D)";
             this.删除行DToolStripMenuItem.Click += new System.EventHandler(this.删除行DToolStripMenuItem_Click);
             // 
@@ -2959,13 +2853,123 @@
             // 
             this.刷新RToolStripMenuItem.Image = global::数据采集档案管理系统___课题版.Properties.Resources._3;
             this.刷新RToolStripMenuItem.Name = "刷新RToolStripMenuItem";
-            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.刷新RToolStripMenuItem.Text = "刷新(&R)";
             this.刷新RToolStripMenuItem.Click += new System.EventHandler(this.刷新RToolStripMenuItem_Click);
             // 
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // dgv_Project_FV_id
+            // 
+            this.dgv_Project_FV_id.FillWeight = 4.476235F;
+            this.dgv_Project_FV_id.HeaderText = "序号";
+            this.dgv_Project_FV_id.Name = "dgv_Project_FV_id";
+            this.dgv_Project_FV_id.ReadOnly = true;
+            // 
+            // dgv_Project_FV_categor
+            // 
+            this.dgv_Project_FV_categor.FillWeight = 12.78924F;
+            this.dgv_Project_FV_categor.HeaderText = "文件类别";
+            this.dgv_Project_FV_categor.Name = "dgv_Project_FV_categor";
+            this.dgv_Project_FV_categor.ReadOnly = true;
+            // 
+            // dgv_Project_FV_name
+            // 
+            this.dgv_Project_FV_name.FillWeight = 19.18386F;
+            this.dgv_Project_FV_name.HeaderText = "缺失文件名称";
+            this.dgv_Project_FV_name.Name = "dgv_Project_FV_name";
+            this.dgv_Project_FV_name.ReadOnly = true;
+            // 
+            // dgv_Project_FV_reason
+            // 
+            this.dgv_Project_FV_reason.FillWeight = 10F;
+            this.dgv_Project_FV_reason.HeaderText = "缺少原因";
+            this.dgv_Project_FV_reason.Items.AddRange(new object[] {
+            "文件缺失",
+            "汇编包含"});
+            this.dgv_Project_FV_reason.Name = "dgv_Project_FV_reason";
+            this.dgv_Project_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Project_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dgv_Project_FV_remark
+            // 
+            this.dgv_Project_FV_remark.FillWeight = 12.78924F;
+            this.dgv_Project_FV_remark.HeaderText = "备注";
+            this.dgv_Project_FV_remark.Name = "dgv_Project_FV_remark";
+            // 
+            // dgv_Topic_FV_id
+            // 
+            this.dgv_Topic_FV_id.FillWeight = 35F;
+            this.dgv_Topic_FV_id.HeaderText = "序号";
+            this.dgv_Topic_FV_id.Name = "dgv_Topic_FV_id";
+            this.dgv_Topic_FV_id.ReadOnly = true;
+            // 
+            // dgv_Topic_FV_categor
+            // 
+            this.dgv_Topic_FV_categor.HeaderText = "文件类别";
+            this.dgv_Topic_FV_categor.Name = "dgv_Topic_FV_categor";
+            this.dgv_Topic_FV_categor.ReadOnly = true;
+            // 
+            // dgv_Topic_FV_name
+            // 
+            this.dgv_Topic_FV_name.FillWeight = 150F;
+            this.dgv_Topic_FV_name.HeaderText = "缺失文件名称";
+            this.dgv_Topic_FV_name.Name = "dgv_Topic_FV_name";
+            this.dgv_Topic_FV_name.ReadOnly = true;
+            // 
+            // dgv_Topic_FV_reason
+            // 
+            this.dgv_Topic_FV_reason.FillWeight = 80F;
+            this.dgv_Topic_FV_reason.HeaderText = "缺少原因";
+            this.dgv_Topic_FV_reason.Items.AddRange(new object[] {
+            "文件缺失",
+            "汇编包含"});
+            this.dgv_Topic_FV_reason.Name = "dgv_Topic_FV_reason";
+            this.dgv_Topic_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Topic_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dgv_Topic_FV_remark
+            // 
+            this.dgv_Topic_FV_remark.HeaderText = "备注";
+            this.dgv_Topic_FV_remark.Name = "dgv_Topic_FV_remark";
+            // 
+            // dgv_Subject_FV_id
+            // 
+            this.dgv_Subject_FV_id.FillWeight = 35F;
+            this.dgv_Subject_FV_id.HeaderText = "序号";
+            this.dgv_Subject_FV_id.Name = "dgv_Subject_FV_id";
+            this.dgv_Subject_FV_id.ReadOnly = true;
+            // 
+            // dgv_Subject_FV_categor
+            // 
+            this.dgv_Subject_FV_categor.HeaderText = "文件类别";
+            this.dgv_Subject_FV_categor.Name = "dgv_Subject_FV_categor";
+            this.dgv_Subject_FV_categor.ReadOnly = true;
+            // 
+            // dgv_Subject_FV_name
+            // 
+            this.dgv_Subject_FV_name.FillWeight = 150F;
+            this.dgv_Subject_FV_name.HeaderText = "缺失文件名称";
+            this.dgv_Subject_FV_name.Name = "dgv_Subject_FV_name";
+            this.dgv_Subject_FV_name.ReadOnly = true;
+            // 
+            // dgv_Subject_FV_reason
+            // 
+            this.dgv_Subject_FV_reason.FillWeight = 80F;
+            this.dgv_Subject_FV_reason.HeaderText = "缺少原因";
+            this.dgv_Subject_FV_reason.Items.AddRange(new object[] {
+            "文件缺失",
+            "汇编包含"});
+            this.dgv_Subject_FV_reason.Name = "dgv_Subject_FV_reason";
+            this.dgv_Subject_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Subject_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dgv_Subject_FV_remark
+            // 
+            this.dgv_Subject_FV_remark.HeaderText = "备注";
+            this.dgv_Subject_FV_remark.Name = "dgv_Subject_FV_remark";
             // 
             // Frm_Wroking
             // 
@@ -3208,21 +3212,6 @@
         private System.Windows.Forms.Button btn_Project_Export;
         private System.Windows.Forms.Button btn_Topic_Export;
         private System.Windows.Forms.Button btn_Subject_Export;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FV_reason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_remark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FV_reason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_remark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FV_reason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_remark;
         private System.Windows.Forms.TextBox txt_Project_AJ_Code;
         private System.Windows.Forms.TextBox txt_Topic_AJ_Code;
         private System.Windows.Forms.TextBox txt_Subject_AJ_Code;
@@ -3274,5 +3263,20 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_unit;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_carrier;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_link;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_name;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FV_reason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_remark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_name;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FV_reason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_remark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_name;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FV_reason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_remark;
     }
 }

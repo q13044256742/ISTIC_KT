@@ -32,14 +32,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Query));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_position = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.btn_Query = new System.Windows.Forms.Button();
             this.txt_Key = new System.Windows.Forms.TextBox();
             this.lbl_FirstPage = new System.Windows.Forms.LinkLabel();
             this.lbl_Back = new System.Windows.Forms.LinkLabel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgv_ShowData = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lbl_position = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ShowData)).BeginInit();
@@ -59,6 +59,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1113, 100);
             this.panel1.TabIndex = 0;
+            // 
+            // lbl_position
+            // 
+            this.lbl_position.AutoSize = true;
+            this.lbl_position.Location = new System.Drawing.Point(96, 65);
+            this.lbl_position.Name = "lbl_position";
+            this.lbl_position.Size = new System.Drawing.Size(35, 20);
+            this.lbl_position.TabIndex = 6;
+            this.lbl_position.Text = "null";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 20);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "当前位置：";
             // 
             // btn_Query
             // 
@@ -119,7 +137,8 @@
             this.dgv_ShowData.AllowUserToAddRows = false;
             this.dgv_ShowData.AllowUserToDeleteRows = false;
             this.dgv_ShowData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dgv_ShowData.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dgv_ShowData.BackgroundColor = System.Drawing.Color.MistyRose;
+            this.dgv_ShowData.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -145,24 +164,6 @@
             this.dgv_ShowData.Size = new System.Drawing.Size(1113, 505);
             this.dgv_ShowData.TabIndex = 0;
             this.dgv_ShowData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_ShowData_CellContentClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 65);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 20);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "当前位置：";
-            // 
-            // lbl_position
-            // 
-            this.lbl_position.AutoSize = true;
-            this.lbl_position.Location = new System.Drawing.Point(96, 65);
-            this.lbl_position.Name = "lbl_position";
-            this.lbl_position.Size = new System.Drawing.Size(35, 20);
-            this.lbl_position.TabIndex = 6;
-            this.lbl_position.Text = "null";
             // 
             // Frm_Query
             // 

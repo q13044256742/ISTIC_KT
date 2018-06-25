@@ -266,6 +266,9 @@
     <Compile Include="Tools\DictionaryHelper.cs" />
     <Compile Include="Tools\ExeToWinForm.cs" />
     <Compile Include="Tools\GetFilePageCount.cs" />
+    <Compile Include="Tools\KyoProgressBar.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\MicrosoftWordExportHelper.cs" />
     <Compile Include="Tools\MicrosoftWordHelper.cs" />
     <Compile Include="Tools\ServerHelper.cs" />

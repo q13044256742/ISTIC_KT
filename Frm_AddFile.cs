@@ -62,7 +62,6 @@ namespace 数据采集档案管理系统___课题版
                 if(dateTime != DateTime.MinValue)
                     dtp_date.Value = dateTime;
                 txt_unit.Text = GetValue(row["fi_unit"]);
-                SetFileCheckBox(pal_carrier, row["fi_carrier"]);
                 LoadFileLinkList(GetValue(row["fi_file_id"]));
                 txt_Remark.Text = GetValue(row["fi_remark"]);
             }
@@ -266,8 +265,6 @@ namespace 数据采集档案管理系统___课题版
             ListViewItem item = lsv_LinkList.Items.Add(id);
             item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
             {
-                new ListViewItem.ListViewSubItem(){ Text = info.Name },
-                new ListViewItem.ListViewSubItem(){ Text = info.CreationTime.ToString("yyyy-MM-dd") },
                 new ListViewItem.ListViewSubItem(){ Text = info.FullName },
             });
             item.Tag = fid;
@@ -292,9 +289,9 @@ namespace 数据采集档案管理系统___课题版
             row.Cells[key + "type"].Value = GetFileRadio(pal_type);
             row.Cells[key + "pages"].Value = num_page.Value;
             row.Cells[key + "count"].Value = num_count.Value;
-            row.Cells[key + "date"].Value = dtp_date.Value.ToString("yyyyMMdd");
+            row.Cells[key + "date"].Value = txt_Date.Text;
             row.Cells[key + "unit"].Value = txt_unit.Text;
-            row.Cells[key + "carrier"].Value = GetFileCheckBox(pal_carrier);
+            row.Cells[key + "carrier"].Value = GetCarrierValue();
             row.Cells[key + "link"].Value = GetFullStringBySplit(GetLinkList(2), "；", string.Empty);
             row.Cells[key + "link"].Tag = GetFullStringBySplit(GetLinkList(1), ";", "'");
             if(isAdd)
@@ -398,7 +395,24 @@ namespace 数据采集档案管理系统___课题版
                 SQLiteHelper.ExecuteNonQuery(updateSql);
                 MessageBox.Show("数据已保存。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+            SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{parentId}'");
             return primaryKey;
+        }
+
+        /// <summary>
+        /// 获取载体类型
+        /// </summary>
+        private object GetCarrierValue()
+        {
+            bool isPaper = num_count.Value != 0;
+            bool isElect = lsv_LinkList.Items.Count != 0;
+            if(isPaper && isElect)
+                return "e7bce5d4-38b7-4d74-8aa2-c580b880aabb";
+            else if(isPaper && !isElect)
+                return "e7bce5d4-38b7-4d74-8aa2-c580b880aaba";
+            else if(!isPaper && isElect)
+                return "6ffdf849-31fa-4401-a640-c371cd994daf";
+            return null;
         }
 
         /// <summary>
@@ -533,18 +547,6 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 errorProvider1.SetError(pal_type, null);
-            //载体
-            count = 0;
-            foreach(CheckBox item in pal_carrier.Controls)
-                if(item.Checked)
-                { count++; break; }
-            if(count == 0)
-            {
-                errorProvider1.SetError(pal_carrier, "提示：载体不能为空。");
-                result = false;
-            }
-            else
-                errorProvider1.SetError(pal_carrier, null);
 
             //存放单位
             if(string.IsNullOrEmpty(txt_unit.Text.Trim()))
@@ -677,11 +679,6 @@ namespace 数据采集档案管理系统___课题版
                     e.Cancel = true;
         }
 
-        private void chk_carrier_ZZ_CheckedChanged(object sender, EventArgs e)
-        {
-            num_count.Enabled = chk_carrier_ZZ.Checked;
-        }
-
         /// <summary>
         /// 移除指定挂接文件
         /// </summary>
@@ -764,6 +761,12 @@ namespace 数据采集档案管理系统___课题版
                     WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
                 }
             }
+        }
+
+        private void dtp_date_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime date = dtp_date.Value;
+            txt_Date.Text = date.ToString("yyyyMMdd");
         }
     }
 }

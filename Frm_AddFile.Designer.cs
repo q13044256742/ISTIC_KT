@@ -34,7 +34,6 @@
             this.btn_Quit = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.txt_unit = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.dtp_date = new System.Windows.Forms.DateTimePicker();
@@ -57,9 +56,6 @@
             this.rdo_type_cw = new System.Windows.Forms.RadioButton();
             this.rdo_type_js = new System.Windows.Forms.RadioButton();
             this.txt_fileCode = new System.Windows.Forms.TextBox();
-            this.pal_carrier = new System.Windows.Forms.Panel();
-            this.chk_carrier_DZ = new System.Windows.Forms.CheckBox();
-            this.chk_carrier_ZZ = new System.Windows.Forms.CheckBox();
             this.txt_fileName = new System.Windows.Forms.ComboBox();
             this.txt_Remark = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -67,25 +63,22 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.num_count = new System.Windows.Forms.NumericUpDown();
             this.label23 = new System.Windows.Forms.Label();
             this.lsv_LinkList = new System.Windows.Forms.ListView();
             this.fid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.fdate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.flink = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.txt_Date = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_type.SuspendLayout();
-            this.pal_carrier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_count)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Reset
             // 
-            this.btn_Reset.Location = new System.Drawing.Point(272, 591);
+            this.btn_Reset.Location = new System.Drawing.Point(272, 530);
             this.btn_Reset.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Reset.Name = "btn_Reset";
             this.btn_Reset.Size = new System.Drawing.Size(71, 33);
@@ -98,7 +91,7 @@
             // 
             this.lbl_OpenFile.AutoSize = true;
             this.lbl_OpenFile.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_OpenFile.Location = new System.Drawing.Point(722, 312);
+            this.lbl_OpenFile.Location = new System.Drawing.Point(722, 275);
             this.lbl_OpenFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_OpenFile.Name = "lbl_OpenFile";
             this.lbl_OpenFile.Size = new System.Drawing.Size(37, 20);
@@ -112,7 +105,7 @@
             // btn_Quit
             // 
             this.btn_Quit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Quit.Location = new System.Drawing.Point(428, 591);
+            this.btn_Quit.Location = new System.Drawing.Point(428, 530);
             this.btn_Quit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Quit.Name = "btn_Quit";
             this.btn_Quit.Size = new System.Drawing.Size(71, 33);
@@ -123,7 +116,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(350, 591);
+            this.btn_Save.Location = new System.Drawing.Point(350, 530);
             this.btn_Save.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(71, 33);
@@ -136,25 +129,15 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label14.Location = new System.Drawing.Point(8, 312);
+            this.label14.Location = new System.Drawing.Point(8, 275);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(93, 19);
             this.label14.TabIndex = 60;
             this.label14.Text = "电子文件挂接";
             // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label11.Location = new System.Drawing.Point(64, 232);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(37, 19);
-            this.label11.TabIndex = 57;
-            this.label11.Text = "载体";
-            // 
             // txt_unit
             // 
-            this.txt_unit.Location = new System.Drawing.Point(114, 270);
+            this.txt_unit.Location = new System.Drawing.Point(114, 230);
             this.txt_unit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_unit.Name = "txt_unit";
             this.txt_unit.Size = new System.Drawing.Size(605, 26);
@@ -164,7 +147,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label10.Location = new System.Drawing.Point(36, 274);
+            this.label10.Location = new System.Drawing.Point(36, 234);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 19);
             this.label10.TabIndex = 56;
@@ -172,11 +155,14 @@
             // 
             // dtp_date
             // 
-            this.dtp_date.Location = new System.Drawing.Point(114, 144);
+            this.dtp_date.CustomFormat = "";
+            this.dtp_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtp_date.Location = new System.Drawing.Point(322, 144);
             this.dtp_date.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dtp_date.Name = "dtp_date";
-            this.dtp_date.Size = new System.Drawing.Size(145, 26);
+            this.dtp_date.Size = new System.Drawing.Size(17, 26);
             this.dtp_date.TabIndex = 5;
+            this.dtp_date.ValueChanged += new System.EventHandler(this.dtp_date_ValueChanged);
             // 
             // label9
             // 
@@ -190,10 +176,10 @@
             // 
             // num_page
             // 
-            this.num_page.Location = new System.Drawing.Point(494, 144);
+            this.num_page.Location = new System.Drawing.Point(512, 144);
             this.num_page.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.num_page.Maximum = new decimal(new int[] {
-            999999999,
+            9999,
             0,
             0,
             0});
@@ -205,7 +191,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(444, 148);
+            this.label7.Location = new System.Drawing.Point(462, 148);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(37, 19);
             this.label7.TabIndex = 49;
@@ -373,39 +359,6 @@
             this.txt_fileCode.Size = new System.Drawing.Size(225, 26);
             this.txt_fileCode.TabIndex = 2;
             // 
-            // pal_carrier
-            // 
-            this.pal_carrier.Controls.Add(this.chk_carrier_DZ);
-            this.pal_carrier.Controls.Add(this.chk_carrier_ZZ);
-            this.pal_carrier.Location = new System.Drawing.Point(114, 226);
-            this.pal_carrier.Name = "pal_carrier";
-            this.pal_carrier.Size = new System.Drawing.Size(131, 33);
-            this.pal_carrier.TabIndex = 70;
-            this.pal_carrier.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aabb";
-            // 
-            // chk_carrier_DZ
-            // 
-            this.chk_carrier_DZ.AutoSize = true;
-            this.chk_carrier_DZ.Location = new System.Drawing.Point(67, 4);
-            this.chk_carrier_DZ.Name = "chk_carrier_DZ";
-            this.chk_carrier_DZ.Size = new System.Drawing.Size(56, 24);
-            this.chk_carrier_DZ.TabIndex = 12;
-            this.chk_carrier_DZ.Tag = "6ffdf849-31fa-4401-a640-c371cd994daf";
-            this.chk_carrier_DZ.Text = "电子";
-            this.chk_carrier_DZ.UseVisualStyleBackColor = true;
-            // 
-            // chk_carrier_ZZ
-            // 
-            this.chk_carrier_ZZ.AutoSize = true;
-            this.chk_carrier_ZZ.Location = new System.Drawing.Point(6, 4);
-            this.chk_carrier_ZZ.Name = "chk_carrier_ZZ";
-            this.chk_carrier_ZZ.Size = new System.Drawing.Size(56, 24);
-            this.chk_carrier_ZZ.TabIndex = 11;
-            this.chk_carrier_ZZ.Tag = "e7bce5d4-38b7-4d74-8aa2-c580b880aaba";
-            this.chk_carrier_ZZ.Text = "纸质";
-            this.chk_carrier_ZZ.UseVisualStyleBackColor = true;
-            this.chk_carrier_ZZ.CheckedChanged += new System.EventHandler(this.chk_carrier_ZZ_CheckedChanged);
-            // 
             // txt_fileName
             // 
             this.txt_fileName.FormattingEnabled = true;
@@ -417,7 +370,7 @@
             // 
             // txt_Remark
             // 
-            this.txt_Remark.Location = new System.Drawing.Point(114, 471);
+            this.txt_Remark.Location = new System.Drawing.Point(114, 412);
             this.txt_Remark.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_Remark.Multiline = true;
             this.txt_Remark.Name = "txt_Remark";
@@ -429,7 +382,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(68, 471);
+            this.label8.Location = new System.Drawing.Point(68, 412);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(37, 19);
             this.label8.TabIndex = 73;
@@ -475,21 +428,11 @@
             this.label18.TabIndex = 77;
             this.label18.Text = "*";
             // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.ForeColor = System.Drawing.Color.Red;
-            this.label20.Location = new System.Drawing.Point(53, 231);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(15, 20);
-            this.label20.TabIndex = 79;
-            this.label20.Text = "*";
-            // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.ForeColor = System.Drawing.Color.Red;
-            this.label22.Location = new System.Drawing.Point(23, 273);
+            this.label22.Location = new System.Drawing.Point(23, 233);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(15, 20);
             this.label22.TabIndex = 81;
@@ -497,8 +440,7 @@
             // 
             // num_count
             // 
-            this.num_count.Enabled = false;
-            this.num_count.Location = new System.Drawing.Point(494, 228);
+            this.num_count.Location = new System.Drawing.Point(512, 186);
             this.num_count.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.num_count.Maximum = new decimal(new int[] {
             999999999,
@@ -513,7 +455,7 @@
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label23.Location = new System.Drawing.Point(378, 232);
+            this.label23.Location = new System.Drawing.Point(396, 190);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(103, 19);
             this.label23.TabIndex = 83;
@@ -521,18 +463,16 @@
             // 
             // lsv_LinkList
             // 
-            this.lsv_LinkList.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
+            this.lsv_LinkList.Alignment = System.Windows.Forms.ListViewAlignment.Default;
             this.lsv_LinkList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fid,
-            this.fname,
-            this.fdate,
-            this.flink});
+            this.fname});
             this.lsv_LinkList.FullRowSelect = true;
             this.lsv_LinkList.GridLines = true;
-            this.lsv_LinkList.Location = new System.Drawing.Point(114, 312);
+            this.lsv_LinkList.Location = new System.Drawing.Point(114, 275);
             this.lsv_LinkList.Name = "lsv_LinkList";
             this.lsv_LinkList.ShowItemToolTips = true;
-            this.lsv_LinkList.Size = new System.Drawing.Size(605, 150);
+            this.lsv_LinkList.Size = new System.Drawing.Size(605, 121);
             this.lsv_LinkList.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.lsv_LinkList.TabIndex = 88;
             this.lsv_LinkList.UseCompatibleStateImageBehavior = false;
@@ -543,35 +483,30 @@
             // fid
             // 
             this.fid.Text = "序号";
-            this.fid.Width = 62;
             // 
             // fname
             // 
             this.fname.Text = "名称";
-            this.fname.Width = 260;
+            this.fname.Width = 500;
             // 
-            // fdate
+            // txt_Date
             // 
-            this.fdate.Text = "上传时间";
-            this.fdate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.fdate.Width = 100;
-            // 
-            // flink
-            // 
-            this.flink.Text = "地址";
-            this.flink.Width = 500;
+            this.txt_Date.Location = new System.Drawing.Point(114, 144);
+            this.txt_Date.Name = "txt_Date";
+            this.txt_Date.Size = new System.Drawing.Size(205, 26);
+            this.txt_Date.TabIndex = 89;
             // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Quit;
-            this.ClientSize = new System.Drawing.Size(770, 641);
+            this.ClientSize = new System.Drawing.Size(770, 573);
+            this.Controls.Add(this.txt_Date);
             this.Controls.Add(this.lsv_LinkList);
             this.Controls.Add(this.num_count);
             this.Controls.Add(this.label23);
             this.Controls.Add(this.label22);
-            this.Controls.Add(this.label20);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
@@ -579,7 +514,6 @@
             this.Controls.Add(this.txt_Remark);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txt_fileName);
-            this.Controls.Add(this.pal_carrier);
             this.Controls.Add(this.pal_type);
             this.Controls.Add(this.txt_fileCode);
             this.Controls.Add(this.label12);
@@ -588,7 +522,6 @@
             this.Controls.Add(this.btn_Quit);
             this.Controls.Add(this.btn_Save);
             this.Controls.Add(this.label14);
-            this.Controls.Add(this.label11);
             this.Controls.Add(this.txt_unit);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dtp_date);
@@ -618,8 +551,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.pal_type.ResumeLayout(false);
             this.pal_type.PerformLayout();
-            this.pal_carrier.ResumeLayout(false);
-            this.pal_carrier.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_count)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -633,7 +564,6 @@
         private System.Windows.Forms.Button btn_Quit;
         private System.Windows.Forms.Button btn_Save;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label11;
         public System.Windows.Forms.TextBox txt_unit;
         private System.Windows.Forms.Label label10;
         public System.Windows.Forms.DateTimePicker dtp_date;
@@ -656,14 +586,10 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.TextBox txt_fileCode;
-        private System.Windows.Forms.Panel pal_carrier;
-        private System.Windows.Forms.CheckBox chk_carrier_DZ;
-        private System.Windows.Forms.CheckBox chk_carrier_ZZ;
         private System.Windows.Forms.ComboBox txt_fileName;
         public System.Windows.Forms.TextBox txt_Remark;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
@@ -673,7 +599,6 @@
         private System.Windows.Forms.ListView lsv_LinkList;
         private System.Windows.Forms.ColumnHeader fid;
         private System.Windows.Forms.ColumnHeader fname;
-        private System.Windows.Forms.ColumnHeader fdate;
-        private System.Windows.Forms.ColumnHeader flink;
+        private System.Windows.Forms.TextBox txt_Date;
     }
 }

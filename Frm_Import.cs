@@ -219,19 +219,6 @@ namespace 数据采集档案管理系统___课题版
             }
             SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
 
-            //sqlString = new StringBuilder();
-            //DataTable tagTable = helper.ExecuteQuery($"SELECT * FROM files_tag_info");
-            //length = tagTable.Rows.Count;
-            //for(int i = 0; i < length; i++)
-            //{
-            //    SetTip($"正在导入数据库[files_tag_info({i}\\{length})]");
-            //    DataRow row = tagTable.Rows[i];
-            //    string insertSql = $"INSERT INTO files_tag_info(pt_id, pt_code, pt_name, pt_term, pt_secret, pt_user, pt_unit, pt_obj_id, pt_special_id) " +
-            //        $"VALUES('{row["pt_id"]}', '{row["pt_code"]}', '{row["pt_name"]}', '{row["pt_term"]}', '{row["pt_secret"]}', '{row["pt_user"]}', '{row["pt_unit"]}', '{row["pt_obj_id"]}', '{row["pt_special_id"]}')";
-            //    SQLiteHelper.ExecuteNonQuery($"DELETE FROM files_tag_info WHERE pt_id='{row["pt_id"]}'");
-            //    SQLiteHelper.ExecuteNonQuery(insertSql);
-            //}
-
             sqlString = new StringBuilder();
             DataTable boxTable = helper.ExecuteQuery($"SELECT * FROM files_box_info");
             length = boxTable.Rows.Count;
@@ -242,6 +229,23 @@ namespace 数据采集档案管理系统___课题版
                 sqlString.Append($"DELETE FROM files_box_info WHERE pb_id='{row["pb_id"]}';");
                 sqlString.Append($"INSERT INTO files_box_info(pb_id, pb_box_number, pb_gc_id, pb_files_id, pb_obj_id, pb_special_id) " +
                     $"VALUES('{row["pb_id"]}', '{row["pb_box_number"]}', '{row["pb_gc_id"]}', '{row["pb_files_id"]}', '{row["pb_obj_id"]}', '{row["pb_special_id"]}');");
+            }
+            SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
+
+            string dicKey = "'46dadbc7-9985-4b56-9c33-b00f2c6d7702','00cd4c30-8f41-4c65-8230-31d97679c209','25343dbb-4c88-4066-a3e8-1e33c9c5613b','b7c4fae1-549a-46d2-a35d-e1a36ccb4b79'";
+            DataTable dicTable = helper.ExecuteQuery($"SELECT * FROM data_dictionary WHERE dd_pId IN ({dicKey})");
+            length = dicTable.Rows.Count;
+            sqlString = new StringBuilder();
+            for(int i = 0; i < length; i++)
+            {
+                SetTip($"正在导入字典表数据({i + 1}\\{length})");
+                DataRow row = dicTable.Rows[i];
+                int index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(dd_id) FROM data_dictionary WHERE dd_id='{row["dd_id"]}'");
+                if(index == 0)
+                {
+                    sqlString.Append("INSERT INTO data_dictionary (dd_id, dd_name, dd_pId, dd_code, dd_note, dd_sort, level, extend_2, extend_3, extend_4, extend_5) " +
+                        $"VALUES ('{row["dd_id"]}', '{row["dd_name"]}', '{row["dd_pId"]}', '{row["dd_code"]}', '{row["dd_note"]}', '{row["dd_sort"]}', '{row["level"]}', '{row["extend_2"]}', '{row["extend_3"]}', '{row["extend_4"]}', '{row["extend_5"]}');");
+                }
             }
             SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
         }

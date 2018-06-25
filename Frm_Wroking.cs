@@ -515,7 +515,7 @@ namespace 数据采集档案管理系统___课题版
                                 row.Cells[$"{key}id"].Tag = fileId;
                             }
                             RemoveFileList(objId);
-                            
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{objId}'");
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Project_FileList, key, objId);
                         }
@@ -617,7 +617,7 @@ namespace 数据采集档案管理系统___课题版
                                 }
                             }
                             RemoveFileList(objId);
-
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{objId}'");
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Topic_FileList, key, objId);
                         }
@@ -716,6 +716,7 @@ namespace 数据采集档案管理系统___课题版
                                 }
                             }
                             RemoveFileList(objId);
+                            SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{objId}'");
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             LoadFileInfoById(dgv_Subject_FileList, key, objId);
                         }
@@ -1039,7 +1040,16 @@ namespace 数据采集档案管理系统___课题版
                     result = false;
                 }
                 else
-                    pagesCell.ErrorText = null;
+                {
+                    int pageValue = Convert.ToInt32(pagesCell.Value);
+                    if(pageValue > 9999)
+                    {
+                        pagesCell.ErrorText = "温馨提示：页数不能超过4位数。";
+                        result = false;
+                    }
+                    else
+                        pagesCell.ErrorText = null;
+                }
 
                 bool isOtherType = "其他".Equals(GetValue(rows[i].Cells[key + "categor"].FormattedValue).Trim());
                 DataGridViewCell cellCategor = rows[i].Cells[key + "categor_name"];
@@ -2566,8 +2576,6 @@ namespace 数据采集档案管理系统___课题版
                     {
                         if(MessageBox.Show("是否打开文件?", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                             WinFormOpenHelper.OpenWinForm(0, "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
-                        else
-                            MessageBox.Show("文件不存在。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

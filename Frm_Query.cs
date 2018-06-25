@@ -85,18 +85,11 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 获取指定ID下缺失文件数
         /// </summary>
-        private string GetLostFileAmount(object id)
+        private int GetLostFileAmount(object id)
         {
-            int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(pfo_id) FROM files_lost_info WHERE pfo_obj_id='{id}'");
-            if(count == 0)
-                return string.Empty;
-            else
-                count = SQLiteHelper.ExecuteCountQuery("SELECT COUNT(dd_name) FROM data_dictionary WHERE dd_pId IN(" +
-                   "SELECT dd_id FROM data_dictionary WHERE dd_pId =( " +
-                   "SELECT dd_id FROM data_dictionary WHERE dd_code = 'dic_file_jd')) " +
-                   "AND dd_name NOT IN (SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id " +
-                   $"WHERE fi.fi_obj_id = '{id}') AND extend_2 IS NOT NULL");
-            return count.ToString();
+            return SQLiteHelper.ExecuteCountQuery("SELECT COUNT(name) FROM (SELECT dd_name name FROM data_dictionary WHERE dd_pId in (" +
+                "SELECT dd_id FROM data_dictionary WHERE dd_pId = (SELECT dd_id FROM data_dictionary WHERE dd_code = 'dic_file_jd')) AND extend_2=1 " +
+                $"AND name NOT IN(SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id WHERE fi.fi_obj_id= '{id}'))");
         }
 
         /// <summary>
@@ -203,19 +196,23 @@ namespace 数据采集档案管理系统___课题版
                 new DataGridViewTextBoxColumn(){Name = "remark", HeaderText = "备注", FillWeight = 10 },
             });
 
-            string querySql = "SELECT pfo_categor||' '||dd2.extend_3 pfo_categor, fli.pfo_name, dd.dd_name, fli.pfo_remark FROM files_lost_info fli " +
-                "LEFT JOIN data_dictionary dd ON dd.dd_id = fli.pfo_reason " +
-                "LEFT JOIN data_dictionary dd2 ON dd2.dd_name = fli.pfo_categor " +
-                $"WHERE fli.pfo_obj_id = '{id}' AND dd2.extend_2 IS NOT NULL;";
+            string querySql = "SELECT dd_name name, dd_name||' '||extend_3 dd_name, dd_note, extend_2 FROM data_dictionary WHERE dd_pId in( " +
+                "SELECT dd_id FROM data_dictionary WHERE dd_pId = (SELECT dd_id FROM data_dictionary WHERE dd_code = 'dic_file_jd')) AND extend_2=1 " +
+                $"AND name NOT IN(SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id WHERE fi.fi_obj_id= '{id}') " +
+                "ORDER BY dd_name";
             DataTable table = SQLiteHelper.ExecuteQuery(querySql);
             for(int i = 0; i < table.Rows.Count; i++)
             {
                 int indexRow = dgv_ShowData.Rows.Add();
                 dgv_ShowData.Rows[indexRow].Cells["id"].Value = i + 1;
-                dgv_ShowData.Rows[indexRow].Cells["type"].Value = table.Rows[i]["pfo_categor"];
-                dgv_ShowData.Rows[indexRow].Cells["name"].Value = table.Rows[i]["pfo_name"];
-                dgv_ShowData.Rows[indexRow].Cells["reason"].Value = GetValue(table.Rows[i]["dd_name"]);
-                dgv_ShowData.Rows[indexRow].Cells["remark"].Value = table.Rows[i]["pfo_remark"];
+                dgv_ShowData.Rows[indexRow].Cells["type"].Value = table.Rows[i]["dd_name"];
+                dgv_ShowData.Rows[indexRow].Cells["name"].Value = table.Rows[i]["dd_note"];
+                DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT pfo_reason, pfo_remark FROM files_lost_info WHERE pfo_obj_id='{id}' AND pfo_categor='{table.Rows[i]["name"]}'");
+                if(row != null)
+                {
+                    dgv_ShowData.Rows[indexRow].Cells["reason"].Value = SQLiteHelper.GetValueByKey(row["pfo_reason"]);
+                    dgv_ShowData.Rows[indexRow].Cells["remark"].Value = row["pfo_remark"];
+                }
             }
 
             dgv_ShowData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
