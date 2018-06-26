@@ -28,13 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "聊聊来了",
-            "序号"}, -1);
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_BoxList));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pal_Show = new System.Windows.Forms.Panel();
-            this.lsv_DataList = new System.Windows.Forms.ListView();
+            this.dgv_DataList = new System.Windows.Forms.DataGridView();
+            this.fb_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fb_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fb_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fb_page = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fb_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fb_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_GC = new System.Windows.Forms.Label();
             this.lbl_Code = new System.Windows.Forms.Label();
             this.lbl_Name = new System.Windows.Forms.Label();
@@ -55,6 +62,7 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.panel1.SuspendLayout();
             this.pal_Show.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -75,8 +83,7 @@
             // pal_Show
             // 
             this.pal_Show.BackColor = System.Drawing.Color.White;
-            this.pal_Show.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pal_Show.Controls.Add(this.lsv_DataList);
+            this.pal_Show.Controls.Add(this.dgv_DataList);
             this.pal_Show.Controls.Add(this.lbl_GC);
             this.pal_Show.Controls.Add(this.lbl_Code);
             this.pal_Show.Controls.Add(this.lbl_Name);
@@ -96,133 +103,194 @@
             this.pal_Show.Size = new System.Drawing.Size(717, 648);
             this.pal_Show.TabIndex = 1;
             // 
-            // lsv_DataList
+            // dgv_DataList
             // 
-            this.lsv_DataList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsv_DataList.FullRowSelect = true;
-            this.lsv_DataList.GridLines = true;
-            this.lsv_DataList.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
-            this.lsv_DataList.Location = new System.Drawing.Point(19, 240);
-            this.lsv_DataList.Name = "lsv_DataList";
-            this.lsv_DataList.Size = new System.Drawing.Size(676, 395);
-            this.lsv_DataList.TabIndex = 13;
-            this.lsv_DataList.UseCompatibleStateImageBehavior = false;
-            this.lsv_DataList.View = System.Windows.Forms.View.Details;
+            this.dgv_DataList.AllowUserToAddRows = false;
+            this.dgv_DataList.AllowUserToDeleteRows = false;
+            this.dgv_DataList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_DataList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            this.dgv_DataList.BackgroundColor = System.Drawing.Color.White;
+            this.dgv_DataList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_DataList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.fb_id,
+            this.fb_code,
+            this.fb_name,
+            this.fb_page,
+            this.fb_count,
+            this.fb_remark});
+            this.dgv_DataList.Location = new System.Drawing.Point(3, 249);
+            this.dgv_DataList.Name = "dgv_DataList";
+            this.dgv_DataList.ReadOnly = true;
+            this.dgv_DataList.RowHeadersVisible = false;
+            this.dgv_DataList.RowTemplate.Height = 23;
+            this.dgv_DataList.Size = new System.Drawing.Size(711, 396);
+            this.dgv_DataList.TabIndex = 13;
+            // 
+            // fb_id
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fb_id.DefaultCellStyle = dataGridViewCellStyle1;
+            this.fb_id.FillWeight = 50F;
+            this.fb_id.HeaderText = "序号";
+            this.fb_id.Name = "fb_id";
+            this.fb_id.ReadOnly = true;
+            // 
+            // fb_code
+            // 
+            this.fb_code.FillWeight = 120F;
+            this.fb_code.HeaderText = "文件编号";
+            this.fb_code.Name = "fb_code";
+            this.fb_code.ReadOnly = true;
+            // 
+            // fb_name
+            // 
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.fb_name.DefaultCellStyle = dataGridViewCellStyle2;
+            this.fb_name.FillWeight = 200F;
+            this.fb_name.HeaderText = "文件名称";
+            this.fb_name.Name = "fb_name";
+            this.fb_name.ReadOnly = true;
+            // 
+            // fb_page
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fb_page.DefaultCellStyle = dataGridViewCellStyle3;
+            this.fb_page.FillWeight = 50F;
+            this.fb_page.HeaderText = "页数";
+            this.fb_page.Name = "fb_page";
+            this.fb_page.ReadOnly = true;
+            // 
+            // fb_count
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.fb_count.DefaultCellStyle = dataGridViewCellStyle4;
+            this.fb_count.FillWeight = 50F;
+            this.fb_count.HeaderText = "份数";
+            this.fb_count.Name = "fb_count";
+            this.fb_count.ReadOnly = true;
+            // 
+            // fb_remark
+            // 
+            this.fb_remark.FillWeight = 60F;
+            this.fb_remark.HeaderText = "备注";
+            this.fb_remark.Name = "fb_remark";
+            this.fb_remark.ReadOnly = true;
             // 
             // lbl_GC
             // 
             this.lbl_GC.AutoSize = true;
-            this.lbl_GC.Location = new System.Drawing.Point(202, 197);
+            this.lbl_GC.Location = new System.Drawing.Point(113, 198);
             this.lbl_GC.Name = "lbl_GC";
-            this.lbl_GC.Size = new System.Drawing.Size(64, 16);
+            this.lbl_GC.Size = new System.Drawing.Size(32, 16);
             this.lbl_GC.TabIndex = 12;
-            this.lbl_GC.Text = "label10";
+            this.lbl_GC.Text = "XXX";
             // 
             // lbl_Code
             // 
             this.lbl_Code.AutoSize = true;
-            this.lbl_Code.Location = new System.Drawing.Point(202, 156);
+            this.lbl_Code.Location = new System.Drawing.Point(113, 157);
             this.lbl_Code.Name = "lbl_Code";
-            this.lbl_Code.Size = new System.Drawing.Size(56, 16);
+            this.lbl_Code.Size = new System.Drawing.Size(32, 16);
             this.lbl_Code.TabIndex = 11;
-            this.lbl_Code.Text = "label9";
+            this.lbl_Code.Text = "XXX";
             // 
             // lbl_Name
             // 
             this.lbl_Name.AutoSize = true;
-            this.lbl_Name.Location = new System.Drawing.Point(202, 115);
+            this.lbl_Name.Location = new System.Drawing.Point(113, 116);
             this.lbl_Name.Name = "lbl_Name";
-            this.lbl_Name.Size = new System.Drawing.Size(56, 16);
+            this.lbl_Name.Size = new System.Drawing.Size(32, 16);
             this.lbl_Name.TabIndex = 10;
-            this.lbl_Name.Text = "label8";
+            this.lbl_Name.Text = "XXX";
             // 
             // lbl_proCode
             // 
             this.lbl_proCode.AutoSize = true;
-            this.lbl_proCode.Location = new System.Drawing.Point(202, 74);
+            this.lbl_proCode.Location = new System.Drawing.Point(113, 75);
             this.lbl_proCode.Name = "lbl_proCode";
-            this.lbl_proCode.Size = new System.Drawing.Size(56, 16);
+            this.lbl_proCode.Size = new System.Drawing.Size(32, 16);
             this.lbl_proCode.TabIndex = 9;
-            this.lbl_proCode.Text = "label7";
+            this.lbl_proCode.Text = "XXX";
             // 
             // panel6
             // 
             this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel6.Location = new System.Drawing.Point(181, 216);
+            this.panel6.Location = new System.Drawing.Point(92, 217);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(447, 1);
+            this.panel6.Size = new System.Drawing.Size(583, 1);
             this.panel6.TabIndex = 8;
             // 
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Location = new System.Drawing.Point(181, 175);
+            this.panel5.Location = new System.Drawing.Point(92, 176);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(447, 1);
+            this.panel5.Size = new System.Drawing.Size(583, 1);
             this.panel5.TabIndex = 7;
             // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Location = new System.Drawing.Point(181, 135);
+            this.panel4.Location = new System.Drawing.Point(92, 136);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(447, 1);
+            this.panel4.Size = new System.Drawing.Size(583, 1);
             this.panel4.TabIndex = 6;
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Location = new System.Drawing.Point(181, 93);
+            this.panel3.Location = new System.Drawing.Point(92, 94);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(447, 1);
+            this.panel3.Size = new System.Drawing.Size(583, 1);
             this.panel3.TabIndex = 5;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(103, 197);
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
+            this.label6.Location = new System.Drawing.Point(17, 198);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 16);
+            this.label6.Size = new System.Drawing.Size(69, 19);
             this.label6.TabIndex = 4;
             this.label6.Text = "馆藏号：";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(87, 156);
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
+            this.label5.Location = new System.Drawing.Point(1, 157);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(88, 16);
+            this.label5.Size = new System.Drawing.Size(84, 19);
             this.label5.TabIndex = 3;
             this.label5.Text = "案卷编号：";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(87, 115);
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
+            this.label4.Location = new System.Drawing.Point(1, 116);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 16);
+            this.label4.Size = new System.Drawing.Size(84, 19);
             this.label4.TabIndex = 2;
             this.label4.Text = "案卷名称：";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(87, 74);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 11F, System.Drawing.FontStyle.Bold);
+            this.label3.Location = new System.Drawing.Point(1, 75);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(88, 16);
+            this.label3.Size = new System.Drawing.Size(84, 19);
             this.label3.TabIndex = 1;
             this.label3.Text = "项目编号：";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(291, 15);
+            this.label2.Font = new System.Drawing.Font("等线", 22F, System.Drawing.FontStyle.Bold);
+            this.label2.Location = new System.Drawing.Point(261, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(132, 27);
+            this.label2.Size = new System.Drawing.Size(194, 31);
             this.label2.TabIndex = 0;
             this.label2.Text = "卷内文件目录";
             // 
@@ -285,6 +353,7 @@
             this.panel1.ResumeLayout(false);
             this.pal_Show.ResumeLayout(false);
             this.pal_Show.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -307,10 +376,16 @@
         private System.Windows.Forms.Label lbl_Code;
         private System.Windows.Forms.Label lbl_Name;
         private System.Windows.Forms.Label lbl_proCode;
-        private System.Windows.Forms.ListView lsv_DataList;
         private System.Windows.Forms.Button btn_PrintSetup;
         private System.Windows.Forms.PageSetupDialog pageSetupDialog1;
         private System.Drawing.Printing.PrintDocument printDocument1;
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
+        private System.Windows.Forms.DataGridView dgv_DataList;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fb_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fb_code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fb_name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fb_page;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fb_count;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fb_remark;
     }
 }

@@ -25,32 +25,21 @@ namespace 数据采集档案管理系统___课题版
             lbl_Code.Text = code;
             lbl_GC.Text = gcCode;
 
-            lsv_DataList.Clear();
-            lsv_DataList.Columns.AddRange(new ColumnHeader[]
-            {
-                    new ColumnHeader{ Name = "id", Text="序号", Width = 50, TextAlign = HorizontalAlignment.Center},
-                    new ColumnHeader{ Name = "code", Text="文件编号", Width = 100},
-                    new ColumnHeader{ Name = "name", Text = "文件名称", Width = 280},
-                    new ColumnHeader{ Name = "pages", Text = "页数", Width = 60, TextAlign = HorizontalAlignment.Center},
-                    new ColumnHeader{ Name = "count", Text = "份数", Width = 60, TextAlign = HorizontalAlignment.Center},
-                    new ColumnHeader{ Name = "remark", Text = "备注", Width = 120}
-            });
+            dgv_DataList.Rows.Clear();
             for(int i = 0; i < dataTable.Rows.Count; i++)
             {
-                ListViewItem item = lsv_DataList.Items.Add((i + 1).ToString().PadLeft(2, '0'));
-                item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
-                {
-                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_code"]) },
-                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_name"]) },
-                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_pages"]) },
-                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_count"]) },
-                    new ListViewItem.ListViewSubItem(){ Text = GetValue(dataTable.Rows[i]["fi_remark"]) }
-                });
+                int index = dgv_DataList.Rows.Add();
+                dgv_DataList.Rows[index].Cells["fb_id"].Value = i + 1;
+                dgv_DataList.Rows[index].Cells["fb_code"].Value = dataTable.Rows[i]["fi_code"];
+                dgv_DataList.Rows[index].Cells["fb_name"].Value = dataTable.Rows[i]["fi_name"];
+                dgv_DataList.Rows[index].Cells["fb_page"].Value = dataTable.Rows[i]["fi_pages"];
+                dgv_DataList.Rows[index].Cells["fb_count"].Value = dataTable.Rows[i]["fi_count"];
+                dgv_DataList.Rows[index].Cells["fb_remark"].Value = dataTable.Rows[i]["fi_remark"];
             }
         }
         private string GetValue(object value) => value == null ? string.Empty : value.ToString();
 
-        private void btn_PrintSetup_Click(object sender, System.EventArgs e)
+        private void btn_PrintSetup_Click(object sender, EventArgs e)
         {
             try
             {

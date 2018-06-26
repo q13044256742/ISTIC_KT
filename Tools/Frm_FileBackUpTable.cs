@@ -16,15 +16,17 @@ namespace 数据采集档案管理系统___课题版
         public int filePages;
         public object docNumber;
         public object user;
-        private void Frm_FileBackUpTable_Load(object sender, System.EventArgs e)
+        private void Frm_FileBackUpTable_Load(object sender, EventArgs e)
         {
-            pal_Show.Height = 1150;
+            pal_Show.Height = 850;
 
             lbl_Amount.Text = GetZN(fileAmount);
             lbl_Count.Text = GetZN(filePages);
 
             lbl_DocNumber.Text = GetValue(docNumber);
-            lbl_User.Text += GetValue(user);
+
+            lbl_LiJuanRen.Text = UserHelper.GetUser().RealName;
+            lbl_date1.Text = DateTime.Now.ToString("yyyy 年 MM 月 dd 日");
         }
 
         private string GetValue(object value) => value == null ? string.Empty : value.ToString();
