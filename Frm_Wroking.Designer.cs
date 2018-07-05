@@ -48,22 +48,13 @@
             this.tab_Project_Info = new System.Windows.Forms.TabControl();
             this.tab_Project_File = new System.Windows.Forms.TabPage();
             this.dgv_Project_FileList = new System.Windows.Forms.DataGridView();
-            this.dgv_Project_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Project_FileValid = new System.Windows.Forms.DataGridView();
+            this.dgv_Project_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_Box = new System.Windows.Forms.TabPage();
             this.btn_Project_Print = new System.Windows.Forms.Button();
             this.txt_Project_AJ_Code = new System.Windows.Forms.TextBox();
@@ -131,22 +122,13 @@
             this.tab_Topic_Info = new System.Windows.Forms.TabControl();
             this.tab_Topic_File = new System.Windows.Forms.TabPage();
             this.dgv_Topic_FileList = new System.Windows.Forms.DataGridView();
-            this.dgv_Topic_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Topic_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Topic_FileValid = new System.Windows.Forms.DataGridView();
+            this.dgv_Topic_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Topic_Box = new System.Windows.Forms.TabPage();
             this.btn_Topic_Print = new System.Windows.Forms.Button();
             this.txt_Topic_AJ_Code = new System.Windows.Forms.TextBox();
@@ -210,22 +192,13 @@
             this.tab_Subject_Info = new System.Windows.Forms.TabControl();
             this.tab_Subject_File = new System.Windows.Forms.TabPage();
             this.dgv_Subject_FileList = new System.Windows.Forms.DataGridView();
-            this.dgv_Subject_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Subject_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Subject_FileValid = new System.Windows.Forms.DataGridView();
+            this.dgv_Subject_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Subject_Box = new System.Windows.Forms.TabPage();
             this.btn_Subject_Print = new System.Windows.Forms.Button();
             this.txt_Subject_AJ_Code = new System.Windows.Forms.TextBox();
@@ -276,21 +249,48 @@
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.dgv_Project_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_categor = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FV_reason = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FV_remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -381,9 +381,10 @@
             // 
             // txt_Project_Code
             // 
-            this.txt_Project_Code.Location = new System.Drawing.Point(107, 8);
+            this.txt_Project_Code.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Code.Location = new System.Drawing.Point(107, 6);
             this.txt_Project_Code.Name = "txt_Project_Code";
-            this.txt_Project_Code.Size = new System.Drawing.Size(210, 27);
+            this.txt_Project_Code.Size = new System.Drawing.Size(210, 31);
             this.txt_Project_Code.TabIndex = 1;
             this.txt_Project_Code.Leave += new System.EventHandler(this.Txt_Code_Leave);
             // 
@@ -412,14 +413,16 @@
             // 
             // txt_Project_Unit
             // 
-            this.txt_Project_Unit.Location = new System.Drawing.Point(107, 107);
+            this.txt_Project_Unit.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Unit.Location = new System.Drawing.Point(107, 105);
             this.txt_Project_Unit.Name = "txt_Project_Unit";
-            this.txt_Project_Unit.Size = new System.Drawing.Size(210, 27);
+            this.txt_Project_Unit.Size = new System.Drawing.Size(210, 31);
             this.txt_Project_Unit.TabIndex = 9;
             // 
             // txt_Project_Intro
             // 
-            this.txt_Project_Intro.Location = new System.Drawing.Point(107, 174);
+            this.txt_Project_Intro.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Intro.Location = new System.Drawing.Point(107, 173);
             this.txt_Project_Intro.Multiline = true;
             this.txt_Project_Intro.Name = "txt_Project_Intro";
             this.txt_Project_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -428,19 +431,21 @@
             // 
             // cbo_Project_Field
             // 
+            this.cbo_Project_Field.Font = new System.Drawing.Font("宋体", 15.75F);
             this.cbo_Project_Field.FormattingEnabled = true;
-            this.cbo_Project_Field.Location = new System.Drawing.Point(107, 42);
+            this.cbo_Project_Field.Location = new System.Drawing.Point(107, 40);
             this.cbo_Project_Field.Name = "cbo_Project_Field";
-            this.cbo_Project_Field.Size = new System.Drawing.Size(210, 28);
+            this.cbo_Project_Field.Size = new System.Drawing.Size(210, 29);
             this.cbo_Project_Field.TabIndex = 3;
             // 
             // cbo_Project_Province
             // 
+            this.cbo_Project_Province.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cbo_Project_Province.FormattingEnabled = true;
-            this.cbo_Project_Province.Location = new System.Drawing.Point(457, 108);
+            this.cbo_Project_Province.Location = new System.Drawing.Point(457, 106);
             this.cbo_Project_Province.MaxDropDownItems = 5;
             this.cbo_Project_Province.Name = "cbo_Project_Province";
-            this.cbo_Project_Province.Size = new System.Drawing.Size(200, 28);
+            this.cbo_Project_Province.Size = new System.Drawing.Size(200, 29);
             this.cbo_Project_Province.TabIndex = 10;
             // 
             // tab_Project_Info
@@ -512,86 +517,6 @@
             this.dgv_Project_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Project_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
-            // dgv_Project_FL_id
-            // 
-            this.dgv_Project_FL_id.HeaderText = "序号";
-            this.dgv_Project_FL_id.Name = "dgv_Project_FL_id";
-            this.dgv_Project_FL_id.Visible = false;
-            // 
-            // dgv_Project_FL_stage
-            // 
-            this.dgv_Project_FL_stage.HeaderText = "阶段";
-            this.dgv_Project_FL_stage.Name = "dgv_Project_FL_stage";
-            this.dgv_Project_FL_stage.Width = 130;
-            // 
-            // dgv_Project_FL_categor
-            // 
-            this.dgv_Project_FL_categor.HeaderText = "文件类别";
-            this.dgv_Project_FL_categor.Name = "dgv_Project_FL_categor";
-            this.dgv_Project_FL_categor.Width = 130;
-            // 
-            // dgv_Project_FL_categor_name
-            // 
-            this.dgv_Project_FL_categor_name.HeaderText = "类别名称";
-            this.dgv_Project_FL_categor_name.Name = "dgv_Project_FL_categor_name";
-            this.dgv_Project_FL_categor_name.Visible = false;
-            // 
-            // dgv_Project_FL_code
-            // 
-            this.dgv_Project_FL_code.HeaderText = "文件编号";
-            this.dgv_Project_FL_code.Name = "dgv_Project_FL_code";
-            // 
-            // dgv_Project_FL_name
-            // 
-            this.dgv_Project_FL_name.HeaderText = "文件名称";
-            this.dgv_Project_FL_name.Name = "dgv_Project_FL_name";
-            this.dgv_Project_FL_name.Width = 300;
-            // 
-            // dgv_Project_FL_count
-            // 
-            this.dgv_Project_FL_count.HeaderText = "份数(用于移交)";
-            this.dgv_Project_FL_count.Name = "dgv_Project_FL_count";
-            this.dgv_Project_FL_count.Width = 150;
-            // 
-            // dgv_Project_FL_user
-            // 
-            this.dgv_Project_FL_user.HeaderText = "责任者";
-            this.dgv_Project_FL_user.Name = "dgv_Project_FL_user";
-            // 
-            // dgv_Project_FL_type
-            // 
-            this.dgv_Project_FL_type.HeaderText = "类型";
-            this.dgv_Project_FL_type.Name = "dgv_Project_FL_type";
-            // 
-            // dgv_Project_FL_pages
-            // 
-            this.dgv_Project_FL_pages.HeaderText = "页数";
-            this.dgv_Project_FL_pages.Name = "dgv_Project_FL_pages";
-            this.dgv_Project_FL_pages.Width = 50;
-            // 
-            // dgv_Project_FL_date
-            // 
-            this.dgv_Project_FL_date.HeaderText = "形成日期";
-            this.dgv_Project_FL_date.Name = "dgv_Project_FL_date";
-            // 
-            // dgv_Project_FL_unit
-            // 
-            this.dgv_Project_FL_unit.HeaderText = "存放单位";
-            this.dgv_Project_FL_unit.Name = "dgv_Project_FL_unit";
-            this.dgv_Project_FL_unit.Width = 250;
-            // 
-            // dgv_Project_FL_carrier
-            // 
-            this.dgv_Project_FL_carrier.HeaderText = "载体";
-            this.dgv_Project_FL_carrier.Name = "dgv_Project_FL_carrier";
-            // 
-            // dgv_Project_FL_link
-            // 
-            this.dgv_Project_FL_link.HeaderText = "电子文件挂接";
-            this.dgv_Project_FL_link.Name = "dgv_Project_FL_link";
-            this.dgv_Project_FL_link.ReadOnly = true;
-            this.dgv_Project_FL_link.Width = 350;
-            // 
             // tab_Project_FileValid
             // 
             this.tab_Project_FileValid.Controls.Add(this.dgv_Project_FileValid);
@@ -631,6 +556,44 @@
             this.dgv_Project_FileValid.RowTemplate.Height = 23;
             this.dgv_Project_FileValid.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Project_FileValid.TabIndex = 0;
+            // 
+            // dgv_Project_FV_id
+            // 
+            this.dgv_Project_FV_id.FillWeight = 4.476235F;
+            this.dgv_Project_FV_id.HeaderText = "序号";
+            this.dgv_Project_FV_id.Name = "dgv_Project_FV_id";
+            this.dgv_Project_FV_id.ReadOnly = true;
+            // 
+            // dgv_Project_FV_categor
+            // 
+            this.dgv_Project_FV_categor.FillWeight = 12.78924F;
+            this.dgv_Project_FV_categor.HeaderText = "文件类别";
+            this.dgv_Project_FV_categor.Name = "dgv_Project_FV_categor";
+            this.dgv_Project_FV_categor.ReadOnly = true;
+            // 
+            // dgv_Project_FV_name
+            // 
+            this.dgv_Project_FV_name.FillWeight = 19.18386F;
+            this.dgv_Project_FV_name.HeaderText = "缺失文件名称";
+            this.dgv_Project_FV_name.Name = "dgv_Project_FV_name";
+            this.dgv_Project_FV_name.ReadOnly = true;
+            // 
+            // dgv_Project_FV_reason
+            // 
+            this.dgv_Project_FV_reason.FillWeight = 10F;
+            this.dgv_Project_FV_reason.HeaderText = "缺少原因";
+            this.dgv_Project_FV_reason.Items.AddRange(new object[] {
+            "文件缺失",
+            "汇编包含"});
+            this.dgv_Project_FV_reason.Name = "dgv_Project_FV_reason";
+            this.dgv_Project_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Project_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dgv_Project_FV_remark
+            // 
+            this.dgv_Project_FV_remark.FillWeight = 12.78924F;
+            this.dgv_Project_FV_remark.HeaderText = "备注";
+            this.dgv_Project_FV_remark.Name = "dgv_Project_FV_remark";
             // 
             // tab_Project_Box
             // 
@@ -910,9 +873,10 @@
             // 
             // txt_Project_ConPhone
             // 
-            this.txt_Project_ConPhone.Location = new System.Drawing.Point(814, 140);
+            this.txt_Project_ConPhone.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_ConPhone.Location = new System.Drawing.Point(814, 138);
             this.txt_Project_ConPhone.Name = "txt_Project_ConPhone";
-            this.txt_Project_ConPhone.Size = new System.Drawing.Size(209, 27);
+            this.txt_Project_ConPhone.Size = new System.Drawing.Size(209, 31);
             this.txt_Project_ConPhone.TabIndex = 14;
             // 
             // label1
@@ -927,9 +891,10 @@
             // 
             // txt_Project_Connecter
             // 
-            this.txt_Project_Connecter.Location = new System.Drawing.Point(457, 140);
+            this.txt_Project_Connecter.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Connecter.Location = new System.Drawing.Point(457, 138);
             this.txt_Project_Connecter.Name = "txt_Project_Connecter";
-            this.txt_Project_Connecter.Size = new System.Drawing.Size(200, 27);
+            this.txt_Project_Connecter.Size = new System.Drawing.Size(200, 31);
             this.txt_Project_Connecter.TabIndex = 13;
             // 
             // label2
@@ -944,9 +909,10 @@
             // 
             // txt_Project_Proer
             // 
-            this.txt_Project_Proer.Location = new System.Drawing.Point(107, 140);
+            this.txt_Project_Proer.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Proer.Location = new System.Drawing.Point(107, 138);
             this.txt_Project_Proer.Name = "txt_Project_Proer";
-            this.txt_Project_Proer.Size = new System.Drawing.Size(210, 27);
+            this.txt_Project_Proer.Size = new System.Drawing.Size(210, 31);
             this.txt_Project_Proer.TabIndex = 12;
             // 
             // label3
@@ -961,18 +927,20 @@
             // 
             // dtp_Project_StartDate
             // 
+            this.dtp_Project_StartDate.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dtp_Project_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Project_StartDate.Location = new System.Drawing.Point(107, 74);
+            this.dtp_Project_StartDate.Location = new System.Drawing.Point(107, 72);
             this.dtp_Project_StartDate.Name = "dtp_Project_StartDate";
-            this.dtp_Project_StartDate.Size = new System.Drawing.Size(210, 27);
+            this.dtp_Project_StartDate.Size = new System.Drawing.Size(210, 31);
             this.dtp_Project_StartDate.TabIndex = 6;
             // 
             // dtp_Project_FinishDate
             // 
+            this.dtp_Project_FinishDate.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.dtp_Project_FinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Project_FinishDate.Location = new System.Drawing.Point(457, 74);
+            this.dtp_Project_FinishDate.Location = new System.Drawing.Point(457, 72);
             this.dtp_Project_FinishDate.Name = "dtp_Project_FinishDate";
-            this.dtp_Project_FinishDate.Size = new System.Drawing.Size(200, 27);
+            this.dtp_Project_FinishDate.Size = new System.Drawing.Size(200, 31);
             this.dtp_Project_FinishDate.TabIndex = 7;
             // 
             // cbo_Project_HasNext
@@ -991,37 +959,42 @@
             // 
             // txt_Project_Uniter
             // 
-            this.txt_Project_Uniter.Location = new System.Drawing.Point(814, 107);
+            this.txt_Project_Uniter.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Uniter.Location = new System.Drawing.Point(814, 105);
             this.txt_Project_Uniter.Name = "txt_Project_Uniter";
-            this.txt_Project_Uniter.Size = new System.Drawing.Size(209, 27);
+            this.txt_Project_Uniter.Size = new System.Drawing.Size(209, 31);
             this.txt_Project_Uniter.TabIndex = 11;
             // 
             // txt_Project_Year
             // 
-            this.txt_Project_Year.Location = new System.Drawing.Point(814, 74);
+            this.txt_Project_Year.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Year.Location = new System.Drawing.Point(814, 72);
             this.txt_Project_Year.Name = "txt_Project_Year";
-            this.txt_Project_Year.Size = new System.Drawing.Size(144, 27);
+            this.txt_Project_Year.Size = new System.Drawing.Size(144, 31);
             this.txt_Project_Year.TabIndex = 8;
             // 
             // txt_Project_Funds
             // 
-            this.txt_Project_Funds.Location = new System.Drawing.Point(814, 41);
+            this.txt_Project_Funds.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Funds.Location = new System.Drawing.Point(814, 39);
             this.txt_Project_Funds.Name = "txt_Project_Funds";
-            this.txt_Project_Funds.Size = new System.Drawing.Size(144, 27);
+            this.txt_Project_Funds.Size = new System.Drawing.Size(144, 31);
             this.txt_Project_Funds.TabIndex = 5;
             // 
             // txt_Project_Theme
             // 
-            this.txt_Project_Theme.Location = new System.Drawing.Point(457, 41);
+            this.txt_Project_Theme.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Theme.Location = new System.Drawing.Point(457, 39);
             this.txt_Project_Theme.Name = "txt_Project_Theme";
-            this.txt_Project_Theme.Size = new System.Drawing.Size(200, 27);
+            this.txt_Project_Theme.Size = new System.Drawing.Size(200, 31);
             this.txt_Project_Theme.TabIndex = 4;
             // 
             // txt_Project_Name
             // 
-            this.txt_Project_Name.Location = new System.Drawing.Point(457, 8);
+            this.txt_Project_Name.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Project_Name.Location = new System.Drawing.Point(457, 6);
             this.txt_Project_Name.Name = "txt_Project_Name";
-            this.txt_Project_Name.Size = new System.Drawing.Size(569, 27);
+            this.txt_Project_Name.Size = new System.Drawing.Size(569, 31);
             this.txt_Project_Name.TabIndex = 2;
             // 
             // label4
@@ -1038,7 +1011,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(50, 177);
+            this.label5.Location = new System.Drawing.Point(50, 173);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 19);
             this.label5.TabIndex = 93;
@@ -1202,9 +1175,10 @@
             // 
             // txt_Topic_Code
             // 
-            this.txt_Topic_Code.Location = new System.Drawing.Point(107, 8);
+            this.txt_Topic_Code.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Code.Location = new System.Drawing.Point(107, 6);
             this.txt_Topic_Code.Name = "txt_Topic_Code";
-            this.txt_Topic_Code.Size = new System.Drawing.Size(210, 27);
+            this.txt_Topic_Code.Size = new System.Drawing.Size(210, 31);
             this.txt_Topic_Code.TabIndex = 1;
             this.txt_Topic_Code.Leave += new System.EventHandler(this.Txt_Code_Leave);
             // 
@@ -1233,32 +1207,36 @@
             // 
             // txt_Topic_Unit
             // 
-            this.txt_Topic_Unit.Location = new System.Drawing.Point(107, 107);
+            this.txt_Topic_Unit.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Unit.Location = new System.Drawing.Point(107, 105);
             this.txt_Topic_Unit.Name = "txt_Topic_Unit";
-            this.txt_Topic_Unit.Size = new System.Drawing.Size(210, 27);
+            this.txt_Topic_Unit.Size = new System.Drawing.Size(210, 31);
             this.txt_Topic_Unit.TabIndex = 9;
             // 
             // cbo_Topic_Province
             // 
+            this.cbo_Topic_Province.Font = new System.Drawing.Font("宋体", 15.75F);
             this.cbo_Topic_Province.FormattingEnabled = true;
-            this.cbo_Topic_Province.Location = new System.Drawing.Point(457, 108);
+            this.cbo_Topic_Province.Location = new System.Drawing.Point(457, 106);
             this.cbo_Topic_Province.Name = "cbo_Topic_Province";
-            this.cbo_Topic_Province.Size = new System.Drawing.Size(200, 28);
+            this.cbo_Topic_Province.Size = new System.Drawing.Size(200, 29);
             this.cbo_Topic_Province.TabIndex = 10;
             // 
             // cbo_Topic_Field
             // 
+            this.cbo_Topic_Field.Font = new System.Drawing.Font("宋体", 15.75F);
             this.cbo_Topic_Field.FormattingEnabled = true;
-            this.cbo_Topic_Field.Location = new System.Drawing.Point(107, 42);
+            this.cbo_Topic_Field.Location = new System.Drawing.Point(107, 40);
             this.cbo_Topic_Field.Name = "cbo_Topic_Field";
-            this.cbo_Topic_Field.Size = new System.Drawing.Size(210, 28);
+            this.cbo_Topic_Field.Size = new System.Drawing.Size(210, 29);
             this.cbo_Topic_Field.TabIndex = 3;
             // 
             // txt_Topic_ConnertPhone
             // 
-            this.txt_Topic_ConnertPhone.Location = new System.Drawing.Point(814, 140);
+            this.txt_Topic_ConnertPhone.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_ConnertPhone.Location = new System.Drawing.Point(814, 138);
             this.txt_Topic_ConnertPhone.Name = "txt_Topic_ConnertPhone";
-            this.txt_Topic_ConnertPhone.Size = new System.Drawing.Size(209, 27);
+            this.txt_Topic_ConnertPhone.Size = new System.Drawing.Size(209, 31);
             this.txt_Topic_ConnertPhone.TabIndex = 14;
             // 
             // label36
@@ -1273,9 +1251,10 @@
             // 
             // txt_Topic_Connecter
             // 
-            this.txt_Topic_Connecter.Location = new System.Drawing.Point(457, 140);
+            this.txt_Topic_Connecter.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Connecter.Location = new System.Drawing.Point(457, 138);
             this.txt_Topic_Connecter.Name = "txt_Topic_Connecter";
-            this.txt_Topic_Connecter.Size = new System.Drawing.Size(200, 27);
+            this.txt_Topic_Connecter.Size = new System.Drawing.Size(200, 31);
             this.txt_Topic_Connecter.TabIndex = 13;
             // 
             // label35
@@ -1290,9 +1269,10 @@
             // 
             // txt_Topic_Proer
             // 
-            this.txt_Topic_Proer.Location = new System.Drawing.Point(107, 140);
+            this.txt_Topic_Proer.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Proer.Location = new System.Drawing.Point(107, 138);
             this.txt_Topic_Proer.Name = "txt_Topic_Proer";
-            this.txt_Topic_Proer.Size = new System.Drawing.Size(210, 27);
+            this.txt_Topic_Proer.Size = new System.Drawing.Size(210, 31);
             this.txt_Topic_Proer.TabIndex = 12;
             // 
             // label31
@@ -1374,101 +1354,6 @@
             this.dgv_Topic_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Topic_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
-            // dgv_Topic_FL_id
-            // 
-            this.dgv_Topic_FL_id.HeaderText = "序号";
-            this.dgv_Topic_FL_id.Name = "dgv_Topic_FL_id";
-            this.dgv_Topic_FL_id.Visible = false;
-            // 
-            // dgv_Topic_FL_stage
-            // 
-            this.dgv_Topic_FL_stage.HeaderText = "阶段";
-            this.dgv_Topic_FL_stage.Items.AddRange(new object[] {
-            "规划阶段",
-            "申报立项阶段",
-            "过程管理阶段",
-            "验收阶段"});
-            this.dgv_Topic_FL_stage.Name = "dgv_Topic_FL_stage";
-            this.dgv_Topic_FL_stage.Width = 130;
-            // 
-            // dgv_Topic_FL_categor
-            // 
-            this.dgv_Topic_FL_categor.HeaderText = "文件类别";
-            this.dgv_Topic_FL_categor.Name = "dgv_Topic_FL_categor";
-            this.dgv_Topic_FL_categor.Width = 130;
-            // 
-            // dgv_Topic_FL_categor_name
-            // 
-            this.dgv_Topic_FL_categor_name.HeaderText = "类别名称";
-            this.dgv_Topic_FL_categor_name.Name = "dgv_Topic_FL_categor_name";
-            this.dgv_Topic_FL_categor_name.Visible = false;
-            // 
-            // dgv_Topic_FL_code
-            // 
-            this.dgv_Topic_FL_code.HeaderText = "文件编号";
-            this.dgv_Topic_FL_code.Name = "dgv_Topic_FL_code";
-            // 
-            // dgv_Topic_FL_name
-            // 
-            this.dgv_Topic_FL_name.HeaderText = "文件名称";
-            this.dgv_Topic_FL_name.Name = "dgv_Topic_FL_name";
-            this.dgv_Topic_FL_name.Width = 300;
-            // 
-            // dgv_Topic_FL_count
-            // 
-            this.dgv_Topic_FL_count.HeaderText = "份数(用于移交)";
-            this.dgv_Topic_FL_count.Name = "dgv_Topic_FL_count";
-            this.dgv_Topic_FL_count.Width = 150;
-            // 
-            // dgv_Topic_FL_user
-            // 
-            this.dgv_Topic_FL_user.HeaderText = "责任者";
-            this.dgv_Topic_FL_user.Name = "dgv_Topic_FL_user";
-            // 
-            // dgv_Topic_FL_type
-            // 
-            this.dgv_Topic_FL_type.HeaderText = "类型";
-            this.dgv_Topic_FL_type.Items.AddRange(new object[] {
-            "财务",
-            "管理",
-            "评审",
-            "技术",
-            "汇编"});
-            this.dgv_Topic_FL_type.Name = "dgv_Topic_FL_type";
-            // 
-            // dgv_Topic_FL_pages
-            // 
-            this.dgv_Topic_FL_pages.HeaderText = "页数";
-            this.dgv_Topic_FL_pages.Name = "dgv_Topic_FL_pages";
-            this.dgv_Topic_FL_pages.Width = 50;
-            // 
-            // dgv_Topic_FL_date
-            // 
-            this.dgv_Topic_FL_date.HeaderText = "形成日期";
-            this.dgv_Topic_FL_date.Name = "dgv_Topic_FL_date";
-            // 
-            // dgv_Topic_FL_unit
-            // 
-            this.dgv_Topic_FL_unit.HeaderText = "存放单位";
-            this.dgv_Topic_FL_unit.Name = "dgv_Topic_FL_unit";
-            this.dgv_Topic_FL_unit.Width = 250;
-            // 
-            // dgv_Topic_FL_carrier
-            // 
-            this.dgv_Topic_FL_carrier.HeaderText = "载体";
-            this.dgv_Topic_FL_carrier.Items.AddRange(new object[] {
-            "纸质",
-            "电子",
-            "纸质+电子"});
-            this.dgv_Topic_FL_carrier.Name = "dgv_Topic_FL_carrier";
-            // 
-            // dgv_Topic_FL_link
-            // 
-            this.dgv_Topic_FL_link.HeaderText = "电子文件挂接";
-            this.dgv_Topic_FL_link.Name = "dgv_Topic_FL_link";
-            this.dgv_Topic_FL_link.ReadOnly = true;
-            this.dgv_Topic_FL_link.Width = 350;
-            // 
             // tab_Topic_FileValid
             // 
             this.tab_Topic_FileValid.Controls.Add(this.dgv_Topic_FileValid);
@@ -1508,6 +1393,42 @@
             this.dgv_Topic_FileValid.RowTemplate.Height = 23;
             this.dgv_Topic_FileValid.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Topic_FileValid.TabIndex = 0;
+            // 
+            // dgv_Topic_FV_id
+            // 
+            this.dgv_Topic_FV_id.FillWeight = 35F;
+            this.dgv_Topic_FV_id.HeaderText = "序号";
+            this.dgv_Topic_FV_id.Name = "dgv_Topic_FV_id";
+            this.dgv_Topic_FV_id.ReadOnly = true;
+            // 
+            // dgv_Topic_FV_categor
+            // 
+            this.dgv_Topic_FV_categor.HeaderText = "文件类别";
+            this.dgv_Topic_FV_categor.Name = "dgv_Topic_FV_categor";
+            this.dgv_Topic_FV_categor.ReadOnly = true;
+            // 
+            // dgv_Topic_FV_name
+            // 
+            this.dgv_Topic_FV_name.FillWeight = 150F;
+            this.dgv_Topic_FV_name.HeaderText = "缺失文件名称";
+            this.dgv_Topic_FV_name.Name = "dgv_Topic_FV_name";
+            this.dgv_Topic_FV_name.ReadOnly = true;
+            // 
+            // dgv_Topic_FV_reason
+            // 
+            this.dgv_Topic_FV_reason.FillWeight = 80F;
+            this.dgv_Topic_FV_reason.HeaderText = "缺少原因";
+            this.dgv_Topic_FV_reason.Items.AddRange(new object[] {
+            "文件缺失",
+            "汇编包含"});
+            this.dgv_Topic_FV_reason.Name = "dgv_Topic_FV_reason";
+            this.dgv_Topic_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Topic_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dgv_Topic_FV_remark
+            // 
+            this.dgv_Topic_FV_remark.HeaderText = "备注";
+            this.dgv_Topic_FV_remark.Name = "dgv_Topic_FV_remark";
             // 
             // tab_Topic_Box
             // 
@@ -1742,18 +1663,20 @@
             // 
             // dtp_Topic_StartDate
             // 
+            this.dtp_Topic_StartDate.Font = new System.Drawing.Font("宋体", 15.75F);
             this.dtp_Topic_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Topic_StartDate.Location = new System.Drawing.Point(107, 74);
+            this.dtp_Topic_StartDate.Location = new System.Drawing.Point(107, 72);
             this.dtp_Topic_StartDate.Name = "dtp_Topic_StartDate";
-            this.dtp_Topic_StartDate.Size = new System.Drawing.Size(210, 27);
+            this.dtp_Topic_StartDate.Size = new System.Drawing.Size(210, 31);
             this.dtp_Topic_StartDate.TabIndex = 6;
             // 
             // dtp_Topic_FinishDate
             // 
+            this.dtp_Topic_FinishDate.Font = new System.Drawing.Font("宋体", 15.75F);
             this.dtp_Topic_FinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Topic_FinishDate.Location = new System.Drawing.Point(457, 74);
+            this.dtp_Topic_FinishDate.Location = new System.Drawing.Point(457, 72);
             this.dtp_Topic_FinishDate.Name = "dtp_Topic_FinishDate";
-            this.dtp_Topic_FinishDate.Size = new System.Drawing.Size(200, 27);
+            this.dtp_Topic_FinishDate.Size = new System.Drawing.Size(200, 31);
             this.dtp_Topic_FinishDate.TabIndex = 7;
             // 
             // cbo_Topic_HasNext
@@ -1763,7 +1686,7 @@
             this.cbo_Topic_HasNext.Items.AddRange(new object[] {
             "无",
             "有"});
-            this.cbo_Topic_HasNext.Location = new System.Drawing.Point(107, 270);
+            this.cbo_Topic_HasNext.Location = new System.Drawing.Point(107, 269);
             this.cbo_Topic_HasNext.Name = "cbo_Topic_HasNext";
             this.cbo_Topic_HasNext.Size = new System.Drawing.Size(119, 28);
             this.cbo_Topic_HasNext.TabIndex = 16;
@@ -1771,7 +1694,8 @@
             // 
             // txt_Topic_Intro
             // 
-            this.txt_Topic_Intro.Location = new System.Drawing.Point(107, 170);
+            this.txt_Topic_Intro.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Intro.Location = new System.Drawing.Point(107, 172);
             this.txt_Topic_Intro.Multiline = true;
             this.txt_Topic_Intro.Name = "txt_Topic_Intro";
             this.txt_Topic_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -1780,44 +1704,49 @@
             // 
             // txt_Topic_Uniter
             // 
-            this.txt_Topic_Uniter.Location = new System.Drawing.Point(814, 107);
+            this.txt_Topic_Uniter.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Uniter.Location = new System.Drawing.Point(814, 105);
             this.txt_Topic_Uniter.Name = "txt_Topic_Uniter";
-            this.txt_Topic_Uniter.Size = new System.Drawing.Size(209, 27);
+            this.txt_Topic_Uniter.Size = new System.Drawing.Size(209, 31);
             this.txt_Topic_Uniter.TabIndex = 11;
             // 
             // txt_Topic_Year
             // 
-            this.txt_Topic_Year.Location = new System.Drawing.Point(814, 74);
+            this.txt_Topic_Year.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Year.Location = new System.Drawing.Point(814, 72);
             this.txt_Topic_Year.Name = "txt_Topic_Year";
-            this.txt_Topic_Year.Size = new System.Drawing.Size(144, 27);
+            this.txt_Topic_Year.Size = new System.Drawing.Size(144, 31);
             this.txt_Topic_Year.TabIndex = 8;
             // 
             // txt_Topic_Funds
             // 
-            this.txt_Topic_Funds.Location = new System.Drawing.Point(814, 41);
+            this.txt_Topic_Funds.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Funds.Location = new System.Drawing.Point(814, 39);
             this.txt_Topic_Funds.Name = "txt_Topic_Funds";
-            this.txt_Topic_Funds.Size = new System.Drawing.Size(144, 27);
+            this.txt_Topic_Funds.Size = new System.Drawing.Size(144, 31);
             this.txt_Topic_Funds.TabIndex = 5;
             // 
             // txt_Topic_Theme
             // 
-            this.txt_Topic_Theme.Location = new System.Drawing.Point(457, 41);
+            this.txt_Topic_Theme.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Theme.Location = new System.Drawing.Point(457, 39);
             this.txt_Topic_Theme.Name = "txt_Topic_Theme";
-            this.txt_Topic_Theme.Size = new System.Drawing.Size(200, 27);
+            this.txt_Topic_Theme.Size = new System.Drawing.Size(200, 31);
             this.txt_Topic_Theme.TabIndex = 4;
             // 
             // txt_Topic_Name
             // 
-            this.txt_Topic_Name.Location = new System.Drawing.Point(457, 8);
+            this.txt_Topic_Name.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Topic_Name.Location = new System.Drawing.Point(457, 6);
             this.txt_Topic_Name.Name = "txt_Topic_Name";
-            this.txt_Topic_Name.Size = new System.Drawing.Size(566, 27);
+            this.txt_Topic_Name.Size = new System.Drawing.Size(566, 31);
             this.txt_Topic_Name.TabIndex = 2;
             // 
             // label56
             // 
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label56.Location = new System.Drawing.Point(8, 271);
+            this.label56.Location = new System.Drawing.Point(8, 274);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(93, 19);
             this.label56.TabIndex = 56;
@@ -1827,7 +1756,7 @@
             // 
             this.label57.AutoSize = true;
             this.label57.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label57.Location = new System.Drawing.Point(50, 170);
+            this.label57.Location = new System.Drawing.Point(50, 172);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(51, 19);
             this.label57.TabIndex = 55;
@@ -2047,9 +1976,10 @@
             // 
             // txt_Subject_Code
             // 
-            this.txt_Subject_Code.Location = new System.Drawing.Point(107, 8);
+            this.txt_Subject_Code.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Code.Location = new System.Drawing.Point(107, 6);
             this.txt_Subject_Code.Name = "txt_Subject_Code";
-            this.txt_Subject_Code.Size = new System.Drawing.Size(210, 27);
+            this.txt_Subject_Code.Size = new System.Drawing.Size(210, 31);
             this.txt_Subject_Code.TabIndex = 1;
             this.txt_Subject_Code.Leave += new System.EventHandler(this.Txt_Code_Leave);
             // 
@@ -2078,32 +2008,36 @@
             // 
             // txt_Subject_Unit
             // 
-            this.txt_Subject_Unit.Location = new System.Drawing.Point(107, 110);
+            this.txt_Subject_Unit.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Unit.Location = new System.Drawing.Point(107, 108);
             this.txt_Subject_Unit.Name = "txt_Subject_Unit";
-            this.txt_Subject_Unit.Size = new System.Drawing.Size(210, 27);
+            this.txt_Subject_Unit.Size = new System.Drawing.Size(210, 31);
             this.txt_Subject_Unit.TabIndex = 9;
             // 
             // cbo_Subject_Province
             // 
+            this.cbo_Subject_Province.Font = new System.Drawing.Font("宋体", 15.75F);
             this.cbo_Subject_Province.FormattingEnabled = true;
-            this.cbo_Subject_Province.Location = new System.Drawing.Point(460, 111);
+            this.cbo_Subject_Province.Location = new System.Drawing.Point(460, 109);
             this.cbo_Subject_Province.Name = "cbo_Subject_Province";
-            this.cbo_Subject_Province.Size = new System.Drawing.Size(200, 28);
+            this.cbo_Subject_Province.Size = new System.Drawing.Size(200, 29);
             this.cbo_Subject_Province.TabIndex = 10;
             // 
             // cbo_Subject_Field
             // 
+            this.cbo_Subject_Field.Font = new System.Drawing.Font("宋体", 15.75F);
             this.cbo_Subject_Field.FormattingEnabled = true;
-            this.cbo_Subject_Field.Location = new System.Drawing.Point(107, 43);
+            this.cbo_Subject_Field.Location = new System.Drawing.Point(107, 41);
             this.cbo_Subject_Field.Name = "cbo_Subject_Field";
-            this.cbo_Subject_Field.Size = new System.Drawing.Size(210, 28);
+            this.cbo_Subject_Field.Size = new System.Drawing.Size(210, 29);
             this.cbo_Subject_Field.TabIndex = 3;
             // 
             // txt_Subject_ConnectPhone
             // 
-            this.txt_Subject_ConnectPhone.Location = new System.Drawing.Point(811, 144);
+            this.txt_Subject_ConnectPhone.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_ConnectPhone.Location = new System.Drawing.Point(811, 142);
             this.txt_Subject_ConnectPhone.Name = "txt_Subject_ConnectPhone";
-            this.txt_Subject_ConnectPhone.Size = new System.Drawing.Size(225, 27);
+            this.txt_Subject_ConnectPhone.Size = new System.Drawing.Size(225, 31);
             this.txt_Subject_ConnectPhone.TabIndex = 14;
             // 
             // label72
@@ -2118,9 +2052,10 @@
             // 
             // txt_Subject_Connecter
             // 
-            this.txt_Subject_Connecter.Location = new System.Drawing.Point(460, 144);
+            this.txt_Subject_Connecter.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Connecter.Location = new System.Drawing.Point(460, 142);
             this.txt_Subject_Connecter.Name = "txt_Subject_Connecter";
-            this.txt_Subject_Connecter.Size = new System.Drawing.Size(200, 27);
+            this.txt_Subject_Connecter.Size = new System.Drawing.Size(200, 31);
             this.txt_Subject_Connecter.TabIndex = 13;
             // 
             // label71
@@ -2135,9 +2070,10 @@
             // 
             // txt_Subject_Proer
             // 
-            this.txt_Subject_Proer.Location = new System.Drawing.Point(107, 144);
+            this.txt_Subject_Proer.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Proer.Location = new System.Drawing.Point(107, 142);
             this.txt_Subject_Proer.Name = "txt_Subject_Proer";
-            this.txt_Subject_Proer.Size = new System.Drawing.Size(210, 27);
+            this.txt_Subject_Proer.Size = new System.Drawing.Size(210, 31);
             this.txt_Subject_Proer.TabIndex = 12;
             // 
             // label32
@@ -2219,101 +2155,6 @@
             this.dgv_Subject_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Subject_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
-            // dgv_Subject_FL_id
-            // 
-            this.dgv_Subject_FL_id.HeaderText = "序号";
-            this.dgv_Subject_FL_id.Name = "dgv_Subject_FL_id";
-            this.dgv_Subject_FL_id.Visible = false;
-            // 
-            // dgv_Subject_FL_stage
-            // 
-            this.dgv_Subject_FL_stage.HeaderText = "阶段";
-            this.dgv_Subject_FL_stage.Items.AddRange(new object[] {
-            "规划阶段",
-            "申报立项阶段",
-            "过程管理阶段",
-            "验收阶段"});
-            this.dgv_Subject_FL_stage.Name = "dgv_Subject_FL_stage";
-            this.dgv_Subject_FL_stage.Width = 130;
-            // 
-            // dgv_Subject_FL_categor
-            // 
-            this.dgv_Subject_FL_categor.HeaderText = "文件类别";
-            this.dgv_Subject_FL_categor.Name = "dgv_Subject_FL_categor";
-            this.dgv_Subject_FL_categor.Width = 130;
-            // 
-            // dgv_Subject_FL_categor_name
-            // 
-            this.dgv_Subject_FL_categor_name.HeaderText = "类别名称";
-            this.dgv_Subject_FL_categor_name.Name = "dgv_Subject_FL_categor_name";
-            this.dgv_Subject_FL_categor_name.Visible = false;
-            // 
-            // dgv_Subject_FL_code
-            // 
-            this.dgv_Subject_FL_code.HeaderText = "文件编号";
-            this.dgv_Subject_FL_code.Name = "dgv_Subject_FL_code";
-            // 
-            // dgv_Subject_FL_name
-            // 
-            this.dgv_Subject_FL_name.HeaderText = "文件名称";
-            this.dgv_Subject_FL_name.Name = "dgv_Subject_FL_name";
-            this.dgv_Subject_FL_name.Width = 300;
-            // 
-            // dgv_Subject_FL_count
-            // 
-            this.dgv_Subject_FL_count.HeaderText = "份数(用于移交)";
-            this.dgv_Subject_FL_count.Name = "dgv_Subject_FL_count";
-            this.dgv_Subject_FL_count.Width = 150;
-            // 
-            // dgv_Subject_FL_user
-            // 
-            this.dgv_Subject_FL_user.HeaderText = "责任者";
-            this.dgv_Subject_FL_user.Name = "dgv_Subject_FL_user";
-            // 
-            // dgv_Subject_FL_type
-            // 
-            this.dgv_Subject_FL_type.HeaderText = "类型";
-            this.dgv_Subject_FL_type.Items.AddRange(new object[] {
-            "财务",
-            "管理",
-            "评审",
-            "技术",
-            "汇编"});
-            this.dgv_Subject_FL_type.Name = "dgv_Subject_FL_type";
-            // 
-            // dgv_Subject_FL_pages
-            // 
-            this.dgv_Subject_FL_pages.HeaderText = "页数";
-            this.dgv_Subject_FL_pages.Name = "dgv_Subject_FL_pages";
-            this.dgv_Subject_FL_pages.Width = 50;
-            // 
-            // dgv_Subject_FL_date
-            // 
-            this.dgv_Subject_FL_date.HeaderText = "形成日期";
-            this.dgv_Subject_FL_date.Name = "dgv_Subject_FL_date";
-            // 
-            // dgv_Subject_FL_unit
-            // 
-            this.dgv_Subject_FL_unit.HeaderText = "存放单位";
-            this.dgv_Subject_FL_unit.Name = "dgv_Subject_FL_unit";
-            this.dgv_Subject_FL_unit.Width = 250;
-            // 
-            // dgv_Subject_FL_carrier
-            // 
-            this.dgv_Subject_FL_carrier.HeaderText = "载体";
-            this.dgv_Subject_FL_carrier.Items.AddRange(new object[] {
-            "纸质",
-            "电子",
-            "纸质+电子"});
-            this.dgv_Subject_FL_carrier.Name = "dgv_Subject_FL_carrier";
-            // 
-            // dgv_Subject_FL_link
-            // 
-            this.dgv_Subject_FL_link.HeaderText = "电子文件挂接";
-            this.dgv_Subject_FL_link.Name = "dgv_Subject_FL_link";
-            this.dgv_Subject_FL_link.ReadOnly = true;
-            this.dgv_Subject_FL_link.Width = 350;
-            // 
             // tab_Subject_FileValid
             // 
             this.tab_Subject_FileValid.Controls.Add(this.dgv_Subject_FileValid);
@@ -2353,6 +2194,42 @@
             this.dgv_Subject_FileValid.RowTemplate.Height = 23;
             this.dgv_Subject_FileValid.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Subject_FileValid.TabIndex = 0;
+            // 
+            // dgv_Subject_FV_id
+            // 
+            this.dgv_Subject_FV_id.FillWeight = 35F;
+            this.dgv_Subject_FV_id.HeaderText = "序号";
+            this.dgv_Subject_FV_id.Name = "dgv_Subject_FV_id";
+            this.dgv_Subject_FV_id.ReadOnly = true;
+            // 
+            // dgv_Subject_FV_categor
+            // 
+            this.dgv_Subject_FV_categor.HeaderText = "文件类别";
+            this.dgv_Subject_FV_categor.Name = "dgv_Subject_FV_categor";
+            this.dgv_Subject_FV_categor.ReadOnly = true;
+            // 
+            // dgv_Subject_FV_name
+            // 
+            this.dgv_Subject_FV_name.FillWeight = 150F;
+            this.dgv_Subject_FV_name.HeaderText = "缺失文件名称";
+            this.dgv_Subject_FV_name.Name = "dgv_Subject_FV_name";
+            this.dgv_Subject_FV_name.ReadOnly = true;
+            // 
+            // dgv_Subject_FV_reason
+            // 
+            this.dgv_Subject_FV_reason.FillWeight = 80F;
+            this.dgv_Subject_FV_reason.HeaderText = "缺少原因";
+            this.dgv_Subject_FV_reason.Items.AddRange(new object[] {
+            "文件缺失",
+            "汇编包含"});
+            this.dgv_Subject_FV_reason.Name = "dgv_Subject_FV_reason";
+            this.dgv_Subject_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Subject_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // dgv_Subject_FV_remark
+            // 
+            this.dgv_Subject_FV_remark.HeaderText = "备注";
+            this.dgv_Subject_FV_remark.Name = "dgv_Subject_FV_remark";
             // 
             // tab_Subject_Box
             // 
@@ -2587,23 +2464,25 @@
             // 
             // dtp_Subject_StartDate
             // 
+            this.dtp_Subject_StartDate.Font = new System.Drawing.Font("宋体", 15.75F);
             this.dtp_Subject_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Subject_StartDate.Location = new System.Drawing.Point(107, 76);
+            this.dtp_Subject_StartDate.Location = new System.Drawing.Point(107, 74);
             this.dtp_Subject_StartDate.Name = "dtp_Subject_StartDate";
-            this.dtp_Subject_StartDate.Size = new System.Drawing.Size(210, 27);
+            this.dtp_Subject_StartDate.Size = new System.Drawing.Size(210, 31);
             this.dtp_Subject_StartDate.TabIndex = 6;
             // 
             // dtp_Subject_FinishDate
             // 
+            this.dtp_Subject_FinishDate.Font = new System.Drawing.Font("宋体", 15.75F);
             this.dtp_Subject_FinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_Subject_FinishDate.Location = new System.Drawing.Point(460, 76);
+            this.dtp_Subject_FinishDate.Location = new System.Drawing.Point(460, 74);
             this.dtp_Subject_FinishDate.Name = "dtp_Subject_FinishDate";
-            this.dtp_Subject_FinishDate.Size = new System.Drawing.Size(200, 27);
+            this.dtp_Subject_FinishDate.Size = new System.Drawing.Size(200, 31);
             this.dtp_Subject_FinishDate.TabIndex = 7;
             // 
             // txt_Subject_Intro
             // 
-            this.txt_Subject_Intro.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txt_Subject_Intro.Font = new System.Drawing.Font("宋体", 15.75F);
             this.txt_Subject_Intro.Location = new System.Drawing.Point(107, 177);
             this.txt_Subject_Intro.Multiline = true;
             this.txt_Subject_Intro.Name = "txt_Subject_Intro";
@@ -2613,37 +2492,42 @@
             // 
             // txt_Subject_Uniter
             // 
-            this.txt_Subject_Uniter.Location = new System.Drawing.Point(811, 110);
+            this.txt_Subject_Uniter.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Uniter.Location = new System.Drawing.Point(811, 108);
             this.txt_Subject_Uniter.Name = "txt_Subject_Uniter";
-            this.txt_Subject_Uniter.Size = new System.Drawing.Size(225, 27);
+            this.txt_Subject_Uniter.Size = new System.Drawing.Size(225, 31);
             this.txt_Subject_Uniter.TabIndex = 11;
             // 
             // txt_Subject_Year
             // 
-            this.txt_Subject_Year.Location = new System.Drawing.Point(811, 76);
+            this.txt_Subject_Year.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Year.Location = new System.Drawing.Point(811, 74);
             this.txt_Subject_Year.Name = "txt_Subject_Year";
-            this.txt_Subject_Year.Size = new System.Drawing.Size(160, 27);
+            this.txt_Subject_Year.Size = new System.Drawing.Size(160, 31);
             this.txt_Subject_Year.TabIndex = 8;
             // 
             // txt_Subject_Funds
             // 
-            this.txt_Subject_Funds.Location = new System.Drawing.Point(811, 42);
+            this.txt_Subject_Funds.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Funds.Location = new System.Drawing.Point(811, 40);
             this.txt_Subject_Funds.Name = "txt_Subject_Funds";
-            this.txt_Subject_Funds.Size = new System.Drawing.Size(160, 27);
+            this.txt_Subject_Funds.Size = new System.Drawing.Size(160, 31);
             this.txt_Subject_Funds.TabIndex = 5;
             // 
             // txt_Subject_Theme
             // 
-            this.txt_Subject_Theme.Location = new System.Drawing.Point(460, 42);
+            this.txt_Subject_Theme.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Theme.Location = new System.Drawing.Point(460, 40);
             this.txt_Subject_Theme.Name = "txt_Subject_Theme";
-            this.txt_Subject_Theme.Size = new System.Drawing.Size(200, 27);
+            this.txt_Subject_Theme.Size = new System.Drawing.Size(200, 31);
             this.txt_Subject_Theme.TabIndex = 4;
             // 
             // txt_Subject_Name
             // 
-            this.txt_Subject_Name.Location = new System.Drawing.Point(460, 8);
+            this.txt_Subject_Name.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.txt_Subject_Name.Location = new System.Drawing.Point(460, 6);
             this.txt_Subject_Name.Name = "txt_Subject_Name";
-            this.txt_Subject_Name.Size = new System.Drawing.Size(576, 27);
+            this.txt_Subject_Name.Size = new System.Drawing.Size(576, 31);
             this.txt_Subject_Name.TabIndex = 2;
             // 
             // label90
@@ -2861,115 +2745,275 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // dgv_Project_FV_id
+            // dgv_Project_FL_id
             // 
-            this.dgv_Project_FV_id.FillWeight = 4.476235F;
-            this.dgv_Project_FV_id.HeaderText = "序号";
-            this.dgv_Project_FV_id.Name = "dgv_Project_FV_id";
-            this.dgv_Project_FV_id.ReadOnly = true;
+            this.dgv_Project_FL_id.HeaderText = "序号";
+            this.dgv_Project_FL_id.Name = "dgv_Project_FL_id";
+            this.dgv_Project_FL_id.Visible = false;
             // 
-            // dgv_Project_FV_categor
+            // dgv_Project_FL_stage
             // 
-            this.dgv_Project_FV_categor.FillWeight = 12.78924F;
-            this.dgv_Project_FV_categor.HeaderText = "文件类别";
-            this.dgv_Project_FV_categor.Name = "dgv_Project_FV_categor";
-            this.dgv_Project_FV_categor.ReadOnly = true;
+            this.dgv_Project_FL_stage.HeaderText = "阶段";
+            this.dgv_Project_FL_stage.Name = "dgv_Project_FL_stage";
+            this.dgv_Project_FL_stage.Width = 130;
             // 
-            // dgv_Project_FV_name
+            // dgv_Project_FL_categor
             // 
-            this.dgv_Project_FV_name.FillWeight = 19.18386F;
-            this.dgv_Project_FV_name.HeaderText = "缺失文件名称";
-            this.dgv_Project_FV_name.Name = "dgv_Project_FV_name";
-            this.dgv_Project_FV_name.ReadOnly = true;
+            this.dgv_Project_FL_categor.HeaderText = "文件类别";
+            this.dgv_Project_FL_categor.Name = "dgv_Project_FL_categor";
+            this.dgv_Project_FL_categor.Width = 130;
             // 
-            // dgv_Project_FV_reason
+            // dgv_Project_FL_categor_name
             // 
-            this.dgv_Project_FV_reason.FillWeight = 10F;
-            this.dgv_Project_FV_reason.HeaderText = "缺少原因";
-            this.dgv_Project_FV_reason.Items.AddRange(new object[] {
-            "文件缺失",
-            "汇编包含"});
-            this.dgv_Project_FV_reason.Name = "dgv_Project_FV_reason";
-            this.dgv_Project_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Project_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgv_Project_FL_categor_name.HeaderText = "类别名称";
+            this.dgv_Project_FL_categor_name.Name = "dgv_Project_FL_categor_name";
+            this.dgv_Project_FL_categor_name.Visible = false;
             // 
-            // dgv_Project_FV_remark
+            // dgv_Project_FL_code
             // 
-            this.dgv_Project_FV_remark.FillWeight = 12.78924F;
-            this.dgv_Project_FV_remark.HeaderText = "备注";
-            this.dgv_Project_FV_remark.Name = "dgv_Project_FV_remark";
+            this.dgv_Project_FL_code.HeaderText = "文件编号";
+            this.dgv_Project_FL_code.Name = "dgv_Project_FL_code";
             // 
-            // dgv_Topic_FV_id
+            // dgv_Project_FL_name
             // 
-            this.dgv_Topic_FV_id.FillWeight = 35F;
-            this.dgv_Topic_FV_id.HeaderText = "序号";
-            this.dgv_Topic_FV_id.Name = "dgv_Topic_FV_id";
-            this.dgv_Topic_FV_id.ReadOnly = true;
+            this.dgv_Project_FL_name.HeaderText = "文件名称";
+            this.dgv_Project_FL_name.Name = "dgv_Project_FL_name";
+            this.dgv_Project_FL_name.Width = 300;
             // 
-            // dgv_Topic_FV_categor
+            // dgv_Project_FL_count
             // 
-            this.dgv_Topic_FV_categor.HeaderText = "文件类别";
-            this.dgv_Topic_FV_categor.Name = "dgv_Topic_FV_categor";
-            this.dgv_Topic_FV_categor.ReadOnly = true;
+            this.dgv_Project_FL_count.HeaderText = "移交份数";
+            this.dgv_Project_FL_count.Name = "dgv_Project_FL_count";
+            this.dgv_Project_FL_count.Width = 150;
             // 
-            // dgv_Topic_FV_name
+            // dgv_Project_FL_user
             // 
-            this.dgv_Topic_FV_name.FillWeight = 150F;
-            this.dgv_Topic_FV_name.HeaderText = "缺失文件名称";
-            this.dgv_Topic_FV_name.Name = "dgv_Topic_FV_name";
-            this.dgv_Topic_FV_name.ReadOnly = true;
+            this.dgv_Project_FL_user.HeaderText = "责任者";
+            this.dgv_Project_FL_user.Name = "dgv_Project_FL_user";
             // 
-            // dgv_Topic_FV_reason
+            // dgv_Project_FL_type
             // 
-            this.dgv_Topic_FV_reason.FillWeight = 80F;
-            this.dgv_Topic_FV_reason.HeaderText = "缺少原因";
-            this.dgv_Topic_FV_reason.Items.AddRange(new object[] {
-            "文件缺失",
-            "汇编包含"});
-            this.dgv_Topic_FV_reason.Name = "dgv_Topic_FV_reason";
-            this.dgv_Topic_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Topic_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgv_Project_FL_type.HeaderText = "类型";
+            this.dgv_Project_FL_type.Name = "dgv_Project_FL_type";
             // 
-            // dgv_Topic_FV_remark
+            // dgv_Project_FL_pages
             // 
-            this.dgv_Topic_FV_remark.HeaderText = "备注";
-            this.dgv_Topic_FV_remark.Name = "dgv_Topic_FV_remark";
+            this.dgv_Project_FL_pages.HeaderText = "页数";
+            this.dgv_Project_FL_pages.Name = "dgv_Project_FL_pages";
+            this.dgv_Project_FL_pages.Width = 50;
             // 
-            // dgv_Subject_FV_id
+            // dgv_Project_FL_date
             // 
-            this.dgv_Subject_FV_id.FillWeight = 35F;
-            this.dgv_Subject_FV_id.HeaderText = "序号";
-            this.dgv_Subject_FV_id.Name = "dgv_Subject_FV_id";
-            this.dgv_Subject_FV_id.ReadOnly = true;
+            this.dgv_Project_FL_date.HeaderText = "形成日期";
+            this.dgv_Project_FL_date.Name = "dgv_Project_FL_date";
             // 
-            // dgv_Subject_FV_categor
+            // dgv_Project_FL_unit
             // 
-            this.dgv_Subject_FV_categor.HeaderText = "文件类别";
-            this.dgv_Subject_FV_categor.Name = "dgv_Subject_FV_categor";
-            this.dgv_Subject_FV_categor.ReadOnly = true;
+            this.dgv_Project_FL_unit.HeaderText = "存放单位";
+            this.dgv_Project_FL_unit.Name = "dgv_Project_FL_unit";
+            this.dgv_Project_FL_unit.Width = 250;
             // 
-            // dgv_Subject_FV_name
+            // dgv_Project_FL_carrier
             // 
-            this.dgv_Subject_FV_name.FillWeight = 150F;
-            this.dgv_Subject_FV_name.HeaderText = "缺失文件名称";
-            this.dgv_Subject_FV_name.Name = "dgv_Subject_FV_name";
-            this.dgv_Subject_FV_name.ReadOnly = true;
+            this.dgv_Project_FL_carrier.HeaderText = "载体";
+            this.dgv_Project_FL_carrier.Name = "dgv_Project_FL_carrier";
             // 
-            // dgv_Subject_FV_reason
+            // dgv_Project_FL_link
             // 
-            this.dgv_Subject_FV_reason.FillWeight = 80F;
-            this.dgv_Subject_FV_reason.HeaderText = "缺少原因";
-            this.dgv_Subject_FV_reason.Items.AddRange(new object[] {
-            "文件缺失",
-            "汇编包含"});
-            this.dgv_Subject_FV_reason.Name = "dgv_Subject_FV_reason";
-            this.dgv_Subject_FV_reason.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_Subject_FV_reason.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dgv_Project_FL_link.HeaderText = "电子文件挂接";
+            this.dgv_Project_FL_link.Name = "dgv_Project_FL_link";
+            this.dgv_Project_FL_link.ReadOnly = true;
+            this.dgv_Project_FL_link.Width = 350;
             // 
-            // dgv_Subject_FV_remark
+            // dgv_Topic_FL_id
             // 
-            this.dgv_Subject_FV_remark.HeaderText = "备注";
-            this.dgv_Subject_FV_remark.Name = "dgv_Subject_FV_remark";
+            this.dgv_Topic_FL_id.HeaderText = "序号";
+            this.dgv_Topic_FL_id.Name = "dgv_Topic_FL_id";
+            this.dgv_Topic_FL_id.Visible = false;
+            // 
+            // dgv_Topic_FL_stage
+            // 
+            this.dgv_Topic_FL_stage.HeaderText = "阶段";
+            this.dgv_Topic_FL_stage.Items.AddRange(new object[] {
+            "规划阶段",
+            "申报立项阶段",
+            "过程管理阶段",
+            "验收阶段"});
+            this.dgv_Topic_FL_stage.Name = "dgv_Topic_FL_stage";
+            this.dgv_Topic_FL_stage.Width = 130;
+            // 
+            // dgv_Topic_FL_categor
+            // 
+            this.dgv_Topic_FL_categor.HeaderText = "文件类别";
+            this.dgv_Topic_FL_categor.Name = "dgv_Topic_FL_categor";
+            this.dgv_Topic_FL_categor.Width = 130;
+            // 
+            // dgv_Topic_FL_categor_name
+            // 
+            this.dgv_Topic_FL_categor_name.HeaderText = "类别名称";
+            this.dgv_Topic_FL_categor_name.Name = "dgv_Topic_FL_categor_name";
+            this.dgv_Topic_FL_categor_name.Visible = false;
+            // 
+            // dgv_Topic_FL_code
+            // 
+            this.dgv_Topic_FL_code.HeaderText = "文件编号";
+            this.dgv_Topic_FL_code.Name = "dgv_Topic_FL_code";
+            // 
+            // dgv_Topic_FL_name
+            // 
+            this.dgv_Topic_FL_name.HeaderText = "文件名称";
+            this.dgv_Topic_FL_name.Name = "dgv_Topic_FL_name";
+            this.dgv_Topic_FL_name.Width = 300;
+            // 
+            // dgv_Topic_FL_count
+            // 
+            this.dgv_Topic_FL_count.HeaderText = "移交份数";
+            this.dgv_Topic_FL_count.Name = "dgv_Topic_FL_count";
+            this.dgv_Topic_FL_count.Width = 150;
+            // 
+            // dgv_Topic_FL_user
+            // 
+            this.dgv_Topic_FL_user.HeaderText = "责任者";
+            this.dgv_Topic_FL_user.Name = "dgv_Topic_FL_user";
+            // 
+            // dgv_Topic_FL_type
+            // 
+            this.dgv_Topic_FL_type.HeaderText = "类型";
+            this.dgv_Topic_FL_type.Items.AddRange(new object[] {
+            "财务",
+            "管理",
+            "评审",
+            "技术",
+            "汇编"});
+            this.dgv_Topic_FL_type.Name = "dgv_Topic_FL_type";
+            // 
+            // dgv_Topic_FL_pages
+            // 
+            this.dgv_Topic_FL_pages.HeaderText = "页数";
+            this.dgv_Topic_FL_pages.Name = "dgv_Topic_FL_pages";
+            this.dgv_Topic_FL_pages.Width = 50;
+            // 
+            // dgv_Topic_FL_date
+            // 
+            this.dgv_Topic_FL_date.HeaderText = "形成日期";
+            this.dgv_Topic_FL_date.Name = "dgv_Topic_FL_date";
+            // 
+            // dgv_Topic_FL_unit
+            // 
+            this.dgv_Topic_FL_unit.HeaderText = "存放单位";
+            this.dgv_Topic_FL_unit.Name = "dgv_Topic_FL_unit";
+            this.dgv_Topic_FL_unit.Width = 250;
+            // 
+            // dgv_Topic_FL_carrier
+            // 
+            this.dgv_Topic_FL_carrier.HeaderText = "载体";
+            this.dgv_Topic_FL_carrier.Items.AddRange(new object[] {
+            "纸质",
+            "电子",
+            "纸质+电子"});
+            this.dgv_Topic_FL_carrier.Name = "dgv_Topic_FL_carrier";
+            // 
+            // dgv_Topic_FL_link
+            // 
+            this.dgv_Topic_FL_link.HeaderText = "电子文件挂接";
+            this.dgv_Topic_FL_link.Name = "dgv_Topic_FL_link";
+            this.dgv_Topic_FL_link.ReadOnly = true;
+            this.dgv_Topic_FL_link.Width = 350;
+            // 
+            // dgv_Subject_FL_id
+            // 
+            this.dgv_Subject_FL_id.HeaderText = "序号";
+            this.dgv_Subject_FL_id.Name = "dgv_Subject_FL_id";
+            this.dgv_Subject_FL_id.Visible = false;
+            // 
+            // dgv_Subject_FL_stage
+            // 
+            this.dgv_Subject_FL_stage.HeaderText = "阶段";
+            this.dgv_Subject_FL_stage.Items.AddRange(new object[] {
+            "规划阶段",
+            "申报立项阶段",
+            "过程管理阶段",
+            "验收阶段"});
+            this.dgv_Subject_FL_stage.Name = "dgv_Subject_FL_stage";
+            this.dgv_Subject_FL_stage.Width = 130;
+            // 
+            // dgv_Subject_FL_categor
+            // 
+            this.dgv_Subject_FL_categor.HeaderText = "文件类别";
+            this.dgv_Subject_FL_categor.Name = "dgv_Subject_FL_categor";
+            this.dgv_Subject_FL_categor.Width = 130;
+            // 
+            // dgv_Subject_FL_categor_name
+            // 
+            this.dgv_Subject_FL_categor_name.HeaderText = "类别名称";
+            this.dgv_Subject_FL_categor_name.Name = "dgv_Subject_FL_categor_name";
+            this.dgv_Subject_FL_categor_name.Visible = false;
+            // 
+            // dgv_Subject_FL_code
+            // 
+            this.dgv_Subject_FL_code.HeaderText = "文件编号";
+            this.dgv_Subject_FL_code.Name = "dgv_Subject_FL_code";
+            // 
+            // dgv_Subject_FL_name
+            // 
+            this.dgv_Subject_FL_name.HeaderText = "文件名称";
+            this.dgv_Subject_FL_name.Name = "dgv_Subject_FL_name";
+            this.dgv_Subject_FL_name.Width = 300;
+            // 
+            // dgv_Subject_FL_count
+            // 
+            this.dgv_Subject_FL_count.HeaderText = "移交份数";
+            this.dgv_Subject_FL_count.Name = "dgv_Subject_FL_count";
+            this.dgv_Subject_FL_count.Width = 150;
+            // 
+            // dgv_Subject_FL_user
+            // 
+            this.dgv_Subject_FL_user.HeaderText = "责任者";
+            this.dgv_Subject_FL_user.Name = "dgv_Subject_FL_user";
+            // 
+            // dgv_Subject_FL_type
+            // 
+            this.dgv_Subject_FL_type.HeaderText = "类型";
+            this.dgv_Subject_FL_type.Items.AddRange(new object[] {
+            "财务",
+            "管理",
+            "评审",
+            "技术",
+            "汇编"});
+            this.dgv_Subject_FL_type.Name = "dgv_Subject_FL_type";
+            // 
+            // dgv_Subject_FL_pages
+            // 
+            this.dgv_Subject_FL_pages.HeaderText = "页数";
+            this.dgv_Subject_FL_pages.Name = "dgv_Subject_FL_pages";
+            this.dgv_Subject_FL_pages.Width = 50;
+            // 
+            // dgv_Subject_FL_date
+            // 
+            this.dgv_Subject_FL_date.HeaderText = "形成日期";
+            this.dgv_Subject_FL_date.Name = "dgv_Subject_FL_date";
+            // 
+            // dgv_Subject_FL_unit
+            // 
+            this.dgv_Subject_FL_unit.HeaderText = "存放单位";
+            this.dgv_Subject_FL_unit.Name = "dgv_Subject_FL_unit";
+            this.dgv_Subject_FL_unit.Width = 250;
+            // 
+            // dgv_Subject_FL_carrier
+            // 
+            this.dgv_Subject_FL_carrier.HeaderText = "载体";
+            this.dgv_Subject_FL_carrier.Items.AddRange(new object[] {
+            "纸质",
+            "电子",
+            "纸质+电子"});
+            this.dgv_Subject_FL_carrier.Name = "dgv_Subject_FL_carrier";
+            // 
+            // dgv_Subject_FL_link
+            // 
+            this.dgv_Subject_FL_link.HeaderText = "电子文件挂接";
+            this.dgv_Subject_FL_link.Name = "dgv_Subject_FL_link";
+            this.dgv_Subject_FL_link.ReadOnly = true;
+            this.dgv_Subject_FL_link.Width = 350;
             // 
             // Frm_Wroking
             // 
@@ -2982,6 +3026,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "我的加工-加工中";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Wroking_FormClosing);
+            this.Load += new System.EventHandler(this.Frm_Wroking_Load);
             this.tab_Menu.ResumeLayout(false);
             this.project.ResumeLayout(false);
             this.project.PerformLayout();
@@ -3221,6 +3266,21 @@
         private System.Windows.Forms.TextBox txt_Project_Code;
         private System.Windows.Forms.TextBox txt_Topic_Code;
         private System.Windows.Forms.TextBox txt_Subject_Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_name;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FV_reason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_remark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_name;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FV_reason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_remark;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_categor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_name;
+        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FV_reason;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_remark;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FL_id;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_stage;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FL_categor;
@@ -3263,20 +3323,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_unit;
         private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FL_carrier;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FL_link;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Project_FV_reason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Project_FV_remark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Topic_FV_reason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Topic_FV_remark;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_categor;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_name;
-        private System.Windows.Forms.DataGridViewComboBoxColumn dgv_Subject_FV_reason;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dgv_Subject_FV_remark;
     }
 }

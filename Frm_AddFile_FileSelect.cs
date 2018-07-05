@@ -64,10 +64,13 @@ namespace 数据采集档案管理系统___课题版
         private bool ClearHasWordedWithFolder(TreeNode node)
         {
             bool result = true;
+            bool flag = true;
             foreach(TreeNode item in node.Nodes)
             {
                 int type = Convert.ToInt32(item.ToolTipText);//0:文件 1:文件夹
-                if(type == 1)
+                if(type == 0)//当前文件夹下存在文件的情况下，无论其子文件夹是否被删除，当前节点都不删除
+                    flag = false;
+                else if(type == 1)
                     result = ClearHasWordedWithFolder(item);
             }
             if(result)
@@ -83,8 +86,13 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
             }
-            if(result)
-                node.Remove();
+            if(result && flag)
+            {
+                if(!string.IsNullOrEmpty(GetValue(node.Tag)))//批次名称永不消逝
+                {
+                    node.Remove();
+                }
+            }
             return result;
         }
 

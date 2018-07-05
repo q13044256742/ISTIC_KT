@@ -70,6 +70,10 @@ namespace 数据采集档案管理系统___课题版
             //下拉框默认
             cbo_Project_HasNext.SelectedIndex = 0;
             cbo_Topic_HasNext.SelectedIndex = 0;
+
+            dgv_Project_FileList.DefaultCellStyle = DataGridViewStyleHelper.GetCellStyle();
+            dgv_Topic_FileList.DefaultCellStyle = DataGridViewStyleHelper.GetCellStyle();
+            dgv_Subject_FileList.DefaultCellStyle = DataGridViewStyleHelper.GetCellStyle();
         }
 
         private void LoadBasicInfo(TreeNode treeNode)
@@ -2878,6 +2882,11 @@ namespace 数据采集档案管理系统___课题版
             }
             Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);
             frm.ShowDialog();
+        }
+
+        private void Frm_Wroking_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

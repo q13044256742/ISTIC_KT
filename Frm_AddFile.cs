@@ -76,7 +76,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(!string.IsNullOrEmpty(_ids[i]))
                     {
-                        object filePath = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_path||'\'||bfi_name FROM backup_files_info WHERE bfi_id='{_ids[i]}'");
+                        object filePath = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_path||'\\'||bfi_name FROM backup_files_info WHERE bfi_id='{_ids[i]}'");
                         AddFileToList(GetValue(filePath), _ids[i]);
                     }
                 }
@@ -251,21 +251,19 @@ namespace 数据采集档案管理系统___课题版
 
         private bool NotExist(string fullPath)
         {
-            FileInfo info = new FileInfo(fullPath);
             foreach(ListViewItem item in lsv_LinkList.Items)
-                if(info.FullName.Equals(item.SubItems[3].Text))
+                if(fullPath.Equals(item.SubItems[1].Text))
                     return false;
             return true;
         }
 
         private void AddFileToList(string fullPath, string fid)
         {
-            FileInfo info = new FileInfo(fullPath);
             string id = (lsv_LinkList.Items.Count + 1).ToString();
             ListViewItem item = lsv_LinkList.Items.Add(id);
             item.SubItems.AddRange(new ListViewItem.ListViewSubItem[]
             {
-                new ListViewItem.ListViewSubItem(){ Text = info.FullName },
+                new ListViewItem.ListViewSubItem(){ Text = fullPath },
             });
             item.Tag = fid;
         }
@@ -338,7 +336,8 @@ namespace 数据采集档案管理系统___课题版
                 "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
                 $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{link}', '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}', '{parentId}', '{row.Index}', '{remark}');";
                 //将备份表中的文件标记为已选取
-                insertSql += $"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_id IN ({fileId});";
+                if(!string.IsNullOrEmpty(fileId))
+                    insertSql += $"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_id IN ({fileId});";
                 SQLiteHelper.ExecuteNonQuery(insertSql);
 
                 row.Cells[key + "id"].Tag = primaryKey;
@@ -369,7 +368,7 @@ namespace 数据采集档案管理系统___课题版
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
                 object link = row.Cells[key + "link"].Value;
-                object fileId = GetFullStringBySplit(GetLinkList(1), ",", "'");
+                string fileId = GetFullStringBySplit(GetLinkList(1), ",", "'");
                 object remark = txt_Remark.Text;
 
                 string oldFileId = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_file_id FROM files_info WHERE fi_id='{primaryKey}';"));
@@ -390,7 +389,7 @@ namespace 数据采集档案管理系统___课题版
                    $"fi_remark = '{remark}', " +
                    $"fi_file_id = '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}' " +
                    $"WHERE fi_id = '{primaryKey}';";
-                if(fileId != null)
+                if(!string.IsNullOrEmpty(fileId))
                     updateSql += $"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_id IN ({fileId});";
                 SQLiteHelper.ExecuteNonQuery(updateSql);
                 MessageBox.Show("数据已保存。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -455,7 +454,7 @@ namespace 数据采集档案管理系统___课题版
                 if(type == 1)
                     result[i] = GetValue(lsv_LinkList.Items[i].Tag);
                 else if(type == 2)
-                    result[i] = GetValue(lsv_LinkList.Items[i].SubItems[3].Text);
+                    result[i] = GetValue(lsv_LinkList.Items[i].SubItems[1].Text);
             }
             return result;
         }
@@ -710,11 +709,6 @@ namespace 数据采集档案管理系统___课题版
                         btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = false;
                         new Thread(delegate ()
                         {
-                            string savePath = Application.StartupPath + @"\Temp\";
-                            if(!Directory.Exists(savePath))
-                                Directory.CreateDirectory(savePath);
-                            string filePath = savePath + new FileInfo(fullPath).Name;
-                            File.Copy(fullPath, filePath, true);
                             //尝试获取页数
                             try
                             {
@@ -734,7 +728,7 @@ namespace 数据采集档案管理系统___课题版
 
                                 if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                                 {
-                                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
+                                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", fullPath, null, null, ShowWindowCommands.SW_NORMAL);
                                 }
                             }
                             else
@@ -755,7 +749,7 @@ namespace 数据采集档案管理系统___课题版
             if(index > 0 && MessageBox.Show("是否打开文件？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ListViewItem item = lsv_LinkList.SelectedItems[0];
-                string filePath = item.SubItems[3].Text;
+                string filePath = item.SubItems[1].Text;
                 if(!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
                 {
                     WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);

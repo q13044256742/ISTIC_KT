@@ -172,25 +172,13 @@ namespace 数据采集档案管理系统___课题版
                 if(!string.IsNullOrEmpty(link) && Directory.Exists(rootFolder))
                 {
                     string fileName = Path.GetFileName(link);
-                    string[] files = Directory.GetFiles(rootFolder, "*" + fileName, SearchOption.AllDirectories);
-                    if(files.Length == 1)
-                        link = files[0];
-                    else
-                        for(int j = 0; j < files.Length; j++)
-                        {
-                            string parent = Directory.GetParent(files[j]).Name;
-                            string real = GetRealParentName(row["fi_obj_id"]).Trim();
-                            if(string.IsNullOrEmpty(real))
-                                link = real;
-                            else if(parent.Equals(real))
-                            {
-                                link = files[j];
-                                break;
-                            }
-                        }
-                    string filePath = Path.GetDirectoryName(link);
+                    string filePath = GetFilePathByRootFolder(rootFolder, fileName);
+                    if(!string.IsNullOrEmpty(filePath))
+                        link = filePath;
+
+                    string _filePath = Path.GetDirectoryName(link);
                     string _fileName = Path.GetFileName(link);
-                    sqlString.Append($"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_path='{filePath}\\' AND bfi_name='{_fileName}';");
+                    sqlString.Append($"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_path='{_filePath}' AND bfi_name='{_fileName}';");
                 }
 
                 //更新文件备份表状态
@@ -198,7 +186,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     string _filePath = Path.GetDirectoryName(link);
                     string __fileName = Path.GetFileName(link);
-                    fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}\\' AND bfi_name='{__fileName}';") ?? fileId;
+                    fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}' AND bfi_name='{__fileName}';") ?? fileId;
                 }
                 sqlString.Append($"DELETE FROM files_info WHERE fi_id='{row["fi_id"]}';");
                 sqlString.Append("INSERT INTO files_info(fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort, fi_remark) VALUES(" +
@@ -248,6 +236,23 @@ namespace 数据采集档案管理系统___课题版
                 }
             }
             SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
+        }
+
+        private string GetFilePathByRootFolder(string rootFolder, string fileName)
+        {
+            string[] file = Directory.GetFiles(rootFolder);
+            foreach(string name in file)
+                if(name.EndsWith(fileName))
+                    return name;
+
+            string[] direct = Directory.GetDirectories(rootFolder);
+            foreach(string dir in direct)
+            {
+                string result = GetFilePathByRootFolder(dir, fileName);
+                if(!string.IsNullOrEmpty(result))
+                    return result;
+            }
+            return null;
         }
 
         private string GetRealParentName(object id)
@@ -312,7 +317,7 @@ namespace 数据采集档案管理系统___课题版
                     SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
                     primaryKey = GetValue(value);
                 }
-                CopyFile(infos[i].FullName, rootFolder + "\\" + infos[i].Name + @"\", primaryKey);
+                CopyFile(infos[i].FullName, rootFolder + "\\" + infos[i].Name, primaryKey);
             }
         }
 
