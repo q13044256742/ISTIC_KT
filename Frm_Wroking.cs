@@ -355,7 +355,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     DateTime time = Convert.ToDateTime(_date);
                     if(time != DateTime.MinValue)
-                        dataGridView.Rows[index].Cells[key + "date"].Value = time.ToString("yyyyMMdd");
+                        dataGridView.Rows[index].Cells[key + "date"].Value = time.ToString("yyyy-MM-dd");
                 }
                 dataGridView.Rows[index].Cells[key + "unit"].Value = dataTable.Rows[i]["fi_unit"];
                 dataGridView.Rows[index].Cells[key + "carrier"].Value = dataTable.Rows[i]["fi_carrier"];
@@ -1154,6 +1154,19 @@ namespace 数据采集档案管理系统___课题版
                 }
                 else
                     cellCategor.ErrorText = null;
+
+                DataGridViewCell dateCell = rows[i].Cells[key + "date"];
+                if(!string.IsNullOrEmpty(GetValue(dateCell.Value)))
+                {
+                    bool flag = DateTime.TryParse(GetValue(dateCell.Value), out DateTime date);
+                    if(!flag)
+                    {
+                        dateCell.ErrorText = "提示：请输入格式为 yyyy-MM-dd 的有效日期。";
+                        result = false;
+                    }
+                    else
+                        dateCell.ErrorText = null;
+                }
             }
             return result;
         }

@@ -486,6 +486,7 @@ namespace 数据采集档案管理系统___课题版
 
         private bool CheckDatas()
         {
+            errorProvider1.Clear();
             bool result = true;
             //文件类别
             if(cbo_categor.SelectedIndex == -1 || cbo_categor.SelectedIndex == cbo_categor.Items.Count - 1)
@@ -496,8 +497,6 @@ namespace 数据采集档案管理系统___课题版
                     errorProvider1.SetError(cbo_categor, "提示：请输入文件类别名称。");
                     result = false;
                 }
-                else
-                    errorProvider1.SetError(cbo_categor, null);
             }
             //页数
             NumericUpDown pagesCell = num_page;
@@ -506,8 +505,6 @@ namespace 数据采集档案管理系统___课题版
                 errorProvider1.SetError(pagesCell, "提示：页数不能为0。");
                 result = false;
             }
-            else
-                errorProvider1.SetError(pagesCell, null);
             //文件名
             string nameValue = txt_fileName.Text.Trim();
             if(string.IsNullOrEmpty(nameValue))
@@ -523,8 +520,6 @@ namespace 数据采集档案管理系统___课题版
                     errorProvider1.SetError(txt_fileName, "提示：文件名已存在，请重新输入。");
                     result = false;
                 }
-                else
-                    errorProvider1.SetError(txt_fileName, null);
             }
             //编号
             if(string.IsNullOrEmpty(txt_fileCode.Text.Trim()))
@@ -532,8 +527,6 @@ namespace 数据采集档案管理系统___课题版
                 errorProvider1.SetError(txt_fileCode, "提示：编号不能为空。");
                 result = false;
             }
-            else
-                errorProvider1.SetError(txt_fileCode, null);
             //文件类型
             int count = 0;
             foreach(RadioButton item in pal_type.Controls)
@@ -544,17 +537,24 @@ namespace 数据采集档案管理系统___课题版
                 errorProvider1.SetError(pal_type, "提示：文件类型不能为空。");
                 result = false;
             }
-            else
-                errorProvider1.SetError(pal_type, null);
-
             //存放单位
             if(string.IsNullOrEmpty(txt_unit.Text.Trim()))
             {
                 errorProvider1.SetError(txt_unit, "提示：存放单位不能为空。");
                 result = false;
             }
-            else
-                errorProvider1.SetError(txt_unit, null);
+
+            string dateString = txt_Date.Text;
+            if(!string.IsNullOrEmpty(dateString))
+            {
+                bool flag = DateTime.TryParse(GetValue(dateString), out DateTime date);
+                if(!flag)
+                {
+                    errorProvider1.SetError(dtp_date, "提示：请输入格式为 yyyy-MM-dd 的有效日期。");
+                    result = false;
+                }
+            }
+
             return result;
         }
 
@@ -760,7 +760,7 @@ namespace 数据采集档案管理系统___课题版
         private void dtp_date_ValueChanged(object sender, EventArgs e)
         {
             DateTime date = dtp_date.Value;
-            txt_Date.Text = date.ToString("yyyyMMdd");
+            txt_Date.Text = date.ToString("yyyy-MM-dd");
         }
     }
 }
