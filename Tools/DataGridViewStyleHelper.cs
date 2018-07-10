@@ -86,7 +86,7 @@ namespace 数据采集档案管理系统___课题版
             return new DataGridViewCellStyle()
             {
                 Alignment = DataGridViewContentAlignment.MiddleLeft,
-                Font = new System.Drawing.Font("华文中宋", DefaultCellFontSize, System.Drawing.FontStyle.Regular)
+                Font = new System.Drawing.Font("宋体", DefaultCellFontSize, System.Drawing.FontStyle.Regular)
             };
         }
     }

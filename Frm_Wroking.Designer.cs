@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -49,20 +50,6 @@
             this.tab_Project_Info = new System.Windows.Forms.TabControl();
             this.tab_Project_File = new System.Windows.Forms.TabPage();
             this.dgv_Project_FileList = new System.Windows.Forms.DataGridView();
-            this.dgv_Project_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Project_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Project_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Project_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Project_FileValid = new System.Windows.Forms.DataGridView();
             this.dgv_Project_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -139,20 +126,6 @@
             this.tab_Topic_Info = new System.Windows.Forms.TabControl();
             this.tab_Topic_File = new System.Windows.Forms.TabPage();
             this.dgv_Topic_FileList = new System.Windows.Forms.DataGridView();
-            this.dgv_Topic_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Topic_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Topic_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Topic_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Topic_FileValid = new System.Windows.Forms.DataGridView();
             this.dgv_Topic_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -225,20 +198,6 @@
             this.tab_Subject_Info = new System.Windows.Forms.TabControl();
             this.tab_Subject_File = new System.Windows.Forms.TabPage();
             this.dgv_Subject_FileList = new System.Windows.Forms.DataGridView();
-            this.dgv_Subject_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgv_Subject_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.dgv_Subject_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Subject_FileValid = new System.Windows.Forms.TabPage();
             this.dgv_Subject_FileValid = new System.Windows.Forms.DataGridView();
             this.dgv_Subject_FV_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -291,11 +250,53 @@
             this.btn_Subject_AddFile = new System.Windows.Forms.Button();
             this.btn_Subject_Add = new System.Windows.Forms.Button();
             this.btn_Subject_Save = new System.Windows.Forms.Button();
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.插入行IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.dgv_Project_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Project_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Project_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Topic_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Topic_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_stage = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_categor = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_categor_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_user = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_type = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_pages = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_unit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgv_Subject_FL_carrier = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.dgv_Subject_FL_link = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -542,85 +543,6 @@
             this.dgv_Project_FileList.RowHeaderMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.FileList_RowHeaderMouseDoubleClick);
             this.dgv_Project_FileList.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.FileList_UserAddedRow);
             this.dgv_Project_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
-            // 
-            // dgv_Project_FL_id
-            // 
-            this.dgv_Project_FL_id.HeaderText = "序号";
-            this.dgv_Project_FL_id.Name = "dgv_Project_FL_id";
-            this.dgv_Project_FL_id.Visible = false;
-            // 
-            // dgv_Project_FL_stage
-            // 
-            this.dgv_Project_FL_stage.HeaderText = "阶段";
-            this.dgv_Project_FL_stage.Name = "dgv_Project_FL_stage";
-            this.dgv_Project_FL_stage.Width = 150;
-            // 
-            // dgv_Project_FL_categor
-            // 
-            this.dgv_Project_FL_categor.HeaderText = "文件类别";
-            this.dgv_Project_FL_categor.Name = "dgv_Project_FL_categor";
-            this.dgv_Project_FL_categor.Width = 180;
-            // 
-            // dgv_Project_FL_categor_name
-            // 
-            this.dgv_Project_FL_categor_name.HeaderText = "类别名称";
-            this.dgv_Project_FL_categor_name.Name = "dgv_Project_FL_categor_name";
-            this.dgv_Project_FL_categor_name.Visible = false;
-            // 
-            // dgv_Project_FL_code
-            // 
-            this.dgv_Project_FL_code.HeaderText = "文件编号";
-            this.dgv_Project_FL_code.Name = "dgv_Project_FL_code";
-            // 
-            // dgv_Project_FL_name
-            // 
-            this.dgv_Project_FL_name.HeaderText = "文件名称";
-            this.dgv_Project_FL_name.Name = "dgv_Project_FL_name";
-            this.dgv_Project_FL_name.Width = 350;
-            // 
-            // dgv_Project_FL_count
-            // 
-            this.dgv_Project_FL_count.HeaderText = "移交份数";
-            this.dgv_Project_FL_count.Name = "dgv_Project_FL_count";
-            // 
-            // dgv_Project_FL_user
-            // 
-            this.dgv_Project_FL_user.HeaderText = "责任者";
-            this.dgv_Project_FL_user.Name = "dgv_Project_FL_user";
-            // 
-            // dgv_Project_FL_type
-            // 
-            this.dgv_Project_FL_type.HeaderText = "类型";
-            this.dgv_Project_FL_type.Name = "dgv_Project_FL_type";
-            // 
-            // dgv_Project_FL_pages
-            // 
-            this.dgv_Project_FL_pages.HeaderText = "页数";
-            this.dgv_Project_FL_pages.Name = "dgv_Project_FL_pages";
-            this.dgv_Project_FL_pages.Width = 50;
-            // 
-            // dgv_Project_FL_date
-            // 
-            this.dgv_Project_FL_date.HeaderText = "形成日期";
-            this.dgv_Project_FL_date.Name = "dgv_Project_FL_date";
-            // 
-            // dgv_Project_FL_unit
-            // 
-            this.dgv_Project_FL_unit.HeaderText = "存放单位";
-            this.dgv_Project_FL_unit.Name = "dgv_Project_FL_unit";
-            this.dgv_Project_FL_unit.Width = 250;
-            // 
-            // dgv_Project_FL_carrier
-            // 
-            this.dgv_Project_FL_carrier.HeaderText = "载体";
-            this.dgv_Project_FL_carrier.Name = "dgv_Project_FL_carrier";
-            // 
-            // dgv_Project_FL_link
-            // 
-            this.dgv_Project_FL_link.HeaderText = "电子文件挂接";
-            this.dgv_Project_FL_link.Name = "dgv_Project_FL_link";
-            this.dgv_Project_FL_link.ReadOnly = true;
-            this.dgv_Project_FL_link.Width = 350;
             // 
             // tab_Project_FileValid
             // 
@@ -1033,21 +955,21 @@
             // 
             // dtp_Project_StartDate
             // 
-            this.dtp_Project_StartDate.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dtp_Project_StartDate.Font = new System.Drawing.Font("宋体", 15F);
             this.dtp_Project_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Project_StartDate.Location = new System.Drawing.Point(301, 72);
             this.dtp_Project_StartDate.Name = "dtp_Project_StartDate";
-            this.dtp_Project_StartDate.Size = new System.Drawing.Size(16, 31);
+            this.dtp_Project_StartDate.Size = new System.Drawing.Size(16, 30);
             this.dtp_Project_StartDate.TabIndex = 6;
             this.dtp_Project_StartDate.ValueChanged += new System.EventHandler(this.Date_ValueChanged);
             // 
             // dtp_Project_FinishDate
             // 
-            this.dtp_Project_FinishDate.Font = new System.Drawing.Font("宋体", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dtp_Project_FinishDate.Font = new System.Drawing.Font("宋体", 15F);
             this.dtp_Project_FinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Project_FinishDate.Location = new System.Drawing.Point(651, 72);
             this.dtp_Project_FinishDate.Name = "dtp_Project_FinishDate";
-            this.dtp_Project_FinishDate.Size = new System.Drawing.Size(16, 31);
+            this.dtp_Project_FinishDate.Size = new System.Drawing.Size(16, 30);
             this.dtp_Project_FinishDate.TabIndex = 7;
             this.dtp_Project_FinishDate.ValueChanged += new System.EventHandler(this.Date_ValueChanged);
             // 
@@ -1482,100 +1404,6 @@
             this.dgv_Topic_FileList.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.FileList_UserAddedRow);
             this.dgv_Topic_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
-            // dgv_Topic_FL_id
-            // 
-            this.dgv_Topic_FL_id.HeaderText = "序号";
-            this.dgv_Topic_FL_id.Name = "dgv_Topic_FL_id";
-            this.dgv_Topic_FL_id.Visible = false;
-            // 
-            // dgv_Topic_FL_stage
-            // 
-            this.dgv_Topic_FL_stage.HeaderText = "阶段";
-            this.dgv_Topic_FL_stage.Items.AddRange(new object[] {
-            "规划阶段",
-            "申报立项阶段",
-            "过程管理阶段",
-            "验收阶段"});
-            this.dgv_Topic_FL_stage.Name = "dgv_Topic_FL_stage";
-            this.dgv_Topic_FL_stage.Width = 150;
-            // 
-            // dgv_Topic_FL_categor
-            // 
-            this.dgv_Topic_FL_categor.HeaderText = "文件类别";
-            this.dgv_Topic_FL_categor.Name = "dgv_Topic_FL_categor";
-            this.dgv_Topic_FL_categor.Width = 180;
-            // 
-            // dgv_Topic_FL_categor_name
-            // 
-            this.dgv_Topic_FL_categor_name.HeaderText = "类别名称";
-            this.dgv_Topic_FL_categor_name.Name = "dgv_Topic_FL_categor_name";
-            this.dgv_Topic_FL_categor_name.Visible = false;
-            // 
-            // dgv_Topic_FL_code
-            // 
-            this.dgv_Topic_FL_code.HeaderText = "文件编号";
-            this.dgv_Topic_FL_code.Name = "dgv_Topic_FL_code";
-            // 
-            // dgv_Topic_FL_name
-            // 
-            this.dgv_Topic_FL_name.HeaderText = "文件名称";
-            this.dgv_Topic_FL_name.Name = "dgv_Topic_FL_name";
-            this.dgv_Topic_FL_name.Width = 350;
-            // 
-            // dgv_Topic_FL_count
-            // 
-            this.dgv_Topic_FL_count.HeaderText = "移交份数";
-            this.dgv_Topic_FL_count.Name = "dgv_Topic_FL_count";
-            // 
-            // dgv_Topic_FL_user
-            // 
-            this.dgv_Topic_FL_user.HeaderText = "责任者";
-            this.dgv_Topic_FL_user.Name = "dgv_Topic_FL_user";
-            // 
-            // dgv_Topic_FL_type
-            // 
-            this.dgv_Topic_FL_type.HeaderText = "类型";
-            this.dgv_Topic_FL_type.Items.AddRange(new object[] {
-            "财务",
-            "管理",
-            "评审",
-            "技术",
-            "汇编"});
-            this.dgv_Topic_FL_type.Name = "dgv_Topic_FL_type";
-            // 
-            // dgv_Topic_FL_pages
-            // 
-            this.dgv_Topic_FL_pages.HeaderText = "页数";
-            this.dgv_Topic_FL_pages.Name = "dgv_Topic_FL_pages";
-            this.dgv_Topic_FL_pages.Width = 50;
-            // 
-            // dgv_Topic_FL_date
-            // 
-            this.dgv_Topic_FL_date.HeaderText = "形成日期";
-            this.dgv_Topic_FL_date.Name = "dgv_Topic_FL_date";
-            // 
-            // dgv_Topic_FL_unit
-            // 
-            this.dgv_Topic_FL_unit.HeaderText = "存放单位";
-            this.dgv_Topic_FL_unit.Name = "dgv_Topic_FL_unit";
-            this.dgv_Topic_FL_unit.Width = 250;
-            // 
-            // dgv_Topic_FL_carrier
-            // 
-            this.dgv_Topic_FL_carrier.HeaderText = "载体";
-            this.dgv_Topic_FL_carrier.Items.AddRange(new object[] {
-            "纸质",
-            "电子",
-            "纸质+电子"});
-            this.dgv_Topic_FL_carrier.Name = "dgv_Topic_FL_carrier";
-            // 
-            // dgv_Topic_FL_link
-            // 
-            this.dgv_Topic_FL_link.HeaderText = "电子文件挂接";
-            this.dgv_Topic_FL_link.Name = "dgv_Topic_FL_link";
-            this.dgv_Topic_FL_link.ReadOnly = true;
-            this.dgv_Topic_FL_link.Width = 350;
-            // 
             // tab_Topic_FileValid
             // 
             this.tab_Topic_FileValid.Controls.Add(this.dgv_Topic_FileValid);
@@ -1885,21 +1713,21 @@
             // 
             // dtp_Topic_StartDate
             // 
-            this.dtp_Topic_StartDate.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.dtp_Topic_StartDate.Font = new System.Drawing.Font("宋体", 15F);
             this.dtp_Topic_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Topic_StartDate.Location = new System.Drawing.Point(300, 72);
             this.dtp_Topic_StartDate.Name = "dtp_Topic_StartDate";
-            this.dtp_Topic_StartDate.Size = new System.Drawing.Size(17, 31);
+            this.dtp_Topic_StartDate.Size = new System.Drawing.Size(17, 30);
             this.dtp_Topic_StartDate.TabIndex = 6;
             this.dtp_Topic_StartDate.ValueChanged += new System.EventHandler(this.Date_ValueChanged);
             // 
             // dtp_Topic_FinishDate
             // 
-            this.dtp_Topic_FinishDate.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.dtp_Topic_FinishDate.Font = new System.Drawing.Font("宋体", 15F);
             this.dtp_Topic_FinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Topic_FinishDate.Location = new System.Drawing.Point(650, 72);
             this.dtp_Topic_FinishDate.Name = "dtp_Topic_FinishDate";
-            this.dtp_Topic_FinishDate.Size = new System.Drawing.Size(17, 31);
+            this.dtp_Topic_FinishDate.Size = new System.Drawing.Size(17, 30);
             this.dtp_Topic_FinishDate.TabIndex = 7;
             this.dtp_Topic_FinishDate.ValueChanged += new System.EventHandler(this.Date_ValueChanged);
             // 
@@ -2399,100 +2227,6 @@
             this.dgv_Subject_FileList.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.FileList_UserAddedRow);
             this.dgv_Subject_FileList.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.UserDeletedRow);
             // 
-            // dgv_Subject_FL_id
-            // 
-            this.dgv_Subject_FL_id.HeaderText = "序号";
-            this.dgv_Subject_FL_id.Name = "dgv_Subject_FL_id";
-            this.dgv_Subject_FL_id.Visible = false;
-            // 
-            // dgv_Subject_FL_stage
-            // 
-            this.dgv_Subject_FL_stage.HeaderText = "阶段";
-            this.dgv_Subject_FL_stage.Items.AddRange(new object[] {
-            "规划阶段",
-            "申报立项阶段",
-            "过程管理阶段",
-            "验收阶段"});
-            this.dgv_Subject_FL_stage.Name = "dgv_Subject_FL_stage";
-            this.dgv_Subject_FL_stage.Width = 150;
-            // 
-            // dgv_Subject_FL_categor
-            // 
-            this.dgv_Subject_FL_categor.HeaderText = "文件类别";
-            this.dgv_Subject_FL_categor.Name = "dgv_Subject_FL_categor";
-            this.dgv_Subject_FL_categor.Width = 180;
-            // 
-            // dgv_Subject_FL_categor_name
-            // 
-            this.dgv_Subject_FL_categor_name.HeaderText = "类别名称";
-            this.dgv_Subject_FL_categor_name.Name = "dgv_Subject_FL_categor_name";
-            this.dgv_Subject_FL_categor_name.Visible = false;
-            // 
-            // dgv_Subject_FL_code
-            // 
-            this.dgv_Subject_FL_code.HeaderText = "文件编号";
-            this.dgv_Subject_FL_code.Name = "dgv_Subject_FL_code";
-            // 
-            // dgv_Subject_FL_name
-            // 
-            this.dgv_Subject_FL_name.HeaderText = "文件名称";
-            this.dgv_Subject_FL_name.Name = "dgv_Subject_FL_name";
-            this.dgv_Subject_FL_name.Width = 350;
-            // 
-            // dgv_Subject_FL_count
-            // 
-            this.dgv_Subject_FL_count.HeaderText = "移交份数";
-            this.dgv_Subject_FL_count.Name = "dgv_Subject_FL_count";
-            // 
-            // dgv_Subject_FL_user
-            // 
-            this.dgv_Subject_FL_user.HeaderText = "责任者";
-            this.dgv_Subject_FL_user.Name = "dgv_Subject_FL_user";
-            // 
-            // dgv_Subject_FL_type
-            // 
-            this.dgv_Subject_FL_type.HeaderText = "类型";
-            this.dgv_Subject_FL_type.Items.AddRange(new object[] {
-            "财务",
-            "管理",
-            "评审",
-            "技术",
-            "汇编"});
-            this.dgv_Subject_FL_type.Name = "dgv_Subject_FL_type";
-            // 
-            // dgv_Subject_FL_pages
-            // 
-            this.dgv_Subject_FL_pages.HeaderText = "页数";
-            this.dgv_Subject_FL_pages.Name = "dgv_Subject_FL_pages";
-            this.dgv_Subject_FL_pages.Width = 50;
-            // 
-            // dgv_Subject_FL_date
-            // 
-            this.dgv_Subject_FL_date.HeaderText = "形成日期";
-            this.dgv_Subject_FL_date.Name = "dgv_Subject_FL_date";
-            // 
-            // dgv_Subject_FL_unit
-            // 
-            this.dgv_Subject_FL_unit.HeaderText = "存放单位";
-            this.dgv_Subject_FL_unit.Name = "dgv_Subject_FL_unit";
-            this.dgv_Subject_FL_unit.Width = 250;
-            // 
-            // dgv_Subject_FL_carrier
-            // 
-            this.dgv_Subject_FL_carrier.HeaderText = "载体";
-            this.dgv_Subject_FL_carrier.Items.AddRange(new object[] {
-            "纸质",
-            "电子",
-            "纸质+电子"});
-            this.dgv_Subject_FL_carrier.Name = "dgv_Subject_FL_carrier";
-            // 
-            // dgv_Subject_FL_link
-            // 
-            this.dgv_Subject_FL_link.HeaderText = "电子文件挂接";
-            this.dgv_Subject_FL_link.Name = "dgv_Subject_FL_link";
-            this.dgv_Subject_FL_link.ReadOnly = true;
-            this.dgv_Subject_FL_link.Width = 350;
-            // 
             // tab_Subject_FileValid
             // 
             this.tab_Subject_FileValid.Controls.Add(this.dgv_Subject_FileValid);
@@ -2802,22 +2536,23 @@
             // 
             // dtp_Subject_StartDate
             // 
-            this.dtp_Subject_StartDate.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.dtp_Subject_StartDate.Font = new System.Drawing.Font("宋体", 15F);
             this.dtp_Subject_StartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Subject_StartDate.Location = new System.Drawing.Point(301, 74);
             this.dtp_Subject_StartDate.Name = "dtp_Subject_StartDate";
-            this.dtp_Subject_StartDate.Size = new System.Drawing.Size(16, 31);
+            this.dtp_Subject_StartDate.Size = new System.Drawing.Size(16, 30);
             this.dtp_Subject_StartDate.TabIndex = 6;
             this.dtp_Subject_StartDate.ValueChanged += new System.EventHandler(this.Date_ValueChanged);
             // 
             // dtp_Subject_FinishDate
             // 
-            this.dtp_Subject_FinishDate.Font = new System.Drawing.Font("宋体", 15.75F);
+            this.dtp_Subject_FinishDate.Font = new System.Drawing.Font("宋体", 15F);
             this.dtp_Subject_FinishDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_Subject_FinishDate.Location = new System.Drawing.Point(654, 74);
             this.dtp_Subject_FinishDate.Name = "dtp_Subject_FinishDate";
-            this.dtp_Subject_FinishDate.Size = new System.Drawing.Size(16, 31);
+            this.dtp_Subject_FinishDate.Size = new System.Drawing.Size(16, 30);
             this.dtp_Subject_FinishDate.TabIndex = 7;
+            this.dtp_Subject_FinishDate.ValueChanged += new System.EventHandler(this.Date_ValueChanged);
             // 
             // txt_Subject_Intro
             // 
@@ -3083,6 +2818,276 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // dgv_Project_FL_id
+            // 
+            this.dgv_Project_FL_id.HeaderText = "序号";
+            this.dgv_Project_FL_id.Name = "dgv_Project_FL_id";
+            this.dgv_Project_FL_id.Visible = false;
+            // 
+            // dgv_Project_FL_stage
+            // 
+            this.dgv_Project_FL_stage.HeaderText = "阶段";
+            this.dgv_Project_FL_stage.Name = "dgv_Project_FL_stage";
+            this.dgv_Project_FL_stage.Width = 150;
+            // 
+            // dgv_Project_FL_categor
+            // 
+            this.dgv_Project_FL_categor.HeaderText = "文件类别";
+            this.dgv_Project_FL_categor.Name = "dgv_Project_FL_categor";
+            this.dgv_Project_FL_categor.Width = 180;
+            // 
+            // dgv_Project_FL_categor_name
+            // 
+            this.dgv_Project_FL_categor_name.HeaderText = "类别名称";
+            this.dgv_Project_FL_categor_name.Name = "dgv_Project_FL_categor_name";
+            this.dgv_Project_FL_categor_name.Visible = false;
+            // 
+            // dgv_Project_FL_code
+            // 
+            this.dgv_Project_FL_code.HeaderText = "文件编号";
+            this.dgv_Project_FL_code.Name = "dgv_Project_FL_code";
+            // 
+            // dgv_Project_FL_name
+            // 
+            this.dgv_Project_FL_name.HeaderText = "文件名称";
+            this.dgv_Project_FL_name.Name = "dgv_Project_FL_name";
+            this.dgv_Project_FL_name.Width = 350;
+            // 
+            // dgv_Project_FL_count
+            // 
+            this.dgv_Project_FL_count.HeaderText = "移交份数";
+            this.dgv_Project_FL_count.Name = "dgv_Project_FL_count";
+            // 
+            // dgv_Project_FL_user
+            // 
+            this.dgv_Project_FL_user.HeaderText = "责任者";
+            this.dgv_Project_FL_user.Name = "dgv_Project_FL_user";
+            // 
+            // dgv_Project_FL_type
+            // 
+            this.dgv_Project_FL_type.HeaderText = "类型";
+            this.dgv_Project_FL_type.Name = "dgv_Project_FL_type";
+            // 
+            // dgv_Project_FL_pages
+            // 
+            this.dgv_Project_FL_pages.HeaderText = "页数";
+            this.dgv_Project_FL_pages.Name = "dgv_Project_FL_pages";
+            this.dgv_Project_FL_pages.Width = 50;
+            // 
+            // dgv_Project_FL_date
+            // 
+            this.dgv_Project_FL_date.HeaderText = "形成日期";
+            this.dgv_Project_FL_date.Name = "dgv_Project_FL_date";
+            this.dgv_Project_FL_date.Width = 150;
+            // 
+            // dgv_Project_FL_unit
+            // 
+            this.dgv_Project_FL_unit.HeaderText = "存放单位";
+            this.dgv_Project_FL_unit.Name = "dgv_Project_FL_unit";
+            this.dgv_Project_FL_unit.Width = 250;
+            // 
+            // dgv_Project_FL_carrier
+            // 
+            this.dgv_Project_FL_carrier.HeaderText = "载体";
+            this.dgv_Project_FL_carrier.Name = "dgv_Project_FL_carrier";
+            // 
+            // dgv_Project_FL_link
+            // 
+            this.dgv_Project_FL_link.HeaderText = "电子文件挂接";
+            this.dgv_Project_FL_link.Name = "dgv_Project_FL_link";
+            this.dgv_Project_FL_link.ReadOnly = true;
+            this.dgv_Project_FL_link.Width = 350;
+            // 
+            // dgv_Topic_FL_id
+            // 
+            this.dgv_Topic_FL_id.HeaderText = "序号";
+            this.dgv_Topic_FL_id.Name = "dgv_Topic_FL_id";
+            this.dgv_Topic_FL_id.Visible = false;
+            // 
+            // dgv_Topic_FL_stage
+            // 
+            this.dgv_Topic_FL_stage.HeaderText = "阶段";
+            this.dgv_Topic_FL_stage.Items.AddRange(new object[] {
+            "规划阶段",
+            "申报立项阶段",
+            "过程管理阶段",
+            "验收阶段"});
+            this.dgv_Topic_FL_stage.Name = "dgv_Topic_FL_stage";
+            this.dgv_Topic_FL_stage.Width = 150;
+            // 
+            // dgv_Topic_FL_categor
+            // 
+            this.dgv_Topic_FL_categor.HeaderText = "文件类别";
+            this.dgv_Topic_FL_categor.Name = "dgv_Topic_FL_categor";
+            this.dgv_Topic_FL_categor.Width = 180;
+            // 
+            // dgv_Topic_FL_categor_name
+            // 
+            this.dgv_Topic_FL_categor_name.HeaderText = "类别名称";
+            this.dgv_Topic_FL_categor_name.Name = "dgv_Topic_FL_categor_name";
+            this.dgv_Topic_FL_categor_name.Visible = false;
+            // 
+            // dgv_Topic_FL_code
+            // 
+            this.dgv_Topic_FL_code.HeaderText = "文件编号";
+            this.dgv_Topic_FL_code.Name = "dgv_Topic_FL_code";
+            // 
+            // dgv_Topic_FL_name
+            // 
+            this.dgv_Topic_FL_name.HeaderText = "文件名称";
+            this.dgv_Topic_FL_name.Name = "dgv_Topic_FL_name";
+            this.dgv_Topic_FL_name.Width = 350;
+            // 
+            // dgv_Topic_FL_count
+            // 
+            this.dgv_Topic_FL_count.HeaderText = "移交份数";
+            this.dgv_Topic_FL_count.Name = "dgv_Topic_FL_count";
+            // 
+            // dgv_Topic_FL_user
+            // 
+            this.dgv_Topic_FL_user.HeaderText = "责任者";
+            this.dgv_Topic_FL_user.Name = "dgv_Topic_FL_user";
+            // 
+            // dgv_Topic_FL_type
+            // 
+            this.dgv_Topic_FL_type.HeaderText = "类型";
+            this.dgv_Topic_FL_type.Items.AddRange(new object[] {
+            "财务",
+            "管理",
+            "评审",
+            "技术",
+            "汇编"});
+            this.dgv_Topic_FL_type.Name = "dgv_Topic_FL_type";
+            // 
+            // dgv_Topic_FL_pages
+            // 
+            this.dgv_Topic_FL_pages.HeaderText = "页数";
+            this.dgv_Topic_FL_pages.Name = "dgv_Topic_FL_pages";
+            this.dgv_Topic_FL_pages.Width = 50;
+            // 
+            // dgv_Topic_FL_date
+            // 
+            this.dgv_Topic_FL_date.HeaderText = "形成日期";
+            this.dgv_Topic_FL_date.Name = "dgv_Topic_FL_date";
+            this.dgv_Topic_FL_date.Width = 150;
+            // 
+            // dgv_Topic_FL_unit
+            // 
+            this.dgv_Topic_FL_unit.HeaderText = "存放单位";
+            this.dgv_Topic_FL_unit.Name = "dgv_Topic_FL_unit";
+            this.dgv_Topic_FL_unit.Width = 250;
+            // 
+            // dgv_Topic_FL_carrier
+            // 
+            this.dgv_Topic_FL_carrier.HeaderText = "载体";
+            this.dgv_Topic_FL_carrier.Items.AddRange(new object[] {
+            "纸质",
+            "电子",
+            "纸质+电子"});
+            this.dgv_Topic_FL_carrier.Name = "dgv_Topic_FL_carrier";
+            // 
+            // dgv_Topic_FL_link
+            // 
+            this.dgv_Topic_FL_link.HeaderText = "电子文件挂接";
+            this.dgv_Topic_FL_link.Name = "dgv_Topic_FL_link";
+            this.dgv_Topic_FL_link.ReadOnly = true;
+            this.dgv_Topic_FL_link.Width = 350;
+            // 
+            // dgv_Subject_FL_id
+            // 
+            this.dgv_Subject_FL_id.HeaderText = "序号";
+            this.dgv_Subject_FL_id.Name = "dgv_Subject_FL_id";
+            this.dgv_Subject_FL_id.Visible = false;
+            // 
+            // dgv_Subject_FL_stage
+            // 
+            this.dgv_Subject_FL_stage.HeaderText = "阶段";
+            this.dgv_Subject_FL_stage.Items.AddRange(new object[] {
+            "规划阶段",
+            "申报立项阶段",
+            "过程管理阶段",
+            "验收阶段"});
+            this.dgv_Subject_FL_stage.Name = "dgv_Subject_FL_stage";
+            this.dgv_Subject_FL_stage.Width = 150;
+            // 
+            // dgv_Subject_FL_categor
+            // 
+            this.dgv_Subject_FL_categor.HeaderText = "文件类别";
+            this.dgv_Subject_FL_categor.Name = "dgv_Subject_FL_categor";
+            this.dgv_Subject_FL_categor.Width = 180;
+            // 
+            // dgv_Subject_FL_categor_name
+            // 
+            this.dgv_Subject_FL_categor_name.HeaderText = "类别名称";
+            this.dgv_Subject_FL_categor_name.Name = "dgv_Subject_FL_categor_name";
+            this.dgv_Subject_FL_categor_name.Visible = false;
+            // 
+            // dgv_Subject_FL_code
+            // 
+            this.dgv_Subject_FL_code.HeaderText = "文件编号";
+            this.dgv_Subject_FL_code.Name = "dgv_Subject_FL_code";
+            // 
+            // dgv_Subject_FL_name
+            // 
+            this.dgv_Subject_FL_name.HeaderText = "文件名称";
+            this.dgv_Subject_FL_name.Name = "dgv_Subject_FL_name";
+            this.dgv_Subject_FL_name.Width = 350;
+            // 
+            // dgv_Subject_FL_count
+            // 
+            this.dgv_Subject_FL_count.HeaderText = "移交份数";
+            this.dgv_Subject_FL_count.Name = "dgv_Subject_FL_count";
+            // 
+            // dgv_Subject_FL_user
+            // 
+            this.dgv_Subject_FL_user.HeaderText = "责任者";
+            this.dgv_Subject_FL_user.Name = "dgv_Subject_FL_user";
+            // 
+            // dgv_Subject_FL_type
+            // 
+            this.dgv_Subject_FL_type.HeaderText = "类型";
+            this.dgv_Subject_FL_type.Items.AddRange(new object[] {
+            "财务",
+            "管理",
+            "评审",
+            "技术",
+            "汇编"});
+            this.dgv_Subject_FL_type.Name = "dgv_Subject_FL_type";
+            // 
+            // dgv_Subject_FL_pages
+            // 
+            this.dgv_Subject_FL_pages.HeaderText = "页数";
+            this.dgv_Subject_FL_pages.Name = "dgv_Subject_FL_pages";
+            this.dgv_Subject_FL_pages.Width = 50;
+            // 
+            // dgv_Subject_FL_date
+            // 
+            this.dgv_Subject_FL_date.HeaderText = "形成日期";
+            this.dgv_Subject_FL_date.Name = "dgv_Subject_FL_date";
+            this.dgv_Subject_FL_date.Width = 150;
+            // 
+            // dgv_Subject_FL_unit
+            // 
+            this.dgv_Subject_FL_unit.HeaderText = "存放单位";
+            this.dgv_Subject_FL_unit.Name = "dgv_Subject_FL_unit";
+            this.dgv_Subject_FL_unit.Width = 250;
+            // 
+            // dgv_Subject_FL_carrier
+            // 
+            this.dgv_Subject_FL_carrier.HeaderText = "载体";
+            this.dgv_Subject_FL_carrier.Items.AddRange(new object[] {
+            "纸质",
+            "电子",
+            "纸质+电子"});
+            this.dgv_Subject_FL_carrier.Name = "dgv_Subject_FL_carrier";
+            // 
+            // dgv_Subject_FL_link
+            // 
+            this.dgv_Subject_FL_link.HeaderText = "电子文件挂接";
+            this.dgv_Subject_FL_link.Name = "dgv_Subject_FL_link";
+            this.dgv_Subject_FL_link.ReadOnly = true;
+            this.dgv_Subject_FL_link.Width = 350;
             // 
             // Frm_Wroking
             // 

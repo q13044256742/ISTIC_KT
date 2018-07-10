@@ -307,7 +307,7 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private DateTime GetDateTimeValue(object date)
         {
-            DateTime _date = DateTime.Now;
+            DateTime _date = DateTimePicker.MinimumDateTime;
             string param = GetValue(date);
             if(!string.IsNullOrEmpty(param))
                 DateTime.TryParse(param, out _date);
@@ -3109,27 +3109,36 @@ namespace 数据采集档案管理系统___课题版
         private void Date_ValueChanged(object sender, EventArgs e)
         {
             DateTimePicker picker = sender as DateTimePicker;
-            string name = picker.Name;
-            if(name.Contains("Project"))
+            if(picker.Value != DateTimePicker.MinimumDateTime)
             {
-                if(name.Contains("Start"))
-                    txt_Project_StartDate.Text = picker.Value.ToString("yyyy-MM-dd");
-                else if(name.Contains("Finish"))
-                    txt_Project_FinishDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                string name = picker.Name;
+                if(name.Contains("Project"))
+                {
+                    if(name.Contains("Start"))
+                        txt_Project_StartDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                    else if(name.Contains("Finish"))
+                        txt_Project_FinishDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                }
+                else if(name.Contains("Topic"))
+                {
+                    if(name.Contains("Start"))
+                        txt_Topic_StartDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                    else if(name.Contains("Finish"))
+                        txt_Topic_FinishDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                }
+                else if(name.Contains("Subject"))
+                {
+                    if(name.Contains("Start"))
+                        txt_Subject_StartDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                    else if(name.Contains("Finish"))
+                        txt_Subject_FinishDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                }
             }
-            else if(name.Contains("Topic"))
+            else
             {
-                if(name.Contains("Start"))
-                    txt_Topic_StartDate.Text = picker.Value.ToString("yyyy-MM-dd");
-                else if(name.Contains("Finish"))
-                    txt_Topic_FinishDate.Text = picker.Value.ToString("yyyy-MM-dd");
-            }
-            else if(name.Contains("Subject"))
-            {
-                if(name.Contains("Start"))
-                    txt_Subject_StartDate.Text = picker.Value.ToString("yyyy-MM-dd");
-                else if(name.Contains("Finish"))
-                    txt_Subject_FinishDate.Text = picker.Value.ToString("yyyy-MM-dd");
+                picker.ValueChanged -= Date_ValueChanged;
+                picker.Value = DateTime.Now;
+                picker.ValueChanged += Date_ValueChanged;
             }
         }
     }
