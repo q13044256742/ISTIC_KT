@@ -1826,13 +1826,14 @@ namespace 数据采集档案管理系统___课题版
                     {
                         frm = new Frm_AddFile(dgv_Project_FileList, "dgv_Project_FL_", null);
                         string value = txt_Project_Year.Text;
-                        int year = 0;
-                        if(int.TryParse(value.Substring(0, 4), out year))
+                        if(value.Length >= 4)
                         {
-                            txt_Project_Year.Text = year.ToString();
-                            DateTime time = DateTime.MinValue;
-                            if(DateTime.TryParse(year + "-01-01", out time))
-                                frm.dtp_date.Value = time;
+                            if(int.TryParse(value.Substring(0, 4), out int year))
+                            {
+                                txt_Project_Year.Text = year.ToString();
+                                if(DateTime.TryParse(year + "-01-01", out DateTime time))
+                                    frm.dtp_date.Value = time;
+                            }
                         }
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
