@@ -2788,18 +2788,18 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 新增
         /// </summary>
-        private void btn_Project_Add_Click(object sender, EventArgs e)
+        private void Btn_Project_Add_Click(object sender, EventArgs e)
         {
             string name = (sender as Control).Name;
             if(name.Contains("Topic"))
             {
                 ClearText(topic, true);
 
-                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{topic.Tag}'");
+                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{topic.Tag}'") + 1;
                 for(int i = 1; i <= _index; i++)
                 {
-                    string tempCode = txt_Topic_Code.Text + "-" + i.ToString().PadLeft(3, '0');
-                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{subject.Tag}' AND ti_code='{tempCode}'");
+                    string tempCode = txt_Project_Code.Text + "-" + i.ToString().PadLeft(3, '0');
+                    int count = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(ti_id) FROM topic_info WHERE ti_obj_id='{topic.Tag}' AND ti_code='{tempCode}'");
                     if(count == 0)
                     {
                         txt_Topic_Code.Text = tempCode;
@@ -2811,7 +2811,7 @@ namespace 数据采集档案管理系统___课题版
             else if(name.Contains("Subject"))
             {
                 ClearText(subject, true);
-                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{subject.Tag}'");
+                int _index = SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(si_id) FROM subject_info WHERE si_obj_id='{subject.Tag}'") + 1;
                 for(int i = 1; i <= _index; i++)
                 {
                     string tempCode = txt_Topic_Code.Text + "-" + i.ToString().PadLeft(3, '0');

@@ -1968,7 +1968,7 @@
             this.btn_Topic_Add.TabIndex = 2;
             this.btn_Topic_Add.Text = "新增课题";
             this.btn_Topic_Add.UseVisualStyleBackColor = true;
-            this.btn_Topic_Add.Click += new System.EventHandler(this.btn_Project_Add_Click);
+            this.btn_Topic_Add.Click += new System.EventHandler(this.Btn_Project_Add_Click);
             // 
             // btn_Topic_Save
             // 
@@ -2768,7 +2768,7 @@
             this.btn_Subject_Add.TabIndex = 2;
             this.btn_Subject_Add.Text = "新增子课题";
             this.btn_Subject_Add.UseVisualStyleBackColor = true;
-            this.btn_Subject_Add.Click += new System.EventHandler(this.btn_Project_Add_Click);
+            this.btn_Subject_Add.Click += new System.EventHandler(this.Btn_Project_Add_Click);
             // 
             // btn_Subject_Save
             // 

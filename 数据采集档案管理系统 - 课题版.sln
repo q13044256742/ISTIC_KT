@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "数据采集档案管理系统 - 课题版", "数据采集档案管理系统 - 课题版.csproj", "{835E7C75-F614-4D98-9B76-93F82B8D2BBF}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ISTIC_KT", "..\ISTIC_KT\ISTIC_KT.vdproj", "{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ISTIC_KT", "..\MSI\ISTIC_KT\ISTIC_KT.vdproj", "{B409CE13-5C46-4454-B154-6F44F8BD6796}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,12 +29,12 @@ Global
 		{835E7C75-F614-4D98-9B76-93F82B8D2BBF}.Release|x64.Build.0 = Release|x64
 		{835E7C75-F614-4D98-9B76-93F82B8D2BBF}.Release|x86.ActiveCfg = Release|Any CPU
 		{835E7C75-F614-4D98-9B76-93F82B8D2BBF}.Release|x86.Build.0 = Release|Any CPU
-		{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}.Debug|Any CPU.ActiveCfg = Debug
-		{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}.Debug|x64.ActiveCfg = Debug
-		{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}.Debug|x86.ActiveCfg = Debug
-		{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}.Release|Any CPU.ActiveCfg = Release
-		{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}.Release|x64.ActiveCfg = Release
-		{F0C90680-BAA0-414C-A8C9-25F6C7DB04BA}.Release|x86.ActiveCfg = Release
+		{B409CE13-5C46-4454-B154-6F44F8BD6796}.Debug|Any CPU.ActiveCfg = Debug
+		{B409CE13-5C46-4454-B154-6F44F8BD6796}.Debug|x64.ActiveCfg = Debug
+		{B409CE13-5C46-4454-B154-6F44F8BD6796}.Debug|x86.ActiveCfg = Debug
+		{B409CE13-5C46-4454-B154-6F44F8BD6796}.Release|Any CPU.ActiveCfg = Release
+		{B409CE13-5C46-4454-B154-6F44F8BD6796}.Release|x64.ActiveCfg = Release
+		{B409CE13-5C46-4454-B154-6F44F8BD6796}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
