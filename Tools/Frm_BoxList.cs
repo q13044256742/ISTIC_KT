@@ -140,20 +140,17 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(item is Panel)
                     {
-                        bitMap = new Bitmap(item.Width, item.Height, PixelFormat.Format32bppArgb);
-                        Graphics.FromImage(bitMap).Clear(Color.White);
-                        item.DrawToBitmap(bitMap, new Rectangle(new Point(0, 0), bitMap.Size));
-                        printDocument.Print();
+
                     }
                     else if(item is DataGridView)
                     {
                         DataGridView view = item as DataGridView;
                         dgv_DataList.ClearSelection();
-                        bitMap = new Bitmap(item.Width, item.Height, PixelFormat.Format32bppArgb);
-                        Graphics.FromImage(bitMap).Clear(Color.White);
-                        item.DrawToBitmap(bitMap, new Rectangle(new Point(0, 0), bitMap.Size));
-                        printDocument.Print();
                     }
+                    bitMap = new Bitmap(item.Width, item.Height, PixelFormat.Format32bppArgb);
+                    Graphics.FromImage(bitMap).Clear(Color.White);
+                    item.DrawToBitmap(bitMap, new Rectangle(new Point(0, 0), bitMap.Size));
+                    printDocument.Print();
                     bitMap = null;
                 }
 

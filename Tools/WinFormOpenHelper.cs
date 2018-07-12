@@ -58,7 +58,7 @@ namespace 数据采集档案管理系统___课题版
         SW_SHOWDEFAULT = 10,
         SW_MAX = 10
     }
-    class WinFormOpenHelper
+    public class WinFormOpenHelper
     {
         /// <summary>
         /// 打开文件或链接

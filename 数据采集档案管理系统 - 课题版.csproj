@@ -205,6 +205,12 @@
     <Compile Include="Frm_Print.Designer.cs">
       <DependentUpon>Frm_Print.cs</DependentUpon>
     </Compile>
+    <Compile Include="Frm_PrintBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frm_PrintBox.Designer.cs">
+      <DependentUpon>Frm_PrintBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="Frm_Query.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -327,6 +333,9 @@
     <EmbeddedResource Include="Frm_Print.resx">
       <DependentUpon>Frm_Print.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Frm_PrintBox.resx">
+      <DependentUpon>Frm_PrintBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm_Query.resx">
       <DependentUpon>Frm_Query.cs</DependentUpon>
     </EmbeddedResource>
@@ -369,6 +378,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\jnml.html" />
+    <None Include="Resources\fm.html" />
     <None Include="Resources\xsl.png" />
     <None Include="Resources\rar.png" />
     <None Include="Resources\pdf.png" />
@@ -395,6 +406,7 @@
     <None Include="Resources\default.png" />
     <None Include="Resources\excel.png" />
     <None Include="Resources\doc.png" />
+    <None Include="Resources\bkb.html" />
     <Content Include="Resources\explain.txt" />
     <None Include="Resources\ooopic_1522400624.ico" />
     <None Include="Resources\login_1.png" />

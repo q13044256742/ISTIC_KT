@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Text;
@@ -596,7 +597,6 @@ namespace 数据采集档案管理系统___课题版
                             }
                             LoadFileBoxTable(objId, ControlType.Plan_Project);
 
-                            MessageBox.Show("操作成功.");
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -696,7 +696,6 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
                             LoadFileBoxTable(objId, ControlType.Plan_Topic);
-                            MessageBox.Show("操作成功.");
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -795,7 +794,6 @@ namespace 数据采集档案管理系统___课题版
                                 SQLiteHelper.ExecuteNonQuery($"UPDATE files_box_info SET pb_files_id='{ids.Replace("'", string.Empty)}' WHERE pb_id='{boxId}'");
                             }
                             LoadFileBoxTable(objId, ControlType.Plan_Topic_Subject);
-                            MessageBox.Show("操作成功.");
                         }
                         else
                             MessageBox.Show("请先添加案卷盒。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -2298,7 +2296,7 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 案卷盒归档移动
         /// </summary>
-        private void btn_BoxMove_Click(object sender, EventArgs e)
+        private void Btn_BoxMove_Click(object sender, EventArgs e)
         {
             string name = (sender as Control).Name;
             if(name.Contains("Project"))
@@ -3001,7 +2999,7 @@ namespace 数据采集档案管理系统___课题版
                 Btn_AddFile_Click(btn_Subject_AddFile, e);
         }
 
-        private void btn_Export_Click(object sender, EventArgs e)
+        private void Btn_Export_Click(object sender, EventArgs e)
         {
             string name = (sender as Button).Name;
             object objId = null, _name = null, code = null;
@@ -3039,11 +3037,12 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void btn_Project_Print_Click(object sender, EventArgs e)
+        private void Btn_Project_Print_Click(object sender, EventArgs e)
         {
             string controlName = (sender as Control).Name;
             object objId = null, boxId = null, docNumber = null;
             string objName = null, gcCode = null;
+            DataTable boxTable = null;
             if(controlName.Contains("Project"))
             {
                 objId = tab_Project_Info.Tag;
@@ -3051,6 +3050,7 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = txt_Project_AJ_Code.Text;
                 objName = txt_Project_AJ_Name.Text;
                 gcCode = txt_Project_GCID.Text;
+                boxTable = (DataTable)cbo_Project_BoxId.DataSource;
             }
             else if(controlName.Contains("Topic"))
             {
@@ -3059,6 +3059,7 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = txt_Topic_AJ_Code.Text;
                 objName = txt_Topic_AJ_Name.Text;
                 gcCode = txt_Topic_GCID.Text;
+                boxTable = (DataTable)cbo_Topic_BoxId.DataSource;
             }
             else if(controlName.Contains("Subject"))
             {
@@ -3067,9 +3068,40 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = txt_Subject_AJ_Code.Text;
                 objName = txt_Subject_AJ_Name.Text;
                 gcCode = txt_Subject_GCID.Text;
+                boxTable = (DataTable)cbo_Subject_BoxId.DataSource;
             }
-            Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);
+
+
+            object _fileAmount = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
+            string[] _files = GetValue(_fileAmount).Split(',');
+            int fileAmount = 0;
+            int filePages = 0;
+            for(int i = 0; i < _files.Length; i++)
+            {
+                if(!string.IsNullOrEmpty(_files[i]))
+                {
+                    fileAmount++;
+                    object _page = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_pages FROM files_info WHERE fi_id='{_files[i]}'");
+                    if(!string.IsNullOrEmpty(GetValue(_page)))
+                        filePages += Convert.ToInt32(_page);
+                }
+            }
+
+            Frm_PrintBox frm = new Frm_PrintBox();
+            frm.boxTable = boxTable;
+            frm.fileAmount = fileAmount;
+            frm.filePages = filePages;
+            frm.objectCode = docNumber;
+            frm.gcCode = gcCode;
+            frm.objectName = objName;
+            frm.bzDate = DateTime.Now.ToString("yyyy-MM-dd");
+            frm.bgDate = DateTime.Now.ToString("yyyy-MM-dd");
+            frm.unitName = UserHelper.GetUser().UserUnitName;
+            frm.proCode = GetValue(docNumber);
             frm.ShowDialog();
+
+            //Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);
+            //frm.ShowDialog();
         }
 
         private void Frm_Wroking_Load(object sender, EventArgs e)

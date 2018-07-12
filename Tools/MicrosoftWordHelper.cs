@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Windows.Forms;
 
 namespace 数据采集档案管理系统___课题版
@@ -138,6 +139,20 @@ namespace 数据采集档案管理系统___课题版
         }
 
         private static string GetValue(object v) => v == null ? string.Empty : v.ToString();
+
+        public static string GetZN(int param)
+        {
+            string[] number = { "零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖" };
+            string[] dom = { "", "拾", "佰", "仟", "万", "拾万", "佰万", "仟万" };
+            string index = GetValue(param);
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < index.Length; i++)
+            {
+                sb.Append(number[index[i] - '0']);
+                sb.Append(dom[index.Length - 1 - i]);
+            }
+            return sb.ToString();
+        }
     }
     class EntityObject
     {
