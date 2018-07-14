@@ -78,9 +78,25 @@ namespace 数据采集档案管理系统___课题版
             {
                 int index = view.Rows.Add();
                 view.Rows[index].Cells["print"].Tag = boxTable.Rows[i]["pb_id"];
+                view.Rows[index].Cells["amount"].Value = GetFileAmount(boxTable.Rows[i]["pb_id"]);
                 view.Rows[index].Cells["id"].Value = boxTable.Rows[i]["pb_box_number"];
                 view.Rows[index].Cells["fmbj"].Value = "20mm";
             }
+        }
+
+        private int GetFileAmount(object id)
+        {
+            int i = 0;
+            object idsObject = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{id}'");
+            if(idsObject != null)
+            {
+                string ids = GetValue(idsObject);
+                string[] idsArray = ids.Split(',');
+                foreach(string item in idsArray)
+                    if(!string.IsNullOrEmpty(item))
+                        i++;
+            }
+            return i;
         }
 
         private void Chk_PrintAll_CheckedChanged(object sender, EventArgs e)
@@ -179,19 +195,13 @@ namespace 数据采集档案管理系统___课题版
                         }
                     }
                 }
-                tip.Text = "提示：打印完毕。";
+                tip.Text = "提示：正在执行打印操作，请等待打印完毕。。。";
             }
         }
 
-        private bool GetBooleanValue(object value)
-        {
-            return value == null ? false : string.IsNullOrEmpty(value.ToString()) ? false : (bool)value;
-        }
+        private bool GetBooleanValue(object value) => value == null ? false : string.IsNullOrEmpty(value.ToString()) ? false : (bool)value;
 
-        private void SetCurrentState(object value, string type)
-        {
-            tip.Text = $"提示：正在打印盒{value}{type}";
-        }
+        private void SetCurrentState(object value, string type) => tip.Text = $"提示：正在打印盒{value}{type}";
 
         /// <summary>
         /// 打印卷内文件目录
@@ -231,16 +241,17 @@ namespace 数据采集档案管理系统___课题版
                 {
                     string newRr = "<tr>" +
                         $"<td>{i + 1}</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_code"]}</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_name"]}</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_pages"]}</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_count"]}</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_remark"]}</td>" +
+                        $"<td>{dataTable.Rows[i]["fi_code"]}&nbsp;</td>" +
+                        $"<td>{dataTable.Rows[i]["fi_name"]}&nbsp;</td>" +
+                        $"<td>{dataTable.Rows[i]["fi_pages"]}&nbsp;</td>" +
+                        $"<td>{dataTable.Rows[i]["fi_count"]}&nbsp;</td>" +
+                        $"<td>{dataTable.Rows[i]["fi_remark"]}&nbsp;</td>" +
                         $"</tr>";
                     jnmlString = jnmlString.Replace("</tbody>", $"{newRr}</tbody>");
                 }
             }
-            web.DocumentText = jnmlString.ToString();
+
+            new WebBrowser() { DocumentText = jnmlString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
 
         private string GetValue(object value) => value == null ? string.Empty : value.ToString();
@@ -252,20 +263,22 @@ namespace 数据采集档案管理系统___课题版
         {
             string fmString = Resources.fm;
             fmString = fmString.Replace("20mm", $"{bj}");
-            fmString = fmString.Replace("id=\"ajmc\"", $"id=\"ajmc\" value=\"{objectName}\"");
-            fmString = fmString.Replace("id=\"bzdw\"", $"id=\"bzdw\" value=\"{unitName}\"");
-            fmString = fmString.Replace("id=\"bzrq\"", $"id=\"bzrq\" value=\"{bzDate}\"");
-            fmString = fmString.Replace("id=\"bgrq\"", $"id=\"bgrq\" value=\"{bgDate}\"");
-            fmString = fmString.Replace("id=\"mj\"", $"id=\"mj\" value=\"{secret}\"");
+            fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{objectName}");
+            fmString = fmString.Replace("id=\"bzdw\">", $"id=\"bzdw\">{unitName}");
+            fmString = fmString.Replace("id=\"bzrq\">", $"id=\"bzrq\">{bzDate}");
+            fmString = fmString.Replace("id=\"bgrq\">", $"id=\"bgrq\">{bgDate}");
+            fmString = fmString.Replace("id=\"mj\">", $"id=\"mj\">{secret}");
             fmString = fmString.Replace("id=\"gch\">", $"id=\"dh\">{gcCode}");
-            web.DocumentText = fmString.ToString();
+
+            new WebBrowser() { DocumentText = fmString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
+
         /// <summary>
         /// 打印卷内备考表
         /// </summary>
         private void PrintBKB(object id)
         {
-            StringBuilder bkbString = new StringBuilder(Resources.bkb);
+            string bkbString = Resources.bkb;
             string fa = MicrosoftWordHelper.GetZN(fileAmount);
             string fp = MicrosoftWordHelper.GetZN(filePages);
 
@@ -273,13 +286,15 @@ namespace 数据采集档案管理系统___课题版
             bkbString = bkbString.Replace("name=\"pages\"", $"name=\"pages\" value=\"{fp}\"");
             bkbString = bkbString.Replace("id=\"dh\">", $"id=\"dh\">{objectCode}");
             bkbString = bkbString.Replace("id=\"ljr\">", $"id=\"dh\">{UserHelper.GetUser().RealName}");
-            bkbString = bkbString.Replace("id=\"ljrq\">", $"id=\"dh\">{DateTime.Now.ToString("yyyy 年 MM 月 dd 日")}");
-            web.DocumentText = bkbString.ToString();
+            bkbString = bkbString.Replace("id=\"ljrq\">", $"id=\"dh\">{DateTime.Now.ToString("yyyy年MM月dd日")}");
+
+            new WebBrowser() { DocumentText = bkbString, ScriptErrorsSuppressed = false}.DocumentCompleted += Web_DocumentCompleted;
         }
 
         private void Web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            web.ShowPrintPreviewDialog();
+            (sender as WebBrowser).Print();
+            (sender as WebBrowser).Dispose();
         }
     }
 }

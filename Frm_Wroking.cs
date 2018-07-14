@@ -3043,6 +3043,7 @@ namespace 数据采集档案管理系统___课题版
             object objId = null, boxId = null, docNumber = null;
             string objName = null, gcCode = null;
             DataTable boxTable = null;
+            string proName = null, proCode = null;
             if(controlName.Contains("Project"))
             {
                 objId = tab_Project_Info.Tag;
@@ -3050,6 +3051,8 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = txt_Project_AJ_Code.Text;
                 objName = txt_Project_AJ_Name.Text;
                 gcCode = txt_Project_GCID.Text;
+                proName = txt_Project_Name.Text;
+                proCode = txt_Project_Code.Text;
                 boxTable = (DataTable)cbo_Project_BoxId.DataSource;
             }
             else if(controlName.Contains("Topic"))
@@ -3059,6 +3062,8 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = txt_Topic_AJ_Code.Text;
                 objName = txt_Topic_AJ_Name.Text;
                 gcCode = txt_Topic_GCID.Text;
+                proName = txt_Topic_Name.Text;
+                proCode = txt_Topic_Code.Text;
                 boxTable = (DataTable)cbo_Topic_BoxId.DataSource;
             }
             else if(controlName.Contains("Subject"))
@@ -3068,6 +3073,8 @@ namespace 数据采集档案管理系统___课题版
                 docNumber = txt_Subject_AJ_Code.Text;
                 objName = txt_Subject_AJ_Name.Text;
                 gcCode = txt_Subject_GCID.Text;
+                proName = txt_Subject_Name.Text;
+                proCode = txt_Subject_Code.Text;
                 boxTable = (DataTable)cbo_Subject_BoxId.DataSource;
             }
 
@@ -3097,7 +3104,8 @@ namespace 数据采集档案管理系统___课题版
             frm.bzDate = DateTime.Now.ToString("yyyy-MM-dd");
             frm.bgDate = DateTime.Now.ToString("yyyy-MM-dd");
             frm.unitName = UserHelper.GetUser().UserUnitName;
-            frm.proCode = GetValue(docNumber);
+            frm.proCode = proCode;
+            frm.proName = proName;
             frm.ShowDialog();
 
             //Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);

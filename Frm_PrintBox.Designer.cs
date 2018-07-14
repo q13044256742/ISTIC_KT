@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btn_StartPrint = new System.Windows.Forms.Button();
             this.view = new System.Windows.Forms.DataGridView();
             this.chk_PrintAll = new System.Windows.Forms.CheckBox();
@@ -39,9 +40,9 @@
             this.cbo_BJ = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.web = new System.Windows.Forms.WebBrowser();
             this.print = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.fm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.fmbj = new System.Windows.Forms.DataGridViewComboBoxColumn();
@@ -80,6 +81,7 @@
             this.view.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.print,
             this.id,
+            this.amount,
             this.bkb,
             this.fm,
             this.fmbj,
@@ -166,16 +168,6 @@
             this.tip.Name = "tip";
             this.tip.Size = new System.Drawing.Size(0, 17);
             // 
-            // web
-            // 
-            this.web.Location = new System.Drawing.Point(264, 224);
-            this.web.MinimumSize = new System.Drawing.Size(20, 20);
-            this.web.Name = "web";
-            this.web.Size = new System.Drawing.Size(296, 130);
-            this.web.TabIndex = 9;
-            this.web.Visible = false;
-            this.web.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.Web_DocumentCompleted);
-            // 
             // print
             // 
             this.print.FillWeight = 10F;
@@ -190,7 +182,18 @@
             this.id.FillWeight = 10F;
             this.id.HeaderText = "盒号";
             this.id.Name = "id";
+            this.id.ReadOnly = true;
             this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // amount
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.amount.FillWeight = 12F;
+            this.amount.HeaderText = "文件数";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            this.amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // bkb
             // 
@@ -198,7 +201,6 @@
             this.bkb.HeaderText = "卷内备考表";
             this.bkb.Name = "bkb";
             this.bkb.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.bkb.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // fm
             // 
@@ -228,7 +230,6 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(824, 579);
-            this.Controls.Add(this.web);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.cbo_BJ);
             this.Controls.Add(this.chk_JNML);
@@ -238,7 +239,10 @@
             this.Controls.Add(this.view);
             this.Controls.Add(this.btn_StartPrint);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Frm_PrintBox";
             this.Text = "案卷盒打印";
             this.Load += new System.EventHandler(this.Frm_PrintBox_Load);
@@ -260,9 +264,9 @@
         private System.Windows.Forms.ComboBox cbo_BJ;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tip;
-        private System.Windows.Forms.WebBrowser web;
         private System.Windows.Forms.DataGridViewCheckBoxColumn print;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn bkb;
         private System.Windows.Forms.DataGridViewCheckBoxColumn fm;
         private System.Windows.Forms.DataGridViewComboBoxColumn fmbj;
