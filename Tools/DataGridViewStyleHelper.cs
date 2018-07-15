@@ -13,7 +13,7 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 默认单元格字体大小
         /// </summary>
-        private static float DefaultCellFontSize = 14f;
+        private static float DefaultCellFontSize = 15f;
 
         /// <summary>
         /// 获取DataGridView默认表头样式
@@ -86,7 +86,7 @@ namespace 数据采集档案管理系统___课题版
             return new DataGridViewCellStyle()
             {
                 Alignment = DataGridViewContentAlignment.MiddleLeft,
-                Font = new System.Drawing.Font("宋体", DefaultCellFontSize, System.Drawing.FontStyle.Regular)
+                Font = new System.Drawing.Font("华文中宋", DefaultCellFontSize, System.Drawing.FontStyle.Regular)
             };
         }
     }

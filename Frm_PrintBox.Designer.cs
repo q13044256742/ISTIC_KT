@@ -214,7 +214,9 @@
             this.fmbj.HeaderText = "边距";
             this.fmbj.Items.AddRange(new object[] {
             "20mm",
+            "30mm",
             "40mm",
+            "50mm",
             "60mm",
             "80mm"});
             this.fmbj.Name = "fmbj";

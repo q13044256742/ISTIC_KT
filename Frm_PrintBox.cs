@@ -235,8 +235,10 @@ namespace 数据采集档案管理系统___课题版
                         dataTable.ImportRow(row);
                 }
             }
+            int fileCount = 0, pageCount = 0;
             if(dataTable != null)
             {
+                fileCount = dataTable.Rows.Count;
                 for(int i = 0; i < dataTable.Rows.Count; i++)
                 {
                     string newRr = "<tr>" +
@@ -248,10 +250,25 @@ namespace 数据采集档案管理系统___课题版
                         $"<td>{dataTable.Rows[i]["fi_remark"]}&nbsp;</td>" +
                         $"</tr>";
                     jnmlString = jnmlString.Replace("</tbody>", $"{newRr}</tbody>");
+                    pageCount += GetIntValue(dataTable.Rows[i]["fi_pages"]);
                 }
             }
-
+            jnmlString = jnmlString.Replace("id=\"fileCount\">", $"id=\"fileCount\">{fileCount}");
+            jnmlString = jnmlString.Replace("id=\"pageCount\">", $"id=\"pageCount\">{pageCount}");
             new WebBrowser() { DocumentText = jnmlString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
+        }
+
+        private int GetIntValue(object value)
+        {
+            if(value == null)
+                return 0;
+            else
+            {
+                if(int.TryParse(GetValue(value), out int result))
+                    return result;
+                else
+                    return 0;
+            }
         }
 
         private string GetValue(object value) => value == null ? string.Empty : value.ToString();

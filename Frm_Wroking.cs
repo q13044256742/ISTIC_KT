@@ -218,14 +218,14 @@ namespace 数据采集档案管理系统___课题版
             {
                 txt_Project_Code.Text = GetValue(row["pi_code"]);
                 txt_Project_Name.Text = GetValue(row["pi_name"]);
-                cbo_Project_Field.Text = GetValue(row["pi_field"]);
+                txt_Project_Field.Text = GetValue(row["pi_field"]);
                 txt_Project_Theme.Text = GetValue(row["pi_theme"]);
                 txt_Project_Funds.Text = GetValue(row["pi_funds"]);
                 dtp_Project_StartDate.Value = GetDateTimeValue(row["pi_startdate"]);
                 dtp_Project_FinishDate.Value = GetDateTimeValue(row["pi_finishdate"]);
                 txt_Project_Year.Tag = txt_Project_Year.Text = GetValue(row["pi_year"]);
                 txt_Project_Unit.Text = GetValue(row["pi_unit"]);
-                cbo_Project_Province.Text = GetValue(row["pi_province"]);
+                txt_Project_Province.Text = GetValue(row["pi_province"]);
                 txt_Project_Uniter.Text = GetValue(row["pi_unit_user"]);
                 txt_Project_Proer.Text = GetValue(row["pi_project_user"]);
                 txt_Project_Connecter.Text = GetValue(row["pi_contacts"]);
@@ -239,14 +239,14 @@ namespace 数据采集档案管理系统___课题版
             {
                 txt_Topic_Code.Text = GetValue(row["ti_code"]);
                 txt_Topic_Name.Text = GetValue(row["ti_name"]);
-                cbo_Topic_Field.Text = GetValue(row["ti_field"]);
+                txt_Topic_Field.Text = GetValue(row["ti_field"]);
                 txt_Topic_Theme.Text = GetValue(row["ti_theme"]);
                 txt_Topic_Funds.Text = GetValue(row["ti_funds"]);
                 dtp_Topic_StartDate.Value = GetDateTimeValue(row["ti_startdate"]);
                 dtp_Topic_FinishDate.Value = GetDateTimeValue(row["ti_finishdate"]);
                 txt_Topic_Year.Tag = txt_Topic_Year.Text = GetValue(row["ti_year"]);
                 txt_Topic_Unit.Text = GetValue(row["ti_unit"]);
-                cbo_Topic_Province.Text = GetValue(row["ti_province"]);
+                txt_Topic_Province.Text = GetValue(row["ti_province"]);
                 txt_Topic_Uniter.Text = GetValue(row["ti_unit_user"]);
                 txt_Topic_Proer.Text = GetValue(row["ti_project_user"]);
                 txt_Topic_Connecter.Text = GetValue(row["ti_contacts"]);
@@ -260,14 +260,14 @@ namespace 数据采集档案管理系统___课题版
             {
                 txt_Subject_Code.Text = GetValue(row["si_code"]);
                 txt_Subject_Name.Text = GetValue(row["si_name"]);
-                cbo_Subject_Field.Text = GetValue(row["si_field"]);
+                txt_Subject_Field.Text = GetValue(row["si_field"]);
                 txt_Subject_Theme.Text = GetValue(row["si_theme"]);
                 txt_Subject_Funds.Text = GetValue(row["si_funds"]);
                 dtp_Subject_StartDate.Value = GetDateTimeValue(row["si_startdate"]);
                 dtp_Subject_FinishDate.Value = GetDateTimeValue(row["si_finishdate"]);
                 txt_Subject_Year.Tag = txt_Subject_Year.Text = GetValue(row["si_year"]);
                 txt_Subject_Unit.Text = GetValue(row["si_unit"]);
-                cbo_Subject_Province.Text = GetValue(row["si_province"]);
+                txt_Subject_Province.Text = GetValue(row["si_province"]);
                 txt_Subject_Uniter.Text = GetValue(row["si_unit_user"]);
                 txt_Subject_Proer.Text = GetValue(row["si_project_user"]);
                 txt_Subject_Connecter.Text = GetValue(row["si_contacts"]);
@@ -1271,14 +1271,14 @@ namespace 数据采集档案管理系统___课题版
             {
                 object code = txt_Project_Code.Text;
                 object name = txt_Project_Name.Text;
-                object field = cbo_Project_Field.Text;
+                object field = txt_Project_Field.Text;
                 object theme = txt_Project_Theme.Text;
                 object funds = txt_Project_Funds.Text;
                 object sdate = GetDateValue(txt_Project_StartDate.Text);
                 object fdate = GetDateValue(txt_Project_FinishDate.Text);
                 object year = txt_Project_Year.Text;
                 object unit = txt_Project_Unit.Text;
-                object province = cbo_Project_Province.Text;
+                object province = txt_Project_Province.Text;
                 object uniter = txt_Project_Uniter.Text;
                 object proer = txt_Project_Proer.Text;
                 object coner = txt_Project_Connecter.Text;
@@ -1321,14 +1321,14 @@ namespace 数据采集档案管理系统___课题版
             {
                 object code = txt_Topic_Code.Text;
                 object name = txt_Topic_Name.Text;
-                object field = cbo_Topic_Field.Text;
+                object field = txt_Topic_Field.Text;
                 object theme = txt_Topic_Theme.Text;
                 object funds = txt_Topic_Funds.Text;
                 object sdate = GetDateValue(txt_Topic_StartDate.Text);
                 object fdate = GetDateValue(txt_Topic_FinishDate.Text);
                 object year = txt_Topic_Year.Text;
                 object unit = txt_Topic_Unit.Text;
-                object province = cbo_Topic_Province.Text;
+                object province = txt_Topic_Province.Text;
                 object uniter = txt_Topic_Uniter.Text;
                 object proer = txt_Topic_Proer.Text;
                 object coner = txt_Topic_Connecter.Text;
@@ -1371,14 +1371,14 @@ namespace 数据采集档案管理系统___课题版
             {
                 object code = txt_Subject_Code.Text;
                 object name = txt_Subject_Name.Text;
-                object field = cbo_Subject_Field.Text;
+                object field = txt_Subject_Field.Text;
                 object theme = txt_Subject_Theme.Text;
                 object funds = txt_Subject_Funds.Text;
                 object sdate = GetDateValue(txt_Subject_StartDate.Text);
                 object fdate = GetDateValue(txt_Subject_FinishDate.Text);
                 object year = txt_Subject_Year.Text;
                 object unit = txt_Subject_Unit.Text;
-                object province = cbo_Subject_Province.Text;
+                object province = txt_Subject_Province.Text;
                 object uniter = txt_Subject_Uniter.Text;
                 object proer = txt_Subject_Proer.Text;
                 object coner = txt_Subject_Connecter.Text;

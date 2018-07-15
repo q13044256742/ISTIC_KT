@@ -171,22 +171,44 @@ namespace 数据采集档案管理系统___课题版
                 //尝试转换文件的link路径-转换为当前服务器链接
                 if(!string.IsNullOrEmpty(link) && Directory.Exists(rootFolder))
                 {
-                    string fileName = Path.GetFileName(link);
-                    string filePath = GetFilePathByRootFolder(rootFolder, fileName);
-                    if(!string.IsNullOrEmpty(filePath))
-                        link = filePath;
-
-                    string _filePath = Path.GetDirectoryName(link);
-                    string _fileName = Path.GetFileName(link);
-                    sqlString.Append($"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_path='{_filePath}' AND bfi_name='{_fileName}';");
+                    string newLink = string.Empty;
+                    string[] linkString = link.Split('；');
+                    for(int j = 0; j < linkString.Length; j++)
+                    {
+                        if(!string.IsNullOrEmpty(linkString[j]))
+                        {
+                            string fileName = Path.GetFileName(linkString[j]);
+                            string filePath = GetFilePathByRootFolder(rootFolder, fileName);
+                            if(!string.IsNullOrEmpty(filePath))
+                            {
+                                linkString[j] = filePath;
+                                string _filePath = Path.GetDirectoryName(linkString[j]);
+                                string _fileName = Path.GetFileName(linkString[j]);
+                                sqlString.Append($"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_path='{_filePath}' AND bfi_name='{_fileName}';");
+                                newLink += linkString[j] + "；";
+                            }
+                        }
+                    }
+                    link = string.IsNullOrEmpty(newLink) ? string.Empty : newLink.Substring(0, newLink.Length - 1);
                 }
 
                 //更新文件备份表状态
                 if(!string.IsNullOrEmpty(link))
                 {
-                    string _filePath = Path.GetDirectoryName(link);
-                    string __fileName = Path.GetFileName(link);
-                    fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}' AND bfi_name='{__fileName}';") ?? fileId;
+                    string[] linkString = link.Split('；');
+                    string newFileId = string.Empty;
+                    for(int j = 0; j < linkString.Length; j++)
+                    {
+                        if(!string.IsNullOrEmpty(linkString[j]))
+                        {
+                            string _filePath = Path.GetDirectoryName(link);
+                            string _fileName = Path.GetFileName(link);
+                            object _fileId = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_path='{_filePath}' AND bfi_name='{_fileName}';");
+                            if(_fileId != null)
+                                newFileId += _fileId + ",";
+                        }
+                    }
+                    fileId = string.IsNullOrEmpty(newFileId) ? string.Empty : newFileId.Substring(0, newFileId.Length - 1);
                 }
                 sqlString.Append($"DELETE FROM files_info WHERE fi_id='{row["fi_id"]}';");
                 sqlString.Append("INSERT INTO files_info(fi_id, fi_code, fi_stage, fi_categor, fi_categor_name, fi_name, fi_user, fi_type, fi_secret, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_format, fi_form, fi_link, fi_file_id, fi_status, fi_obj_id, fi_sort, fi_remark) VALUES(" +
