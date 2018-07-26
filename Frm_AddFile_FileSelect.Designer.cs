@@ -31,8 +31,8 @@
             this.tv_file = new System.Windows.Forms.TreeView();
             this.btn_sure = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.lbl_filename = new System.Windows.Forms.Label();
             this.rdo_ShowAll = new System.Windows.Forms.CheckBox();
+            this.lsv_Selected = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // tv_file
@@ -43,17 +43,17 @@
             this.tv_file.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tv_file.Indent = 15;
             this.tv_file.LineColor = System.Drawing.Color.DimGray;
-            this.tv_file.Location = new System.Drawing.Point(2, 47);
+            this.tv_file.Location = new System.Drawing.Point(2, 122);
             this.tv_file.Name = "tv_file";
-            this.tv_file.Size = new System.Drawing.Size(753, 464);
+            this.tv_file.Size = new System.Drawing.Size(864, 541);
             this.tv_file.TabIndex = 0;
-            this.tv_file.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.Tv_file_AfterSelect);
+            this.tv_file.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tv_file_NodeMouseClick);
             this.tv_file.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.Tv_file_NodeMouseDoubleClick);
             // 
             // btn_sure
             // 
             this.btn_sure.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btn_sure.Location = new System.Drawing.Point(341, 523);
+            this.btn_sure.Location = new System.Drawing.Point(397, 670);
             this.btn_sure.Name = "btn_sure";
             this.btn_sure.Size = new System.Drawing.Size(75, 31);
             this.btn_sure.TabIndex = 1;
@@ -64,28 +64,18 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(2, 15);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(2, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 17);
+            this.label1.Size = new System.Drawing.Size(93, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "当前已选择：";
-            // 
-            // lbl_filename
-            // 
-            this.lbl_filename.AutoSize = true;
-            this.lbl_filename.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbl_filename.Location = new System.Drawing.Point(78, 15);
-            this.lbl_filename.Name = "lbl_filename";
-            this.lbl_filename.Size = new System.Drawing.Size(32, 17);
-            this.lbl_filename.TabIndex = 3;
-            this.lbl_filename.Text = "null";
             // 
             // rdo_ShowAll
             // 
             this.rdo_ShowAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.rdo_ShowAll.AutoSize = true;
-            this.rdo_ShowAll.Location = new System.Drawing.Point(681, 15);
+            this.rdo_ShowAll.Location = new System.Drawing.Point(792, 4);
             this.rdo_ShowAll.Name = "rdo_ShowAll";
             this.rdo_ShowAll.Size = new System.Drawing.Size(72, 16);
             this.rdo_ShowAll.TabIndex = 4;
@@ -93,14 +83,26 @@
             this.rdo_ShowAll.UseVisualStyleBackColor = true;
             this.rdo_ShowAll.CheckedChanged += new System.EventHandler(this.rdo_ShowAll_CheckedChanged);
             // 
+            // lsv_Selected
+            // 
+            this.lsv_Selected.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lsv_Selected.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.lsv_Selected.Location = new System.Drawing.Point(2, 26);
+            this.lsv_Selected.Name = "lsv_Selected";
+            this.lsv_Selected.Size = new System.Drawing.Size(864, 95);
+            this.lsv_Selected.TabIndex = 5;
+            this.lsv_Selected.UseCompatibleStateImageBehavior = false;
+            this.lsv_Selected.View = System.Windows.Forms.View.List;
+            // 
             // Frm_AddFile_FileSelect
             // 
             this.AcceptButton = this.btn_sure;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 564);
+            this.ClientSize = new System.Drawing.Size(868, 711);
+            this.Controls.Add(this.lsv_Selected);
             this.Controls.Add(this.rdo_ShowAll);
-            this.Controls.Add(this.lbl_filename);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_sure);
             this.Controls.Add(this.tv_file);
@@ -121,7 +123,7 @@
         private System.Windows.Forms.TreeView tv_file;
         private System.Windows.Forms.Button btn_sure;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lbl_filename;
         private System.Windows.Forms.CheckBox rdo_ShowAll;
+        private System.Windows.Forms.ListView lsv_Selected;
     }
 }

@@ -38,6 +38,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_Wroking));
             this.tab_Menu = new System.Windows.Forms.TabControl();
             this.project = new System.Windows.Forms.TabPage();
+            this.txt_Project_Province = new System.Windows.Forms.TextBox();
+            this.txt_Project_Field = new System.Windows.Forms.TextBox();
             this.txt_Project_FinishDate = new System.Windows.Forms.TextBox();
             this.txt_Project_StartDate = new System.Windows.Forms.TextBox();
             this.txt_Project_Code = new System.Windows.Forms.TextBox();
@@ -121,6 +123,8 @@
             this.label43 = new System.Windows.Forms.Label();
             this.label44 = new System.Windows.Forms.Label();
             this.topic = new System.Windows.Forms.TabPage();
+            this.txt_Topic_Province = new System.Windows.Forms.TextBox();
+            this.txt_Topic_Field = new System.Windows.Forms.TextBox();
             this.txt_Topic_FinishDate = new System.Windows.Forms.TextBox();
             this.txt_Topic_StartDate = new System.Windows.Forms.TextBox();
             this.txt_Topic_Code = new System.Windows.Forms.TextBox();
@@ -205,6 +209,8 @@
             this.btn_Topic_Add = new System.Windows.Forms.Button();
             this.btn_Topic_Save = new System.Windows.Forms.Button();
             this.subject = new System.Windows.Forms.TabPage();
+            this.txt_Subject_Province = new System.Windows.Forms.TextBox();
+            this.txt_Subject_Field = new System.Windows.Forms.TextBox();
             this.txt_Subject_FinishDate = new System.Windows.Forms.TextBox();
             this.txt_Subject_StartDate = new System.Windows.Forms.TextBox();
             this.txt_Subject_Code = new System.Windows.Forms.TextBox();
@@ -291,12 +297,9 @@
             this.删除行DToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.txt_Project_Field = new System.Windows.Forms.TextBox();
-            this.txt_Project_Province = new System.Windows.Forms.TextBox();
-            this.txt_Topic_Field = new System.Windows.Forms.TextBox();
-            this.txt_Topic_Province = new System.Windows.Forms.TextBox();
-            this.txt_Subject_Field = new System.Windows.Forms.TextBox();
-            this.txt_Subject_Province = new System.Windows.Forms.TextBox();
+            this.btn_Project_OtherDoc = new System.Windows.Forms.Button();
+            this.btn_Topic_OtherDoc = new System.Windows.Forms.Button();
+            this.btn_Subject_OtherDoc = new System.Windows.Forms.Button();
             this.tab_Menu.SuspendLayout();
             this.project.SuspendLayout();
             this.tab_Project_Info.SuspendLayout();
@@ -341,6 +344,7 @@
             // 
             // project
             // 
+            this.project.Controls.Add(this.btn_Project_OtherDoc);
             this.project.Controls.Add(this.txt_Project_Province);
             this.project.Controls.Add(this.txt_Project_Field);
             this.project.Controls.Add(this.txt_Project_FinishDate);
@@ -387,13 +391,29 @@
             this.project.Text = "项目";
             this.project.UseVisualStyleBackColor = true;
             // 
+            // txt_Project_Province
+            // 
+            this.txt_Project_Province.Font = new System.Drawing.Font("华文中宋", 15F);
+            this.txt_Project_Province.Location = new System.Drawing.Point(457, 109);
+            this.txt_Project_Province.Name = "txt_Project_Province";
+            this.txt_Project_Province.Size = new System.Drawing.Size(210, 34);
+            this.txt_Project_Province.TabIndex = 10;
+            // 
+            // txt_Project_Field
+            // 
+            this.txt_Project_Field.Font = new System.Drawing.Font("华文中宋", 15F);
+            this.txt_Project_Field.Location = new System.Drawing.Point(107, 39);
+            this.txt_Project_Field.Name = "txt_Project_Field";
+            this.txt_Project_Field.Size = new System.Drawing.Size(210, 34);
+            this.txt_Project_Field.TabIndex = 3;
+            // 
             // txt_Project_FinishDate
             // 
             this.txt_Project_FinishDate.Font = new System.Drawing.Font("华文中宋", 15F);
             this.txt_Project_FinishDate.Location = new System.Drawing.Point(457, 74);
             this.txt_Project_FinishDate.Name = "txt_Project_FinishDate";
             this.txt_Project_FinishDate.Size = new System.Drawing.Size(192, 34);
-            this.txt_Project_FinishDate.TabIndex = 119;
+            this.txt_Project_FinishDate.TabIndex = 7;
             // 
             // txt_Project_StartDate
             // 
@@ -401,7 +421,7 @@
             this.txt_Project_StartDate.Location = new System.Drawing.Point(107, 74);
             this.txt_Project_StartDate.Name = "txt_Project_StartDate";
             this.txt_Project_StartDate.Size = new System.Drawing.Size(192, 34);
-            this.txt_Project_StartDate.TabIndex = 118;
+            this.txt_Project_StartDate.TabIndex = 6;
             // 
             // txt_Project_Code
             // 
@@ -515,8 +535,6 @@
             this.dgv_Project_FileList.RowTemplate.Height = 23;
             this.dgv_Project_FileList.Size = new System.Drawing.Size(1256, 300);
             this.dgv_Project_FileList.TabIndex = 0;
-            this.dgv_Project_FileList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FileList_CellContentClick);
-            this.dgv_Project_FileList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellEndEdit);
             this.dgv_Project_FileList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_FileList_CellMouseDown);
             this.dgv_Project_FileList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.Dgv_DataError);
             this.dgv_Project_FileList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Dgv_File_EditingControlShowing);
@@ -1227,6 +1245,7 @@
             // 
             // topic
             // 
+            this.topic.Controls.Add(this.btn_Topic_OtherDoc);
             this.topic.Controls.Add(this.txt_Topic_Province);
             this.topic.Controls.Add(this.txt_Topic_Field);
             this.topic.Controls.Add(this.txt_Topic_FinishDate);
@@ -1273,13 +1292,29 @@
             this.topic.Text = "课题";
             this.topic.UseVisualStyleBackColor = true;
             // 
+            // txt_Topic_Province
+            // 
+            this.txt_Topic_Province.Font = new System.Drawing.Font("华文中宋", 15F);
+            this.txt_Topic_Province.Location = new System.Drawing.Point(460, 108);
+            this.txt_Topic_Province.Name = "txt_Topic_Province";
+            this.txt_Topic_Province.Size = new System.Drawing.Size(210, 34);
+            this.txt_Topic_Province.TabIndex = 10;
+            // 
+            // txt_Topic_Field
+            // 
+            this.txt_Topic_Field.Font = new System.Drawing.Font("华文中宋", 15F);
+            this.txt_Topic_Field.Location = new System.Drawing.Point(110, 38);
+            this.txt_Topic_Field.Name = "txt_Topic_Field";
+            this.txt_Topic_Field.Size = new System.Drawing.Size(210, 34);
+            this.txt_Topic_Field.TabIndex = 3;
+            // 
             // txt_Topic_FinishDate
             // 
             this.txt_Topic_FinishDate.Font = new System.Drawing.Font("华文中宋", 15F);
             this.txt_Topic_FinishDate.Location = new System.Drawing.Point(460, 73);
             this.txt_Topic_FinishDate.Name = "txt_Topic_FinishDate";
             this.txt_Topic_FinishDate.Size = new System.Drawing.Size(192, 34);
-            this.txt_Topic_FinishDate.TabIndex = 121;
+            this.txt_Topic_FinishDate.TabIndex = 7;
             // 
             // txt_Topic_StartDate
             // 
@@ -1287,7 +1322,7 @@
             this.txt_Topic_StartDate.Location = new System.Drawing.Point(110, 73);
             this.txt_Topic_StartDate.Name = "txt_Topic_StartDate";
             this.txt_Topic_StartDate.Size = new System.Drawing.Size(192, 34);
-            this.txt_Topic_StartDate.TabIndex = 120;
+            this.txt_Topic_StartDate.TabIndex = 6;
             // 
             // txt_Topic_Code
             // 
@@ -1444,8 +1479,6 @@
             this.dgv_Topic_FileList.RowTemplate.Height = 23;
             this.dgv_Topic_FileList.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Topic_FileList.TabIndex = 0;
-            this.dgv_Topic_FileList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FileList_CellContentClick);
-            this.dgv_Topic_FileList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellEndEdit);
             this.dgv_Topic_FileList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_FileList_CellMouseDown);
             this.dgv_Topic_FileList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.Dgv_DataError);
             this.dgv_Topic_FileList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Dgv_File_EditingControlShowing);
@@ -2137,6 +2170,7 @@
             // 
             // subject
             // 
+            this.subject.Controls.Add(this.btn_Subject_OtherDoc);
             this.subject.Controls.Add(this.txt_Subject_Province);
             this.subject.Controls.Add(this.txt_Subject_Field);
             this.subject.Controls.Add(this.txt_Subject_FinishDate);
@@ -2181,13 +2215,29 @@
             this.subject.Text = "子课题";
             this.subject.UseVisualStyleBackColor = true;
             // 
+            // txt_Subject_Province
+            // 
+            this.txt_Subject_Province.Font = new System.Drawing.Font("华文中宋", 15F);
+            this.txt_Subject_Province.Location = new System.Drawing.Point(473, 109);
+            this.txt_Subject_Province.Name = "txt_Subject_Province";
+            this.txt_Subject_Province.Size = new System.Drawing.Size(210, 34);
+            this.txt_Subject_Province.TabIndex = 10;
+            // 
+            // txt_Subject_Field
+            // 
+            this.txt_Subject_Field.Font = new System.Drawing.Font("华文中宋", 15F);
+            this.txt_Subject_Field.Location = new System.Drawing.Point(111, 39);
+            this.txt_Subject_Field.Name = "txt_Subject_Field";
+            this.txt_Subject_Field.Size = new System.Drawing.Size(210, 34);
+            this.txt_Subject_Field.TabIndex = 3;
+            // 
             // txt_Subject_FinishDate
             // 
             this.txt_Subject_FinishDate.Font = new System.Drawing.Font("华文中宋", 15F);
             this.txt_Subject_FinishDate.Location = new System.Drawing.Point(473, 74);
             this.txt_Subject_FinishDate.Name = "txt_Subject_FinishDate";
             this.txt_Subject_FinishDate.Size = new System.Drawing.Size(192, 34);
-            this.txt_Subject_FinishDate.TabIndex = 123;
+            this.txt_Subject_FinishDate.TabIndex = 7;
             // 
             // txt_Subject_StartDate
             // 
@@ -2195,7 +2245,7 @@
             this.txt_Subject_StartDate.Location = new System.Drawing.Point(111, 74);
             this.txt_Subject_StartDate.Name = "txt_Subject_StartDate";
             this.txt_Subject_StartDate.Size = new System.Drawing.Size(192, 34);
-            this.txt_Subject_StartDate.TabIndex = 122;
+            this.txt_Subject_StartDate.TabIndex = 6;
             // 
             // txt_Subject_Code
             // 
@@ -2352,8 +2402,6 @@
             this.dgv_Subject_FileList.RowTemplate.Height = 23;
             this.dgv_Subject_FileList.Size = new System.Drawing.Size(1256, 301);
             this.dgv_Subject_FileList.TabIndex = 0;
-            this.dgv_Subject_FileList.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.FileList_CellContentClick);
-            this.dgv_Subject_FileList.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.CellEndEdit);
             this.dgv_Subject_FileList.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_FileList_CellMouseDown);
             this.dgv_Subject_FileList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.Dgv_DataError);
             this.dgv_Subject_FileList.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.Dgv_File_EditingControlShowing);
@@ -2798,7 +2846,7 @@
             this.txt_Subject_Intro.Multiline = true;
             this.txt_Subject_Intro.Name = "txt_Subject_Intro";
             this.txt_Subject_Intro.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Subject_Intro.Size = new System.Drawing.Size(929, 104);
+            this.txt_Subject_Intro.Size = new System.Drawing.Size(929, 91);
             this.txt_Subject_Intro.TabIndex = 15;
             // 
             // txt_Subject_Uniter
@@ -3056,53 +3104,35 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // txt_Project_Field
+            // btn_Project_OtherDoc
             // 
-            this.txt_Project_Field.Font = new System.Drawing.Font("华文中宋", 15F);
-            this.txt_Project_Field.Location = new System.Drawing.Point(107, 39);
-            this.txt_Project_Field.Name = "txt_Project_Field";
-            this.txt_Project_Field.Size = new System.Drawing.Size(210, 34);
-            this.txt_Project_Field.TabIndex = 120;
+            this.btn_Project_OtherDoc.Location = new System.Drawing.Point(905, 268);
+            this.btn_Project_OtherDoc.Name = "btn_Project_OtherDoc";
+            this.btn_Project_OtherDoc.Size = new System.Drawing.Size(119, 30);
+            this.btn_Project_OtherDoc.TabIndex = 123;
+            this.btn_Project_OtherDoc.Text = "其它载体档案";
+            this.btn_Project_OtherDoc.UseVisualStyleBackColor = true;
+            this.btn_Project_OtherDoc.Click += new System.EventHandler(this.Btn_OtherDoc_Click);
             // 
-            // txt_Project_Province
+            // btn_Topic_OtherDoc
             // 
-            this.txt_Project_Province.Font = new System.Drawing.Font("华文中宋", 15F);
-            this.txt_Project_Province.Location = new System.Drawing.Point(457, 109);
-            this.txt_Project_Province.Name = "txt_Project_Province";
-            this.txt_Project_Province.Size = new System.Drawing.Size(210, 34);
-            this.txt_Project_Province.TabIndex = 121;
+            this.btn_Topic_OtherDoc.Location = new System.Drawing.Point(910, 268);
+            this.btn_Topic_OtherDoc.Name = "btn_Topic_OtherDoc";
+            this.btn_Topic_OtherDoc.Size = new System.Drawing.Size(119, 30);
+            this.btn_Topic_OtherDoc.TabIndex = 125;
+            this.btn_Topic_OtherDoc.Text = "其它载体档案";
+            this.btn_Topic_OtherDoc.UseVisualStyleBackColor = true;
+            this.btn_Topic_OtherDoc.Click += new System.EventHandler(this.Btn_OtherDoc_Click);
             // 
-            // txt_Topic_Field
+            // btn_Subject_OtherDoc
             // 
-            this.txt_Topic_Field.Font = new System.Drawing.Font("华文中宋", 15F);
-            this.txt_Topic_Field.Location = new System.Drawing.Point(110, 38);
-            this.txt_Topic_Field.Name = "txt_Topic_Field";
-            this.txt_Topic_Field.Size = new System.Drawing.Size(210, 34);
-            this.txt_Topic_Field.TabIndex = 122;
-            // 
-            // txt_Topic_Province
-            // 
-            this.txt_Topic_Province.Font = new System.Drawing.Font("华文中宋", 15F);
-            this.txt_Topic_Province.Location = new System.Drawing.Point(460, 108);
-            this.txt_Topic_Province.Name = "txt_Topic_Province";
-            this.txt_Topic_Province.Size = new System.Drawing.Size(210, 34);
-            this.txt_Topic_Province.TabIndex = 123;
-            // 
-            // txt_Subject_Field
-            // 
-            this.txt_Subject_Field.Font = new System.Drawing.Font("华文中宋", 15F);
-            this.txt_Subject_Field.Location = new System.Drawing.Point(111, 39);
-            this.txt_Subject_Field.Name = "txt_Subject_Field";
-            this.txt_Subject_Field.Size = new System.Drawing.Size(210, 34);
-            this.txt_Subject_Field.TabIndex = 124;
-            // 
-            // txt_Subject_Province
-            // 
-            this.txt_Subject_Province.Font = new System.Drawing.Font("华文中宋", 15F);
-            this.txt_Subject_Province.Location = new System.Drawing.Point(473, 109);
-            this.txt_Subject_Province.Name = "txt_Subject_Province";
-            this.txt_Subject_Province.Size = new System.Drawing.Size(210, 34);
-            this.txt_Subject_Province.TabIndex = 125;
+            this.btn_Subject_OtherDoc.Location = new System.Drawing.Point(922, 272);
+            this.btn_Subject_OtherDoc.Name = "btn_Subject_OtherDoc";
+            this.btn_Subject_OtherDoc.Size = new System.Drawing.Size(119, 30);
+            this.btn_Subject_OtherDoc.TabIndex = 127;
+            this.btn_Subject_OtherDoc.Text = "其它载体档案";
+            this.btn_Subject_OtherDoc.UseVisualStyleBackColor = true;
+            this.btn_Subject_OtherDoc.Click += new System.EventHandler(this.Btn_OtherDoc_Click);
             // 
             // Frm_Wroking
             // 
@@ -3418,5 +3448,8 @@
         private System.Windows.Forms.TextBox txt_Topic_Field;
         private System.Windows.Forms.TextBox txt_Subject_Province;
         private System.Windows.Forms.TextBox txt_Subject_Field;
+        private System.Windows.Forms.Button btn_Project_OtherDoc;
+        private System.Windows.Forms.Button btn_Topic_OtherDoc;
+        private System.Windows.Forms.Button btn_Subject_OtherDoc;
     }
 }

@@ -703,40 +703,19 @@ namespace 数据采集档案管理系统___课题版
                 Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootId);
                 if(frm.ShowDialog() == DialogResult.OK)
                 {
-                    string fullPath = frm.SelectedFileName;
-                    if(File.Exists(fullPath))
+                    string[] fullPath = frm.SelectedFileName;
+                    for(int i = 0; i < fullPath.Length; i++)
                     {
-                        btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = false;
-                        new Thread(delegate ()
+                        if(File.Exists(fullPath[i]))
                         {
-                            //尝试获取页数
-                            try
-                            {
-                                string format = Path.GetExtension(fullPath).ToLower();
-                                if(format.Contains("doc") || format.Contains("docx"))
-                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetWordPageCount(fullPath);
-                                else if(format.Contains("pdf"))
-                                    num_page.Value = (int)GetFilePageCount.GetFilePageCountInstince().GetPDFPageCount(fullPath);
-                            }
-                            catch(Exception) { }
-
-                            btn_Save.Enabled = btn_Reset.Enabled = btn_Quit.Enabled = true;
-
-                            if(NotExist(fullPath))
-                            {
-                                AddFileToList(fullPath, frm.SelectedFileId);
-
-                                if(MessageBox.Show("文件解析完成，是否现在打开？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                                {
-                                    WinFormOpenHelper.OpenWinForm(Handle.ToInt32(), "open", fullPath, null, null, ShowWindowCommands.SW_NORMAL);
-                                }
-                            }
+                            if(NotExist(fullPath[i]))
+                                AddFileToList(fullPath[i], frm.SelectedFileId[i]);
                             else
-                                MessageBox.Show("此文件已存在，不可重复添加。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                        }).Start();
+                                MessageBox.Show($"{Path.GetFileName(fullPath[i])}文件已存在，不可重复添加。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                            MessageBox.Show($"服务器不存在文件{Path.GetFileName(fullPath[i])}。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     }
-                    else
-                        MessageBox.Show("服务器不存在此文件。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 }
             }
             else

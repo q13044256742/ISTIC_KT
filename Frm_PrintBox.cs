@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using 数据采集档案管理系统___课题版.Properties;
 
@@ -12,14 +9,6 @@ namespace 数据采集档案管理系统___课题版
 {
     public partial class Frm_PrintBox : Form
     {
-        /// <summary>
-        /// 文件总份数
-        /// </summary>
-        public int fileAmount;
-        /// <summary>
-        /// 文件总页数
-        /// </summary>
-        public int filePages;
         /// <summary>
         /// 案卷名称
         /// </summary>
@@ -33,21 +22,9 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         public string unitName;
         /// <summary>
-        /// 编制日期
-        /// </summary>
-        public string bzDate;
-        /// <summary>
-        /// 保管日期
-        /// </summary>
-        public string bgDate;
-        /// <summary>
         /// 密级
         /// </summary>
         public string secret;
-        /// <summary>
-        /// 馆藏号
-        /// </summary>
-        public string gcCode;
         /// <summary>
         /// 项目编号
         /// </summary>
@@ -60,6 +37,18 @@ namespace 数据采集档案管理系统___课题版
         /// 盒列表
         /// </summary>
         public DataTable boxTable;
+        /// <summary>
+        /// 所属对象父级名称
+        /// </summary>
+        public object parentObjectName;
+        /// <summary>
+        /// 其他密切相关文档
+        /// </summary>
+        public DataTable otherDoc;
+        public string ljPeople;
+        public string ljDate;
+        public string jcPeople;
+        public string jcDate;
         public Frm_PrintBox()
         {
             InitializeComponent();
@@ -78,25 +67,11 @@ namespace 数据采集档案管理系统___课题版
             {
                 int index = view.Rows.Add();
                 view.Rows[index].Cells["print"].Tag = boxTable.Rows[i]["pb_id"];
-                view.Rows[index].Cells["amount"].Value = GetFileAmount(boxTable.Rows[i]["pb_id"]);
+                view.Rows[index].Cells["amount"].Value = GetFilePageCount(boxTable.Rows[i]["pb_id"], 1);
                 view.Rows[index].Cells["id"].Value = boxTable.Rows[i]["pb_box_number"];
+                view.Rows[index].Cells["id"].Tag = boxTable.Rows[i]["pb_gc_id"];
                 view.Rows[index].Cells["fmbj"].Value = "20mm";
             }
-        }
-
-        private int GetFileAmount(object id)
-        {
-            int i = 0;
-            object idsObject = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{id}'");
-            if(idsObject != null)
-            {
-                string ids = GetValue(idsObject);
-                string[] idsArray = ids.Split(',');
-                foreach(string item in idsArray)
-                    if(!string.IsNullOrEmpty(item))
-                        i++;
-            }
-            return i;
         }
 
         private void Chk_PrintAll_CheckedChanged(object sender, EventArgs e)
@@ -177,21 +152,21 @@ namespace 数据采集档案管理系统___课题版
                         bool printBkb = GetBooleanValue(row.Cells["bkb"].Value);
                         if(printBkb)
                         {
-                            SetCurrentState(row.Cells["id"].Value, "备考表");
-                            PrintBKB(id);
+                            int boxNumber = (int)row.Cells["id"].Value;
+                            PrintBKB(id, boxNumber);
                         }
                         bool printFm = GetBooleanValue(row.Cells["fm"].Value);
                         if(printFm)
                         {
-                            SetCurrentState(row.Cells["id"].Value, "封面&脊背");
                             object bj = row.Cells["fmbj"].Value;
-                            PrintFM(id, bj);
+                            object GCNumber = row.Cells["id"].Tag;
+                            PrintFM(id, bj, GCNumber, row.Index);
                         }
                         bool printJnml = GetBooleanValue(row.Cells["jnml"].Value);
                         if(printJnml)
                         {
-                            SetCurrentState(row.Cells["id"].Value, "卷内文件目录");
-                            PrintJNML(id);
+                            object GCNumber = row.Cells["id"].Tag;
+                            PrintJNML(id, GCNumber);
                         }
                     }
                 }
@@ -206,14 +181,11 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 打印卷内文件目录
         /// </summary>
-        private void PrintJNML(object boxId)
+        private void PrintJNML(object boxId, object GCNumber)
         {
             string jnmlString = Resources.jnml;
-
-            jnmlString = jnmlString.Replace("id=\"xmmc\">", $"id=\"xmmc\">{proName}");
-            jnmlString = jnmlString.Replace("id=\"xmbh\">", $"id=\"xmbh\">{proCode}");
             jnmlString = jnmlString.Replace("id=\"ajbh\">", $"id=\"ajbh\">{objectCode}");
-            jnmlString = jnmlString.Replace("id=\"gch\">", $"id=\"gch\">{gcCode}");
+            jnmlString = jnmlString.Replace("id=\"gch\">", $"id=\"gch\">{GCNumber}");
 
             string files = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'"));
             string[] fids = files.Split(',');
@@ -221,16 +193,17 @@ namespace 数据采集档案管理系统___课题版
             dataTable.Columns.AddRange(new DataColumn[]
             {
                 new DataColumn("fi_code"),
+                new DataColumn("fi_user"),
                 new DataColumn("fi_name"),
                 new DataColumn("fi_pages"),
-                new DataColumn("fi_count"),
+                new DataColumn("fi_create_date"),
                 new DataColumn("fi_remark"),
             });
             for(int i = 0; i < fids.Length; i++)
             {
                 if(!string.IsNullOrEmpty(fids[i]))
                 {
-                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_code, fi_name, fi_pages, fi_count, fi_remark FROM files_info WHERE fi_id='{fids[i]}'");
+                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_code, fi_user, fi_name, fi_pages, fi_create_date, fi_remark FROM files_info WHERE fi_id='{fids[i]}'");
                     if(row != null)
                         dataTable.ImportRow(row);
                 }
@@ -244,9 +217,10 @@ namespace 数据采集档案管理系统___课题版
                     string newRr = "<tr>" +
                         $"<td>{i + 1}</td>" +
                         $"<td>{dataTable.Rows[i]["fi_code"]}&nbsp;</td>" +
+                        $"<td>{dataTable.Rows[i]["fi_user"]}&nbsp;</td>" +
                         $"<td>{dataTable.Rows[i]["fi_name"]}&nbsp;</td>" +
+                        $"<td>{GetDateValue(dataTable.Rows[i]["fi_create_date"], "yyyy-MM-dd")}&nbsp;</td>" +
                         $"<td>{dataTable.Rows[i]["fi_pages"]}&nbsp;</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_count"]}&nbsp;</td>" +
                         $"<td>{dataTable.Rows[i]["fi_remark"]}&nbsp;</td>" +
                         $"</tr>";
                     jnmlString = jnmlString.Replace("</tbody>", $"{newRr}</tbody>");
@@ -256,6 +230,22 @@ namespace 数据采集档案管理系统___课题版
             jnmlString = jnmlString.Replace("id=\"fileCount\">", $"id=\"fileCount\">{fileCount}");
             jnmlString = jnmlString.Replace("id=\"pageCount\">", $"id=\"pageCount\">{pageCount}");
             new WebBrowser() { DocumentText = jnmlString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
+        }
+
+        private object GetDateValue(object date, string format)
+        {
+            if(date != null)
+            {
+                if(DateTime.TryParse(GetValue(date), out DateTime result))
+                {
+                    if(result.Date != new DateTime(1900, 01, 01) &&
+                       result.Date != new DateTime(0001, 01, 01))
+                        return result.ToString(format);
+                }
+                else
+                    return date;
+            }
+            return null;
         }
 
         private int GetIntValue(object value)
@@ -274,18 +264,49 @@ namespace 数据采集档案管理系统___课题版
         private string GetValue(object value) => value == null ? string.Empty : value.ToString();
 
         /// <summary>
+        /// 获取文件数/页数
+        /// </summary>
+        /// <param name="boxId">盒ID</param>
+        /// <param name="type">获取类型
+        /// <para>1：文件数</para>
+        /// <para>2：页数</para>
+        /// </param>
+        private int GetFilePageCount(object boxId, int type)
+        {
+            object _fileAmount = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
+            string[] _files = GetValue(_fileAmount).Split(',');
+            int fileAmount = 0;
+            int filePages = 0;
+            for(int i = 0; i < _files.Length; i++)
+            {
+                if(!string.IsNullOrEmpty(_files[i]))
+                {
+                    fileAmount++;
+                    if(type == 2)
+                    {
+                        object _page = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_pages FROM files_info WHERE fi_id='{_files[i]}'");
+                        if(!string.IsNullOrEmpty(GetValue(_page)))
+                            filePages += Convert.ToInt32(_page);
+                    }
+                }
+            }
+            return type == 1 ? fileAmount : filePages;
+        }
+
+        /// <summary>
         /// 打印封面
         /// </summary>
-        private void PrintFM(object id, object bj)
+        private void PrintFM(object boxId, object bj, object GCNumber, int rowIndex)
         {
             string fmString = Resources.fm;
-            fmString = fmString.Replace("20mm", $"{bj}");
-            fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{objectName}");
-            fmString = fmString.Replace("id=\"bzdw\">", $"id=\"bzdw\">{unitName}");
-            fmString = fmString.Replace("id=\"bzrq\">", $"id=\"bzrq\">{bzDate}");
-            fmString = fmString.Replace("id=\"bgrq\">", $"id=\"bgrq\">{bgDate}");
-            fmString = fmString.Replace("id=\"mj\">", $"id=\"mj\">{secret}");
-            fmString = fmString.Replace("id=\"gch\">", $"id=\"dh\">{gcCode}");
+            object fontObject = view.Rows[rowIndex].Cells["font"].Tag;
+            if(fontObject != null)
+            {
+                Font font = (Font)fontObject;
+                fmString = fmString.Replace("FangSong", $"{font.FontFamily.Name}");
+                fmString = fmString.Replace("18pt", $"{font.Size}pt");
+            }
+            fmString = GetCoverHtmlString(boxId, fmString, bj, GCNumber);
 
             new WebBrowser() { DocumentText = fmString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
@@ -293,25 +314,152 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 打印卷内备考表
         /// </summary>
-        private void PrintBKB(object id)
+        private void PrintBKB(object boxId, int boxNumber)
         {
             string bkbString = Resources.bkb;
-            string fa = MicrosoftWordHelper.GetZN(fileAmount);
-            string fp = MicrosoftWordHelper.GetZN(filePages);
+            string fa = MicrosoftWordHelper.GetZN(GetFilePageCount(boxId, 1));
+            string fp = MicrosoftWordHelper.GetZN(GetFilePageCount(boxId, 2));
+            string hh = MicrosoftWordHelper.GetZN(boxNumber);
 
             bkbString = bkbString.Replace("name=\"count\"", $"name=\"count\" value=\"{fa}\"");
             bkbString = bkbString.Replace("name=\"pages\"", $"name=\"pages\" value=\"{fp}\"");
-            bkbString = bkbString.Replace("id=\"dh\">", $"id=\"dh\">{objectCode}");
-            bkbString = bkbString.Replace("id=\"ljr\">", $"id=\"dh\">{UserHelper.GetUser().RealName}");
-            bkbString = bkbString.Replace("id=\"ljrq\">", $"id=\"dh\">{DateTime.Now.ToString("yyyy年MM月dd日")}");
+            bkbString = bkbString.Replace("name=\"number\"", $"name=\"number\" value=\"{hh}\"");
 
-            new WebBrowser() { DocumentText = bkbString, ScriptErrorsSuppressed = false}.DocumentCompleted += Web_DocumentCompleted;
+            foreach(DataRow row in otherDoc.Rows)
+            {
+                string newTr = $"<tr>" +
+                    $"<td>{row["od_name"]}</td>" +
+                    $"<td>{row["od_code"]}</td>" +
+                    $"<td>{row["od_carrier"]}</td>" +
+                    $"<td>{row["od_intro"]}</td>" +
+                    $"</tr>";
+                bkbString = bkbString.Replace("</tbody>", $"{newTr}</tbody>");
+            }
+
+            bkbString = bkbString.Replace("id=\"dh\">", $"id=\"dh\">{objectCode}");
+            bkbString = bkbString.Replace("id=\"ljr\">", $"id=\"dh\">{ljPeople}");
+            bkbString = bkbString.Replace("id=\"ljrq\">", $"id=\"dh\">{GetDateValue(ljDate, "yyyy-MM-dd")}");
+            bkbString = bkbString.Replace("id=\"jcr\">", $"id=\"jcr\">{jcPeople}");
+            bkbString = bkbString.Replace("id=\"jcrq\">", $"id=\"jcrq\">{GetDateValue(jcDate, "yyyy-MM-dd")}");
+
+            new WebBrowser() { DocumentText = bkbString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
 
+        /// <summary>
+        /// 打印文档
+        /// </summary>
         private void Web_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             (sender as WebBrowser).Print();
             (sender as WebBrowser).Dispose();
         }
+
+        /// <summary>
+        /// 字体设置|预览
+        /// </summary>
+        private void View_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            string columnName = view.Columns[e.ColumnIndex].Name;
+            if("font".Equals(columnName))
+            {
+                object fontObject = view.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag;
+                if(fontObject != null)
+                {
+                    Font font = (Font)fontObject;
+                    fontDialog.Font = (Font)font;
+                }
+                if(fontDialog.ShowDialog() == DialogResult.OK)
+                {
+                    view.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag = fontDialog.Font;
+                }
+            }
+            else if("preview".Equals(columnName))
+            {
+                string fmString = Resources.fm;
+                
+                object fontObject = view.Rows[e.RowIndex].Cells["font"].Tag;
+                if(fontObject != null)
+                {
+                    Font font = (Font)fontObject;
+                    fmString = fmString.Replace("FangSong", $"{font.FontFamily.Name}");
+                    fmString = fmString.Replace("18pt", $"{font.Size}pt");
+                }
+                object bj = view.Rows[e.RowIndex].Cells["fmbj"].Value;
+                object boxId = view.Rows[e.RowIndex].Cells["print"].Tag;
+                object GCNumber = view.Rows[e.RowIndex].Cells["id"].Tag;
+                fmString = GetCoverHtmlString(boxId, fmString, bj, GCNumber);
+
+                new WebBrowser() { DocumentText = fmString, ScriptErrorsSuppressed = false }.DocumentCompleted += Preview_DocumentCompleted;
+            }
+            else if("print".Equals(columnName))
+            {
+                bool state = (bool)view.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue;
+                foreach(DataGridViewCell cell in view.Rows[e.RowIndex].Cells)
+                {
+                    if(cell is DataGridViewCheckBoxCell)
+                    {
+                        (cell as DataGridViewCheckBoxCell).Value = state;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 打印预览
+        /// </summary>
+        private void Preview_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            
+            (sender as WebBrowser).ShowPrintPreviewDialog();
+            (sender as WebBrowser).Dispose();
+        }
+
+        /// <summary>
+        /// 获取完整的封面HTML模板页
+        /// </summary>
+        /// <param name="bj">边距mm数</param>
+        private string GetCoverHtmlString(object boxId, string fmString, object bj, object GCNumber)
+        {
+            fmString = fmString.Replace("20mm", $"{bj}");
+            if(string.IsNullOrEmpty(GetValue(parentObjectName)))
+                fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{objectName}");
+            else
+            {
+                fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{parentObjectName}");
+                fmString = fmString.Replace("id=\"ktmc\">", $"id=\"ktmc\">{objectName}");
+            }
+            fmString = fmString.Replace("id=\"bzdw\">", $"id=\"bzdw\">{unitName}");
+            fmString = fmString.Replace("id=\"bzrq\">", $"id=\"bzrq\">{GetBzDate(boxId)}");
+            fmString = fmString.Replace("id=\"bgrq\">", $"id=\"bgrq\">永久");
+            fmString = fmString.Replace("id=\"mj\">", $"id=\"mj\">{secret}");
+            fmString = fmString.Replace("id=\"gch\">", $"id=\"dh\">{GCNumber}");
+            return fmString;
+        }
+
+        /// <summary>
+        /// 获取当前盒的编制日期（当前盒内文件的最早至最晚形成日期）
+        /// </summary>
+        private string GetBzDate(object boxId)
+        {
+            object fileIds = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
+            if(!string.IsNullOrEmpty(GetValue(fileIds)))
+            {
+                string[] ids = GetValue(fileIds).Split(',');
+                string idsString = string.Empty;
+                foreach(string id in ids)
+                    if(!string.IsNullOrEmpty(id))
+                        idsString += $"'{id}',";
+                if(!string.IsNullOrEmpty(idsString))
+                {
+                    idsString = idsString.Substring(0, idsString.Length - 1);
+                    object minDate = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT MIN(fi_create_date) FROM files_info where fi_id IN ({idsString}) AND DATE(fi_create_date) <> '1900-01-01' AND DATE(fi_create_date) <> '0001-01-01';");
+                    object maxDate = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT MAX(fi_create_date) FROM files_info where fi_id IN ({idsString}) AND DATE(fi_create_date) <> '1900-01-01' AND DATE(fi_create_date) <> '0001-01-01';");
+                    if(minDate != null && maxDate != null)
+                        return $"{(Convert.ToDateTime(minDate)).ToString("yyyy-MM-dd")} ~ {(Convert.ToDateTime(maxDate)).ToString("yyyy-MM-dd")}";
+                }
+            }
+            return null;
+        }
+
     }
 }
