@@ -720,7 +720,7 @@
             this.btn_Project_Print.TabIndex = 57;
             this.btn_Project_Print.Text = "打印";
             this.btn_Project_Print.UseVisualStyleBackColor = true;
-            this.btn_Project_Print.Click += new System.EventHandler(this.Btn_Project_Print_Click);
+            this.btn_Project_Print.Click += new System.EventHandler(this.Btn_Print_Click);
             // 
             // txt_Project_AJ_Code
             // 
@@ -1662,7 +1662,7 @@
             this.btn_Topic_Print.TabIndex = 66;
             this.btn_Topic_Print.Text = "打印";
             this.btn_Topic_Print.UseVisualStyleBackColor = true;
-            this.btn_Topic_Print.Click += new System.EventHandler(this.Btn_Project_Print_Click);
+            this.btn_Topic_Print.Click += new System.EventHandler(this.Btn_Print_Click);
             // 
             // txt_Topic_AJ_Code
             // 
@@ -2570,7 +2570,7 @@
             this.btn_Subject_Print.TabIndex = 78;
             this.btn_Subject_Print.Text = "打印";
             this.btn_Subject_Print.UseVisualStyleBackColor = true;
-            this.btn_Subject_Print.Click += new System.EventHandler(this.Btn_Project_Print_Click);
+            this.btn_Subject_Print.Click += new System.EventHandler(this.Btn_Print_Click);
             // 
             // txt_Subject_AJ_Code
             // 

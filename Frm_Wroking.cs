@@ -1853,13 +1853,16 @@ namespace 数据采集档案管理系统___课题版
                     {
                         frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", null);
                         string value = txt_Topic_Year.Text;
-                        int year = 0;
-                        if(int.TryParse(value.Substring(0, 4), out year))
+                        if(value.Length >= 4)
                         {
-                            txt_Topic_Year.Text = year.ToString();
-                            DateTime time = DateTime.MinValue;
-                            if(DateTime.TryParse(year + "-01-01", out time))
-                                frm.dtp_date.Value = time;
+                            int year = 0;
+                            if(int.TryParse(value.Substring(0, 4), out year))
+                            {
+                                txt_Topic_Year.Text = year.ToString();
+                                DateTime time = DateTime.MinValue;
+                                if(DateTime.TryParse(year + "-01-01", out time))
+                                    frm.dtp_date.Value = time;
+                            }
                         }
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
@@ -1881,13 +1884,16 @@ namespace 数据采集档案管理系统___课题版
                     {
                         frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", null);
                         string value = txt_Subject_Year.Text;
-                        int year = 0;
-                        if(int.TryParse(value.Substring(0, 4), out year))
+                        if(value.Length >= 4)
                         {
-                            txt_Subject_Year.Text = year.ToString();
-                            DateTime time = DateTime.MinValue;
-                            if(DateTime.TryParse(year + "-01-01", out time))
-                                frm.dtp_date.Value = time;
+                            int year = 0;
+                            if(int.TryParse(value.Substring(0, 4), out year))
+                            {
+                                txt_Subject_Year.Text = year.ToString();
+                                DateTime time = DateTime.MinValue;
+                                if(DateTime.TryParse(year + "-01-01", out time))
+                                    frm.dtp_date.Value = time;
+                            }
                         }
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
@@ -2164,15 +2170,8 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Project_BoxId.DisplayMember = "pb_box_number";
                 cbo_Project_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
-                {
                     cbo_Project_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                    Cbo_BoxId_SelectionChangeCommitted(cbo_Project_BoxId, null);
-                }
-                else
-                {
-                    lsv_Project_Left.Clear();
-                    lsv_Project_Right.Clear();
-                }
+                Cbo_BoxId_SelectionChangeCommitted(cbo_Project_BoxId, null);
             }
             else if(type == ControlType.Plan_Topic)
             {
@@ -2180,15 +2179,8 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Topic_BoxId.DisplayMember = "pb_box_number";
                 cbo_Topic_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
-                {
                     cbo_Topic_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                    Cbo_BoxId_SelectionChangeCommitted(cbo_Topic_BoxId, null);
-                }
-                else
-                {
-                    lsv_Topic_Left.Clear();
-                    lsv_Topic_Right.Clear();
-                }
+                Cbo_BoxId_SelectionChangeCommitted(cbo_Topic_BoxId, null);
             }
             else if(type == ControlType.Plan_Topic_Subject)
             {
@@ -2196,15 +2188,8 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Subject_BoxId.DisplayMember = "pb_box_number";
                 cbo_Subject_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
-                {
                     cbo_Subject_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                    Cbo_BoxId_SelectionChangeCommitted(cbo_Subject_BoxId, null);
-                }
-                else
-                {
-                    lsv_Subject_Left.Clear();
-                    lsv_Subject_Right.Clear();
-                }
+                Cbo_BoxId_SelectionChangeCommitted(cbo_Subject_BoxId, null);
             }
         }
 
@@ -3037,13 +3022,14 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void Btn_Project_Print_Click(object sender, EventArgs e)
+        private void Btn_Print_Click(object sender, EventArgs e)
         {
             string controlName = (sender as Control).Name;
             object objId = null, boxId = null, docNumber = null;
             string objName = null, gcCode = null;
             DataTable boxTable = null;
             string proName = null, proCode = null;
+            object parentObjectName = null;
             if(controlName.Contains("Project"))
             {
                 objId = tab_Project_Info.Tag;
@@ -3065,6 +3051,7 @@ namespace 数据采集档案管理系统___课题版
                 proName = txt_Topic_Name.Text;
                 proCode = txt_Topic_Code.Text;
                 boxTable = (DataTable)cbo_Topic_BoxId.DataSource;
+                parentObjectName = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pi_name FROM project_info WHERE pi_id=(SELECT ti_obj_id FROM topic_info WHERE ti_id='{objId}')");
             }
             else if(controlName.Contains("Subject"))
             {
@@ -3076,6 +3063,7 @@ namespace 数据采集档案管理系统___课题版
                 proName = txt_Subject_Name.Text;
                 proCode = txt_Subject_Code.Text;
                 boxTable = (DataTable)cbo_Subject_BoxId.DataSource;
+                parentObjectName = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT ti_name FROM topic_info WHERE ti_id=(SELECT si_obj_id FROM subject_info WHERE si_id='{objId}')");
             }
 
 
@@ -3094,18 +3082,20 @@ namespace 数据采集档案管理系统___课题版
                 }
             }
 
-            Frm_PrintBox frm = new Frm_PrintBox();
-            frm.boxTable = boxTable;
-            frm.fileAmount = fileAmount;
-            frm.filePages = filePages;
-            frm.objectCode = docNumber;
-            frm.gcCode = gcCode;
-            frm.objectName = objName;
-            frm.bzDate = DateTime.Now.ToString("yyyy-MM-dd");
-            frm.bgDate = DateTime.Now.ToString("yyyy-MM-dd");
-            frm.unitName = UserHelper.GetUser().UserUnitName;
-            frm.proCode = proCode;
-            frm.proName = proName;
+            Frm_PrintBox frm = new Frm_PrintBox
+            {
+                boxTable = boxTable,
+                fileAmount = fileAmount,
+                filePages = filePages,
+                objectCode = docNumber,
+                gcCode = gcCode,
+                objectName = objName,
+                bzDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                bgDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                unitName = UserHelper.GetUser().UserUnitName,
+                proCode = proCode,
+                proName = proName,
+            };
             frm.ShowDialog();
 
             //Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);

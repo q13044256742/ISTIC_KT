@@ -410,7 +410,7 @@ namespace 数据采集档案管理系统___课题版
                         for(int i = 0; i < topicTable.Rows.Count; i++)
                         {
                             int rid = dgv_DataList.Rows.Add();
-                            dgv_DataList.Rows[rid].Tag = ControlType.Plan_Topic;
+                            dgv_DataList.Rows[rid].Tag = ControlType.Topic;
                             dgv_DataList.Rows[rid].Cells["id"].Tag = topicTable.Rows[i]["ti_id"];
                             dgv_DataList.Rows[rid].Cells["id"].Value = rowNumber++;
                             dgv_DataList.Rows[rid].Cells["code"].Value = topicTable.Rows[i]["ti_code"];
