@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Data;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -364,6 +365,7 @@ namespace 数据采集档案管理系统___课题版
                 dataGridView.Rows[index].Cells[key + "link"].Tag = dataTable.Rows[i]["fi_file_id"];
             }
             dataGridView.Columns[key + "categor_name"].Visible = false;
+            FileList_RowEnter(dataGridView, new DataGridViewCellEventArgs(0, 0));
         }
 
         /// <summary>
@@ -920,20 +922,53 @@ namespace 数据采集档案管理系统___课题版
                 string startDate = txt_Project_StartDate.Text;
                 if(!string.IsNullOrEmpty(startDate))
                 {
-                    DateTime time = new DateTime();
-                    if(!DateTime.TryParse(startDate, out time))
+
+                    if(!Regex.IsMatch(startDate, "\\d{4}-\\d{2}-\\d{2}"))
                     {
-                        errorProvider1.SetError(dtp_Project_StartDate, "提示：请输入合法的日期");
+                        errorProvider1.SetError(dtp_Project_StartDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
                     }
+                    else
+                    {
+                        if(!DateTime.TryParse(startDate, out DateTime time))
+                        {
+                            errorProvider1.SetError(dtp_Project_StartDate, "提示：请输入合法的日期");
+                            result = false;
+                        }
+                    }
                 }
+
                 string endDate = txt_Project_FinishDate.Text;
                 if(!string.IsNullOrEmpty(endDate))
                 {
-                    DateTime time = new DateTime();
-                    if(!DateTime.TryParse(endDate, out time))
+                    if(!Regex.IsMatch(endDate, "\\d{4}-\\d{2}-\\d{2}"))
                     {
-                        errorProvider1.SetError(dtp_Project_FinishDate, "提示：请输入合法的日期");
+                        errorProvider1.SetError(dtp_Project_FinishDate, "提示：请输入yyyy-MM-dd格式的日期");
+                        result = false;
+                    }
+                    else
+                    {
+                        if(!DateTime.TryParse(endDate, out DateTime time))
+                        {
+                            errorProvider1.SetError(dtp_Project_FinishDate, "提示：请输入合法的日期");
+                            result = false;
+                        }
+                    }
+                }
+
+                string year = txt_Project_Year.Text;
+                if(!Regex.IsMatch(year, "^\\d{4}$"))
+                {
+                    errorProvider1.SetError(txt_Topic_Year, "提示：请输入正确的立项年度");
+                    result = false;
+                }
+
+                string funds = txt_Project_Funds.Text;
+                if(!string.IsNullOrEmpty(funds))
+                {
+                    if(!Regex.IsMatch(funds, "^[0-9]+(.[0-9]{2})?$"))
+                    {
+                        errorProvider1.SetError(txt_Project_Funds, "提示：请输入合法经费");
                         result = false;
                     }
                 }
@@ -962,44 +997,71 @@ namespace 数据采集档案管理系统___课题版
                         result = false;
                     }
                 }
-                if(!isParentLevel)
+                if(string.IsNullOrEmpty(txt_Topic_Year.Text))
                 {
-                    if(string.IsNullOrEmpty(txt_Topic_Year.Text))
-                    {
-                        errorProvider1.SetError(txt_Topic_Year, "提示：立项年度不能为空");
-                        result = false;
-                    }
-                    if(string.IsNullOrEmpty(txt_Topic_Unit.Text))
-                    {
-                        errorProvider1.SetError(txt_Topic_Unit, "提示：承担单位不能为空");
-                        result = false;
-                    }
-                    if(string.IsNullOrEmpty(txt_Topic_Proer.Text))
-                    {
-                        errorProvider1.SetError(txt_Topic_Proer, "提示：负责人不能为空");
-                        result = false;
-                    }
+                    errorProvider1.SetError(txt_Topic_Year, "提示：立项年度不能为空");
+                    result = false;
+                }
+                if(string.IsNullOrEmpty(txt_Topic_Unit.Text))
+                {
+                    errorProvider1.SetError(txt_Topic_Unit, "提示：承担单位不能为空");
+                    result = false;
+                }
+                if(string.IsNullOrEmpty(txt_Topic_Proer.Text))
+                {
+                    errorProvider1.SetError(txt_Topic_Proer, "提示：负责人不能为空");
+                    result = false;
+                }
 
-                    string startDate = txt_Topic_StartDate.Text;
-                    if(!string.IsNullOrEmpty(startDate))
+                string funds = txt_Topic_Funds.Text;
+                if(!string.IsNullOrEmpty(funds))
+                {
+                    if(!Regex.IsMatch(funds, "^[0-9]+(.[0-9]{2})?$"))
                     {
-                        DateTime time = new DateTime();
-                        if(!DateTime.TryParse(startDate, out time))
+                        errorProvider1.SetError(txt_Topic_Funds, "提示：请输入合法经费");
+                        result = false;
+                    }
+                }
+                string startDate = txt_Topic_StartDate.Text;
+                if(!string.IsNullOrEmpty(startDate))
+                {
+                    if(!Regex.IsMatch(startDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    {
+                        errorProvider1.SetError(dtp_Topic_StartDate, "提示：请输入yyyy-MM-dd格式的日期");
+                        result = false;
+                    }
+                    else
+                    {
+                        if(!DateTime.TryParse(startDate, out DateTime time))
                         {
                             errorProvider1.SetError(dtp_Topic_StartDate, "提示：请输入合法的日期");
                             result = false;
                         }
                     }
-                    string endDate = txt_Topic_FinishDate.Text;
-                    if(!string.IsNullOrEmpty(endDate))
+                }
+                string endDate = txt_Topic_FinishDate.Text;
+                if(!string.IsNullOrEmpty(endDate))
+                {
+                    if(!Regex.IsMatch(endDate, "\\d{4}-\\d{2}-\\d{2}"))
                     {
-                        DateTime time = new DateTime();
-                        if(!DateTime.TryParse(endDate, out time))
+                        errorProvider1.SetError(dtp_Topic_FinishDate, "提示：请输入yyyy-MM-dd格式的日期");
+                        result = false;
+                    }
+                    else
+                    {
+                        if(!DateTime.TryParse(endDate, out DateTime time))
                         {
                             errorProvider1.SetError(dtp_Topic_FinishDate, "提示：请输入合法的日期");
                             result = false;
                         }
                     }
+                }
+
+                string year = txt_Topic_Year.Text;
+                if(!Regex.IsMatch(year, "^\\d{4}$"))
+                {
+                    errorProvider1.SetError(txt_Topic_Year, "提示：请输入正确的立项年度");
+                    result = false;
                 }
             }
             else if(name.Contains("Subject"))
@@ -1014,9 +1076,10 @@ namespace 数据采集档案管理系统___课题版
                     errorProvider1.SetError(txt_Subject_Code, "提示：子课题编号不能含有空格");
                     result = false;
                 }
-                if(string.IsNullOrEmpty(txt_Subject_Year.Text))
+                string year = txt_Subject_Year.Text;
+                if(!Regex.IsMatch(year, "^\\d{4}$"))
                 {
-                    errorProvider1.SetError(txt_Subject_Year, "提示：立项年度不能为空");
+                    errorProvider1.SetError(txt_Subject_Year, "提示：请输入正确的立项年度");
                     result = false;
                 }
                 if(string.IsNullOrEmpty(txt_Subject_Unit.Text))
@@ -1030,24 +1093,47 @@ namespace 数据采集档案管理系统___课题版
                     result = false;
                 }
 
+                string funds = txt_Subject_Funds.Text;
+                if(!string.IsNullOrEmpty(funds))
+                {
+                    if(!Regex.IsMatch(funds, "^[0-9]+(.[0-9]{2})?$"))
+                    {
+                        errorProvider1.SetError(txt_Subject_Funds, "提示：请输入合法经费");
+                        result = false;
+                    }
+                }
                 string startDate = txt_Subject_StartDate.Text;
                 if(!string.IsNullOrEmpty(startDate))
                 {
-                    DateTime time = new DateTime();
-                    if(!DateTime.TryParse(startDate, out time))
+                    if(!Regex.IsMatch(startDate, "\\d{4}-\\d{2}-\\d{2}"))
                     {
-                        errorProvider1.SetError(dtp_Subject_StartDate, "提示：请输入合法的日期");
+                        errorProvider1.SetError(dtp_Subject_StartDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
+                    }
+                    else
+                    {
+                        if(!DateTime.TryParse(startDate, out DateTime time))
+                        {
+                            errorProvider1.SetError(dtp_Subject_StartDate, "提示：请输入合法的日期");
+                            result = false;
+                        }
                     }
                 }
                 string endDate = txt_Subject_FinishDate.Text;
                 if(!string.IsNullOrEmpty(endDate))
                 {
-                    DateTime time = new DateTime();
-                    if(!DateTime.TryParse(endDate, out time))
+                    if(!Regex.IsMatch(endDate, "\\d{4}-\\d{2}-\\d{2}"))
                     {
-                        errorProvider1.SetError(dtp_Subject_FinishDate, "提示：请输入合法的日期");
+                        errorProvider1.SetError(dtp_Subject_FinishDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
+                    }
+                    else
+                    {
+                        if(!DateTime.TryParse(endDate, out DateTime time))
+                        {
+                            errorProvider1.SetError(dtp_Subject_FinishDate, "提示：请输入合法的日期");
+                            result = false;
+                        }
                     }
                 }
             }
@@ -1120,18 +1206,18 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
 
+                //页数
                 DataGridViewCell pagesCell = rows[i].Cells[key + "pages"];
-                if(pagesCell.Value == null || string.IsNullOrEmpty(GetValue(pagesCell.Value)) || Convert.ToInt32(pagesCell.Value) == 0)
+                if(pagesCell.Value == null)
                 {
                     pagesCell.ErrorText = "温馨提示：页数不能为0或空。";
                     result = false;
                 }
                 else
                 {
-                    int pageValue = Convert.ToInt32(pagesCell.Value);
-                    if(pageValue > 9999)
+                    if(!Regex.IsMatch(GetValue(pagesCell.Value), "^[0-9]{1,4}$"))
                     {
-                        pagesCell.ErrorText = "温馨提示：页数不能超过4位数。";
+                        pagesCell.ErrorText = "温馨提示：请输入小于4位数的合法数字。";
                         result = false;
                     }
                     else
@@ -1220,18 +1306,18 @@ namespace 数据采集档案管理系统___课题版
                 }
             }
 
+            //页数
             DataGridViewCell pagesCell = row.Cells[key + "pages"];
-            if(pagesCell.Value == null || string.IsNullOrEmpty(GetValue(pagesCell.Value)) || Convert.ToInt32(pagesCell.Value) == 0)
+            if(pagesCell.Value == null)
             {
                 pagesCell.ErrorText = "温馨提示：页数不能为0或空。";
                 result = false;
             }
             else
             {
-                int pageValue = Convert.ToInt32(pagesCell.Value);
-                if(pageValue > 9999)
+                if(!Regex.IsMatch(GetValue(pagesCell.Value), "^[0-9]{1,4}$"))
                 {
-                    pagesCell.ErrorText = "温馨提示：页数不能超过4位数。";
+                    pagesCell.ErrorText = "温馨提示：请输入小于4位数的合法数字。";
                     result = false;
                 }
                 else
@@ -1255,6 +1341,21 @@ namespace 数据采集档案管理系统___课题版
             return result;
         }
 
+        private string GetFloatValue(string text, int length)
+        {
+            if(!string.IsNullOrEmpty(text))
+            {
+                if(float.TryParse(text, out float result))
+                {
+                    string format = $"0.{"0".PadLeft(length, '0')}";
+                    return result.ToString(format);
+                }
+                else
+                    return string.Empty;
+            }
+            return string.Empty;
+        }
+
         /// <summary>
         /// 保存或修改基本信息
         /// </summary>
@@ -1273,7 +1374,7 @@ namespace 数据采集档案管理系统___课题版
                 object name = txt_Project_Name.Text;
                 object field = txt_Project_Field.Text;
                 object theme = txt_Project_Theme.Text;
-                object funds = txt_Project_Funds.Text;
+                object funds = GetFloatValue(txt_Project_Funds.Text, 2);
                 object sdate = GetDateValue(txt_Project_StartDate.Text);
                 object fdate = GetDateValue(txt_Project_FinishDate.Text);
                 object year = txt_Project_Year.Text;
@@ -1323,7 +1424,7 @@ namespace 数据采集档案管理系统___课题版
                 object name = txt_Topic_Name.Text;
                 object field = txt_Topic_Field.Text;
                 object theme = txt_Topic_Theme.Text;
-                object funds = txt_Topic_Funds.Text;
+                object funds = GetFloatValue(txt_Topic_Funds.Text, 2);
                 object sdate = GetDateValue(txt_Topic_StartDate.Text);
                 object fdate = GetDateValue(txt_Topic_FinishDate.Text);
                 object year = txt_Topic_Year.Text;
@@ -1373,7 +1474,7 @@ namespace 数据采集档案管理系统___课题版
                 object name = txt_Subject_Name.Text;
                 object field = txt_Subject_Field.Text;
                 object theme = txt_Subject_Theme.Text;
-                object funds = txt_Subject_Funds.Text;
+                object funds = GetFloatValue(txt_Subject_Funds.Text, 2);
                 object sdate = GetDateValue(txt_Subject_StartDate.Text);
                 object fdate = GetDateValue(txt_Subject_FinishDate.Text);
                 object year = txt_Subject_Year.Text;
@@ -1853,16 +1954,13 @@ namespace 数据采集档案管理系统___课题版
                     {
                         frm = new Frm_AddFile(dgv_Topic_FileList, "dgv_Topic_FL_", null);
                         string value = txt_Topic_Year.Text;
-                        if(value.Length >= 4)
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
                         {
-                            int year = 0;
-                            if(int.TryParse(value.Substring(0, 4), out year))
-                            {
-                                txt_Topic_Year.Text = year.ToString();
-                                DateTime time = DateTime.MinValue;
-                                if(DateTime.TryParse(year + "-01-01", out time))
-                                    frm.dtp_date.Value = time;
-                            }
+                            txt_Topic_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                frm.dtp_date.Value = time;
                         }
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
@@ -1884,16 +1982,13 @@ namespace 数据采集档案管理系统___课题版
                     {
                         frm = new Frm_AddFile(dgv_Subject_FileList, "dgv_Subject_FL_", null);
                         string value = txt_Subject_Year.Text;
-                        if(value.Length >= 4)
+                        int year = 0;
+                        if(int.TryParse(value.Substring(0, 4), out year))
                         {
-                            int year = 0;
-                            if(int.TryParse(value.Substring(0, 4), out year))
-                            {
-                                txt_Subject_Year.Text = year.ToString();
-                                DateTime time = DateTime.MinValue;
-                                if(DateTime.TryParse(year + "-01-01", out time))
-                                    frm.dtp_date.Value = time;
-                            }
+                            txt_Subject_Year.Text = year.ToString();
+                            DateTime time = DateTime.MinValue;
+                            if(DateTime.TryParse(year + "-01-01", out time))
+                                frm.dtp_date.Value = time;
                         }
                         frm.txt_unit.Text = UserHelper.GetUser().UserUnitName;
                     }
@@ -2163,15 +2258,22 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="selectLastItem">是否选中最后一个选项</param>
         private void LoadBoxList(object objId, ControlType type, bool selectLastItem)
         {
-            DataTable table = SQLiteHelper.ExecuteQuery($"SELECT pb_id, pb_box_number FROM files_box_info WHERE pb_obj_id='{objId}' ORDER BY pb_box_number ASC");
+            DataTable table = SQLiteHelper.ExecuteQuery($"SELECT * FROM files_box_info WHERE pb_obj_id='{objId}' ORDER BY pb_box_number ASC");
             if(type == ControlType.Plan_Project)
             {
                 cbo_Project_BoxId.DataSource = table;
                 cbo_Project_BoxId.DisplayMember = "pb_box_number";
                 cbo_Project_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
+                {
                     cbo_Project_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                Cbo_BoxId_SelectionChangeCommitted(cbo_Project_BoxId, null);
+                    Cbo_BoxId_SelectionChangeCommitted(cbo_Project_BoxId, null);
+                }
+                else
+                {
+                    lsv_Project_Left.Clear();
+                    lsv_Project_Right.Clear();
+                }
             }
             else if(type == ControlType.Plan_Topic)
             {
@@ -2179,8 +2281,15 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Topic_BoxId.DisplayMember = "pb_box_number";
                 cbo_Topic_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
+                {
                     cbo_Topic_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                Cbo_BoxId_SelectionChangeCommitted(cbo_Topic_BoxId, null);
+                    Cbo_BoxId_SelectionChangeCommitted(cbo_Topic_BoxId, null);
+                }
+                else
+                {
+                    lsv_Topic_Left.Clear();
+                    lsv_Topic_Right.Clear();
+                }
             }
             else if(type == ControlType.Plan_Topic_Subject)
             {
@@ -2188,8 +2297,15 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Subject_BoxId.DisplayMember = "pb_box_number";
                 cbo_Subject_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
+                {
                     cbo_Subject_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                Cbo_BoxId_SelectionChangeCommitted(cbo_Subject_BoxId, null);
+                    Cbo_BoxId_SelectionChangeCommitted(cbo_Subject_BoxId, null);
+                }
+                else
+                {
+                    lsv_Subject_Left.Clear();
+                    lsv_Subject_Right.Clear();
+                }
             }
         }
 
@@ -2739,23 +2855,6 @@ namespace 数据采集档案管理系统___课题版
                 SetFileDetail(ControlType.Plan_Topic_Subject, e.RowIndex);
         }
 
-        private void FileList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if(e.RowIndex != -1 && e.ColumnIndex != -1)
-            {
-                DataGridView dataGridView = sender as DataGridView;
-                if(dataGridView.Columns[e.ColumnIndex].Name.Contains("link"))
-                {
-                    string filePath = GetValue(dataGridView.CurrentCell.Value);
-                    if(!string.IsNullOrEmpty(filePath) && File.Exists(filePath))
-                    {
-                        if(MessageBox.Show("是否打开文件?", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
-                            WinFormOpenHelper.OpenWinForm(0, "open", filePath, null, null, ShowWindowCommands.SW_NORMAL);
-                    }
-                }
-            }
-        }
-
         private void dgv_FileList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
             if(e.Button == MouseButtons.Right && e.RowIndex != -1 && e.ColumnIndex != -1)
@@ -2926,26 +3025,6 @@ namespace 数据采集档案管理系统___课题版
 
         private void UserDeletedRow(object sender, DataGridViewRowEventArgs e) => removeIdList.Add(e.Row.Cells[0].Tag);
 
-        private void CellEndEdit(object sender, DataGridViewCellEventArgs e)
-        {
-            DataGridView view = sender as DataGridView;
-            if("页数".Equals(view.Columns[e.ColumnIndex].HeaderText))
-            {
-                DataGridViewCell cell = view.Rows[e.RowIndex].Cells[e.ColumnIndex];
-                if(cell.Value != null && !string.IsNullOrEmpty(GetValue(cell.Value).Trim()) && Convert.ToInt32(cell.Value) == 0)
-                {
-                    view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].ReadOnly = true;
-                    view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Style.BackColor = System.Drawing.Color.Wheat;
-                    view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value = null;
-                }
-                else
-                {
-                    view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].ReadOnly = false;
-                    view.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Style.BackColor = System.Drawing.Color.White;
-                }
-            }
-        }
-
         private void Btn_ViewFileTree_Click(object sender, EventArgs e)
         {
             object[] rootIds = SQLiteHelper.ExecuteSingleColumnQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_code = '-1'");
@@ -2954,20 +3033,13 @@ namespace 数据采集档案管理系统___课题版
                 Frm_AddFile_FileSelect frm = new Frm_AddFile_FileSelect(rootIds);
                 if(frm.ShowDialog() == DialogResult.OK)
                 {
-                    string fileId = frm.SelectedFileId;
-                    string filePath = frm.SelectedFileName;
-                    if(File.Exists(filePath))
-                    {
-                        if(MessageBox.Show("是否需要打开文件？", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    string[] filePath = frm.SelectedFileName;
+                    if(filePath != null && filePath.Length > 0)
+                        if(MessageBox.Show("是否需要打开文件所在地址？", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         {
-                            string savePath = Application.StartupPath + @"\TempBackupFolder\";
-                            if(!Directory.Exists(savePath))
-                                Directory.CreateDirectory(savePath);
-                            string _filePath = savePath + new FileInfo(filePath).Name;
-                            File.Copy(filePath, _filePath, true);
-                            WinFormOpenHelper.OpenWinForm(0, "open", _filePath, null, null, ShowWindowCommands.SW_NORMAL);
+                            string fileFolder = Path.GetDirectoryName(filePath[0]);
+                            WinFormOpenHelper.OpenWinForm(0, "open", null, null, fileFolder, ShowWindowCommands.SW_NORMAL);
                         }
-                    }
                 }
             }
         }
@@ -3022,11 +3094,11 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void Btn_Print_Click(object sender, EventArgs e)
+        private void Btn_Project_Print_Click(object sender, EventArgs e)
         {
-            string controlName = (sender as Control).Name;
+            string controlName = (sender as Button).Name;
             object objId = null, boxId = null, docNumber = null;
-            string objName = null, gcCode = null;
+            string objName = null;
             DataTable boxTable = null;
             string proName = null, proCode = null;
             object parentObjectName = null;
@@ -3036,7 +3108,6 @@ namespace 数据采集档案管理系统___课题版
                 boxId = cbo_Project_BoxId.SelectedValue;
                 docNumber = txt_Project_AJ_Code.Text;
                 objName = txt_Project_AJ_Name.Text;
-                gcCode = txt_Project_GCID.Text;
                 proName = txt_Project_Name.Text;
                 proCode = txt_Project_Code.Text;
                 boxTable = (DataTable)cbo_Project_BoxId.DataSource;
@@ -3047,7 +3118,6 @@ namespace 数据采集档案管理系统___课题版
                 boxId = cbo_Topic_BoxId.SelectedValue;
                 docNumber = txt_Topic_AJ_Code.Text;
                 objName = txt_Topic_AJ_Name.Text;
-                gcCode = txt_Topic_GCID.Text;
                 proName = txt_Topic_Name.Text;
                 proCode = txt_Topic_Code.Text;
                 boxTable = (DataTable)cbo_Topic_BoxId.DataSource;
@@ -3059,7 +3129,6 @@ namespace 数据采集档案管理系统___课题版
                 boxId = cbo_Subject_BoxId.SelectedValue;
                 docNumber = txt_Subject_AJ_Code.Text;
                 objName = txt_Subject_AJ_Name.Text;
-                gcCode = txt_Subject_GCID.Text;
                 proName = txt_Subject_Name.Text;
                 proCode = txt_Subject_Code.Text;
                 boxTable = (DataTable)cbo_Subject_BoxId.DataSource;
@@ -3067,39 +3136,19 @@ namespace 数据采集档案管理系统___课题版
             }
 
 
-            object _fileAmount = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
-            string[] _files = GetValue(_fileAmount).Split(',');
-            int fileAmount = 0;
-            int filePages = 0;
-            for(int i = 0; i < _files.Length; i++)
-            {
-                if(!string.IsNullOrEmpty(_files[i]))
-                {
-                    fileAmount++;
-                    object _page = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_pages FROM files_info WHERE fi_id='{_files[i]}'");
-                    if(!string.IsNullOrEmpty(GetValue(_page)))
-                        filePages += Convert.ToInt32(_page);
-                }
-            }
-
             Frm_PrintBox frm = new Frm_PrintBox
             {
                 boxTable = boxTable,
-                fileAmount = fileAmount,
-                filePages = filePages,
                 objectCode = docNumber,
-                gcCode = gcCode,
                 objectName = objName,
-                bzDate = DateTime.Now.ToString("yyyy-MM-dd"),
-                bgDate = DateTime.Now.ToString("yyyy-MM-dd"),
                 unitName = UserHelper.GetUser().UserUnitName,
                 proCode = proCode,
                 proName = proName,
+                parentObjectName = parentObjectName,
+                ljPeople = UserHelper.GetUser().RealName,
+                otherDoc = SQLiteHelper.ExecuteQuery($"SELECT * FROM other_doc WHERE od_obj_id='{objId}'"),
             };
             frm.ShowDialog();
-
-            //Frm_Print frm = new Frm_Print(objId, boxId, docNumber, objName, gcCode);
-            //frm.ShowDialog();
         }
 
         private void Frm_Wroking_Load(object sender, EventArgs e)
@@ -3171,6 +3220,25 @@ namespace 数据采集档案管理系统___课题版
                 picker.Value = DateTime.Now;
                 picker.ValueChanged += Date_ValueChanged;
             }
+        }
+
+        private void Btn_OtherDoc_Click(object sender, EventArgs e)
+        {
+            string name = (sender as Button).Name;
+            object objid = null;
+            if(name.Contains("Project"))
+                objid = tab_Project_Info.Tag;
+            else if(name.Contains("Topic"))
+                objid = tab_Topic_Info.Tag;
+            else if(name.Contains("Subject"))
+                objid = tab_Subject_Info.Tag;
+            if(objid != null)
+            {
+                Frm_OtherDoc frm = new Frm_OtherDoc(objid);
+                frm.ShowDialog();
+            }
+            else
+                MessageBox.Show("请先保存基本信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
     }
 }

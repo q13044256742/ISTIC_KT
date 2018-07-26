@@ -29,10 +29,19 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.btn_StartPrint = new System.Windows.Forms.Button();
             this.view = new System.Windows.Forms.DataGridView();
+            this.print = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.fm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.fmbj = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.font = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.preview = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.jnml = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.chk_PrintAll = new System.Windows.Forms.CheckBox();
             this.chk_BKB = new System.Windows.Forms.CheckBox();
             this.chk_FMBJ = new System.Windows.Forms.CheckBox();
@@ -40,26 +49,11 @@
             this.cbo_BJ = new System.Windows.Forms.ComboBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.print = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.fm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.fmbj = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.jnml = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.btn_StartPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.view)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btn_StartPrint
-            // 
-            this.btn_StartPrint.Location = new System.Drawing.Point(729, 495);
-            this.btn_StartPrint.Name = "btn_StartPrint";
-            this.btn_StartPrint.Size = new System.Drawing.Size(83, 30);
-            this.btn_StartPrint.TabIndex = 1;
-            this.btn_StartPrint.Text = "开始打印";
-            this.btn_StartPrint.UseVisualStyleBackColor = true;
-            this.btn_StartPrint.Click += new System.EventHandler(this.Btn_StartPrint_Click);
             // 
             // view
             // 
@@ -85,14 +79,100 @@
             this.bkb,
             this.fm,
             this.fmbj,
+            this.font,
+            this.preview,
             this.jnml});
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(31)))), ((int)(((byte)(53)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.view.DefaultCellStyle = dataGridViewCellStyle4;
             this.view.Dock = System.Windows.Forms.DockStyle.Top;
             this.view.Location = new System.Drawing.Point(0, 0);
             this.view.Name = "view";
             this.view.RowHeadersVisible = false;
             this.view.RowTemplate.Height = 23;
-            this.view.Size = new System.Drawing.Size(824, 422);
+            this.view.Size = new System.Drawing.Size(899, 422);
             this.view.TabIndex = 2;
+            this.view.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.View_CellContentClick);
+            // 
+            // print
+            // 
+            this.print.FillWeight = 10F;
+            this.print.HeaderText = "打印";
+            this.print.Name = "print";
+            this.print.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // id
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.id.DefaultCellStyle = dataGridViewCellStyle2;
+            this.id.FillWeight = 10F;
+            this.id.HeaderText = "盒号";
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // amount
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.amount.DefaultCellStyle = dataGridViewCellStyle3;
+            this.amount.FillWeight = 13F;
+            this.amount.HeaderText = "文件数";
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            // 
+            // bkb
+            // 
+            this.bkb.FillWeight = 20F;
+            this.bkb.HeaderText = "卷内备考表";
+            this.bkb.Name = "bkb";
+            this.bkb.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            // 
+            // fm
+            // 
+            this.fm.FillWeight = 20F;
+            this.fm.HeaderText = "封面&脊背";
+            this.fm.Name = "fm";
+            // 
+            // fmbj
+            // 
+            this.fmbj.FillWeight = 12F;
+            this.fmbj.HeaderText = "边距";
+            this.fmbj.Items.AddRange(new object[] {
+            "20mm",
+            "30mm",
+            "40mm",
+            "50mm",
+            "60mm",
+            "80mm"});
+            this.fmbj.Name = "fmbj";
+            // 
+            // font
+            // 
+            this.font.FillWeight = 15F;
+            this.font.HeaderText = "字体设置";
+            this.font.Name = "font";
+            this.font.Text = "设置";
+            this.font.UseColumnTextForButtonValue = true;
+            // 
+            // preview
+            // 
+            this.preview.FillWeight = 15F;
+            this.preview.HeaderText = "打印预览";
+            this.preview.Name = "preview";
+            this.preview.Text = "预览";
+            this.preview.UseColumnTextForButtonValue = true;
+            // 
+            // jnml
+            // 
+            this.jnml.FillWeight = 20F;
+            this.jnml.HeaderText = "卷内文件目录";
+            this.jnml.Name = "jnml";
+            this.jnml.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
             // chk_PrintAll
             // 
@@ -144,7 +224,9 @@
             this.cbo_BJ.FormattingEnabled = true;
             this.cbo_BJ.Items.AddRange(new object[] {
             "20mm",
+            "30mm",
             "40mm",
+            "50mm",
             "60mm",
             "80mm"});
             this.cbo_BJ.Location = new System.Drawing.Point(150, 498);
@@ -159,7 +241,8 @@
             this.tip});
             this.statusStrip1.Location = new System.Drawing.Point(0, 557);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(824, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(899, 22);
+            this.statusStrip1.SizingGrip = false;
             this.statusStrip1.TabIndex = 8;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -168,70 +251,19 @@
             this.tip.Name = "tip";
             this.tip.Size = new System.Drawing.Size(0, 17);
             // 
-            // print
+            // btn_StartPrint
             // 
-            this.print.FillWeight = 10F;
-            this.print.HeaderText = "打印";
-            this.print.Name = "print";
-            this.print.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // id
-            // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.id.DefaultCellStyle = dataGridViewCellStyle2;
-            this.id.FillWeight = 10F;
-            this.id.HeaderText = "盒号";
-            this.id.Name = "id";
-            this.id.ReadOnly = true;
-            this.id.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // amount
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.amount.DefaultCellStyle = dataGridViewCellStyle3;
-            this.amount.FillWeight = 12F;
-            this.amount.HeaderText = "文件数";
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
-            this.amount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // bkb
-            // 
-            this.bkb.FillWeight = 25F;
-            this.bkb.HeaderText = "卷内备考表";
-            this.bkb.Name = "bkb";
-            this.bkb.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            // 
-            // fm
-            // 
-            this.fm.FillWeight = 25F;
-            this.fm.HeaderText = "封面&脊背";
-            this.fm.Name = "fm";
-            // 
-            // fmbj
-            // 
-            this.fmbj.FillWeight = 20F;
-            this.fmbj.HeaderText = "边距";
-            this.fmbj.Items.AddRange(new object[] {
-            "20mm",
-            "30mm",
-            "40mm",
-            "50mm",
-            "60mm",
-            "80mm"});
-            this.fmbj.Name = "fmbj";
-            // 
-            // jnml
-            // 
-            this.jnml.FillWeight = 25F;
-            this.jnml.HeaderText = "卷内文件目录";
-            this.jnml.Name = "jnml";
-            this.jnml.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.btn_StartPrint.Location = new System.Drawing.Point(729, 495);
+            this.btn_StartPrint.Name = "btn_StartPrint";
+            this.btn_StartPrint.Size = new System.Drawing.Size(83, 30);
+            this.btn_StartPrint.TabIndex = 1;
+            this.btn_StartPrint.Text = "开始打印";
+            this.btn_StartPrint.Click += new System.EventHandler(this.Btn_StartPrint_Click);
             // 
             // Frm_PrintBox
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(824, 579);
+            this.ClientSize = new System.Drawing.Size(899, 579);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.cbo_BJ);
             this.Controls.Add(this.chk_JNML);
@@ -272,6 +304,9 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn bkb;
         private System.Windows.Forms.DataGridViewCheckBoxColumn fm;
         private System.Windows.Forms.DataGridViewComboBoxColumn fmbj;
+        private System.Windows.Forms.DataGridViewButtonColumn font;
+        private System.Windows.Forms.DataGridViewButtonColumn preview;
         private System.Windows.Forms.DataGridViewCheckBoxColumn jnml;
+        private System.Windows.Forms.FontDialog fontDialog;
     }
 }

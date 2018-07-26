@@ -151,7 +151,8 @@ namespace 数据采集档案管理系统___课题版
                 sb.Append(number[index[i] - '0']);
                 sb.Append(dom[index.Length - 1 - i]);
             }
-            return sb.ToString();
+            string result = sb.ToString();
+            return result.EndsWith(number[0]) ? result.Substring(0, result.Length - 1) : result;
         }
     }
     class EntityObject

@@ -44,7 +44,7 @@ namespace 数据采集档案管理系统___课题版
                         return;
                 SaveTargetPath(); //如果是首次添加目标路径，则保存
                 btn_Import.Enabled = false;
-                int totalFileAmount = Directory.GetFiles(sPath, "*", SearchOption.AllDirectories).Length - Directory.GetFiles(sPath, "ISTIC*.db", SearchOption.AllDirectories).Length;
+                int totalFileAmount = GetFilesCount(new DirectoryInfo(sPath));
                 pro_Show.Value = pro_Show.Minimum;
                 pro_Show.Maximum = totalFileAmount;
 
@@ -74,6 +74,22 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 SetTip("请先填写必要信息。");
+        }
+
+        /// <summary>
+        /// 获取指定文件夹下的所有文件总数
+        /// </summary>
+        /// <param name="dirInfo">指定文件夹</param>
+        private int GetFilesCount(DirectoryInfo dirInfo)
+        {
+            int totalFile = 0;
+            if(!IsSystemHidden(dirInfo))
+            {
+                totalFile += dirInfo.GetFiles().Length;
+                foreach(DirectoryInfo subdir in dirInfo.GetDirectories())
+                    totalFile += GetFilesCount(subdir);
+            }
+            return totalFile;
         }
 
         private void SaveTargetPath()
@@ -329,18 +345,38 @@ namespace 数据采集档案管理系统___课题版
             DirectoryInfo[] infos = info.GetDirectories();
             for(int i = 0; i < infos.Length; i++)
             {
-                string primaryKey = Guid.NewGuid().ToString();
-                object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{infos[i].Name}' AND bfi_path='{rootFolder}'");
-                if(string.IsNullOrEmpty(GetValue(value)))
-                    SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid, bfi_type) VALUES " +
-                       $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}', '{1}')");
-                else
+                if(!IsSystemHidden(infos[i]))
                 {
-                    SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
-                    primaryKey = GetValue(value);
+                    string primaryKey = Guid.NewGuid().ToString();
+                    object value = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT bfi_id FROM backup_files_info WHERE bfi_name='{infos[i].Name}' AND bfi_path='{rootFolder}'");
+                    if(string.IsNullOrEmpty(GetValue(value)))
+                        SQLiteHelper.ExecuteNonQuery($"INSERT INTO backup_files_info(bfi_id, bfi_code, bfi_name, bfi_path, bfi_date, bfi_pid, bfi_userid, bfi_type) VALUES " +
+                           $"('{primaryKey}', '{indexCount++.ToString().PadLeft(6, '0')}', '{infos[i].Name}', '{rootFolder}', '{DateTime.Now.ToString("s")}', '{pid}', '{UserHelper.GetUser().UserId}', '{1}')");
+                    else
+                    {
+                        SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_code='{indexCount++.ToString().PadLeft(6, '0')}', bfi_date='{DateTime.Now.ToString("s")}', bfi_pid='{pid}', bfi_userid='{UserHelper.GetUser().UserId}' WHERE bfi_id='{value}';");
+                        primaryKey = GetValue(value);
+                    }
+                    CopyFile(infos[i].FullName, rootFolder + "\\" + infos[i].Name, primaryKey);
                 }
-                CopyFile(infos[i].FullName, rootFolder + "\\" + infos[i].Name, primaryKey);
             }
+        }
+
+        /// <summary>
+        /// 判断指定文件夹是否是系统文件夹
+        /// </summary>
+        private bool IsSystemHidden(DirectoryInfo dirInfo)
+        {
+            if(dirInfo.Parent == null)
+            {
+                return false;
+            }
+            string attributes = dirInfo.Attributes.ToString();
+            if(attributes.IndexOf("Hidden") > -1 || attributes.IndexOf("System") > -1)
+            {
+                return true;
+            }
+            return false;
         }
 
         private void Frm_Import_FormClosing(object sender, FormClosingEventArgs e)

@@ -8,8 +8,8 @@ namespace 数据采集档案管理系统___课题版
 {
     public partial class Frm_AddFile_FileSelect : Form
     {
-        public string SelectedFileName;
-        public string SelectedFileId;
+        public string[] SelectedFileName;
+        public string[] SelectedFileId;
         /// <summary>
         /// <para>0：默认文件夹</para>
         /// <para>1：小锁</para>
@@ -159,28 +159,16 @@ namespace 数据采集档案管理系统___课题版
         }
 
 
-        private void Tv_file_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            TreeNode node = e.Node;
-            int type = Convert.ToInt32(node.ToolTipText);//0:文件 1:文件夹
-            string state = node.StateImageKey;//1:已加工
-            if(type == 0 && !"1".Equals(state))
-            {
-                SelectedFileId = node.Name;
-                lbl_filename.Text = node.Text;
-                SelectedFileName = node.Tag + "\\" + node.Text;
-            }
-            else
-            {
-                lbl_filename.Text = string.Empty;
-                SelectedFileName = string.Empty;
-                SelectedFileId = string.Empty;
-            }
-        }
-
         private void Btn_sure_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(SelectedFileName))
+            SelectedFileId = new string[lsv_Selected.Items.Count];
+            SelectedFileName = new string[lsv_Selected.Items.Count];
+            for(int i = 0; i < SelectedFileId.Length; i++)
+            {
+                SelectedFileId[i] = lsv_Selected.Items[i].Name;
+                SelectedFileName[i] = GetValue(lsv_Selected.Items[i].Tag);
+            }
+            if(SelectedFileId.Length > 0)
                 DialogResult = DialogResult.OK;
             Close();
         }
@@ -192,9 +180,63 @@ namespace 数据采集档案管理系统___课题版
 
         private void Tv_file_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if(e.Button == MouseButtons.Left)
-                if(!string.IsNullOrEmpty(SelectedFileName))
-                    Btn_sure_Click(null, null);
+            Tv_file_NodeMouseClick(sender, e);
+            if(lsv_Selected.Items.Count > 0)
+                Btn_sure_Click(null, null);
         }
+
+        private void Tv_file_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if(e.Button == MouseButtons.Left)
+            {
+                TreeNode node = e.Node;
+                int type = Convert.ToInt32(node.ToolTipText);//0:文件 1:文件夹
+                string state = node.StateImageKey;//1:已加工
+                if(type == 0 && !"1".Equals(state))
+                {
+                    ListViewItem item = new ListViewItem()
+                    {
+                        Name = node.Name,
+                        Text = node.Text,
+                        Tag = node.Tag + "\\" + node.Text
+                    };
+                    if(Control.ModifierKeys != Keys.Control)
+                        lsv_Selected.Items.Clear();
+                    if(IsNotExist(item))
+                        ChangeItem(item, true);
+                }
+            }
+        }
+
+        private bool IsNotExist(ListViewItem item)
+        {
+            bool flag = true;
+            foreach(ListViewItem _item in lsv_Selected.Items)
+            {
+                if(_item.Name.Equals(item.Name))
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            return flag;
+        }
+
+        /// <summary>
+        /// 添加Item
+        /// </summary>
+        /// <param name="isAdd">是否新增</param>
+        private void ChangeItem(ListViewItem item, bool isAdd)
+        {
+            lsv_Selected.BeginUpdate();
+            if(isAdd)
+                lsv_Selected.Items.Add(item);
+            else
+                lsv_Selected.Items.Remove(item);
+            lsv_Selected.EndUpdate();
+            label1.Text = $"当前已选择文件数({lsv_Selected.Items.Count})：";
+        }
+
     }
+
 }
