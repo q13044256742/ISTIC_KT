@@ -690,7 +690,7 @@ namespace 数据采集档案管理系统___课题版
                 {
                     if(MessageBox.Show("是否删除选中项？", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         for(int i = 0; i < count; i++)
-                            lsv_LinkList.SelectedItems[i].Remove();
+                            lsv_LinkList.SelectedItems[0].Remove();
                 }
             }
         }

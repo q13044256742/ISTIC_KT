@@ -222,8 +222,8 @@ namespace 数据采集档案管理系统___课题版
                 txt_Project_Field.Text = GetValue(row["pi_field"]);
                 txt_Project_Theme.Text = GetValue(row["pi_theme"]);
                 txt_Project_Funds.Text = GetValue(row["pi_funds"]);
-                dtp_Project_StartDate.Value = GetDateTimeValue(row["pi_startdate"]);
-                dtp_Project_FinishDate.Value = GetDateTimeValue(row["pi_finishdate"]);
+                txt_Project_StartDate.Text = GetDateValue(row["pi_startdate"], "yyyy-MM-dd");
+                txt_Project_FinishDate.Text  = GetDateValue(row["pi_finishdate"], "yyyy-MM-dd");
                 txt_Project_Year.Tag = txt_Project_Year.Text = GetValue(row["pi_year"]);
                 txt_Project_Unit.Text = GetValue(row["pi_unit"]);
                 txt_Project_Province.Text = GetValue(row["pi_province"]);
@@ -243,8 +243,8 @@ namespace 数据采集档案管理系统___课题版
                 txt_Topic_Field.Text = GetValue(row["ti_field"]);
                 txt_Topic_Theme.Text = GetValue(row["ti_theme"]);
                 txt_Topic_Funds.Text = GetValue(row["ti_funds"]);
-                dtp_Topic_StartDate.Value = GetDateTimeValue(row["ti_startdate"]);
-                dtp_Topic_FinishDate.Value = GetDateTimeValue(row["ti_finishdate"]);
+                txt_Topic_StartDate.Text  = GetDateValue(row["ti_startdate"], "yyyy-MM-dd");
+                txt_Topic_FinishDate.Text  = GetDateValue(row["ti_finishdate"], "yyyy-MM-dd");
                 txt_Topic_Year.Tag = txt_Topic_Year.Text = GetValue(row["ti_year"]);
                 txt_Topic_Unit.Text = GetValue(row["ti_unit"]);
                 txt_Topic_Province.Text = GetValue(row["ti_province"]);
@@ -264,8 +264,8 @@ namespace 数据采集档案管理系统___课题版
                 txt_Subject_Field.Text = GetValue(row["si_field"]);
                 txt_Subject_Theme.Text = GetValue(row["si_theme"]);
                 txt_Subject_Funds.Text = GetValue(row["si_funds"]);
-                dtp_Subject_StartDate.Value = GetDateTimeValue(row["si_startdate"]);
-                dtp_Subject_FinishDate.Value = GetDateTimeValue(row["si_finishdate"]);
+                txt_Subject_StartDate.Text  = GetDateValue(row["si_startdate"], "yyyy-MM-dd");
+                txt_Subject_FinishDate.Text  = GetDateValue(row["si_finishdate"], "yyyy-MM-dd");
                 txt_Subject_Year.Tag = txt_Subject_Year.Text = GetValue(row["si_year"]);
                 txt_Subject_Unit.Text = GetValue(row["si_unit"]);
                 txt_Subject_Province.Text = GetValue(row["si_province"]);
@@ -923,43 +923,29 @@ namespace 数据采集档案管理系统___课题版
                 if(!string.IsNullOrEmpty(startDate))
                 {
 
-                    if(!Regex.IsMatch(startDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    if(!Regex.IsMatch(startDate, "^\\d{4}-\\d{2}-\\d{2}$") ||
+                        !DateTime.TryParse(startDate, out DateTime time))
                     {
                         errorProvider1.SetError(dtp_Project_StartDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
-                    }
-                    else
-                    {
-                        if(!DateTime.TryParse(startDate, out DateTime time))
-                        {
-                            errorProvider1.SetError(dtp_Project_StartDate, "提示：请输入合法的日期");
-                            result = false;
-                        }
                     }
                 }
 
                 string endDate = txt_Project_FinishDate.Text;
                 if(!string.IsNullOrEmpty(endDate))
                 {
-                    if(!Regex.IsMatch(endDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    if(!Regex.IsMatch(endDate, "^\\d{4}-\\d{2}-\\d{2}$") ||
+                        !DateTime.TryParse(endDate, out DateTime time))
                     {
                         errorProvider1.SetError(dtp_Project_FinishDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
-                    }
-                    else
-                    {
-                        if(!DateTime.TryParse(endDate, out DateTime time))
-                        {
-                            errorProvider1.SetError(dtp_Project_FinishDate, "提示：请输入合法的日期");
-                            result = false;
-                        }
                     }
                 }
 
                 string year = txt_Project_Year.Text;
                 if(!Regex.IsMatch(year, "^\\d{4}$"))
                 {
-                    errorProvider1.SetError(txt_Topic_Year, "提示：请输入正确的立项年度");
+                    errorProvider1.SetError(txt_Project_Year, "提示：请输入正确的立项年度");
                     result = false;
                 }
 
@@ -1025,35 +1011,21 @@ namespace 数据采集档案管理系统___课题版
                 string startDate = txt_Topic_StartDate.Text;
                 if(!string.IsNullOrEmpty(startDate))
                 {
-                    if(!Regex.IsMatch(startDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    if(!Regex.IsMatch(startDate, "^\\d{4}-\\d{2}-\\d{2}$") ||
+                        !DateTime.TryParse(startDate, out DateTime time))
                     {
                         errorProvider1.SetError(dtp_Topic_StartDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
-                    }
-                    else
-                    {
-                        if(!DateTime.TryParse(startDate, out DateTime time))
-                        {
-                            errorProvider1.SetError(dtp_Topic_StartDate, "提示：请输入合法的日期");
-                            result = false;
-                        }
                     }
                 }
                 string endDate = txt_Topic_FinishDate.Text;
                 if(!string.IsNullOrEmpty(endDate))
                 {
-                    if(!Regex.IsMatch(endDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    if(!Regex.IsMatch(endDate, "^\\d{4}-\\d{2}-\\d{2}$") ||
+                        !DateTime.TryParse(endDate, out DateTime time))
                     {
                         errorProvider1.SetError(dtp_Topic_FinishDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
-                    }
-                    else
-                    {
-                        if(!DateTime.TryParse(endDate, out DateTime time))
-                        {
-                            errorProvider1.SetError(dtp_Topic_FinishDate, "提示：请输入合法的日期");
-                            result = false;
-                        }
                     }
                 }
 
@@ -1105,35 +1077,21 @@ namespace 数据采集档案管理系统___课题版
                 string startDate = txt_Subject_StartDate.Text;
                 if(!string.IsNullOrEmpty(startDate))
                 {
-                    if(!Regex.IsMatch(startDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    if(!Regex.IsMatch(startDate, "^\\d{4}-\\d{2}-\\d{2}$") ||
+                        !DateTime.TryParse(startDate, out DateTime time))
                     {
                         errorProvider1.SetError(dtp_Subject_StartDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
-                    }
-                    else
-                    {
-                        if(!DateTime.TryParse(startDate, out DateTime time))
-                        {
-                            errorProvider1.SetError(dtp_Subject_StartDate, "提示：请输入合法的日期");
-                            result = false;
-                        }
                     }
                 }
                 string endDate = txt_Subject_FinishDate.Text;
                 if(!string.IsNullOrEmpty(endDate))
                 {
-                    if(!Regex.IsMatch(endDate, "\\d{4}-\\d{2}-\\d{2}"))
+                    if(!Regex.IsMatch(endDate, "^\\d{4}-\\d{2}-\\d{2}$") ||
+                        !DateTime.TryParse(endDate, out DateTime time))
                     {
                         errorProvider1.SetError(dtp_Subject_FinishDate, "提示：请输入yyyy-MM-dd格式的日期");
                         result = false;
-                    }
-                    else
-                    {
-                        if(!DateTime.TryParse(endDate, out DateTime time))
-                        {
-                            errorProvider1.SetError(dtp_Subject_FinishDate, "提示：请输入合法的日期");
-                            result = false;
-                        }
                     }
                 }
             }
@@ -1159,53 +1117,64 @@ namespace 数据采集档案管理系统___课题版
         private bool CheckFileName(DataGridViewRowCollection rows, string key)
         {
             bool result = true;
+            List<DataGridViewRow> nameRowList = new List<DataGridViewRow>();
+            List<DataGridViewRow> codeRowList = new List<DataGridViewRow>();
             for(int i = 0; i < rows.Count - 1; i++)
             {
-                DataGridViewCell cellName = rows[i].Cells[key + "name"];
-                if(cellName.Value == null || string.IsNullOrEmpty(GetValue(cellName.Value).Trim()))
+                if(!nameRowList.Contains(rows[i]))
                 {
-                    cellName.ErrorText = "温馨提示：文件名不能为空。";
-                    result = false;
-                }
-                else
-                {
-                    cellName.ErrorText = null;
-                    for(int j = i + 1; j < rows.Count - 1; j++)
+                    DataGridViewCell cellName = rows[i].Cells[key + "name"];
+                    if(cellName.Value == null || string.IsNullOrEmpty(GetValue(cellName.Value).Trim()))
                     {
-                        DataGridViewCell cell2 = rows[j].Cells[key + "name"];
-                        if(cellName.Value.Equals(cell2.Value))
+                        cellName.ErrorText = "温馨提示：文件名不能为空。";
+                        result = false;
+                    }
+                    else
+                    {
+                        cellName.ErrorText = null;
+                        for(int j = i + 1; j < rows.Count - 1; j++)
                         {
-                            cellName.ErrorText = $"温馨提示：与行{j + 1}的文件名重复。";
-                            result = false;
+                            DataGridViewCell cell2 = rows[j].Cells[key + "name"];
+                            if(cellName.Value.Equals(cell2.Value))
+                            {
+                                cellName.ErrorText = $"温馨提示：与行{j + 1}的文件名重复。";
+                                cell2.ErrorText = $"温馨提示：与行{i + 1}的文件名重复。";
+                                nameRowList.Add(cell2.OwningRow);
+                                result = false;
+                            }
+                            else
+                                cellName.ErrorText = null;
                         }
-                        else
-                            cellName.ErrorText = null;
                     }
                 }
 
                 //检测文件编号重复
-                DataGridViewCell cellCode = rows[i].Cells[key + "code"];
-                if(cellCode.Value == null || string.IsNullOrEmpty(GetValue(cellCode.Value).Trim()))
+                if(!codeRowList.Contains(rows[i]))
                 {
-                    cellCode.ErrorText = "温馨提示：文件编号不能为空。";
-                    result = false;
-                }
-                else
-                {
-                    cellCode.ErrorText = null;
-                    for(int j = i + 1; j < rows.Count - 1; j++)
+                    DataGridViewCell cellCode = rows[i].Cells[key + "code"];
+                    if(cellCode.Value == null || string.IsNullOrEmpty(GetValue(cellCode.Value).Trim()))
                     {
-                        DataGridViewCell cell2 = rows[j].Cells[key + "code"];
-                        if(cellCode.Value.Equals(cell2.Value))
+                        cellCode.ErrorText = "温馨提示：文件编号不能为空。";
+                        result = false;
+                    }
+                    else
+                    {
+                        cellCode.ErrorText = null;
+                        for(int j = i + 1; j < rows.Count - 1; j++)
                         {
-                            cellCode.ErrorText = $"温馨提示：与行{j + 1}的文件编号重复。";
-                            result = false;
+                            DataGridViewCell cell2 = rows[j].Cells[key + "code"];
+                            if(cellCode.Value.Equals(cell2.Value))
+                            {
+                                cellCode.ErrorText = $"温馨提示：与行{j + 1}的文件编号重复。";
+                                cell2.ErrorText = $"温馨提示：与行{i + 1}的文件编号重复。";
+                                codeRowList.Add(cell2.OwningRow);
+                                result = false;
+                            }
+                            else
+                                cellCode.ErrorText = null;
                         }
-                        else
-                            cellCode.ErrorText = null;
                     }
                 }
-
                 //页数
                 DataGridViewCell pagesCell = rows[i].Cells[key + "pages"];
                 if(pagesCell.Value == null)
@@ -2265,15 +2234,8 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Project_BoxId.DisplayMember = "pb_box_number";
                 cbo_Project_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
-                {
                     cbo_Project_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                    Cbo_BoxId_SelectionChangeCommitted(cbo_Project_BoxId, null);
-                }
-                else
-                {
-                    lsv_Project_Left.Clear();
-                    lsv_Project_Right.Clear();
-                }
+                Cbo_BoxId_SelectionChangeCommitted(cbo_Project_BoxId, null);
             }
             else if(type == ControlType.Plan_Topic)
             {
@@ -2281,15 +2243,8 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Topic_BoxId.DisplayMember = "pb_box_number";
                 cbo_Topic_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
-                {
                     cbo_Topic_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                    Cbo_BoxId_SelectionChangeCommitted(cbo_Topic_BoxId, null);
-                }
-                else
-                {
-                    lsv_Topic_Left.Clear();
-                    lsv_Topic_Right.Clear();
-                }
+                Cbo_BoxId_SelectionChangeCommitted(cbo_Topic_BoxId, null);
             }
             else if(type == ControlType.Plan_Topic_Subject)
             {
@@ -2297,15 +2252,8 @@ namespace 数据采集档案管理系统___课题版
                 cbo_Subject_BoxId.DisplayMember = "pb_box_number";
                 cbo_Subject_BoxId.ValueMember = "pb_id";
                 if(table.Rows.Count > 0)
-                {
                     cbo_Subject_BoxId.SelectedIndex = selectLastItem ? table.Rows.Count - 1 : 0;
-                    Cbo_BoxId_SelectionChangeCommitted(cbo_Subject_BoxId, null);
-                }
-                else
-                {
-                    lsv_Subject_Left.Clear();
-                    lsv_Subject_Right.Clear();
-                }
+                Cbo_BoxId_SelectionChangeCommitted(cbo_Subject_BoxId, null);
             }
         }
 
@@ -3094,7 +3042,7 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void Btn_Project_Print_Click(object sender, EventArgs e)
+        private void Btn_Print_Click(object sender, EventArgs e)
         {
             string controlName = (sender as Button).Name;
             object objId = null, boxId = null, docNumber = null;
@@ -3239,6 +3187,34 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 MessageBox.Show("请先保存基本信息。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
+        private void FileList_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if(e.RowIndex != -1 && e.ColumnIndex != -1)
+            {
+                DataGridView dataGridView = sender as DataGridView;
+                if(dataGridView.Columns[e.ColumnIndex].Name.Contains("link"))
+                {
+                    string path = GetValue(dataGridView.CurrentCell.Value);
+                    if(!string.IsNullOrEmpty(path))
+                    {
+                        if(path.Contains("；"))
+                        {
+                            string[] linkString = path.Split('；');
+                            Frm_FileList fileList = new Frm_FileList(linkString);
+                            fileList.ShowDialog();
+                        }
+                        else if(File.Exists(path))
+                        {
+                            if(MessageBox.Show("是否打开文件?", "确认提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                                WinFormOpenHelper.OpenWinForm(0, "open", path, null, null, ShowWindowCommands.SW_NORMAL);
+                        }
+                        else
+                            MessageBox.Show("文件不存在。", "打开失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
         }
     }
 }

@@ -89,11 +89,11 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="fileName">上传到远程服务器后的文件扩展名</param>  
         public static void UploadFile(string src, string dst, string fileName)
         {
-            FileStream inFileStream = new FileStream(src, FileMode.Open);    //此处假定本地文件存在，不然程序会报错     
+            FileStream inFileStream = new FileStream(src, FileMode.Open, FileAccess.Read);    //此处假定本地文件存在，不然程序会报错     
             if(!Directory.Exists(dst))        //判断上传到的远程服务器路径是否存在  
                 Directory.CreateDirectory(dst);
             dst = dst + "\\" + fileName;            //上传到远程服务器共享文件夹后文件的绝对路径  
-            FileStream outFileStream = new FileStream(dst, FileMode.OpenOrCreate);
+            FileStream outFileStream = new FileStream(dst, FileMode.OpenOrCreate, FileAccess.Write);
             byte[] buf = new byte[inFileStream.Length];
             int byteCount;
             while((byteCount = inFileStream.Read(buf, 0, buf.Length)) > 0)
