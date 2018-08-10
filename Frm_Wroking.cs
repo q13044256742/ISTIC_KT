@@ -380,7 +380,7 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="format">转换格式</param>
         private string GetDateValue(object date, string format)
         {
-            string _formatDate = null, value = GetValue(date);
+            string _formatDate = string.Empty, value = GetValue(date);
             if(!string.IsNullOrEmpty(value))
                 _formatDate = Convert.ToDateTime(value).ToString(format);
             return _formatDate.Contains("0001-") ? null : _formatDate;
@@ -1211,8 +1211,8 @@ namespace 数据采集档案管理系统___课题版
                 DataGridViewCell dateCell = rows[i].Cells[key + "date"];
                 if(!string.IsNullOrEmpty(GetValue(dateCell.Value)))
                 {
-                    bool flag = DateTime.TryParse(GetValue(dateCell.Value), out DateTime date);
-                    if(!flag)
+                    if(!Regex.IsMatch(GetValue(dateCell.Value), "^\\d{4}-\\d{2}-\\d{2}$")
+                        || !DateTime.TryParse(GetValue(dateCell.Value), out DateTime date))
                     {
                         dateCell.ErrorText = "提示：请输入格式为 yyyy-MM-dd 的有效日期。";
                         result = false;

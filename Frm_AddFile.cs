@@ -580,11 +580,10 @@ namespace 数据采集档案管理系统___课题版
         public void SetCategorByStage(object jdId, DataGridViewRow dataGridViewRow, object key)
         {
             DataGridViewComboBoxCell categorCell = dataGridViewRow.Cells[key + "categor"] as DataGridViewComboBoxCell;
-            string querySql = $"SELECT dd_id, dd_name FROM data_dictionary WHERE dd_pId='{jdId}' ORDER BY dd_sort";
+            string querySql = $"SELECT dd_id, dd_name||' '||extend_3 as dd_name FROM data_dictionary WHERE dd_pId='{jdId}' ORDER BY dd_sort";
             categorCell.DataSource = SQLiteHelper.ExecuteQuery(querySql);
             categorCell.DisplayMember = "dd_name";
             categorCell.ValueMember = "dd_id";
-            categorCell.Style = new DataGridViewCellStyle() { Font = new System.Drawing.Font("宋体", 10.5f), NullValue = categorCell.Items[0] };
         }
         
         /// <summary>
