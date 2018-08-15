@@ -58,13 +58,18 @@ namespace 数据采集档案管理系统___课题版
                 string _count = GetValue(row["fi_count"]);
                 if(!string.IsNullOrEmpty(_count))
                     num_count.Value = Convert.ToInt32(_count);
-                DateTime dateTime = Convert.ToDateTime(row["fi_create_date"]);
-                if(dateTime != DateTime.MinValue)
-                    dtp_date.Value = dateTime;
+                txt_Date.Text = GetDateValue(row["fi_create_date"], "yyyy-MM-dd");
                 txt_unit.Text = GetValue(row["fi_unit"]);
                 LoadFileLinkList(GetValue(row["fi_file_id"]));
                 txt_Remark.Text = GetValue(row["fi_remark"]);
             }
+        }
+
+        private string GetDateValue(object v1, string v2)
+        {
+            if(DateTime.TryParse(GetValue(v1), out DateTime result))
+                return result.ToString(v2);
+            return string.Empty;
         }
 
         private void LoadFileLinkList(string ids)
@@ -302,18 +307,7 @@ namespace 数据采集档案管理系统___课题版
                 object type = row.Cells[key + "type"].Value;
                 object pages = row.Cells[key + "pages"].Value;
                 object count = row.Cells[key + "count"].Value;
-                DateTime date = DateTime.Now;
-                string _date = GetValue(row.Cells[key + "date"].Value);
-                if(!string.IsNullOrEmpty(_date))
-                {
-                    if(_date.Length == 4)
-                        _date = _date + "-" + date.Month + "-" + date.Day;
-                    else if(_date.Length == 6)
-                        _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + date.Day;
-                    else if(_date.Length == 8)
-                        _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + _date.Substring(6, 2);
-                    DateTime.TryParse(_date, out date);
-                }
+                object date = row.Cells[key + "date"].Value;
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
                 object link = row.Cells[key + "link"].Value;
@@ -334,7 +328,7 @@ namespace 数据采集档案管理系统___课题版
 
                 string insertSql = "INSERT INTO files_info (" +
                 "fi_id, fi_code, fi_stage, fi_categor, fi_code, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_create_date, fi_unit, fi_carrier, fi_link, fi_file_id, fi_obj_id, fi_sort, fi_remark) " +
-                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{date.ToString("s")}', '{unit}', '{carrier}', '{link}', '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}', '{parentId}', '{row.Index}', '{remark}');";
+                $"VALUES( '{primaryKey}', '{code}', '{stage}', '{categor}', '{code}', '{name}', '{user}', '{type}', '{pages}', '{count}', '{date}', '{unit}', '{carrier}', '{link}', '{GetFullStringBySplit(GetLinkList(1), ",", string.Empty)}', '{parentId}', '{row.Index}', '{remark}');";
                 //将备份表中的文件标记为已选取
                 if(!string.IsNullOrEmpty(fileId))
                     insertSql += $"UPDATE backup_files_info SET bfi_state=1 WHERE bfi_id IN ({fileId});";
@@ -353,18 +347,7 @@ namespace 数据采集档案管理系统___课题版
                 object type = row.Cells[key + "type"].Value;
                 object pages = row.Cells[key + "pages"].Value;
                 object count = row.Cells[key + "count"].Value;
-                DateTime date = DateTime.Now;
-                string _date = GetValue(row.Cells[key + "date"].Value);
-                if(!string.IsNullOrEmpty(_date))
-                {
-                    if(_date.Length == 4)
-                        _date = _date + "-" + date.Month + "-" + date.Day;
-                    else if(_date.Length == 6)
-                        _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + date.Day;
-                    else if(_date.Length == 8)
-                        _date = _date.Substring(0, 4) + "-" + _date.Substring(4, 2) + "-" + _date.Substring(6, 2);
-                    DateTime.TryParse(_date, out date);
-                }
+                object date = row.Cells[key + "date"].Value;
                 object unit = row.Cells[key + "unit"].Value;
                 object carrier = row.Cells[key + "carrier"].Value;
                 object link = row.Cells[key + "link"].Value;
@@ -382,7 +365,7 @@ namespace 数据采集档案管理系统___课题版
                    $"fi_type = '{type}', " +
                    $"fi_pages = '{pages}', " +
                    $"fi_count = '{count}', " +
-                   $"fi_create_date = '{date.ToString("s")}', " +
+                   $"fi_create_date = '{date}', " +
                    $"fi_unit = '{unit}', " +
                    $"fi_carrier = '{carrier}', " +
                    $"fi_link = '{link}', " +
@@ -550,7 +533,7 @@ namespace 数据采集档案管理系统___课题版
                 bool flag = DateTime.TryParse(GetValue(dateString), out DateTime date);
                 if(!flag)
                 {
-                    errorProvider1.SetError(dtp_date, "提示：请输入格式为 yyyy-MM-dd 的有效日期。");
+                    errorProvider1.SetError(txt_Date, "提示：请输入格式为 yyyy-MM-dd 的有效日期。");
                     result = false;
                 }
             }
@@ -735,10 +718,5 @@ namespace 数据采集档案管理系统___课题版
             }
         }
 
-        private void dtp_date_ValueChanged(object sender, EventArgs e)
-        {
-            DateTime date = dtp_date.Value;
-            txt_Date.Text = date.ToString("yyyy-MM-dd");
-        }
     }
 }

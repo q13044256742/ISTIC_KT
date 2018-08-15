@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -44,6 +43,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.pic_Export = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pic_Logout = new System.Windows.Forms.PictureBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pic_Help = new System.Windows.Forms.PictureBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -80,12 +80,11 @@
             this.tv_DataTree = new System.Windows.Forms.TreeView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.stateTip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.cms_TreeView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cms_TreeView = new System.Windows.Forms.ContextMenuStrip();
             this.添加子节点AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.项目toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.课题TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.子课题SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pic_Logout = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Add)).BeginInit();
             this.panel2.SuspendLayout();
@@ -93,6 +92,7 @@
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Logout)).BeginInit();
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Help)).BeginInit();
             this.panel7.SuspendLayout();
@@ -106,7 +106,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_DataList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.cms_TreeView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Logout)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -227,6 +226,18 @@
             this.groupBox1.Size = new System.Drawing.Size(1342, 96);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // pic_Logout
+            // 
+            this.pic_Logout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pic_Logout.Image = global::数据采集档案管理系统___课题版.Properties.Resources.zhuxiao;
+            this.pic_Logout.Location = new System.Drawing.Point(1276, 23);
+            this.pic_Logout.Name = "pic_Logout";
+            this.pic_Logout.Size = new System.Drawing.Size(50, 50);
+            this.pic_Logout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pic_Logout.TabIndex = 17;
+            this.pic_Logout.TabStop = false;
+            this.pic_Logout.Click += new System.EventHandler(this.pic_Exit_Click);
             // 
             // panel6
             // 
@@ -442,6 +453,7 @@
             this.txt_Query_Name.Name = "txt_Query_Name";
             this.txt_Query_Name.Size = new System.Drawing.Size(176, 21);
             this.txt_Query_Name.TabIndex = 5;
+            this.txt_Query_Name.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Query_Code_KeyDown);
             // 
             // label6
             // 
@@ -458,6 +470,7 @@
             this.txt_Query_Code.Name = "txt_Query_Code";
             this.txt_Query_Code.Size = new System.Drawing.Size(134, 21);
             this.txt_Query_Code.TabIndex = 3;
+            this.txt_Query_Code.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Query_Code_KeyDown);
             // 
             // label5
             // 
@@ -652,18 +665,6 @@
             this.子课题SToolStripMenuItem.Text = "子课题(&S)";
             this.子课题SToolStripMenuItem.Click += new System.EventHandler(this.子课题SToolStripMenuItem_Click);
             // 
-            // pic_Logout
-            // 
-            this.pic_Logout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pic_Logout.Image = global::数据采集档案管理系统___课题版.Properties.Resources.zhuxiao;
-            this.pic_Logout.Location = new System.Drawing.Point(1276, 23);
-            this.pic_Logout.Name = "pic_Logout";
-            this.pic_Logout.Size = new System.Drawing.Size(50, 50);
-            this.pic_Logout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pic_Logout.TabIndex = 17;
-            this.pic_Logout.TabStop = false;
-            this.pic_Logout.Click += new System.EventHandler(this.pic_Exit_Click);
-            // 
             // Frm_MainFrame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -691,6 +692,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pic_Export)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_Logout)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Help)).EndInit();
@@ -710,7 +712,6 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.cms_TreeView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pic_Logout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

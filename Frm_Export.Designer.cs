@@ -45,6 +45,7 @@
             this.lbl_GuiDangPro = new System.Windows.Forms.Label();
             this.btn_GuiDang = new System.Windows.Forms.Button();
             this.pro_GuiDang = new System.Windows.Forms.ProgressBar();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Wait)).BeginInit();
             this.gro_YiJiao.SuspendLayout();
             this.gro_GuiDang.SuspendLayout();
@@ -117,6 +118,7 @@
             // 
             // gro_YiJiao
             // 
+            this.gro_YiJiao.Controls.Add(this.checkBox1);
             this.gro_YiJiao.Controls.Add(this.btn_Close);
             this.gro_YiJiao.Controls.Add(this.pic_Wait);
             this.gro_YiJiao.Controls.Add(this.lsv_DataList);
@@ -231,6 +233,18 @@
             this.pro_GuiDang.Size = new System.Drawing.Size(657, 30);
             this.pro_GuiDang.TabIndex = 0;
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.checkBox1.Location = new System.Drawing.Point(701, 32);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(58, 24);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "全选";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // Frm_Export
             // 
             this.AcceptButton = this.btn_Export;
@@ -277,5 +291,6 @@
         private System.Windows.Forms.Label lbl_GuiDangPro;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

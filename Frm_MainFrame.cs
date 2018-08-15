@@ -597,5 +597,13 @@ namespace 数据采集档案管理系统___课题版
         {
             new Frm_Explain().ShowDialog();
         }
+
+        private void txt_Query_Code_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Btn_Query_Click(null, null);
+            }
+        }
     }
 }

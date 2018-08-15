@@ -344,5 +344,13 @@ namespace 数据采集档案管理系统___课题版
         {
             Close();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach(ListViewItem item in lsv_DataList.Items)
+            {
+                item.Checked = checkBox1.Checked;
+            }
+        }
     }
 }

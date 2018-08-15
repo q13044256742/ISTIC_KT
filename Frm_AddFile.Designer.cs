@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btn_Reset = new System.Windows.Forms.Button();
             this.lbl_OpenFile = new System.Windows.Forms.LinkLabel();
             this.btn_Quit = new System.Windows.Forms.Button();
@@ -36,7 +35,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.txt_unit = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.dtp_date = new System.Windows.Forms.DateTimePicker();
             this.label9 = new System.Windows.Forms.Label();
             this.num_page = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,7 +46,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.cbo_stage = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider();
             this.label12 = new System.Windows.Forms.Label();
             this.pal_type = new System.Windows.Forms.Panel();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
@@ -152,17 +150,6 @@
             this.label10.Size = new System.Drawing.Size(65, 19);
             this.label10.TabIndex = 56;
             this.label10.Text = "存放单位";
-            // 
-            // dtp_date
-            // 
-            this.dtp_date.CustomFormat = "";
-            this.dtp_date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtp_date.Location = new System.Drawing.Point(322, 144);
-            this.dtp_date.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.dtp_date.Name = "dtp_date";
-            this.dtp_date.Size = new System.Drawing.Size(17, 26);
-            this.dtp_date.TabIndex = 5;
-            this.dtp_date.ValueChanged += new System.EventHandler(this.dtp_date_ValueChanged);
             // 
             // label9
             // 
@@ -493,7 +480,7 @@
             // 
             this.txt_Date.Location = new System.Drawing.Point(114, 144);
             this.txt_Date.Name = "txt_Date";
-            this.txt_Date.Size = new System.Drawing.Size(205, 26);
+            this.txt_Date.Size = new System.Drawing.Size(225, 26);
             this.txt_Date.TabIndex = 89;
             // 
             // Frm_AddFile
@@ -524,7 +511,6 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.txt_unit);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.dtp_date);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.num_page);
             this.Controls.Add(this.label7);
@@ -566,7 +552,6 @@
         private System.Windows.Forms.Label label14;
         public System.Windows.Forms.TextBox txt_unit;
         private System.Windows.Forms.Label label10;
-        public System.Windows.Forms.DateTimePicker dtp_date;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown num_page;
         private System.Windows.Forms.Label label7;
