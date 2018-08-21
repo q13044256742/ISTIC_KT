@@ -68,6 +68,7 @@
             this.fid = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.fname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.txt_Date = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.num_page)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.pal_type.SuspendLayout();
@@ -76,7 +77,7 @@
             // 
             // btn_Reset
             // 
-            this.btn_Reset.Location = new System.Drawing.Point(272, 530);
+            this.btn_Reset.Location = new System.Drawing.Point(272, 556);
             this.btn_Reset.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Reset.Name = "btn_Reset";
             this.btn_Reset.Size = new System.Drawing.Size(71, 33);
@@ -103,7 +104,7 @@
             // btn_Quit
             // 
             this.btn_Quit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_Quit.Location = new System.Drawing.Point(428, 530);
+            this.btn_Quit.Location = new System.Drawing.Point(428, 556);
             this.btn_Quit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Quit.Name = "btn_Quit";
             this.btn_Quit.Size = new System.Drawing.Size(71, 33);
@@ -114,7 +115,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(350, 530);
+            this.btn_Save.Location = new System.Drawing.Point(350, 556);
             this.btn_Save.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(71, 33);
@@ -357,7 +358,7 @@
             // 
             // txt_Remark
             // 
-            this.txt_Remark.Location = new System.Drawing.Point(114, 412);
+            this.txt_Remark.Location = new System.Drawing.Point(114, 445);
             this.txt_Remark.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txt_Remark.Multiline = true;
             this.txt_Remark.Name = "txt_Remark";
@@ -369,7 +370,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Bold);
-            this.label8.Location = new System.Drawing.Point(68, 412);
+            this.label8.Location = new System.Drawing.Point(68, 445);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(37, 19);
             this.label8.TabIndex = 73;
@@ -483,12 +484,23 @@
             this.txt_Date.Size = new System.Drawing.Size(225, 26);
             this.txt_Date.TabIndex = 89;
             // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 9.5F);
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(68, 399);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(670, 42);
+            this.label6.TabIndex = 90;
+            this.label6.Text = "注：请简要说明本文件中所包含的各个子文件名称。若此文件（包含电子和纸质）未移交，需在此标明文件的保存位置（或编号）。";
+            // 
             // Frm_AddFile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btn_Quit;
-            this.ClientSize = new System.Drawing.Size(770, 573);
+            this.ClientSize = new System.Drawing.Size(770, 596);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.txt_Date);
             this.Controls.Add(this.lsv_LinkList);
             this.Controls.Add(this.num_count);
@@ -585,5 +597,6 @@
         private System.Windows.Forms.ColumnHeader fid;
         private System.Windows.Forms.ColumnHeader fname;
         private System.Windows.Forms.TextBox txt_Date;
+        private System.Windows.Forms.Label label6;
     }
 }

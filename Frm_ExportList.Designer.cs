@@ -36,6 +36,7 @@
             this.lbl_SelectPath = new System.Windows.Forms.LinkLabel();
             this.btn_Sure = new System.Windows.Forms.Button();
             this.pic_Wait = new System.Windows.Forms.PictureBox();
+            this.chk_LostFileList = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pic_Wait)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // 
             this.chk_TotalTable.AutoSize = true;
             this.chk_TotalTable.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chk_TotalTable.Location = new System.Drawing.Point(243, 55);
+            this.chk_TotalTable.Location = new System.Drawing.Point(202, 55);
             this.chk_TotalTable.Name = "chk_TotalTable";
             this.chk_TotalTable.Size = new System.Drawing.Size(70, 24);
             this.chk_TotalTable.TabIndex = 1;
@@ -123,11 +124,23 @@
             this.pic_Wait.TabStop = false;
             this.pic_Wait.Visible = false;
             // 
+            // chk_LostFileList
+            // 
+            this.chk_LostFileList.AutoSize = true;
+            this.chk_LostFileList.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chk_LostFileList.Location = new System.Drawing.Point(332, 55);
+            this.chk_LostFileList.Name = "chk_LostFileList";
+            this.chk_LostFileList.Size = new System.Drawing.Size(112, 24);
+            this.chk_LostFileList.TabIndex = 8;
+            this.chk_LostFileList.Text = "缺失文件清单";
+            this.chk_LostFileList.UseVisualStyleBackColor = true;
+            // 
             // Frm_ExportList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(469, 245);
+            this.Controls.Add(this.chk_LostFileList);
             this.Controls.Add(this.pic_Wait);
             this.Controls.Add(this.btn_Sure);
             this.Controls.Add(this.lbl_SelectPath);
@@ -160,5 +173,6 @@
         private System.Windows.Forms.Button btn_Sure;
         private System.Windows.Forms.CheckBox chk_TotalTable;
         private System.Windows.Forms.PictureBox pic_Wait;
+        private System.Windows.Forms.CheckBox chk_LostFileList;
     }
 }

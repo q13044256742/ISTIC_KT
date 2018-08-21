@@ -380,13 +380,13 @@ namespace 数据采集档案管理系统___课题版
 
         private void Frm_Import_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(!btn_Import.Enabled)
-            {
-                MessageBox.Show("请等待导入完毕,中途退出会导致数据错误。", "无法关闭", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                e.Cancel = true;
-            }
-            else
-                DialogResult = DialogResult.OK;
+            //if(!btn_Import.Enabled)
+            //{
+            //    MessageBox.Show("请等待导入完毕,中途退出会导致数据错误。", "无法关闭", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+            //    e.Cancel = true;
+            //}
+            //else
+            //    DialogResult = DialogResult.OK;
         }
 
         private void btn_TarPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

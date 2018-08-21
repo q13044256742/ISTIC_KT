@@ -113,6 +113,19 @@ namespace 数据采集档案管理系统___课题版
 
                         result = MicrosoftWordExportHelper.WriteTotalTable(filePath, table, SpeName);
                     }
+                    //缺失文件清单
+                    if(chk_LostFileList.Checked)
+                    {
+                        string filePath = path + "\\重大专项项目（课题）缺失文件清单.doc";
+                        if(!File.Exists(filePath))
+                            File.Create(filePath).Close();
+                        string querySql = "SELECT dd_name name, dd_name||' '||extend_3 dd_name, dd_note, extend_2 FROM data_dictionary WHERE dd_pId in(" +
+                            "SELECT dd_id FROM data_dictionary WHERE dd_pId = (SELECT dd_id FROM data_dictionary  WHERE dd_code = 'dic_file_jd')) " +
+                            $"AND name NOT IN(SELECT dd.dd_name FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id where fi.fi_obj_id='{objId}') AND name<>'其他' " +
+                            $"ORDER BY dd_name";
+                        DataTable table = SQLiteHelper.ExecuteQuery(querySql);
+                        result = MicrosoftWordExportHelper.WriteLostDocumentList(filePath, table, SpeName, SpeCode, objId);
+                    }
                     pic_Wait.Visible = false;
                     btn_Sure.Enabled = true;
 

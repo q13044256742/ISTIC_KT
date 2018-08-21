@@ -334,16 +334,40 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 获取对象的文件数（纸本和电子）
         /// </summary>
+        /// <param name="type">类型</param>
         /// <param name="objid">对象主键</param>
         /// <param name="isPaper">是否纸本</param>
         /// <returns>文件数量</returns>
-        private object GetFileAmount(object objid, bool isPaper)
+        private object GetFileAmount(ControlType type, object objid, bool isPaper)
         {
-            string querySql = $"SELECT COUNT(*) FROM files_info fi LEFT JOIN data_dictionary dd ON fi.fi_carrier = dd.dd_id WHERE fi.fi_obj_id='{objid}' ";
+            string querySql = string.Empty, queryCon = string.Empty;
             if(isPaper)
-                querySql += "AND (dd_code = 'ZT_ZZ' OR dd_code = 'ZT_ALL')";
+                queryCon += "AND (dd_code = 'ZT_ZZ' OR dd_code = 'ZT_ALL')";
             else
-                querySql += "AND (dd_code = 'ZT_DZ' OR dd_code = 'ZT_ALL')";
+                queryCon += "AND (dd_code = 'ZT_DZ' OR dd_code = 'ZT_ALL')";
+            if(type == ControlType.Plan)
+            {
+                querySql = $"SELECT COUNT(fi.fi_id) FROM( " +
+                    $"SELECT pi_id FROM project_info UNION ALL SELECT ti_id FROM topic_info ) A " +
+                    $"LEFT JOIN files_info fi ON A.pi_id = fi.fi_obj_id " +
+                    $"LEFT JOIN data_dictionary dd ON dd.dd_id=fi.fi_carrier " +
+                    $"WHERE A.pi_id = '{objid}' {queryCon} GROUP BY A.pi_id";
+            }
+            else if(type == ControlType.Plan_Project)
+            {
+                querySql = $"SELECT COUNT(fi.fi_id) FROM( " +
+                    $"SELECT si_id FROM subject_info UNION ALL SELECT ti_id FROM topic_info ) A " +
+                    $"LEFT JOIN files_info fi ON A.si_id = fi.fi_obj_id " +
+                    $"LEFT JOIN data_dictionary dd ON dd.dd_id=fi.fi_carrier " +
+                    $"WHERE A.si_id = '{objid}' {queryCon} GROUP BY A.si_id";
+            }
+            else if(type == ControlType.Plan_Topic || type == ControlType.Topic)
+            {
+                querySql = $"SELECT COUNT(fi.fi_id) FROM (SELECT si_id FROM subject_info) A " +
+                    $"LEFT JOIN files_info fi ON A.si_id = fi.fi_obj_id " +
+                    $"LEFT JOIN data_dictionary dd ON dd.dd_id=fi.fi_carrier " +
+                    $"WHERE A.si_id = '{objid}' {queryCon} GROUP BY A.si_id";
+            }
             return SQLiteHelper.ExecuteOnlyOneQuery(querySql); ;
         }
 
@@ -403,8 +427,8 @@ namespace 数据采集档案管理系统___课题版
                             dgv_DataList.Rows[rid].Cells["unit"].Value = projectTable.Rows[i]["pi_unit"];
                             dgv_DataList.Rows[rid].Cells["user"].Value = projectTable.Rows[i]["pi_unit_user"];
                             dgv_DataList.Rows[rid].Cells["phone"].Value = projectTable.Rows[i]["pi_contacts_phone"];
-                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(projectTable.Rows[i]["pi_id"], true);
-                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(projectTable.Rows[i]["pi_id"], false);
+                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(type, projectTable.Rows[i]["pi_id"], true);
+                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(type, projectTable.Rows[i]["pi_id"], false);
                         }
                         DataTable topicTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM topic_info WHERE ti_obj_id='{e.Node.Name}'");
                         for(int i = 0; i < topicTable.Rows.Count; i++)
@@ -418,8 +442,8 @@ namespace 数据采集档案管理系统___课题版
                             dgv_DataList.Rows[rid].Cells["unit"].Value = topicTable.Rows[i]["ti_unit"];
                             dgv_DataList.Rows[rid].Cells["user"].Value = topicTable.Rows[i]["ti_unit_user"];
                             dgv_DataList.Rows[rid].Cells["phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
-                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], true);
-                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], false);
+                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(type, topicTable.Rows[i]["ti_id"], true);
+                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(type, topicTable.Rows[i]["ti_id"], false);
                         }
                     }
                     else if(type == ControlType.Plan_Project)
@@ -437,8 +461,8 @@ namespace 数据采集档案管理系统___课题版
                             dgv_DataList.Rows[rid].Cells["unit"].Value = subjectTable.Rows[i]["si_unit"];
                             dgv_DataList.Rows[rid].Cells["user"].Value = subjectTable.Rows[i]["si_unit_user"];
                             dgv_DataList.Rows[rid].Cells["phone"].Value = subjectTable.Rows[i]["si_contacts_phone"];
-                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(subjectTable.Rows[i]["si_id"], true);
-                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(subjectTable.Rows[i]["si_id"], false);
+                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(type, subjectTable.Rows[i]["si_id"], true);
+                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(type, subjectTable.Rows[i]["si_id"], false);
                         }
                         DataTable topicTable = SQLiteHelper.ExecuteQuery($"SELECT * FROM topic_info WHERE ti_obj_id='{e.Node.Name}'");
                         for(int i = 0; i < topicTable.Rows.Count; i++)
@@ -452,8 +476,8 @@ namespace 数据采集档案管理系统___课题版
                             dgv_DataList.Rows[rid].Cells["unit"].Value = topicTable.Rows[i]["ti_unit"];
                             dgv_DataList.Rows[rid].Cells["user"].Value = topicTable.Rows[i]["ti_unit_user"];
                             dgv_DataList.Rows[rid].Cells["phone"].Value = topicTable.Rows[i]["ti_contacts_phone"];
-                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], true);
-                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(topicTable.Rows[i]["ti_id"], false);
+                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(type, topicTable.Rows[i]["ti_id"], true);
+                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(type, topicTable.Rows[i]["ti_id"], false);
                         }
                     }
                     else if(type == ControlType.Plan_Topic || type == ControlType.Topic)
@@ -470,8 +494,8 @@ namespace 数据采集档案管理系统___课题版
                             dgv_DataList.Rows[rid].Cells["unit"].Value = subjectTable.Rows[i]["si_unit"];
                             dgv_DataList.Rows[rid].Cells["user"].Value = subjectTable.Rows[i]["si_unit_user"];
                             dgv_DataList.Rows[rid].Cells["phone"].Value = subjectTable.Rows[i]["si_contacts_phone"];
-                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(subjectTable.Rows[i]["si_id"], true);
-                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(subjectTable.Rows[i]["si_id"], false);
+                            dgv_DataList.Rows[rid].Cells["files"].Value = GetFileAmount(type, subjectTable.Rows[i]["si_id"], true);
+                            dgv_DataList.Rows[rid].Cells["eles"].Value = GetFileAmount(type, subjectTable.Rows[i]["si_id"], false);
                         }
                     }
                 }

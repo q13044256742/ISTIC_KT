@@ -166,6 +166,113 @@ namespace 数据采集档案管理系统___课题版
             return string.Empty;
         }
 
+        public static bool WriteLostDocumentList(string filePath, System.Data.DataTable tableList, object speName, object speCode, object parentId)
+        {
+            Microsoft.Office.Interop.Word.Application app = null;
+            Document doc = null;
+            try
+            {
+                int rows = tableList.Rows.Count + 2;//表格行数加1是为了标题栏
+                int cols = 5;//表格列数
+                object oMissing = Missing.Value;
+                app = new Microsoft.Office.Interop.Word.Application();//创建word应用程序
+                doc = app.Documents.Add();//添加一个word文档
+
+                app.Selection.PageSetup.LeftMargin = 50f;
+                app.Selection.PageSetup.RightMargin = 50f;
+                app.Selection.PageSetup.PageWidth = 800f;  //页面宽度
+
+                //标题
+                app.Selection.Font.Bold = 700;
+                app.Selection.Font.Size = 18;
+                app.Selection.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                app.Selection.Text = "重大专项项目（课题）档案缺失清单";
+
+                //子标题
+                object subLine = WdUnits.wdLine;
+                app.Selection.MoveDown(ref subLine, oMissing, oMissing);
+                app.Selection.TypeParagraph();//换行
+                app.Selection.Font.Bold = 0;
+                app.Selection.Font.Size = 12;
+                app.Selection.Text = $"项目（课题）名称：{speName}\t\t项目（课题）编号：{speCode}";
+
+                //换行添加表格
+                object line = WdUnits.wdLine;
+                app.Selection.MoveDown(ref line, oMissing, oMissing);
+                app.Selection.TypeParagraph();//换行
+                app.Selection.Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
+                Range range = app.Selection.Range;
+                Table table = app.Selection.Tables.Add(range, rows, cols, ref oMissing, ref oMissing);
+                //设置表格的字体大小粗细
+                table.Range.Font.Size = 11;
+                table.Range.Font.Bold = 0;
+                table.Borders.OutsideLineStyle = WdLineStyle.wdLineStyleSingle;
+                table.Borders.InsideLineStyle = WdLineStyle.wdLineStyleSingle;
+
+                //设置表格标题
+                int rowIndex = 1;
+                table.Rows[rowIndex].Range.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                table.Rows[rowIndex].Range.Font.Bold = 100;
+                table.Rows[rowIndex].Height = 30f;
+                table.Cell(rowIndex, 1).Range.Text = "序号";
+                table.Cell(rowIndex, 2).Range.Text = "文件类别";
+                table.Cell(rowIndex, 3).Range.Text = "缺失文件名称";
+                table.Cell(rowIndex, 4).Range.Text = "备注";
+
+                table.Columns[1].Width = 45f;
+                table.Columns[2].Width = 100f;
+                table.Columns[3].Width = 250f;
+                table.Columns[4].Width = 300f;
+
+                int rowCount = tableList.Rows.Count;
+                //循环数据创建数据行
+                for(int i = 0; i < rowCount; i++)
+                {
+                    rowIndex++;
+                    DataRow row = tableList.Rows[i];
+                    table.Cell(rowIndex, 1).Range.Text = GetValue(i + 1).PadLeft(2, '0');
+                    table.Cell(rowIndex, 2).Range.Text = GetValue(row["dd_name"]);
+                    table.Cell(rowIndex, 3).Range.Text = GetValue(row["dd_note"]);
+                    string queryReasonSql = $"SELECT pfo_remark FROM files_lost_info WHERE pfo_obj_id='{parentId}' AND pfo_categor LIKE '{row["name"]}%'";
+                    DataRow _row = SQLiteHelper.ExecuteSingleRowQuery(queryReasonSql);
+                    if(_row != null)
+                    {
+                        table.Cell(rowIndex, 4).Range.Text = GetValue(_row["pfo_remark"]);
+                    }
+                }
+
+                rowIndex++;
+                table.Rows[rowIndex].Height = 40f;
+                table.Rows[rowIndex].Cells[1].VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                table.Rows[rowIndex].Cells[2].VerticalAlignment = WdCellVerticalAlignment.wdCellAlignVerticalCenter;
+                table.Cell(rowIndex, 1).Range.Text = "合计";
+                table.Cell(rowIndex, 2).Merge(table.Cell(rowIndex, 4));
+                table.Cell(rowIndex, 2).Range.Text = $"共 {rowCount} 份文件。";
+
+                //导出到文件
+                doc.SaveAs(filePath,
+                    oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing, oMissing,
+                    oMissing, oMissing, oMissing, oMissing, oMissing, oMissing);
+                return true;
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+                return false;
+            }
+            finally
+            {
+                try
+                {
+                    if(doc != null)
+                        doc.Close();//关闭文档
+                    if(app != null)
+                        app.Quit();//退出应用程序
+                }
+                catch(Exception exo) { MessageBox.Show(exo.Message); }
+            }
+        }
+
         /// <summary>
         /// 汇总表
         /// </summary>

@@ -118,11 +118,11 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(26, 69);
+            this.label2.Location = new System.Drawing.Point(42, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 22);
+            this.label2.Size = new System.Drawing.Size(58, 22);
             this.label2.TabIndex = 2;
-            this.label2.Text = "馆藏号：";
+            this.label2.Text = "编号：";
             // 
             // txt_Name
             // 

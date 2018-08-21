@@ -255,24 +255,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
-    <Compile Include="Tools\Frm_BoxList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tools\Frm_BoxList.Designer.cs">
-      <DependentUpon>Frm_BoxList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Frm_Cover.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tools\Frm_Cover.Designer.cs">
-      <DependentUpon>Frm_Cover.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\Frm_FileBackUpTable.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Tools\Frm_FileBackUpTable.Designer.cs">
-      <DependentUpon>Frm_FileBackUpTable.cs</DependentUpon>
-    </Compile>
     <Compile Include="Tools\CreateKyoPanel.cs" />
     <Compile Include="Tools\DataGridViewStyleHelper.cs" />
     <Compile Include="Tools\DictionaryHelper.cs" />
@@ -364,15 +346,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Frm_BoxList.resx">
-      <DependentUpon>Frm_BoxList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Frm_Cover.resx">
-      <DependentUpon>Frm_Cover.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Tools\Frm_FileBackUpTable.resx">
-      <DependentUpon>Frm_FileBackUpTable.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="bin\x86\Debug\ISTIC.db" />

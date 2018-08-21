@@ -71,6 +71,7 @@ namespace 数据采集档案管理系统___课题版
             }
 
             lsv_DataList.Items.Clear();
+            checkBox1.Checked = false;
             foreach(DataRow row in _table.Rows)
             {
                 ListViewItem item = lsv_DataList.Items.Add(GetValue(row["code"]));
@@ -92,8 +93,6 @@ namespace 数据采集档案管理系统___课题版
                 int index = Convert.ToInt32(sta);
                 if(index == 1)
                     return "√";
-                else if(index == 0)
-                    return "×";
             }
             return string.Empty;
         }
@@ -142,6 +141,14 @@ namespace 数据采集档案管理系统___课题版
                             SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_lastupdate='{DateTime.Now.ToString("s")}', hr_isupdate=0 WHERE hr_id = '{historyId}'");
                     }
 
+                    string destPath = targetPath + $"\\ISTIC_{DateTime.Now.ToString("yyyyMMddHHmm")}.db";
+                    if(!Directory.Exists(Path.GetDirectoryName(destPath)))
+                        Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+                    if(!File.Exists(destPath))
+                        File.Create(destPath).Close();
+                    string sourFile = Application.StartupPath + @"\ISTIC.db";
+                    File.Copy(sourFile, destPath, true);
+
                     pic_Wait.Visible = false;
                     btn_Export.Enabled = true;
                     if(MessageBox.Show("移交完毕，是否现在打开文件夹？", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
@@ -155,7 +162,10 @@ namespace 数据采集档案管理系统___课题版
                 MessageBox.Show("请至少选择一条待移交的数据。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
-        private static List<object[]> GetFileLinkByObjId(object objId) => SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_link, fi_file_id FROM files_info WHERE fi_obj_id='{objId}'", 2);
+        private static List<object[]> GetFileLinkByObjId(object objId)
+        {
+            return SQLiteHelper.ExecuteColumnsQuery($"SELECT fi_link, fi_file_id FROM files_info WHERE fi_obj_id='{objId}'", 2);
+        }
 
         /// <summary>
         /// 复制文件
@@ -169,20 +179,22 @@ namespace 数据采集档案管理系统___课题版
                 string filePath = GetValue(list[i][0]);
                 if(!string.IsNullOrEmpty(filePath))
                 {
-                    if(File.Exists(filePath))
+                    string[] filePathArray = filePath.Split('；');
+                    foreach(string filePathString in filePathArray)
                     {
-                        //进行归档操作【文件复制】
-                        string destFile = rootFolder + "\\" + Path.GetFileName(filePath);
-                        if(!File.Exists(destFile))
-                            File.Create(destFile).Close();
-                        File.Copy(filePath, destFile, true);
+                        if(File.Exists(filePathString))
+                        {
+                            //进行归档操作【文件复制】
+                            string destFile = rootFolder + "\\" + Path.GetFileName(filePathString);
+                            if(!File.Exists(destFile))
+                                File.Create(destFile).Close();
+                            File.Copy(filePathString, destFile, true);
 
-                        //已归档的文件进行记录
-                        string fileId = GetValue(list[i][1]);
-                        SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state_gd=1 WHERE bfi_id='{fileId}'");
-
+                        }
                     }
                 }
+                //已归档的文件进行记录
+                SQLiteHelper.ExecuteNonQuery($"UPDATE backup_files_info SET bfi_state_gd=1 WHERE bfi_id='{list[i][1]}'");
                 UpdateGuiDangPro(pro_GuiDang.Value++);
             }
         }

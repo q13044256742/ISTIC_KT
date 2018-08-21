@@ -33,6 +33,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rdo_ShowAll = new System.Windows.Forms.CheckBox();
             this.lsv_Selected = new System.Windows.Forms.ListView();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tv_file
@@ -95,12 +96,23 @@
             this.lsv_Selected.UseCompatibleStateImageBehavior = false;
             this.lsv_Selected.View = System.Windows.Forms.View.List;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 9F);
+            this.label2.Location = new System.Drawing.Point(7, 679);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(197, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "（注：按 Ctrl + 鼠标左键可多选）";
+            // 
             // Frm_AddFile_FileSelect
             // 
             this.AcceptButton = this.btn_sure;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(868, 711);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lsv_Selected);
             this.Controls.Add(this.rdo_ShowAll);
             this.Controls.Add(this.label1);
@@ -125,5 +137,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox rdo_ShowAll;
         private System.Windows.Forms.ListView lsv_Selected;
+        private System.Windows.Forms.Label label2;
     }
 }
