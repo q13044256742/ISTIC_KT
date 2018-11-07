@@ -28,31 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.view = new System.Windows.Forms.DataGridView();
-            this.print = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.fontDialog = new System.Windows.Forms.FontDialog();
+            this.btn_StartPrint = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.打印预览PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.字体设置SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.案卷名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.课题名称ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.脊背设置BToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
+            this.print = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bkb = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.fm = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.fmbj = new System.Windows.Forms.DataGridViewComboBoxColumn();
             this.font = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.preview = new System.Windows.Forms.DataGridViewButtonColumn();
             this.jnml = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.chk_PrintAll = new System.Windows.Forms.CheckBox();
-            this.chk_BKB = new System.Windows.Forms.CheckBox();
-            this.chk_FMBJ = new System.Windows.Forms.CheckBox();
-            this.chk_JNML = new System.Windows.Forms.CheckBox();
-            this.cbo_BJ = new System.Windows.Forms.ComboBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.fontDialog = new System.Windows.Forms.FontDialog();
-            this.btn_StartPrint = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.view)).BeginInit();
-            this.statusStrip1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // view
@@ -80,7 +80,6 @@
             this.fm,
             this.fmbj,
             this.font,
-            this.preview,
             this.jnml});
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
@@ -98,13 +97,80 @@
             this.view.Size = new System.Drawing.Size(899, 422);
             this.view.TabIndex = 2;
             this.view.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.View_CellContentClick);
+            this.view.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.view_CellMouseDown);
+            // 
+            // btn_StartPrint
+            // 
+            this.btn_StartPrint.Location = new System.Drawing.Point(783, 438);
+            this.btn_StartPrint.Name = "btn_StartPrint";
+            this.btn_StartPrint.Size = new System.Drawing.Size(83, 30);
+            this.btn_StartPrint.TabIndex = 1;
+            this.btn_StartPrint.Text = "开始打印";
+            this.btn_StartPrint.Click += new System.EventHandler(this.Btn_StartPrint_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.打印预览PToolStripMenuItem,
+            this.字体设置SToolStripMenuItem,
+            this.脊背设置BToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(141, 70);
+            // 
+            // 打印预览PToolStripMenuItem
+            // 
+            this.打印预览PToolStripMenuItem.Name = "打印预览PToolStripMenuItem";
+            this.打印预览PToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.打印预览PToolStripMenuItem.Text = "打印预览(&P)";
+            this.打印预览PToolStripMenuItem.Click += new System.EventHandler(this.打印预览PToolStripMenuItem_Click);
+            // 
+            // 字体设置SToolStripMenuItem
+            // 
+            this.字体设置SToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.案卷名称ToolStripMenuItem,
+            this.课题名称ToolStripMenuItem});
+            this.字体设置SToolStripMenuItem.Name = "字体设置SToolStripMenuItem";
+            this.字体设置SToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.字体设置SToolStripMenuItem.Text = "字体设置(&S)";
+            // 
+            // 案卷名称ToolStripMenuItem
+            // 
+            this.案卷名称ToolStripMenuItem.Name = "案卷名称ToolStripMenuItem";
+            this.案卷名称ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.案卷名称ToolStripMenuItem.Text = "案卷名称";
+            this.案卷名称ToolStripMenuItem.Click += new System.EventHandler(this.案卷名称ToolStripMenuItem_Click);
+            // 
+            // 课题名称ToolStripMenuItem
+            // 
+            this.课题名称ToolStripMenuItem.Name = "课题名称ToolStripMenuItem";
+            this.课题名称ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.课题名称ToolStripMenuItem.Text = "课题名称";
+            this.课题名称ToolStripMenuItem.Click += new System.EventHandler(this.课题名称ToolStripMenuItem_Click);
+            // 
+            // 脊背设置BToolStripMenuItem
+            // 
+            this.脊背设置BToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripComboBox1});
+            this.脊背设置BToolStripMenuItem.Name = "脊背设置BToolStripMenuItem";
+            this.脊背设置BToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.脊背设置BToolStripMenuItem.Text = "脊背设置(&B)";
+            // 
+            // toolStripComboBox1
+            // 
+            this.toolStripComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.toolStripComboBox1.Items.AddRange(new object[] {
+            "样式一（横版）",
+            "样式二（竖版）"});
+            this.toolStripComboBox1.Name = "toolStripComboBox1";
+            this.toolStripComboBox1.Size = new System.Drawing.Size(121, 25);
+            this.toolStripComboBox1.DropDownClosed += new System.EventHandler(this.toolStripComboBox1_DropDownClosed);
             // 
             // print
             // 
             this.print.FillWeight = 10F;
             this.print.HeaderText = "打印";
             this.print.Name = "print";
-            this.print.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.print.Visible = false;
             // 
             // id
             // 
@@ -158,14 +224,7 @@
             this.font.Name = "font";
             this.font.Text = "设置";
             this.font.UseColumnTextForButtonValue = true;
-            // 
-            // preview
-            // 
-            this.preview.FillWeight = 15F;
-            this.preview.HeaderText = "打印预览";
-            this.preview.Name = "preview";
-            this.preview.Text = "预览";
-            this.preview.UseColumnTextForButtonValue = true;
+            this.font.Visible = false;
             // 
             // jnml
             // 
@@ -174,102 +233,10 @@
             this.jnml.Name = "jnml";
             this.jnml.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             // 
-            // chk_PrintAll
-            // 
-            this.chk_PrintAll.AutoSize = true;
-            this.chk_PrintAll.Location = new System.Drawing.Point(12, 454);
-            this.chk_PrintAll.Name = "chk_PrintAll";
-            this.chk_PrintAll.Size = new System.Drawing.Size(91, 20);
-            this.chk_PrintAll.TabIndex = 3;
-            this.chk_PrintAll.Text = "全部打印";
-            this.chk_PrintAll.UseVisualStyleBackColor = true;
-            this.chk_PrintAll.CheckedChanged += new System.EventHandler(this.Chk_PrintAll_CheckedChanged);
-            // 
-            // chk_BKB
-            // 
-            this.chk_BKB.AutoSize = true;
-            this.chk_BKB.Location = new System.Drawing.Point(150, 454);
-            this.chk_BKB.Name = "chk_BKB";
-            this.chk_BKB.Size = new System.Drawing.Size(107, 20);
-            this.chk_BKB.TabIndex = 4;
-            this.chk_BKB.Text = "卷内备考表";
-            this.chk_BKB.UseVisualStyleBackColor = true;
-            this.chk_BKB.CheckedChanged += new System.EventHandler(this.Chk_BKB_CheckedChanged);
-            // 
-            // chk_FMBJ
-            // 
-            this.chk_FMBJ.AutoSize = true;
-            this.chk_FMBJ.Location = new System.Drawing.Point(12, 500);
-            this.chk_FMBJ.Name = "chk_FMBJ";
-            this.chk_FMBJ.Size = new System.Drawing.Size(99, 20);
-            this.chk_FMBJ.TabIndex = 5;
-            this.chk_FMBJ.Text = "封面&&脊背";
-            this.chk_FMBJ.UseVisualStyleBackColor = true;
-            this.chk_FMBJ.CheckedChanged += new System.EventHandler(this.Chk_FMBJ_CheckedChanged);
-            // 
-            // chk_JNML
-            // 
-            this.chk_JNML.AutoSize = true;
-            this.chk_JNML.Location = new System.Drawing.Point(298, 454);
-            this.chk_JNML.Name = "chk_JNML";
-            this.chk_JNML.Size = new System.Drawing.Size(123, 20);
-            this.chk_JNML.TabIndex = 6;
-            this.chk_JNML.Text = "卷内文件目录";
-            this.chk_JNML.UseVisualStyleBackColor = true;
-            this.chk_JNML.CheckedChanged += new System.EventHandler(this.Chk_JNML_CheckedChanged);
-            // 
-            // cbo_BJ
-            // 
-            this.cbo_BJ.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbo_BJ.FormattingEnabled = true;
-            this.cbo_BJ.Items.AddRange(new object[] {
-            "20mm",
-            "30mm",
-            "40mm",
-            "50mm",
-            "60mm",
-            "80mm"});
-            this.cbo_BJ.Location = new System.Drawing.Point(150, 498);
-            this.cbo_BJ.Name = "cbo_BJ";
-            this.cbo_BJ.Size = new System.Drawing.Size(121, 24);
-            this.cbo_BJ.TabIndex = 7;
-            this.cbo_BJ.SelectedIndexChanged += new System.EventHandler(this.Cbo_BJ_SelectedIndexChanged);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tip});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 557);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(899, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 8;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // tip
-            // 
-            this.tip.Name = "tip";
-            this.tip.Size = new System.Drawing.Size(0, 17);
-            // 
-            // btn_StartPrint
-            // 
-            this.btn_StartPrint.Location = new System.Drawing.Point(729, 495);
-            this.btn_StartPrint.Name = "btn_StartPrint";
-            this.btn_StartPrint.Size = new System.Drawing.Size(83, 30);
-            this.btn_StartPrint.TabIndex = 1;
-            this.btn_StartPrint.Text = "开始打印";
-            this.btn_StartPrint.Click += new System.EventHandler(this.Btn_StartPrint_Click);
-            // 
             // Frm_PrintBox
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(899, 579);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.cbo_BJ);
-            this.Controls.Add(this.chk_JNML);
-            this.Controls.Add(this.chk_FMBJ);
-            this.Controls.Add(this.chk_BKB);
-            this.Controls.Add(this.chk_PrintAll);
+            this.ClientSize = new System.Drawing.Size(899, 478);
             this.Controls.Add(this.view);
             this.Controls.Add(this.btn_StartPrint);
             this.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -281,32 +248,29 @@
             this.Text = "案卷盒打印";
             this.Load += new System.EventHandler(this.Frm_PrintBox_Load);
             ((System.ComponentModel.ISupportInitialize)(this.view)).EndInit();
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button btn_StartPrint;
         private System.Windows.Forms.DataGridView view;
-        private System.Windows.Forms.CheckBox chk_PrintAll;
-        private System.Windows.Forms.CheckBox chk_BKB;
-        private System.Windows.Forms.CheckBox chk_FMBJ;
-        private System.Windows.Forms.CheckBox chk_JNML;
-        private System.Windows.Forms.ComboBox cbo_BJ;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.ToolStripStatusLabel tip;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn print;
+        private System.Windows.Forms.FontDialog fontDialog;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 打印预览PToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 字体设置SToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 案卷名称ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 课题名称ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 脊背设置BToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox toolStripComboBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn print;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn amount;
         private System.Windows.Forms.DataGridViewCheckBoxColumn bkb;
         private System.Windows.Forms.DataGridViewCheckBoxColumn fm;
         private System.Windows.Forms.DataGridViewComboBoxColumn fmbj;
         private System.Windows.Forms.DataGridViewButtonColumn font;
-        private System.Windows.Forms.DataGridViewButtonColumn preview;
         private System.Windows.Forms.DataGridViewCheckBoxColumn jnml;
-        private System.Windows.Forms.FontDialog fontDialog;
     }
 }

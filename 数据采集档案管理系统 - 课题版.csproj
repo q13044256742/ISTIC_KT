@@ -360,6 +360,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\fm2.html" />
     <None Include="Resources\jnml.html" />
     <None Include="Resources\fm.html" />
     <None Include="Resources\xsl.png" />

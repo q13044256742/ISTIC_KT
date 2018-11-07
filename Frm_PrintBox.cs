@@ -22,18 +22,6 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         public string unitName;
         /// <summary>
-        /// 密级
-        /// </summary>
-        public string secret;
-        /// <summary>
-        /// 项目编号
-        /// </summary>
-        public string proCode;
-        /// <summary>
-        /// 项目名称
-        /// </summary>
-        public string proName;
-        /// <summary>
         /// 盒列表
         /// </summary>
         public DataTable boxTable;
@@ -46,11 +34,21 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         public DataTable otherDoc;
         public string ljPeople;
-        public string ljDate;
+        public object ljDate;
         public string jcPeople;
         public string jcDate;
-        public Frm_PrintBox()
+        /// <summary>
+        /// 父窗体
+        /// </summary>
+        private Form parentForm;
+        /// <summary>
+        /// 对象ID
+        /// </summary>
+        private object objectId;
+        public Frm_PrintBox(object objectId, Form parentForm)
         {
+            this.objectId = objectId;
+            this.parentForm = parentForm;
             InitializeComponent();
             InitialFrom();
         }
@@ -58,68 +56,21 @@ namespace 数据采集档案管理系统___课题版
         private void InitialFrom()
         {
             view.ColumnHeadersDefaultCellStyle.Font = new Font("宋体", 12, FontStyle.Bold);
-            cbo_BJ.SelectedIndex = 0;
+            toolStripComboBox1.SelectedIndex = 0;
         }
 
         private void Frm_PrintBox_Load(object sender, EventArgs e)
         {
-            for(int i = 0; i < boxTable.Rows.Count; i++)
+            DataTable table = SQLiteHelper.ExecuteQuery($"SELECT * FROM files_box_info WHERE pb_obj_id='{objectId}' ORDER BY pb_box_number");
+            foreach(DataRow row in table.Rows)
             {
                 int index = view.Rows.Add();
-                view.Rows[index].Cells["print"].Tag = boxTable.Rows[i]["pb_id"];
-                view.Rows[index].Cells["amount"].Value = GetFilePageCount(boxTable.Rows[i]["pb_id"], 1);
-                view.Rows[index].Cells["id"].Value = boxTable.Rows[i]["pb_box_number"];
-                view.Rows[index].Cells["id"].Tag = boxTable.Rows[i]["pb_gc_id"];
+                view.Rows[index].Tag = row["pt_id"];
+                view.Rows[index].Cells["print"].Tag = row["pb_id"];
+                view.Rows[index].Cells["amount"].Value = GetFilePageCount(row["pb_id"], 1);
+                view.Rows[index].Cells["id"].Value = row["pb_box_number"];
+                view.Rows[index].Cells["id"].Tag = row["pb_gc_id"];
                 view.Rows[index].Cells["fmbj"].Value = "20mm";
-            }
-        }
-
-        private void Chk_PrintAll_CheckedChanged(object sender, EventArgs e)
-        {
-            bool flag = chk_PrintAll.Checked;
-            foreach(DataGridViewRow row in view.Rows)
-            {
-                row.Cells["print"].Value = flag;
-            }
-        }
-
-        private void Chk_BKB_CheckedChanged(object sender, EventArgs e)
-        {
-            bool flag = chk_BKB.Checked;
-            foreach(DataGridViewRow row in view.Rows)
-            {
-                row.Cells["bkb"].Value = flag;
-            }
-        }
-
-        private void Chk_JNML_CheckedChanged(object sender, EventArgs e)
-        {
-            bool flag = chk_JNML.Checked;
-            foreach(DataGridViewRow row in view.Rows)
-            {
-                row.Cells["jnml"].Value = flag;
-            }
-        }
-
-        private void Chk_FMBJ_CheckedChanged(object sender, EventArgs e)
-        {
-            bool flag = chk_FMBJ.Checked;
-            foreach(DataGridViewRow row in view.Rows)
-            {
-                row.Cells["fm"].Value = flag;
-                row.Cells["fmbj"].Value = flag ? cbo_BJ.SelectedItem : "20mm";
-            }
-        }
-
-        private void Cbo_BJ_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool flag = chk_FMBJ.Checked;
-            if(flag)
-            {
-                foreach(DataGridViewRow row in view.Rows)
-                {
-                    row.Cells["fmbj"].Value = cbo_BJ.SelectedItem;
-                }
             }
         }
 
@@ -128,9 +79,14 @@ namespace 数据采集档案管理系统___课题版
             List<object> boxIds = new List<object>();
             foreach(DataGridViewRow row in view.Rows)
             {
-                if(true.Equals(row.Cells["print"].Value))
+                object boxId = row.Cells["print"].Tag;
+                foreach(DataGridViewCell cell in row.Cells)
                 {
-                    boxIds.Add(row.Cells["print"].Tag);
+                    if(true.Equals(cell.Value))
+                    {
+                        boxIds.Add(boxId);
+                        break;
+                    }
                 }
             }
             if(boxIds.Count > 0)
@@ -141,94 +97,48 @@ namespace 数据采集档案管理系统___课题版
                 MessageBox.Show("请先至少选择一盒进行打印。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void PrintDocument(object[] ids)
+        private void PrintDocument(object[] boxIds)
         {
-            foreach(object id in ids)
+            foreach(object boxId in boxIds)
             {
                 foreach(DataGridViewRow row in view.Rows)
                 {
-                    if(id.Equals(row.Cells["print"].Tag))
+                    if(boxId.Equals(row.Cells["print"].Tag))
                     {
+                        object ptId = row.Tag;
                         bool printBkb = GetBooleanValue(row.Cells["bkb"].Value);
                         if(printBkb)
                         {
                             int boxNumber = (int)row.Cells["id"].Value;
-                            PrintBKB(id, boxNumber);
+                            PrintBKB(boxId, ptId, boxNumber);
                         }
                         bool printFm = GetBooleanValue(row.Cells["fm"].Value);
                         if(printFm)
                         {
                             object bj = row.Cells["fmbj"].Value;
                             object GCNumber = row.Cells["id"].Tag;
-                            PrintFM(id, bj, GCNumber, row.Index);
+                            PrintFM(boxId, ptId, bj, GCNumber, row.Index);
                         }
                         bool printJnml = GetBooleanValue(row.Cells["jnml"].Value);
                         if(printJnml)
                         {
                             object GCNumber = row.Cells["id"].Tag;
-                            PrintJNML(id, GCNumber);
+                            PrintJNML(boxId, ptId, GCNumber);
                         }
                     }
                 }
-                tip.Text = "提示：正在执行打印操作，请等待打印完毕。。。";
             }
         }
 
         private bool GetBooleanValue(object value) => value == null ? false : string.IsNullOrEmpty(value.ToString()) ? false : (bool)value;
 
-        private void SetCurrentState(object value, string type) => tip.Text = $"提示：正在打印盒{value}{type}";
-
         /// <summary>
         /// 打印卷内文件目录
         /// </summary>
-        private void PrintJNML(object boxId, object GCNumber)
+        private void PrintJNML(object boxId, object ptId, object GCNumber)
         {
-            string jnmlString = Resources.jnml;
-            jnmlString = jnmlString.Replace("id=\"ajbh\">", $"id=\"ajbh\">{objectCode}");
-            jnmlString = jnmlString.Replace("id=\"gch\">", $"id=\"gch\">{GCNumber}");
-
-            string files = GetValue(SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'"));
-            string[] fids = files.Split(',');
-            DataTable dataTable = new DataTable();
-            dataTable.Columns.AddRange(new DataColumn[]
-            {
-                new DataColumn("fi_code"),
-                new DataColumn("fi_user"),
-                new DataColumn("fi_name"),
-                new DataColumn("fi_pages"),
-                new DataColumn("fi_create_date"),
-                new DataColumn("fi_remark"),
-            });
-            for(int i = 0; i < fids.Length; i++)
-            {
-                if(!string.IsNullOrEmpty(fids[i]))
-                {
-                    DataRow row = SQLiteHelper.ExecuteSingleRowQuery($"SELECT fi_code, fi_user, fi_name, fi_pages, fi_create_date, fi_remark FROM files_info WHERE fi_id='{fids[i]}'");
-                    if(row != null)
-                        dataTable.ImportRow(row);
-                }
-            }
-            int fileCount = 0, pageCount = 0;
-            if(dataTable != null)
-            {
-                fileCount = dataTable.Rows.Count;
-                for(int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    string newRr = "<tr>" +
-                        $"<td>{i + 1}</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_code"]}&nbsp;</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_user"]}&nbsp;</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_name"]}&nbsp;</td>" +
-                        $"<td>{GetDateValue(dataTable.Rows[i]["fi_create_date"], "yyyy-MM-dd")}&nbsp;</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_pages"]}&nbsp;</td>" +
-                        $"<td>{dataTable.Rows[i]["fi_remark"]}&nbsp;</td>" +
-                        $"</tr>";
-                    jnmlString = jnmlString.Replace("</tbody>", $"{newRr}</tbody>");
-                    pageCount += GetIntValue(dataTable.Rows[i]["fi_pages"]);
-                }
-            }
-            jnmlString = jnmlString.Replace("id=\"fileCount\">", $"id=\"fileCount\">{fileCount}");
-            jnmlString = jnmlString.Replace("id=\"pageCount\">", $"id=\"pageCount\">{pageCount}");
+            object docCode = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pt_code FROM files_tag_info WHERE pt_id='{ptId}'");
+            string jnmlString = GetFileList(boxId, docCode, GCNumber);
             new WebBrowser() { DocumentText = jnmlString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
 
@@ -273,32 +183,24 @@ namespace 数据采集档案管理系统___课题版
         /// </param>
         private int GetFilePageCount(object boxId, int type)
         {
-            object _fileAmount = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
-            string[] _files = GetValue(_fileAmount).Split(',');
-            int fileAmount = 0;
-            int filePages = 0;
-            for(int i = 0; i < _files.Length; i++)
+            if(type == 1)
             {
-                if(!string.IsNullOrEmpty(_files[i]))
-                {
-                    fileAmount++;
-                    if(type == 2)
-                    {
-                        object _page = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT fi_pages FROM files_info WHERE fi_id='{_files[i]}'");
-                        if(!string.IsNullOrEmpty(GetValue(_page)))
-                            filePages += Convert.ToInt32(_page);
-                    }
-                }
+                return SQLiteHelper.ExecuteCountQuery($"SELECT COUNT(fi_id) FROM files_info WHERE fi_box_id='{boxId}'");
             }
-            return type == 1 ? fileAmount : filePages;
+            else
+            {
+                return SQLiteHelper.ExecuteCountQuery($"SELECT SUM(fi_pages) FROM files_info WHERE fi_box_id='{boxId}'");
+            }
         }
 
         /// <summary>
         /// 打印封面
         /// </summary>
-        private void PrintFM(object boxId, object bj, object GCNumber, int rowIndex)
+        private void PrintFM(object boxId, object ptId, object bj, object GCNumber, int rowIndex)
         {
-            string fmString = Resources.fm;
+            object styleType = view.Rows[rowIndex].Cells["jnml"].Tag;
+            int style = GetIntValue(styleType, 0);
+            string fmString = style == 0 ? Resources.fm : Resources.fm2;
             object fontObject = view.Rows[rowIndex].Cells["font"].Tag;
             if(fontObject != null)
             {
@@ -306,7 +208,8 @@ namespace 数据采集档案管理系统___课题版
                 fmString = fmString.Replace("FangSong", $"{font.FontFamily.Name}");
                 fmString = fmString.Replace("18pt", $"{font.Size}pt");
             }
-            fmString = GetCoverHtmlString(boxId, fmString, bj, GCNumber);
+            object docCode = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pt_code FROM files_tag_info WHERE pt_id='{ptId}';");
+            fmString = GetCoverHtmlString(boxId, fmString, bj, GCNumber, docCode);
 
             new WebBrowser() { DocumentText = fmString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
@@ -314,33 +217,10 @@ namespace 数据采集档案管理系统___课题版
         /// <summary>
         /// 打印卷内备考表
         /// </summary>
-        private void PrintBKB(object boxId, int boxNumber)
+        private void PrintBKB(object boxId, object ptId, int boxNumber)
         {
-            string bkbString = Resources.bkb;
-            string fa = MicrosoftWordHelper.GetZN(GetFilePageCount(boxId, 1));
-            string fp = MicrosoftWordHelper.GetZN(GetFilePageCount(boxId, 2));
-            string hh = MicrosoftWordHelper.GetZN(boxNumber);
-
-            bkbString = bkbString.Replace("name=\"count\"", $"name=\"count\" value=\"{fa}\"");
-            bkbString = bkbString.Replace("name=\"pages\"", $"name=\"pages\" value=\"{fp}\"");
-            bkbString = bkbString.Replace("name=\"number\"", $"name=\"number\" value=\"{hh}\"");
-
-            foreach(DataRow row in otherDoc.Rows)
-            {
-                string newTr = $"<tr>" +
-                    $"<td>{row["od_name"]}</td>" +
-                    $"<td>{row["od_code"]}</td>" +
-                    $"<td>{row["od_carrier"]}</td>" +
-                    $"<td>{row["od_intro"]}</td>" +
-                    $"</tr>";
-                bkbString = bkbString.Replace("</tbody>", $"{newTr}</tbody>");
-            }
-
-            bkbString = bkbString.Replace("id=\"dh\">", $"id=\"dh\">{objectCode}");
-            bkbString = bkbString.Replace("id=\"ljr\">", $"id=\"dh\">{ljPeople}");
-            bkbString = bkbString.Replace("id=\"ljrq\">", $"id=\"dh\">{GetDateValue(ljDate, "yyyy-MM-dd")}");
-            bkbString = bkbString.Replace("id=\"jcr\">", $"id=\"jcr\">{jcPeople}");
-            bkbString = bkbString.Replace("id=\"jcrq\">", $"id=\"jcrq\">{GetDateValue(jcDate, "yyyy-MM-dd")}");
+            object docCode = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pt_code FROM files_tag_info WHERE pt_id='{ptId}'");
+            string bkbString = GetBackupTable(boxId, docCode, boxNumber);
 
             new WebBrowser() { DocumentText = bkbString, ScriptErrorsSuppressed = false }.DocumentCompleted += Web_DocumentCompleted;
         }
@@ -373,24 +253,6 @@ namespace 数据采集档案管理系统___课题版
                     view.Rows[e.RowIndex].Cells[e.ColumnIndex].Tag = fontDialog.Font;
                 }
             }
-            else if("preview".Equals(columnName))
-            {
-                string fmString = Resources.fm;
-                
-                object fontObject = view.Rows[e.RowIndex].Cells["font"].Tag;
-                if(fontObject != null)
-                {
-                    Font font = (Font)fontObject;
-                    fmString = fmString.Replace("FangSong", $"{font.FontFamily.Name}");
-                    fmString = fmString.Replace("18pt", $"{font.Size}pt");
-                }
-                object bj = view.Rows[e.RowIndex].Cells["fmbj"].Value;
-                object boxId = view.Rows[e.RowIndex].Cells["print"].Tag;
-                object GCNumber = view.Rows[e.RowIndex].Cells["id"].Tag;
-                fmString = GetCoverHtmlString(boxId, fmString, bj, GCNumber);
-
-                new WebBrowser() { DocumentText = fmString, ScriptErrorsSuppressed = false }.DocumentCompleted += Preview_DocumentCompleted;
-            }
             else if("print".Equals(columnName))
             {
                 bool state = (bool)view.Rows[e.RowIndex].Cells[e.ColumnIndex].EditedFormattedValue;
@@ -409,57 +271,229 @@ namespace 数据采集档案管理系统___课题版
         /// </summary>
         private void Preview_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            
-            (sender as WebBrowser).ShowPrintPreviewDialog();
-            (sender as WebBrowser).Dispose();
+            WebBrowser browser = sender as WebBrowser;
+            browser.Parent = parentForm;
+            if(browser.ReadyState == WebBrowserReadyState.Complete)
+            {
+                browser.ShowPrintPreviewDialog();
+                browser.Dispose();
+            }
         }
 
         /// <summary>
         /// 获取完整的封面HTML模板页
         /// </summary>
         /// <param name="bj">边距mm数</param>
-        private string GetCoverHtmlString(object boxId, string fmString, object bj, object GCNumber)
+        private string GetCoverHtmlString(object boxId, string fmString, object bj, object GCNumber, object docCode)
         {
             fmString = fmString.Replace("20mm", $"{bj}");
             if(string.IsNullOrEmpty(GetValue(parentObjectName)))
-                fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{objectName}");
+                fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{objectName}&nbsp;");
             else
             {
-                fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{parentObjectName}");
-                fmString = fmString.Replace("id=\"ktmc\">", $"id=\"ktmc\">{objectName}");
+                fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{parentObjectName}&nbsp;");
+                fmString = fmString.Replace("id=\"ktmc\">", $"id=\"ktmc\">{objectName}&nbsp;");
             }
-            fmString = fmString.Replace("id=\"bzdw\">", $"id=\"bzdw\">{unitName}");
-            fmString = fmString.Replace("id=\"bzrq\">", $"id=\"bzrq\">{GetBzDate(boxId)}");
-            fmString = fmString.Replace("id=\"bgrq\">", $"id=\"bgrq\">永久");
-            fmString = fmString.Replace("id=\"mj\">", $"id=\"mj\">{secret}");
-            fmString = fmString.Replace("id=\"gch\">", $"id=\"dh\">{GCNumber}");
+            fmString = fmString.Replace("id=\"bzdw\">", $"id=\"bzdw\">{unitName}&nbsp;");
+            fmString = fmString.Replace("id=\"dh\">", $"id=\"dh\">{docCode}&nbsp;");
+            fmString = fmString.Replace("id=\"bzrq\">", $"id=\"bzrq\">{GetDateValue(ljDate, "yyyy-MM-dd")}&nbsp;");
+            fmString = fmString.Replace("id=\"bgqx\">", $"id=\"bgqx\">永久");
+            fmString = fmString.Replace("id=\"gch\">", $"id=\"gch\">{GCNumber}");
             return fmString;
         }
 
-        /// <summary>
-        /// 获取当前盒的编制日期（当前盒内文件的最早至最晚形成日期）
-        /// </summary>
-        private string GetBzDate(object boxId)
+        private void view_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-            object fileIds = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pb_files_id FROM files_box_info WHERE pb_id='{boxId}'");
-            if(!string.IsNullOrEmpty(GetValue(fileIds)))
+            if(e.Button == MouseButtons.Right && e.RowIndex != -1 && e.ColumnIndex != -1)
             {
-                string[] ids = GetValue(fileIds).Split(',');
-                string idsString = string.Empty;
-                foreach(string id in ids)
-                    if(!string.IsNullOrEmpty(id))
-                        idsString += $"'{id}',";
-                if(!string.IsNullOrEmpty(idsString))
+                字体设置SToolStripMenuItem.Visible = false;
+                脊背设置BToolStripMenuItem.Visible = false;
+                string name = view.Columns[e.ColumnIndex].Name;
+                if("fm".Equals(name) || "bkb".Equals(name) || "jnml".Equals(name))
                 {
-                    idsString = idsString.Substring(0, idsString.Length - 1);
-                    object minDate = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT MIN(fi_create_date) FROM files_info where fi_id IN ({idsString}) AND DATE(fi_create_date) <> '1900-01-01' AND DATE(fi_create_date) <> '0001-01-01';");
-                    object maxDate = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT MAX(fi_create_date) FROM files_info where fi_id IN ({idsString}) AND DATE(fi_create_date) <> '1900-01-01' AND DATE(fi_create_date) <> '0001-01-01';");
-                    if(minDate != null && maxDate != null)
-                        return $"{(Convert.ToDateTime(minDate)).ToString("yyyy-MM-dd")} ~ {(Convert.ToDateTime(maxDate)).ToString("yyyy-MM-dd")}";
+                    view.ClearSelection();
+                    view.CurrentCell = view.Rows[e.RowIndex].Cells[e.ColumnIndex];
+                    contextMenuStrip1.Tag = view;
+                    contextMenuStrip1.Show(MousePosition);
+                }
+                if("fm".Equals(name))
+                {
+                    字体设置SToolStripMenuItem.Visible = true;
+                    脊背设置BToolStripMenuItem.Visible = true;
                 }
             }
-            return null;
         }
 
+        private string GetBackupTable(object boxId, object docCode, int boxNumber)
+        {
+            string bkbString = Resources.bkb;
+            string fa = MicrosoftWordHelper.GetZN(GetFilePageCount(boxId, 1));
+            string fp = MicrosoftWordHelper.GetZN(GetFilePageCount(boxId, 2));
+            string hh = MicrosoftWordHelper.GetZN(boxNumber);
+
+            bkbString = bkbString.Replace("name=\"count\"", $"name=\"count\" value=\"{fa}\"");
+            bkbString = bkbString.Replace("name=\"pages\"", $"name=\"pages\" value=\"{fp}\"");
+            bkbString = bkbString.Replace("name=\"number\"", $"name=\"number\" value=\"{hh}\"");
+            string newTr = string.Empty;
+            if(otherDoc.Rows.Count > 0)
+                foreach(DataRow row in otherDoc.Rows)
+                    newTr += $"<tr><td>{row["od_name"]}</td>" +
+                        $"<td>{row["od_code"]}</td>" +
+                        $"<td>{row["od_carrier"]}</td>" +
+                        $"<td>{row["od_intro"]}</td></tr>";
+            else
+                newTr = "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>" +
+                    "<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>";
+            bkbString = bkbString.Replace("</tbody>", $"{newTr}</tbody>");
+
+            bkbString = bkbString.Replace("id=\"dh\">", $"id=\"dh\">{docCode}");
+            bkbString = bkbString.Replace("id=\"ljr\">", $"id=\"dh\">{ljPeople}");
+            bkbString = bkbString.Replace("id=\"ljrq\">", $"id=\"dh\">{GetDateValue(ljDate, "yyyy-MM-dd")}");
+            bkbString = bkbString.Replace("id=\"jcr\">", $"id=\"jcr\">{jcPeople}");
+            bkbString = bkbString.Replace("id=\"jcrq\">", $"id=\"jcrq\">{GetDateValue(jcDate, "yyyy-MM-dd")}");
+            return bkbString;
+        }
+
+        private string GetFileList(object boxId, object docCode, object GCNumber)
+        {
+            string jnmlString = Resources.jnml;
+            jnmlString = jnmlString.Replace("id=\"ajbh\">", $"id=\"ajbh\">{docCode}");
+            jnmlString = jnmlString.Replace("id=\"gch\">", $"id=\"gch\">{GCNumber}");
+
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.AddRange(new DataColumn[]
+            {
+                new DataColumn("fi_code"),
+                new DataColumn("fi_user"),
+                new DataColumn("fi_name"),
+                new DataColumn("fi_pages"),
+                new DataColumn("fi_create_date"),
+                new DataColumn("fi_remark"),
+            });
+            DataTable table = SQLiteHelper.ExecuteQuery($"SELECT fi_code, fi_user, fi_name, fi_pages, fi_create_date, fi_remark FROM files_info WHERE fi_box_id='{boxId}' ORDER BY fi_box_sort");
+            foreach(DataRow row in table.Rows)
+                dataTable.ImportRow(row);
+            int fileCount = dataTable.Rows.Count, pageCount = 0;
+            int i = 0;
+            foreach(DataRow dataRow in dataTable.Rows)
+            {
+                string newRr = "<tr>" +
+                    $"<td>{++i}</td>" +
+                    $"<td>{dataRow["fi_code"]}&nbsp;</td>" +
+                    $"<td>{dataRow["fi_user"]}&nbsp;</td>" +
+                    $"<td style='text-align: left;'>{dataRow["fi_name"]}&nbsp;</td>" +
+                    $"<td>{GetDateValue(dataRow["fi_create_date"], "yyyy-MM-dd")}&nbsp;</td>" +
+                    $"<td>{dataRow["fi_pages"]}&nbsp;</td>" +
+                    $"<td>{dataRow["fi_remark"]}&nbsp;</td>" +
+                    $"</tr>";
+                jnmlString = jnmlString.Replace("</tbody>", $"{newRr}</tbody>");
+                pageCount += GetIntValue(dataRow["fi_pages"]);
+            }
+            jnmlString = jnmlString.Replace("id=\"fileCount\">", $"id=\"fileCount\">{fileCount}");
+            jnmlString = jnmlString.Replace("id=\"pageCount\">", $"id=\"pageCount\">{pageCount}");
+            return jnmlString;
+        }
+
+        private void 打印预览PToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell cell = view.CurrentCell;
+            object ptId = cell.OwningRow.Tag;
+            object boxId = cell.OwningRow.Cells["print"].Tag;
+            object GCNumber = cell.OwningRow.Cells["id"].Tag;
+            string HTML_STRING = string.Empty;
+            if("fm".Equals(cell.OwningColumn.Name))
+            {
+                object styleType = cell.OwningRow.Cells["jnml"].Tag;
+                int style = GetIntValue(styleType, 0);
+                HTML_STRING = style == 0 ? Resources.fm : Resources.fm2;
+                object fontObject = cell.OwningRow.Cells["font"].Tag;
+                if(fontObject != null)
+                {
+                    Font font = (Font)fontObject;
+                    HTML_STRING = HTML_STRING.Replace("id=\"ajmc\"", $"style=\"font-family:{font.FontFamily.Name}; \" id=\"ajmc\"");
+                    HTML_STRING = HTML_STRING.Replace($"style=\"font-family:{font.FontFamily.Name}; \" id=\"ajmc\"", $"style=\"font-family:{font.FontFamily.Name}; font-size:{font.Size}pt; \" id=\"ajmc\"");
+                }
+                object fontObject2 = cell.OwningRow.Cells["fmbj"].Tag;
+                if(fontObject2 != null)
+                {
+                    Font font = (Font)fontObject2;
+                    HTML_STRING = HTML_STRING.Replace("id=\"ktmc\"", $"style=\"font-family:{font.FontFamily.Name}; \" id=\"ktmc\"");
+                    HTML_STRING = HTML_STRING.Replace($"style=\"font-family:{font.FontFamily.Name}; \" id=\"ktmc\"", $"style=\"font-family:{font.FontFamily.Name}; font-size:{font.Size}pt; \" id=\"ktmc\"");
+                }
+                object bj = cell.OwningRow.Cells["fmbj"].Value;
+                object docCode = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pt_code FROM files_tag_info WHERE pt_id='{ptId}'");
+                HTML_STRING = GetCoverHtmlString(boxId, HTML_STRING, bj, GCNumber, docCode);
+            }
+            else if("bkb".Equals(cell.OwningColumn.Name))
+            {
+                object docCode = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pt_code FROM files_tag_info WHERE pt_id='{ptId}'");
+                object boxNumber = cell.OwningRow.Cells["id"].Value;
+                HTML_STRING = GetBackupTable(boxId, docCode, GetIntValue(boxNumber, 1));
+            }
+            else if("jnml".Equals(cell.OwningColumn.Name))
+            {
+                object docCode = SQLiteHelper.ExecuteOnlyOneQuery($"SELECT pt_code FROM files_tag_info WHERE pt_id='{ptId}'");
+                HTML_STRING = GetFileList(boxId, docCode, GCNumber);
+            }
+            new WebBrowser() { DocumentText = HTML_STRING, Size = new Size(500, 500) }.DocumentCompleted += Preview_DocumentCompleted;
+        }
+
+        /// <summary>
+        /// 将对象转换成其整型
+        /// </summary>
+        /// <param name="value">object对象</param>
+        /// <param name="defaultValue">转换失败时的默认值</param>
+        public int GetIntValue(object value, int defaultValue)
+        {
+            string str = GetValue(value);
+            if(!string.IsNullOrEmpty(str))
+            {
+                if(int.TryParse(str, out int result))
+                    return result;
+                else
+                    return defaultValue;
+            }
+            return defaultValue;
+        }
+
+        private void 案卷名称ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell cell = view.CurrentCell;
+
+            object fontObject = cell.OwningRow.Cells["font"].Tag;
+            if(fontObject != null)
+            {
+                Font font = (Font)fontObject;
+                fontDialog.Font = (Font)font;
+            }
+            if(fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                cell.OwningRow.Cells["font"].Tag = fontDialog.Font;
+            }
+        }
+
+        private void 课题名称ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell cell = view.CurrentCell;
+
+            object fontObject = cell.OwningRow.Cells["fmbj"].Tag;
+            if(fontObject != null)
+            {
+                Font font = (Font)fontObject;
+                fontDialog.Font = (Font)font;
+            }
+            if(fontDialog.ShowDialog() == DialogResult.OK)
+            {
+                cell.OwningRow.Cells["fmbj"].Tag = fontDialog.Font;
+            }
+        }
+
+        private void toolStripComboBox1_DropDownClosed(object sender, EventArgs e)
+        {
+            ToolStripComboBox comboBox = sender as ToolStripComboBox;
+            DataGridViewCell cell = view.CurrentCell;
+            cell.OwningRow.Cells["jnml"].Tag = comboBox.SelectedIndex;
+            contextMenuStrip1.Hide();
+        }
     }
 }

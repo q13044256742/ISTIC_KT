@@ -13,16 +13,24 @@
     <style type="text/css">
         .div1 span{
 			border: none;
-			border-bottom: 1px solid black;
-			width: 315pt;
 			font-size: 18pt;
 			font-family: "华文中宋";
 		}
 		.div1{
-			margin: 12px 20px;
-			height: 15mm;
+			
+			text-align: center;
+			border: 1px solid black;
+			border-bottom: none;
+		}
+		.div1 div{
+			padding: 12px 20px;
+			margin: 5px -20px;
+			word-wrap: break-word;
 		}
 		.div1 label{
+			border-bottom: 1px solid black;
+			padding: 5px;
+			display: block;
 			font-family: "华文中宋";
 			font-size:18pt;
 			font-weight: bold;
@@ -33,39 +41,66 @@
 			font-family: "宋体";
 			font-size:36pt;
 		}
-		.special{
+		.div2 span{
+			border: none;
+			border-bottom: 1px solid black;
+			width: 315pt;
+			font-size: 18pt;
 			font-family: "华文中宋";
+		}
+		.div2{
+			margin: 12px 20px;
+			height: 15mm;
+		}
+		.div2 label{
+			font-family: "华文中宋";
+			font-size:18pt;
+			font-weight: bold;
 		}
     </style>
 </head>
 <body>
+	<div style="width: 60mm; height: 310mm; font-size:18pt; float: left">
+		<div class="div1" style="height: 50mm">
+			<label>保管期限</label>
+			<div><span id="bgqx"></span></div>
+		</div>
+		<div class="div1" style="height: 50mm">
+			<label>档号</label>
+			<div><span id="dh"></span></div>
+		</div>
+		<div class="div1" style="height: 95mm">
+			<label>案卷题名</label>
+			<div><span id="ajmc"></span></div>
+		</div>
+		<div class="div1" style="height: 60mm; border-bottom: 1px solid black">
+			<label>立卷单位</label>
+			<div><span id="bzdw"></span></div>
+		</div>
+	</div>
 	<div style="border: 1px solid black; width: 158mm; height: 95mm; font-size:18pt;">
-		<div class="div1">
+		<div class="div2">
 			<label>案卷名称</label>
 			<span id="ajmc"></span>
 		</div>
-		<div class="div1">
+		<div class="div2">
 			<label>课题名称</label>
 			<span id="ktmc"></span>
 		</div>
-		<div class="div1">
+		<div class="div2">
 			<label>编制单位</label>
 			<span id="bzdw"></span>
 		</div>
-		<div class="div1">
+		<div class="div2">
 			<label>编制日期</label>
 			<span id="bzrq"></span>
 		</div>
-		<div class="div1">
+		<div class="div2">
 			<label>保管期限</label>
 			<span id="bgqx"></span>
 		</div>
 	</div>
-	<div id="box" style="margin-top: 25px; line-height: 20mm;">
-		<b><span style="margin-left: 15px;">馆藏号</span></b>
-		<span class="special"style="margin-left: -25px;">：</span>
-        <span class="special" id="gch"></span>
-	</div>
 </body>
+
 </html>
     
