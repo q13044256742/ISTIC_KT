@@ -286,7 +286,7 @@ namespace 数据采集档案管理系统___课题版
         /// <param name="bj">边距mm数</param>
         private string GetCoverHtmlString(object boxId, string fmString, object bj, object GCNumber, object docCode)
         {
-            fmString = fmString.Replace("20mm", $"{bj}");
+            fmString = fmString.Replace("20mm", $"{bj}").Replace("40mm", $"{bj}");
             if(string.IsNullOrEmpty(GetValue(parentObjectName)))
                 fmString = fmString.Replace("id=\"ajmc\">", $"id=\"ajmc\">{objectName}&nbsp;");
             else

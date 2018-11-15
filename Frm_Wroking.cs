@@ -589,6 +589,7 @@ namespace 数据采集档案管理系统___课题版
                                 object fileId = AddFileInfo(key, row, objId, row.Index);
                                 row.Cells[$"{key}id"].Tag = fileId;
                             }
+                            UpdateLostFileList(objId);
                             RemoveFileList(objId);
                             SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{objId}'");
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -660,6 +661,7 @@ namespace 数据采集档案管理系统___课题版
                                     row.Cells[$"{key}id"].Tag = fileId;
                                 }
                             }
+                            UpdateLostFileList(objId);
                             RemoveFileList(objId);
                             SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{objId}'");
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -725,6 +727,7 @@ namespace 数据采集档案管理系统___课题版
                                     row.Cells[$"{key}id"].Tag = fileId;
                                 }
                             }
+                            UpdateLostFileList(objId);
                             RemoveFileList(objId);
                             SQLiteHelper.ExecuteNonQuery($"UPDATE handover_record SET hr_isupdate=1 WHERE hr_obj_id='{objId}'");
                             MessageBox.Show("信息保存成功。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
@@ -767,6 +770,38 @@ namespace 数据采集档案管理系统___课题版
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 更新指定对象下的文件缺失列表
+        /// </summary>
+        /// <param name="objId">项目/课题ID</param>
+        private void UpdateLostFileList(object objId)
+        {
+            string querySql = "SELECT dd_name, extend_2 FROM data_dictionary dd WHERE dd_pId IN(" +
+               "SELECT dd_id FROM data_dictionary WHERE dd_pId = (SELECT dd_id FROM data_dictionary  WHERE dd_code = 'dic_file_jd')) " +
+                "AND dd.dd_name NOT IN(SELECT dd.dd_name FROM files_info fi " +
+               $"LEFT JOIN data_dictionary dd ON fi.fi_categor = dd.dd_id where fi.fi_obj_id='{objId}')";
+            DataTable table = SQLiteHelper.ExecuteQuery(querySql);
+            StringBuilder sqlString = new StringBuilder($"DELETE FROM files_lost_info WHERE pfo_obj_id='{objId}';");
+            for(int i = 0; i < table.Rows.Count; i++)
+            {
+                object categor = table.Rows[i]["dd_name"];
+                if(!"其他".Equals(categor))
+                {
+                    int ismust = GetIntValue(table.Rows[i]["extend_2"], 0);
+                    sqlString.Append("INSERT INTO files_lost_info (pfo_id, pfo_categor, pfo_obj_id, pfo_ismust) " +
+                        $"VALUES('{Guid.NewGuid().ToString()}', '{categor}', '{objId}', '{ismust}');");
+                }
+            }
+            SQLiteHelper.ExecuteNonQuery(sqlString.ToString());
+        }
+
+        private int GetIntValue(object value, int defaultValue)
+        {
+            if(int.TryParse(GetValue(value), out int result))
+                return result;
+            return defaultValue;
         }
 
         /// <summary>

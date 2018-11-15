@@ -61,8 +61,8 @@ namespace 数据采集档案管理系统___课题版
                 new Thread(delegate ()
                 {
                     CopyFile(sPath, rootFolder + "\\" + bName, GetValue(localKey));
-
                     CopyDataTable(sPath, rootFolder + "\\" + bName);
+                    CopyXmlData(sPath);
 
                     MessageBox.Show($"数据导入完毕。", "温馨提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                     btn_Import.Enabled = true;
@@ -73,6 +73,121 @@ namespace 数据采集档案管理系统___课题版
             }
             else
                 SetTip("请先填写必要信息。");
+        }
+
+        private void CopyXmlData(string sPath)
+        {
+            tip.Text = "正在导入XML文件数据，请稍后...";
+            DirectoryInfo directory = new DirectoryInfo(sPath);
+            FileInfo[] xmlFiles = directory.GetFiles("*.xml");
+            foreach(FileInfo file in xmlFiles)
+            {
+                pro_Show.Style = ProgressBarStyle.Marquee;
+
+                string xmlName = Path.GetFileNameWithoutExtension(file.Name);
+                DataSet dataSet = new DataSet(xmlName);
+                if("Documents".Equals(xmlName))
+                {
+                    dataSet.ReadXml(new FileStream(file.FullName, FileMode.Open), XmlReadMode.Auto);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    DataTable projectTable = dataSet.Tables["Project"];
+                    if(projectTable != null)
+                    {
+                        foreach(DataRow dataRow in projectTable.Rows)
+                        {
+                            object objID = dataRow["objId"];
+                            int categor = Convert.ToInt32(dataRow["categor"]);
+                            if(categor == 2)
+                                objID = UserHelper.GetUser().SpecialId;
+                            stringBuilder.Append($"DELETE FROM project_info WHERE pi_id='{dataRow["id"]}';");
+                            stringBuilder.Append("INSERT INTO project_info(" +
+                                "pi_id, pi_code, pi_name, pi_field, pi_theme, pi_funds, pi_startdate, pi_finishdate, pi_year, pi_unit, pi_province, pi_unit_user, " +
+                                "pi_project_user, pi_introduction, pi_obj_id, pi_worker_date) VALUES (" +
+                               $"'{dataRow["id"]}', '{dataRow["code"]}', '{dataRow["name"]}', '{dataRow["field"]}', '{dataRow["theme"]}', '{dataRow["funds"]}', '{dataRow["startDate"]}', '{dataRow["endDate"]}', '{dataRow["year"]}', '{dataRow["unit"]}', '{dataRow["province"]}', " +
+                               $"'{dataRow["uinter"]}', '{dataRow["prouser"]}', '{dataRow["intro"]}', '{objID}', '{DateTime.Now.ToString("s")}');");
+                        }
+                    }
+                    DataTable topicTable = dataSet.Tables["Topic"];
+                    if(topicTable != null)
+                    {
+                        foreach(DataRow dataRow in topicTable.Rows)
+                        {
+                            object objID = dataRow["objId"];
+                            int categor = Convert.ToInt32(dataRow["categor"]);
+                            if(categor == -3)
+                                objID = UserHelper.GetUser().SpecialId;
+                            stringBuilder.Append($"DELETE FROM topic_info WHERE ti_id='{dataRow["id"]}';");
+                            stringBuilder.Append("INSERT INTO topic_info(" +
+                                "ti_id, ti_code, ti_name, ti_field, ti_theme, ti_funds, ti_startdate, ti_finishdate, ti_year, ti_unit, ti_province, ti_unit_user, " +
+                                "ti_project_user, ti_introduction, ti_obj_id, ti_worker_date) VALUES (" +
+                               $"'{dataRow["id"]}', '{dataRow["code"]}', '{dataRow["name"]}', '{dataRow["field"]}', '{dataRow["theme"]}', '{dataRow["funds"]}', '{dataRow["startDate"]}', '{dataRow["endDate"]}', '{dataRow["year"]}', '{dataRow["unit"]}', '{dataRow["province"]}', " +
+                               $"'{dataRow["uinter"]}', '{dataRow["prouser"]}', '{dataRow["intro"]}', '{objID}', '{DateTime.Now.ToString("s")}');");
+                        }
+                    }
+                    DataTable subjectTable = dataSet.Tables["Subject"];
+                    if(subjectTable != null)
+                    {
+                        foreach(DataRow dataRow in subjectTable.Rows)
+                        {
+                            stringBuilder.Append($"DELETE FROM subject_info WHERE si_id='{dataRow["id"]}';");
+                            stringBuilder.Append("INSERT INTO subject_info(" +
+                                "si_id, si_code, si_name, si_field, si_theme, si_funds, si_startdate, si_finishdate, si_year, si_unit, si_province, si_unit_user, " +
+                                "si_project_user, si_introduction, si_obj_id, si_worker_date) VALUES (" +
+                               $"'{dataRow["id"]}', '{dataRow["code"]}', '{dataRow["name"]}', '{dataRow["field"]}', '{dataRow["theme"]}', '{dataRow["funds"]}', '{dataRow["startDate"]}', '{dataRow["endDate"]}', '{dataRow["year"]}', '{dataRow["unit"]}', '{dataRow["province"]}', " +
+                               $"'{dataRow["uinter"]}', '{dataRow["prouser"]}', '{dataRow["intro"]}', '{dataRow["objId"]}', '{DateTime.Now.ToString("s")}');");
+                        }
+                    }
+                    SQLiteHelper.ExecuteNonQuery(stringBuilder.ToString());
+                }
+                else if("Files".Equals(xmlName))
+                {
+                    dataSet.ReadXml(new FileStream(file.FullName, FileMode.Open), XmlReadMode.Auto);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    DataTable fileTable = dataSet.Tables["File"];
+                    if(fileTable != null)
+                    {
+                        foreach(DataRow dataRow in fileTable.Rows)
+                        {
+                            stringBuilder.Append($"DELETE FROM files_info WHERE fi_id='{dataRow["pfl_id"]}';");
+                            stringBuilder.Append("INSERT INTO files_info (" +
+                                "fi_id, fi_code, fi_stage, fi_categor, fi_name, fi_user, fi_type, fi_pages, fi_count, fi_create_date, fi_unit, " +
+                                "fi_carrier, fi_link, fi_obj_id, fi_sort, fi_remark, fi_box_id, fi_box_sort) " +
+                                "VALUES(" +
+                               $"'{dataRow["pfl_id"]}', '{dataRow["pfl_code"]}', '{dataRow["pfl_stage"]}', '{dataRow["pfl_categor"]}', '{dataRow["pfl_name"]}', '{dataRow["pfl_user"]}', '{dataRow["pfl_type"]}', '{dataRow["pfl_pages"]}', '{dataRow["pfl_amount"]}', '{dataRow["pfl_date"]}', " +
+                               $"'{dataRow["pfl_unit"]}', '{dataRow["pfl_carrier"]}', '{dataRow["pfl_link"]}', '{dataRow["pfl_obj_id"]}', '{dataRow["pfl_sort"]}', '{dataRow["pfl_remark"]}', '{dataRow["pfl_box_id"]}', '{dataRow["pfl_box_sort"]}');");
+                        }
+                        SQLiteHelper.ExecuteNonQuery(stringBuilder.ToString());
+                    }
+                }
+                else if("Boxs".Equals(xmlName))
+                {
+                    dataSet.ReadXml(new FileStream(file.FullName, FileMode.Open), XmlReadMode.Auto);
+                    StringBuilder stringBuilder = new StringBuilder();
+                    DataTable boxTable = dataSet.Tables["Box"];
+                    if(boxTable != null)
+                    {
+                        foreach(DataRow dataRow in boxTable.Rows)
+                        {
+                            stringBuilder.Append($"DELETE FROM files_box_info WHERE pb_id='{dataRow["pb_id"]}';");
+                            stringBuilder.Append("INSERT INTO files_box_info (" +
+                                "pb_id, pb_box_number, pb_gc_id, pb_obj_id, pb_special_id, pt_id) VALUES(" +
+                               $"'{dataRow["pb_id"]}', '{dataRow["pb_box_number"]}', '{dataRow["pb_gc_id"]}', '{dataRow["pb_obj_id"]}', '{UserHelper.GetUser().SpecialId}', '{dataRow["pt_id"]}');");
+                        }
+                    }
+                    DataTable tagTable = dataSet.Tables["Tag"];
+                    if(tagTable != null)
+                    {
+                        foreach(DataRow dataRow in tagTable.Rows)
+                        {
+                            stringBuilder.Append($"DELETE FROM files_tag_info WHERE pt_id='{dataRow["pt_id"]}';");
+                            stringBuilder.Append("INSERT INTO files_tag_info (pt_id, pt_code, pt_name, pt_obj_id) VALUES(" +
+                               $"'{dataRow["pt_id"]}', '{dataRow["pt_code"]}', '{dataRow["pt_name"]}', '{dataRow["pt_obj_id"]}');");
+                        }
+                    }
+                    SQLiteHelper.ExecuteNonQuery(stringBuilder.ToString());
+                }
+            }
+            tip.Text = string.Empty;
         }
 
         /// <summary>
